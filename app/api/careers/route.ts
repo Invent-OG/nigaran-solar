@@ -1,7 +1,8 @@
-// app/api/admin/careers/route.ts
+// app/api/careers/route.ts
+export const dynamic = "force-dynamic";
+
 import { db } from '@/lib/db';
 import { careers } from '@/lib/db/schema';
-import { eq } from 'drizzle-orm';
 import { NextResponse } from 'next/server';
 
 export async function GET() {
