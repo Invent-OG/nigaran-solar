@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -17,7 +17,8 @@ import { Edit2, Trash2 } from "lucide-react";
 import { Pagination } from "@/components/ui/pagination";
 import BlogForm from "./BlogForm";
 import { useBlogs, useDeleteBlog } from "@/lib/queries/blogs";
-import { useToast } from "@/hooks/use-toast";
+import { toast } from "sonner"; // ✅ Replaced useToast with Sonner
+import { DeleteConfirmation } from "./DeleteConfirmation";
 
 interface BlogTableProps {
   searchTerm: string;
@@ -29,16 +30,16 @@ export default function BlogTable({ searchTerm }: BlogTableProps) {
   const [selectedBlogs, setSelectedBlogs] = useState<string[]>([]);
   const [editingBlog, setEditingBlog] = useState<any | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const { toast } = useToast();
 
   const { data, isLoading } = useBlogs();
   const deleteBlogMutation = useDeleteBlog();
 
   const blogs = data?.blogs || [];
 
-  const filteredBlogs = blogs.filter((blog) =>
-    blog.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    blog.category.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredBlogs = blogs.filter(
+    (blog) =>
+      blog.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      blog.category.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const totalPages = Math.ceil(filteredBlogs.length / ITEMS_PER_PAGE);
@@ -66,25 +67,27 @@ export default function BlogTable({ searchTerm }: BlogTableProps) {
   const handleDelete = async (blogId: string) => {
     try {
       await deleteBlogMutation.mutateAsync(blogId);
-      toast({
-        title: "Success",
-        description: "Blog deleted successfully",
-      });
+      toast.success("Blog deleted successfully");
     } catch (error) {
-      toast({
-        title: "Error",
-        description: "Failed to delete blog",
-        variant: "destructive",
-      });
+      toast.error("Failed to delete blog");
     }
   };
 
   const handleDeleteSelected = async () => {
-    if (confirm(`Are you sure you want to delete ${selectedBlogs.length} blog posts?`)) {
-      for (const id of selectedBlogs) {
-        await deleteBlogMutation.mutateAsync(id);
+    if (
+      confirm(
+        `Are you sure you want to delete ${selectedBlogs.length} blog post(s)?`
+      )
+    ) {
+      try {
+        for (const id of selectedBlogs) {
+          await deleteBlogMutation.mutateAsync(id);
+        }
+        toast.success("Selected blogs deleted successfully");
+        setSelectedBlogs([]);
+      } catch (error) {
+        toast.error("Failed to delete some blogs");
       }
-      setSelectedBlogs([]);
     }
   };
 
@@ -159,7 +162,9 @@ export default function BlogTable({ searchTerm }: BlogTableProps) {
                 </TableCell>
                 <TableCell className="font-medium">{blog.title}</TableCell>
                 <TableCell>{blog.category}</TableCell>
-                <TableCell>{new Date(blog.createdAt).toLocaleDateString()}</TableCell>
+                <TableCell>
+                  {new Date(blog.createdAt).toLocaleDateString()}
+                </TableCell>
                 <TableCell className="text-right">
                   <Button
                     variant="ghost"

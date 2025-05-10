@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -17,14 +16,14 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useCreateBlog, useUpdateBlog } from "@/lib/queries/blogs";
-import { useToast } from "@/hooks/use-toast";
+import { toast } from "sonner"; // ✅ Replaced custom useToast with Sonner
 
 const blogSchema = z.object({
   title: z.string().min(2, "Title must be at least 2 characters"),
   excerpt: z.string().min(10, "Excerpt must be at least 10 characters"),
   content: z.string().min(50, "Content must be at least 50 characters"),
   imageUrl: z.string().url("Please enter a valid image URL"),
-  category: z.string().min(2, "Category must be at least 2 characters")
+  category: z.string().min(2, "Category must be at least 2 characters"),
 });
 
 type BlogFormData = z.infer<typeof blogSchema>;
@@ -36,7 +35,6 @@ interface BlogFormProps {
 
 export default function BlogForm({ onClose, initialData }: BlogFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { toast } = useToast();
   const createBlogMutation = useCreateBlog();
   const updateBlogMutation = useUpdateBlog();
 
@@ -59,17 +57,14 @@ export default function BlogForm({ onClose, initialData }: BlogFormProps) {
       } else {
         await createBlogMutation.mutateAsync(data);
       }
-      toast({
-        title: "Success",
-        description: initialData ? "Blog updated successfully" : "Blog created successfully",
-      });
+      toast.success(
+        initialData ? "Blog updated successfully" : "Blog created successfully"
+      );
       onClose();
     } catch (error) {
-      toast({
-        title: "Error",
-        description: initialData ? "Failed to update blog" : "Failed to create blog",
-        variant: "destructive",
-      });
+      toast.error(
+        initialData ? "Failed to update blog" : "Failed to create blog"
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -167,11 +162,19 @@ export default function BlogForm({ onClose, initialData }: BlogFormProps) {
           />
 
           <div className="flex justify-end gap-4">
-            <Button 
-              type="submit" 
-              disabled={isSubmitting || createBlogMutation.isPending || updateBlogMutation.isPending}
+            <Button
+              type="submit"
+              disabled={
+                isSubmitting ||
+                createBlogMutation.isPending ||
+                updateBlogMutation.isPending
+              }
             >
-              {isSubmitting ? "Saving..." : initialData ? "Update Blog" : "Create Blog"}
+              {isSubmitting
+                ? "Saving..."
+                : initialData
+                ? "Update Blog"
+                : "Create Blog"}
             </Button>
           </div>
         </form>

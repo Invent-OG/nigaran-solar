@@ -29,7 +29,7 @@ export default function TestimonialsSection() {
       company: "Nigaran Solar",
       content: t.content,
       rating: 5,
-      avatar: t.imageUrl,
+      imageUrl: t.imageUrl,
       youtubeUrl: t.youtubeUrl,
     })) || [];
 

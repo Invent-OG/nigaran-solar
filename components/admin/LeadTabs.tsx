@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useLeadsStore } from "@/lib/store/leads-store";
+import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Table,
@@ -13,34 +12,30 @@ import {
 } from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Search, Download, Trash2 } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
+import { Search, Download } from "lucide-react";
 import { Pagination } from "@/components/ui/pagination";
+import { DeleteConfirmation } from "./DeleteConfirmation";
+import { useLeads, useDeleteLead } from "@/lib/queries/leads";
+import { toast } from "sonner";
 
 const ITEMS_PER_PAGE = 10;
 
 export default function LeadTabs() {
-  const { toast } = useToast();
-  const { leads, isLoading, error, fetchLeads, removeLead } = useLeadsStore();
+  const { data, isLoading, error } = useLeads();
+  const deleteMutation = useDeleteLead();
+
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
-  useEffect(() => {
-    fetchLeads();
-  }, [fetchLeads]);
-
   const handleDelete = async (id: string) => {
     try {
-      await removeLead(id);
-      toast({
-        title: "Lead deleted",
+      await deleteMutation.mutateAsync(id);
+      toast.success("Lead deleted", {
         description: "The lead has been successfully deleted.",
       });
     } catch (error) {
-      toast({
-        title: "Error",
-        description: "Failed to delete lead. Please try again.",
-        variant: "destructive",
+      toast.error("Failed to delete lead", {
+        description: "Please try again.",
       });
     }
   };
@@ -52,19 +47,21 @@ export default function LeadTabs() {
   if (error) {
     return (
       <div className="p-8 text-center text-red-500">
-        Error loading leads: {error}
+        Error loading leads: {(error as Error).message}
       </div>
     );
   }
 
+  const leads = data?.leads ?? [];
+
   const filterLeadsByType = (type: string) => {
-    return leads.filter((lead) => 
-      lead.type === type && 
-      (searchTerm === "" || 
-        lead.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        lead.whatsappNumber.includes(searchTerm) ||
-        lead.city.toLowerCase().includes(searchTerm.toLowerCase())
-      )
+    return leads.filter(
+      (lead) =>
+        lead.type === type &&
+        (searchTerm === "" ||
+          lead.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          lead.whatsappNumber.includes(searchTerm) ||
+          lead.city.toLowerCase().includes(searchTerm.toLowerCase()))
     );
   };
 

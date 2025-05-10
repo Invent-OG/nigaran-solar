@@ -23,16 +23,22 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useCreateCareer, useUpdateCareer } from "@/lib/queries/careers";
-import { useToast } from "@/hooks/use-toast";
+import { toast } from "sonner";
 
 const careerSchema = z.object({
   title: z.string().min(2, "Title must be at least 2 characters"),
   type: z.enum(["Full-Time", "Part-Time", "Internship"]),
   location: z.string().min(2, "Location must be at least 2 characters"),
   description: z.string().min(10, "Description must be at least 10 characters"),
-  requirements: z.string().min(10, "Requirements must be at least 10 characters"),
+  requirements: z
+    .string()
+    .min(10, "Requirements must be at least 10 characters"),
   salary: z.string().optional(),
-  applyUrl: z.string().url("Please enter a valid URL").optional().or(z.literal("")),
+  applyUrl: z
+    .string()
+    .url("Please enter a valid URL")
+    .optional()
+    .or(z.literal("")),
 });
 
 type CareerFormData = z.infer<typeof careerSchema>;
@@ -44,7 +50,7 @@ interface CareerFormProps {
 
 export default function CareerForm({ initialData, onClose }: CareerFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { toast } = useToast();
+
   const createCareerMutation = useCreateCareer();
   const updateCareerMutation = useUpdateCareer();
 
@@ -66,21 +72,18 @@ export default function CareerForm({ initialData, onClose }: CareerFormProps) {
     try {
       if (initialData?.id) {
         await updateCareerMutation.mutateAsync({ id: initialData.id, data });
+        toast.success("Career updated successfully");
       } else {
         await createCareerMutation.mutateAsync(data);
+        toast.success("Career created successfully");
       }
-      toast({
-        title: "Success",
-        description: initialData ? "Career updated successfully" : "Career created successfully",
-      });
+
       form.reset();
       onClose?.();
     } catch (error) {
-      toast({
-        title: "Error",
-        description: initialData ? "Failed to update career" : "Failed to create career",
-        variant: "destructive",
-      });
+      toast.error(
+        initialData ? "Failed to update career" : "Failed to create career"
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -210,7 +213,11 @@ export default function CareerForm({ initialData, onClose }: CareerFormProps) {
           </Button>
           <Button
             type="submit"
-            disabled={isSubmitting || createCareerMutation.isPending || updateCareerMutation.isPending}
+            disabled={
+              isSubmitting ||
+              createCareerMutation.isPending ||
+              updateCareerMutation.isPending
+            }
           >
             {isSubmitting ? "Saving..." : initialData ? "Update" : "Create"}
           </Button>

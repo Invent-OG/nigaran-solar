@@ -19,7 +19,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { ArrowLeft } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
+import { toast } from "sonner"; // ✅ Sonner toast
 import { supabase } from "@/lib/supabase/client";
 
 const applicationSchema = z.object({
@@ -35,7 +35,6 @@ type ApplicationFormData = z.infer<typeof applicationSchema>;
 export default function CareerApplicationPage() {
   const params = useParams();
   const router = useRouter();
-  const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [fileUrl, setFileUrl] = useState<string | null>(null);
 
@@ -78,28 +77,19 @@ export default function CareerApplicationPage() {
       return response.json();
     },
     onSuccess: () => {
-      toast({
-        title: "Application Submitted",
+      toast.success("Application Submitted", {
         description: "We'll review your application and get back to you soon.",
       });
       router.push("/careers");
     },
     onError: () => {
-      toast({
-        title: "Error",
-        description: "Failed to submit application. Please try again.",
-        variant: "destructive",
-      });
+      toast.error("Failed to submit application. Please try again.");
     },
   });
 
   const onSubmit = async (data: ApplicationFormData) => {
     if (!fileUrl) {
-      toast({
-        title: "Error",
-        description: "Please upload your resume.",
-        variant: "destructive",
-      });
+      toast.error("Please upload your resume.");
       return;
     }
 
@@ -108,7 +98,7 @@ export default function CareerApplicationPage() {
       const finalData = {
         ...data,
         resumeUrl: fileUrl,
-        careerId: params.id, // 👈 Add this line
+        careerId: params.id,
       };
       await submitApplication.mutateAsync(finalData);
     } finally {
@@ -118,11 +108,7 @@ export default function CareerApplicationPage() {
 
   const handleFileUpload = async (file: File) => {
     if (file.type !== "application/pdf") {
-      toast({
-        title: "Invalid File",
-        description: "Only PDF files are allowed.",
-        variant: "destructive",
-      });
+      toast.error("Only PDF files are allowed.");
       return;
     }
 
@@ -141,11 +127,7 @@ export default function CareerApplicationPage() {
 
     if (error) {
       console.error("Upload error:", error.message);
-      toast({
-        title: "Upload Failed",
-        description: error.message,
-        variant: "destructive",
-      });
+      toast.error("Upload Failed: " + error.message);
       return;
     }
 
@@ -156,21 +138,14 @@ export default function CareerApplicationPage() {
     const publicUrl = publicUrlData?.publicUrl;
 
     if (!publicUrl) {
-      toast({
-        title: "Error",
-        description: "Failed to retrieve uploaded file URL.",
-        variant: "destructive",
-      });
+      toast.error("Failed to retrieve uploaded file URL.");
       return;
     }
 
     setFileUrl(publicUrl);
     form.setValue("resumeUrl", publicUrl, { shouldValidate: true });
 
-    toast({
-      title: "File Uploaded",
-      description: "Resume uploaded successfully.",
-    });
+    toast.success("Resume uploaded successfully.");
   };
 
   if (careerLoading) {

@@ -15,23 +15,27 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useToast } from "@/hooks/use-toast";
-import { useAdminStore } from "@/lib/store";
+import { toast } from "sonner"; // ✅ using Sonner's toast now
 
-const passwordSchema = z.object({
-  currentPassword: z.string().min(6, "Password must be at least 6 characters"),
-  newPassword: z.string().min(6, "Password must be at least 6 characters"),
-  confirmPassword: z.string().min(6, "Password must be at least 6 characters"),
-}).refine((data) => data.newPassword === data.confirmPassword, {
-  message: "Passwords don't match",
-  path: ["confirmPassword"],
-});
+const passwordSchema = z
+  .object({
+    currentPassword: z
+      .string()
+      .min(6, "Password must be at least 6 characters"),
+    newPassword: z.string().min(6, "Password must be at least 6 characters"),
+    confirmPassword: z
+      .string()
+      .min(6, "Password must be at least 6 characters"),
+  })
+  .refine((data) => data.newPassword === data.confirmPassword, {
+    message: "Passwords don't match",
+    path: ["confirmPassword"],
+  });
 
 type PasswordFormData = z.infer<typeof passwordSchema>;
 
 export default function SettingsPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { toast } = useToast();
 
   const form = useForm<PasswordFormData>({
     resolver: zodResolver(passwordSchema),
@@ -45,22 +49,13 @@ export default function SettingsPage() {
   const onSubmit = async (data: PasswordFormData) => {
     setIsSubmitting(true);
     try {
-      // Here you would typically make an API call to update the password
-      // For demo purposes, we'll just show a success message
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      toast({
-        title: "Success",
-        description: "Password updated successfully",
-      });
-      
+      // Simulate API call
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      toast.success("Password updated successfully"); // ✅ Success toast
       form.reset();
     } catch (error) {
-      toast({
-        title: "Error",
-        description: "Failed to update password",
-        variant: "destructive",
-      });
+      toast.error("Failed to update password"); // ✅ Error toast
     } finally {
       setIsSubmitting(false);
     }
@@ -117,11 +112,7 @@ export default function SettingsPage() {
                 )}
               />
 
-              <Button
-                type="submit"
-                className="w-full"
-                disabled={isSubmitting}
-              >
+              <Button type="submit" className="w-full" disabled={isSubmitting}>
                 {isSubmitting ? "Updating..." : "Update Password"}
               </Button>
             </form>

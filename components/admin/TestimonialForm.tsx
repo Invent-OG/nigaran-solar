@@ -15,14 +15,21 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { useCreateTestimonial, useUpdateTestimonial } from "@/lib/queries/testimonials";
-import { useToast } from "@/hooks/use-toast";
+import {
+  useCreateTestimonial,
+  useUpdateTestimonial,
+} from "@/lib/queries/testimonials";
+import { toast } from "sonner";
 
 const testimonialSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   role: z.string().min(2, "Role must be at least 2 characters"),
   content: z.string().min(10, "Content must be at least 10 characters"),
-  youtubeUrl: z.string().url("Please enter a valid YouTube URL").optional().or(z.literal("")),
+  youtubeUrl: z
+    .string()
+    .url("Please enter a valid YouTube URL")
+    .optional()
+    .or(z.literal("")),
   imageUrl: z.string().url("Please enter a valid image URL"),
 });
 
@@ -33,9 +40,11 @@ interface TestimonialFormProps {
   initialData?: TestimonialFormData & { id: string };
 }
 
-export default function TestimonialForm({ onClose, initialData }: TestimonialFormProps) {
+export default function TestimonialForm({
+  onClose,
+  initialData,
+}: TestimonialFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { toast } = useToast();
   const createTestimonialMutation = useCreateTestimonial();
   const updateTestimonialMutation = useUpdateTestimonial();
 
@@ -54,22 +63,24 @@ export default function TestimonialForm({ onClose, initialData }: TestimonialFor
     setIsSubmitting(true);
     try {
       if (initialData?.id) {
-        await updateTestimonialMutation.mutateAsync({ id: initialData.id, data });
+        await updateTestimonialMutation.mutateAsync({
+          id: initialData.id,
+          data,
+        });
+        toast.success("Testimonial updated successfully");
       } else {
         await createTestimonialMutation.mutateAsync(data);
+        toast.success("Testimonial created successfully");
       }
-      toast({
-        title: "Success",
-        description: initialData ? "Testimonial updated successfully" : "Testimonial created successfully",
-      });
+
       form.reset();
       onClose();
     } catch (error) {
-      toast({
-        title: "Error",
-        description: initialData ? "Failed to update testimonial" : "Failed to create testimonial",
-        variant: "destructive",
-      });
+      toast.error(
+        initialData
+          ? "Failed to update testimonial"
+          : "Failed to create testimonial"
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -163,11 +174,19 @@ export default function TestimonialForm({ onClose, initialData }: TestimonialFor
           />
 
           <div className="flex justify-end gap-4">
-            <Button 
-              type="submit" 
-              disabled={isSubmitting || createTestimonialMutation.isPending || updateTestimonialMutation.isPending}
+            <Button
+              type="submit"
+              disabled={
+                isSubmitting ||
+                createTestimonialMutation.isPending ||
+                updateTestimonialMutation.isPending
+              }
             >
-              {isSubmitting ? "Saving..." : initialData ? "Update Testimonial" : "Add Testimonial"}
+              {isSubmitting
+                ? "Saving..."
+                : initialData
+                ? "Update Testimonial"
+                : "Add Testimonial"}
             </Button>
           </div>
         </form>
