@@ -1,12 +1,12 @@
 "use client";
 
-import { useRef } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { useBlogs } from '@/lib/queries/blogs';
+import { useRef } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useBlogs } from "@/lib/queries/blogs";
 
 interface BlogCardProps {
   title: string;
@@ -37,9 +37,7 @@ const BlogCard = ({ title, excerpt, imageUrl, index }: BlogCardProps) => {
         <h3 className="text-xl font-semibold mb-3 line-clamp-2 group-hover:text-primary transition-colors">
           {title}
         </h3>
-        <p className="text-muted-foreground mb-4 line-clamp-3">
-          {excerpt}
-        </p>
+        <p className="text-muted-foreground mb-4 line-clamp-3">{excerpt}</p>
         <Button variant="link" className="p-0 h-auto font-medium text-primary">
           Read More <ArrowRight className="ml-1 h-4 w-4" />
         </Button>
@@ -58,7 +56,11 @@ export default function BlogSection() {
   }
 
   if (error) {
-    return <div className="py-16 text-center text-red-500">Error loading blog posts</div>;
+    return (
+      <div className="py-16 text-center text-red-500">
+        Error loading blog posts
+      </div>
+    );
   }
 
   const blogs = data?.blogs || [];
@@ -73,7 +75,6 @@ export default function BlogSection() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
@@ -81,7 +82,8 @@ export default function BlogSection() {
             Insights, Trends, And Tips From Industry Experts
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Stay informed with the latest news and developments in renewable energy and sustainable practices.
+            Stay informed with the latest news and developments in renewable
+            energy and sustainable practices.
           </p>
         </motion.div>
 
@@ -96,7 +98,7 @@ export default function BlogSection() {
             />
           ))}
         </div>
-        
+
         <div className="text-center mt-12">
           <Link href="/blog">
             <Button variant="outline" className="group">

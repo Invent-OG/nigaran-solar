@@ -1,7 +1,12 @@
+"use client"; // 👈 Add this as the very first line
+
+import { useRef } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Battery, Power, Zap } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { motion, AnimatePresence } from "framer-motion";
+import Spline from "@splinetool/react-spline";
 
 interface TabContent {
   badge: string;
@@ -33,13 +38,13 @@ const Feature108 = ({
   tabs = [
     {
       value: "on-grid",
-      icon: <Power className="h-auto w-4 shrink-0" />,
+      icon: <Power className="w-4 h-auto shrink-0" />,
       label: "On-Grid Systems",
       content: {
         badge: "Grid Connected",
         title: "On-Grid Solar Systems for Continuous Power Supply",
         description:
-          "Residential and commercial solar systems are predominantly powered by on-grid solar systems. They are linked to the electricity network, enabling you to return surplus energy to the grid, resulting in credits or financial compensation. This system assists you in lowering your monthly electricity expenses while also being environmentally conscious.",
+          "Residential and commercial solar systems are predominantly powered by on-grid solar systems...",
         buttonText: "Learn More",
         imageSrc:
           "https://images.pexels.com/photos/356049/pexels-photo-356049.jpeg",
@@ -48,13 +53,13 @@ const Feature108 = ({
     },
     {
       value: "off-grid",
-      icon: <Battery className="h-auto w-4 shrink-0" />,
+      icon: <Battery className="w-4 h-auto shrink-0" />,
       label: "Off-Grid Systems",
       content: {
         badge: "Energy Independence",
         title: "Off-Grid Solar Systems for Complete Energy Independence",
         description:
-          "Off-grid solar systems are ideal for regions where there is no connection to the electricity grid. This system employs batteries to store energy, enabling you to utilize solar power even when the sun is not visible. It's an ideal choice for remote homes, farms, or businesses that need a reliable source of electricity without any interruptions.",
+          "Off-grid solar systems are ideal for regions where there is no connection to the electricity grid...",
         buttonText: "Explore Options",
         imageSrc:
           "https://images.pexels.com/photos/2800832/pexels-photo-2800832.jpeg",
@@ -63,13 +68,13 @@ const Feature108 = ({
     },
     {
       value: "hybrid",
-      icon: <Zap className="h-auto w-4 shrink-0" />,
+      icon: <Zap className="w-4 h-auto shrink-0" />,
       label: "Hybrid Systems",
       content: {
         badge: "Best of Both",
         title: "Hybrid Solar Systems for the Best of Both Worlds",
         description:
-          "Hybrid solar systems combine the advantages of both on-grid and off-grid systems. This system is linked to the power grid, but it also incorporates energy storage through batteries. This enables you to save surplus energy during the day and utilize it when required, even in the event of a power outage.",
+          "Hybrid solar systems combine the advantages of both on-grid and off-grid systems...",
         buttonText: "See Details",
         imageSrc:
           "https://images.pexels.com/photos/414837/pexels-photo-414837.jpeg",
@@ -80,58 +85,123 @@ const Feature108 = ({
 }: Feature108Props) => {
   return (
     <section className="py-32 bg-background">
-      <div className="container mx-auto">
-        <div className="flex flex-col items-center gap-4 text-center">
+      <div className="container relative mx-auto">
+        {/* Heading Section */}
+        <motion.div
+          className="flex flex-col items-center gap-4 text-center"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
           <Badge variant="outline">{badge}</Badge>
-          <h2 className="max-w-2xl text-3xl font-semibold md:text-4xl">
+          <h2 className="max-w-2xl text-3xl font-extrabold md:text-4xl">
             {heading}
           </h2>
           <p className="text-muted-foreground">{description}</p>
-        </div>
-        <Tabs defaultValue={tabs[0].value} className="mt-8">
-          <TabsList className=" flex flex-col bg-inherit items-center justify-center gap-4 sm:flex-row md:gap-10">
-            {tabs.map((tab) => (
-              <TabsTrigger
-                key={tab.value}
-                value={tab.value}
-                className="flex items-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold text-muted-foreground data-[state=active]:bg-muted data-[state=active]:text-primary"
-              >
-                {tab.icon} {tab.label}
-              </TabsTrigger>
-            ))}
-          </TabsList>
-          <div className="mx-auto mt-8 max-w-screen-xl rounded-2xl bg-muted/70 p-6 lg:p-16">
-            {tabs.map((tab) => (
-              <TabsContent
-                key={tab.value}
-                value={tab.value}
-                className="grid place-items-center gap-20 lg:grid-cols-2 lg:gap-10"
-              >
-                <div className="flex flex-col gap-5">
-                  <Badge variant="outline" className="w-fit bg-background">
-                    {tab.content.badge}
-                  </Badge>
-                  <h3 className="text-3xl font-semibold lg:text-5xl">
-                    {tab.content.title}
-                  </h3>
-                  <p className="text-muted-foreground lg:text-lg">
-                    {tab.content.description}
-                  </p>
-                  <Button className="mt-2.5 w-fit gap-2" size="lg">
-                    {tab.content.buttonText}
-                  </Button>
-                </div>
-                <div className="relative h-[300px] w-full overflow-hidden rounded-xl">
-                  <img
-                    src={tab.content.imageSrc}
-                    alt={tab.content.imageAlt}
-                    className="absolute inset-0 h-full w-full object-cover"
-                  />
-                </div>
-              </TabsContent>
-            ))}
+        </motion.div>
+
+        <div className="relative mt-8">
+          <div className="absolute left-0 -translate-y-2/4 -top-5 lg:-translate-x-1/2 -translate-x-2/4">
+            <Spline scene="https://prod.spline.design/fZXdoHZ9JramEa8D/scene.splinecode" />
           </div>
-        </Tabs>
+
+          <Tabs defaultValue={tabs[0].value} className="relative mt-8 ">
+            {/* Tabs List */}
+            <motion.div
+              className="flex flex-col items-center justify-center gap-4 sm:flex-row md:gap-10"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+            >
+              <TabsList className="flex flex-col items-center justify-center gap-4 py-20 lg:py-2 bg-inherit sm:flex-row md:gap-10">
+                {tabs.map((tab) => (
+                  <TabsTrigger
+                    key={tab.value}
+                    value={tab.value}
+                    className="flex items-center gap-2 rounded-xl px-4 py-3 text-xs font-semibold text-muted-foreground data-[state=active]:bg-primary data-[state=active]:text-white"
+                  >
+                    {tab.icon} {tab.label}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+            </motion.div>
+
+            {/* Tabs Content */}
+            <motion.div
+              className="max-w-screen-xl p-6 mx-auto mt-8 rounded-2xl bg-muted lg:p-16"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <AnimatePresence>
+                {tabs.map((tab) => (
+                  <TabsContent
+                    key={tab.value}
+                    value={tab.value}
+                    className="relative z-30"
+                    asChild
+                  >
+                    <motion.div
+                      className="grid gap-20 place-items-center lg:grid-cols-2 lg:gap-10"
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -30 }}
+                      transition={{ duration: 0.4 }}
+                    >
+                      <div className="flex flex-col gap-5">
+                        <Badge
+                          variant="outline"
+                          className="text-white w-fit bg-primary"
+                        >
+                          {tab.content.badge}
+                        </Badge>
+                        <motion.h3
+                          className="text-3xl font-semibold lg:text-5xl"
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.1 }}
+                        >
+                          {tab.content.title}
+                        </motion.h3>
+                        <motion.p
+                          className="text-muted-foreground lg:text-lg"
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.2 }}
+                        >
+                          {tab.content.description}
+                        </motion.p>
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ delay: 0.3 }}
+                        >
+                          <Button className="mt-2.5 w-fit gap-2" size="lg">
+                            {tab.content.buttonText}
+                          </Button>
+                        </motion.div>
+                      </div>
+                      <motion.div
+                        className="relative h-[300px] w-full overflow-hidden rounded-xl"
+                        initial={{ scale: 0.95, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ delay: 0.2 }}
+                      >
+                        <img
+                          src={tab.content.imageSrc}
+                          alt={tab.content.imageAlt}
+                          className="absolute inset-0 object-cover w-full h-full"
+                        />
+                      </motion.div>
+                    </motion.div>
+                  </TabsContent>
+                ))}
+              </AnimatePresence>
+            </motion.div>
+          </Tabs>
+        </div>
       </div>
     </section>
   );

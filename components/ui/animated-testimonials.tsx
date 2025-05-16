@@ -106,7 +106,7 @@ export function AnimatedTestimonials({
           initial="hidden"
           animate={controls}
           variants={containerVariants}
-          className="grid grid-cols-1 gap-16 w-full md:grid-cols-2 lg:gap-24"
+          className="grid w-full grid-cols-1 gap-16 md:grid-cols-2 lg:gap-24"
         >
           {/* Left */}
           <motion.div
@@ -115,7 +115,7 @@ export function AnimatedTestimonials({
           >
             <div className="space-y-6">
               {badgeText && (
-                <div className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-primary/10 text-primary">
+                <div className="inline-flex items-center px-3 py-1 text-sm font-medium rounded-full bg-primary/10 text-primary">
                   <Star className="mr-1 h-3.5 w-3.5 fill-primary" />
                   <span>{badgeText}</span>
                 </div>
@@ -165,21 +165,21 @@ export function AnimatedTestimonials({
                   transition={{ duration: 0.5, ease: "easeInOut" }}
                   style={{ zIndex: activeIndex === index ? 10 : 0 }}
                 >
-                  <div className="bg-card border shadow-lg rounded-xl p-8 h-full flex flex-col">
+                  <div className="flex flex-col h-full p-8 border shadow-lg bg-card rounded-xl">
                     {testimonial.rating && (
-                      <div className="mb-6 flex gap-2">
+                      <div className="flex gap-2 mb-6">
                         {Array(testimonial.rating)
                           .fill(0)
                           .map((_, i) => (
                             <Star
                               key={i}
-                              className="h-5 w-5 fill-yellow-500 text-yellow-500"
+                              className="w-5 h-5 text-yellow-500 fill-yellow-500"
                             />
                           ))}
                       </div>
                     )}
 
-                    <div className="relative mb-6 flex-1">
+                    <div className="relative flex-1 mb-6">
                       {videoId ? (
                         <div className="relative w-full h-full overflow-hidden rounded-lg">
                           <iframe
@@ -193,7 +193,7 @@ export function AnimatedTestimonials({
                         </div>
                       ) : (
                         <>
-                          <Quote className="absolute -top-2 -left-2 h-8 w-8 text-primary/20 rotate-180" />
+                          <Quote className="absolute w-8 h-8 rotate-180 -top-2 -left-2 text-primary/20" />
                           <p className="relative z-10 text-lg font-medium leading-relaxed">
                             {testimonial.content}
                           </p>
@@ -204,7 +204,7 @@ export function AnimatedTestimonials({
                     <Separator className="my-4" />
 
                     <div className="flex items-center gap-4">
-                      <Avatar className="h-12 w-12 border">
+                      <Avatar className="w-12 h-12 border">
                         <AvatarImage
                           src={testimonial.imageUrl}
                           alt={testimonial.name}
@@ -227,34 +227,10 @@ export function AnimatedTestimonials({
             })}
 
             {/* Decorative */}
-            <div className="absolute -bottom-6 -left-6 h-24 w-24 rounded-xl bg-primary/5"></div>
-            <div className="absolute -top-6 -right-6 h-24 w-24 rounded-xl bg-primary/5"></div>
+            <div className="absolute w-24 h-24 -bottom-6 -left-6 rounded-xl bg-primary/5"></div>
+            <div className="absolute w-24 h-24 -top-6 -right-6 rounded-xl bg-primary/5"></div>
           </motion.div>
         </motion.div>
-
-        {/* Logos */}
-        {trustedCompanies.length > 0 && (
-          <motion.div
-            variants={itemVariants}
-            initial="hidden"
-            animate={controls}
-            className="mt-24 text-center"
-          >
-            <h3 className="text-sm font-medium text-muted-foreground mb-8">
-              {trustedCompaniesTitle}
-            </h3>
-            <div className="flex flex-wrap justify-center gap-x-12 gap-y-8">
-              {trustedCompanies.map((company) => (
-                <div
-                  key={company}
-                  className="text-2xl font-semibold text-muted-foreground/50"
-                >
-                  {company}
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        )}
       </div>
     </section>
   );

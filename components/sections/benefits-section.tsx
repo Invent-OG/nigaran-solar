@@ -1,8 +1,8 @@
 "use client";
 
-import { useRef } from 'react';
-import { motion } from 'framer-motion';
-import { LeafyGreen, TrendingUp, Award } from 'lucide-react';
+import { useRef } from "react";
+import { motion } from "framer-motion";
+import { LeafyGreen, TrendingUp, Award } from "lucide-react";
 
 interface BenefitCardProps {
   icon: JSX.Element;
@@ -16,7 +16,6 @@ const BenefitCard = ({ icon, title, description, index }: BenefitCardProps) => {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       className="bg-card rounded-xl p-6 shadow-sm"
     >
@@ -36,18 +35,21 @@ export default function BenefitsSection() {
     {
       icon: <LeafyGreen className="h-6 w-6" />,
       title: "Renewable & Sustainable",
-      description: "Solar energy is a clean, renewable resource that reduces carbon emissions and helps preserve our planet for future generations."
+      description:
+        "Solar energy is a clean, renewable resource that reduces carbon emissions and helps preserve our planet for future generations.",
     },
     {
       icon: <TrendingUp className="h-6 w-6" />,
       title: "Increased Property Value",
-      description: "Solar installations can boost your property's value by 3-4%, making it a smart investment for long-term financial benefits."
+      description:
+        "Solar installations can boost your property's value by 3-4%, making it a smart investment for long-term financial benefits.",
     },
     {
       icon: <Award className="h-6 w-6" />,
       title: "Government Incentives",
-      description: "Take advantage of federal tax credits, state rebates, and local incentives that significantly reduce your installation costs."
-    }
+      description:
+        "Take advantage of federal tax credits, state rebates, and local incentives that significantly reduce your installation costs.",
+    },
   ];
 
   return (

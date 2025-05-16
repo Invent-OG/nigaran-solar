@@ -1,10 +1,10 @@
 "use client";
 
-import { motion } from 'framer-motion';
-import Image from 'next/image';
-import { Button } from '@/components/ui/button';
-import { ArrowRight, Home, Users, Leaf, PiggyBank } from 'lucide-react';
-import LeadForm from '@/components/forms/lead-form';
+import { motion } from "framer-motion";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { ArrowRight, Home, Users, Leaf, PiggyBank } from "lucide-react";
+import LeadForm from "@/components/forms/lead-form";
 
 export default function HousingSocietyPage() {
   return (
@@ -20,7 +20,7 @@ export default function HousingSocietyPage() {
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50" />
         </div>
-        
+
         <div className="container relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -32,7 +32,8 @@ export default function HousingSocietyPage() {
               Solar Solutions for Housing Societies
             </h1>
             <p className="text-lg md:text-xl text-white/90 mb-8">
-              Transform your housing society with sustainable energy solutions. Reduce maintenance costs and create a greener community.
+              Transform your housing society with sustainable energy solutions.
+              Reduce maintenance costs and create a greener community.
             </p>
           </motion.div>
         </div>
@@ -44,11 +45,12 @@ export default function HousingSocietyPage() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
             transition={{ duration: 0.5 }}
             className="max-w-md mx-auto bg-card rounded-lg p-8 shadow-lg"
           >
-            <h2 className="text-2xl font-bold mb-6 text-center">Get Your Free Quote</h2>
+            <h2 className="text-2xl font-bold mb-6 text-center">
+              Get Your Free Quote
+            </h2>
             <LeadForm type="housing_society" />
           </motion.div>
         </div>
@@ -67,7 +69,8 @@ export default function HousingSocietyPage() {
               Benefits for Your Society
             </h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              Discover how solar energy can benefit your entire housing community
+              Discover how solar energy can benefit your entire housing
+              community
             </p>
           </motion.div>
 
@@ -76,29 +79,32 @@ export default function HousingSocietyPage() {
               {
                 icon: <Home className="h-8 w-8" />,
                 title: "Common Area Savings",
-                description: "Reduce electricity costs for lifts, lighting, and other common facilities"
+                description:
+                  "Reduce electricity costs for lifts, lighting, and other common facilities",
               },
               {
                 icon: <Users className="h-8 w-8" />,
                 title: "Community Benefits",
-                description: "Lower maintenance charges for all society members"
+                description:
+                  "Lower maintenance charges for all society members",
               },
               {
                 icon: <PiggyBank className="h-8 w-8" />,
                 title: "Government Incentives",
-                description: "Take advantage of special subsidies for housing societies"
+                description:
+                  "Take advantage of special subsidies for housing societies",
               },
               {
                 icon: <Leaf className="h-8 w-8" />,
                 title: "Green Society",
-                description: "Contribute to environmental sustainability as a community"
-              }
+                description:
+                  "Contribute to environmental sustainability as a community",
+              },
             ].map((benefit, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="bg-card rounded-lg p-6 text-center"
               >
@@ -120,7 +126,6 @@ export default function HousingSocietyPage() {
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
               transition={{ duration: 0.5 }}
               className="md:w-2/3"
             >
@@ -128,13 +133,13 @@ export default function HousingSocietyPage() {
                 Ready to Power Your Society with Solar?
               </h2>
               <p className="text-primary-foreground/90 text-lg">
-                Our experts will guide you through the entire process, from planning to installation.
+                Our experts will guide you through the entire process, from
+                planning to installation.
               </p>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
               <Button size="lg" variant="secondary" className="group">

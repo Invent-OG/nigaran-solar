@@ -1,10 +1,10 @@
 "use client";
 
-import { useRef } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { useRef } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 
 interface ServiceCardProps {
   title: string;
@@ -13,7 +13,12 @@ interface ServiceCardProps {
   index: number;
 }
 
-const ServiceCard = ({ title, description, imageUrl, index }: ServiceCardProps) => {
+const ServiceCard = ({
+  title,
+  description,
+  imageUrl,
+  index,
+}: ServiceCardProps) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -34,8 +39,8 @@ const ServiceCard = ({ title, description, imageUrl, index }: ServiceCardProps) 
       <div className="p-6">
         <h3 className="text-xl font-semibold mb-2">{title}</h3>
         <p className="text-muted-foreground mb-4">{description}</p>
-        <Link 
-          href="#" 
+        <Link
+          href="#"
           className="inline-flex items-center text-primary font-medium group-hover:underline"
         >
           Learn More <ArrowRight className="ml-1 h-4 w-4" />
@@ -51,19 +56,25 @@ export default function ServicesSection() {
   const services = [
     {
       title: "Energy Efficiency & Saving",
-      description: "Optimize your energy consumption and reduce costs with our advanced monitoring and efficiency solutions.",
-      imageUrl: "https://images.pexels.com/photos/414837/pexels-photo-414837.jpeg"
+      description:
+        "Optimize your energy consumption and reduce costs with our advanced monitoring and efficiency solutions.",
+      imageUrl:
+        "https://images.pexels.com/photos/414837/pexels-photo-414837.jpeg",
     },
     {
       title: "Eco-Friendly Technology",
-      description: "Harness the environmentally-friendly, low-carbon, and sustainable energy with our cutting-edge solar technologies.",
-      imageUrl: "https://images.pexels.com/photos/356049/pexels-photo-356049.jpeg"
+      description:
+        "Harness the environmentally-friendly, low-carbon, and sustainable energy with our cutting-edge solar technologies.",
+      imageUrl:
+        "https://images.pexels.com/photos/356049/pexels-photo-356049.jpeg",
     },
     {
       title: "Smart Monitoring & Control",
-      description: "Access our advanced monitoring systems that allow users to track energy production and consumption in real-time.",
-      imageUrl: "https://images.pexels.com/photos/2800832/pexels-photo-2800832.jpeg"
-    }
+      description:
+        "Access our advanced monitoring systems that allow users to track energy production and consumption in real-time.",
+      imageUrl:
+        "https://images.pexels.com/photos/2800832/pexels-photo-2800832.jpeg",
+    },
   ];
 
   return (
@@ -72,13 +83,16 @@ export default function ServicesSection() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Futures That We Provide</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            Futures That We Provide
+          </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Our comprehensive range of solar solutions is designed to meet your specific energy needs while contributing to a more sustainable future.
+            Our comprehensive range of solar solutions is designed to meet your
+            specific energy needs while contributing to a more sustainable
+            future.
           </p>
         </motion.div>
 

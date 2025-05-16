@@ -1,9 +1,18 @@
 "use client";
 
-import { motion } from 'framer-motion';
-import Image from 'next/image';
-import { Button } from '@/components/ui/button';
-import { ArrowRight, Users, Target, Shield, Award, Rocket, Leaf, Zap } from 'lucide-react';
+import { motion } from "framer-motion";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import {
+  ArrowRight,
+  Users,
+  Target,
+  Shield,
+  Award,
+  Rocket,
+  Leaf,
+  Zap,
+} from "lucide-react";
 
 export default function AboutPage() {
   return (
@@ -19,7 +28,7 @@ export default function AboutPage() {
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50" />
         </div>
-        
+
         <div className="container relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -31,7 +40,10 @@ export default function AboutPage() {
               Empowering India, One Rooftop at a Time
             </h1>
             <p className="text-lg md:text-xl text-white/90 mb-8">
-              At Nigaran Solar, we deliver eco-friendly, affordable solar solutions tailored to homes and businesses. Based in Coimbatore, we specialize in high-efficiency installations with a strong focus on sustainability.
+              At Nigaran Solar, we deliver eco-friendly, affordable solar
+              solutions tailored to homes and businesses. Based in Coimbatore,
+              we specialize in high-efficiency installations with a strong focus
+              on sustainability.
             </p>
             <Button size="lg" className="group">
               Learn More
@@ -48,7 +60,6 @@ export default function AboutPage() {
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
               transition={{ duration: 0.5 }}
               className="bg-card rounded-lg p-8"
             >
@@ -59,7 +70,9 @@ export default function AboutPage() {
                 <h2 className="text-2xl font-bold">Our Vision</h2>
               </div>
               <p className="text-muted-foreground mb-6">
-                To make solar energy accessible for all, paving the way for a sustainable tomorrow. We envision a future where clean energy powers every home and business in India.
+                To make solar energy accessible for all, paving the way for a
+                sustainable tomorrow. We envision a future where clean energy
+                powers every home and business in India.
               </p>
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
@@ -80,7 +93,6 @@ export default function AboutPage() {
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
               transition={{ duration: 0.5 }}
               className="bg-card rounded-lg p-8"
             >
@@ -91,7 +103,9 @@ export default function AboutPage() {
                 <h2 className="text-2xl font-bold">Our Mission</h2>
               </div>
               <p className="text-muted-foreground mb-6">
-                To replace traditional energy with clean, cost-effective solar solutions for everyone. We're committed to providing innovative solar technology that makes a real difference in people's lives.
+                To replace traditional energy with clean, cost-effective solar
+                solutions for everyone. We're committed to providing innovative
+                solar technology that makes a real difference in people's lives.
               </p>
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
@@ -118,13 +132,15 @@ export default function AboutPage() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
             transition={{ duration: 0.5 }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Why Choose Us</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Why Choose Us
+            </h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              We combine expertise with dedication to deliver the best solar solutions
+              We combine expertise with dedication to deliver the best solar
+              solutions
             </p>
           </motion.div>
 
@@ -133,29 +149,30 @@ export default function AboutPage() {
               {
                 icon: <Users className="h-8 w-8" />,
                 title: "Expert Team",
-                description: "Years of experience in solar installations and consultancy"
+                description:
+                  "Years of experience in solar installations and consultancy",
               },
               {
                 icon: <Shield className="h-8 w-8" />,
                 title: "Quality Systems",
-                description: "High-quality, durable systems built to last"
+                description: "High-quality, durable systems built to last",
               },
               {
                 icon: <Award className="h-8 w-8" />,
                 title: "Customer Support",
-                description: "Dedicated support throughout your solar journey"
+                description: "Dedicated support throughout your solar journey",
               },
               {
                 icon: <Shield className="h-8 w-8" />,
                 title: "Performance Guarantee",
-                description: "Guaranteed performance with comprehensive warranties"
-              }
+                description:
+                  "Guaranteed performance with comprehensive warranties",
+              },
             ].map((feature, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="bg-card rounded-lg p-6 text-center"
               >
@@ -177,7 +194,6 @@ export default function AboutPage() {
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
               transition={{ duration: 0.5 }}
               className="md:w-2/3"
             >
@@ -185,13 +201,13 @@ export default function AboutPage() {
                 Ready to Start Your Solar Journey?
               </h2>
               <p className="text-primary-foreground/90 text-lg">
-                Let our experts help you transition to clean, sustainable energy.
+                Let our experts help you transition to clean, sustainable
+                energy.
               </p>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
               <Button size="lg" variant="secondary" className="group">

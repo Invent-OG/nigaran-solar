@@ -94,7 +94,6 @@ export default function FAQSection() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
@@ -110,7 +109,6 @@ export default function FAQSection() {
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
             transition={{ duration: 0.5 }}
             className="relative mb-8"
           >
@@ -127,7 +125,6 @@ export default function FAQSection() {
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
             <Accordion type="single" collapsible className="space-y-4">
@@ -136,7 +133,6 @@ export default function FAQSection() {
                   key={index}
                   initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
                   transition={{ duration: 0.3, delay: index * 0.1 }}
                 >
                   <AccordionItem

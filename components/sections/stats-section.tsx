@@ -6,6 +6,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { cn } from "@/lib/utils";
 import { Users, Briefcase, Building2 } from "lucide-react";
+import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -62,16 +63,21 @@ const StatCard = ({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.6, delay: delay * 0.2 }}
-      className={cn("flex flex-col items-center text-center", className)}
+      className={cn(
+        "flex flex-col items-center text-center  z-20 relative bg-white hover:shadow-2xl shadow-md transition-all duration-500  py-10 rounded-2xl ",
+        className
+      )}
     >
-      <div className="mb-3 text-primary">{icon}</div>
+      <div className="absolute opacity-30 -bottom-3 -left-5 text-primary ">
+        {icon}
+      </div>
       <div
         ref={numberRef}
-        className="text-4xl md:text-5xl font-extrabold text-foreground mb-2"
+        className="mb-2 text-3xl font-extrabold text-primary md:text-6xl"
       >
         {value}
       </div>
-      <div className="text-sm md:text-base text-muted-foreground font-medium uppercase tracking-wide">
+      <div className="text-sm font-bold tracking-wide uppercase md:text-base">
         {metric}
       </div>
     </motion.div>
@@ -80,28 +86,35 @@ const StatCard = ({
 
 export default function StatsSection() {
   return (
-    <section className="py-16 md:py-24 bg-white text-foreground">
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+    <section className="relative py-16 md:py-24 bg-primary px-[15%]">
+      <div className="">
+        <div className="z-20 grid grid-cols-1 gap-10 md:grid-cols-3">
           <StatCard
             value="1000+"
             metric="Satisfied Customers"
-            icon={<Users size={40} />}
+            icon={<Users size={100} />}
             delay={0}
           />
           <StatCard
             value="25+"
             metric="Experienced Professionals"
-            icon={<Briefcase size={40} />}
+            icon={<Briefcase size={100} />}
             delay={0.2}
           />
           <StatCard
             value="500+"
             metric="Clients across Industries"
-            icon={<Building2 size={40} />}
+            icon={<Building2 size={100} />}
             delay={0.4}
           />
         </div>
+        <Image
+          src="/windmill.svg"
+          alt="Solar Panels"
+          width={500}
+          height={500}
+          className="absolute bottom-0 right-0 z-10 object-cover"
+        />
       </div>
     </section>
   );

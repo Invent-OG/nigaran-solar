@@ -7,6 +7,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sun, Battery, Shield } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { LogosSlider } from "./logos-slider";
+import AshParticles from "../AshParticles";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -55,41 +57,42 @@ export default function HeroSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative flex items-center justify-center min-h-screen overflow-hidden"
     >
-      <div className="hero-background absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 hero-background">
         <video
           autoPlay
           loop
           muted
           playsInline
-          className="w-full h-full object-cover"
+          className="object-cover w-full h-full"
         >
           <source src="/videos/hero-video.webm" type="video/webm" />
           <source src="/videos/hero-video.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50 mix-blend-multiply" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/10 to-black/10 mix-blend-multiply" />
+        <AshParticles />
       </div>
 
-      <div className="container relative z-10 px-4 md:px-6 text-center">
+      <div className="container relative z-10 px-4 text-center md:px-6">
         <div className="flex flex-col items-center justify-center min-h-screen py-16">
-          <div className="mb-4 text-white/80 font-medium">
-            <span className="inline-block border-b-2 border-primary pb-1">
+          <div className="mb-4 font-medium text-white/80">
+            <span className="inline-block pb-1 border-b-2 border-primary">
               Your Trusted Solar Power Partner
             </span>
           </div>
 
           <h1
             ref={headingRef}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight max-w-4xl"
+            className="max-w-4xl mb-6 text-4xl font-bold leading-tight text-white md:text-5xl lg:text-6xl"
           >
             Powering Tamil Nadu&apos;s Future with Clean Energy
           </h1>
 
           <p
             ref={textRef}
-            className="text-lg md:text-xl text-white/90 mb-8 max-w-2xl"
+            className="max-w-2xl mb-8 text-lg md:text-xl text-white/90"
           >
             Experience the power of sustainable energy with Tamil Nadu&apos;s
             leading solar solutions provider. We deliver efficient, reliable,
@@ -98,7 +101,7 @@ export default function HeroSection() {
 
           <div
             ref={ctaRef}
-            className="flex flex-col sm:flex-row gap-4 justify-center mb-10"
+            className="flex flex-col justify-center gap-4 mb-10 sm:flex-row"
           >
             <Button
               size="lg"
@@ -106,25 +109,25 @@ export default function HeroSection() {
               className="group"
             >
               Get Free Solar Consultation
-              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
             </Button>
             <Button size="lg" variant="outline">
               Learn More
             </Button>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl mx-auto">
+          <div className="grid max-w-3xl grid-cols-1 gap-6 mx-auto sm:grid-cols-3">
             {[
               {
-                icon: <Sun className="h-6 w-6" />,
+                icon: <Sun className="w-6 h-6" />,
                 label: "25+ Years Warranty",
               },
               {
-                icon: <Battery className="h-6 w-6" />,
+                icon: <Battery className="w-6 h-6" />,
                 label: "90% Power Savings",
               },
               {
-                icon: <Shield className="h-6 w-6" />,
+                icon: <Shield className="w-6 h-6" />,
                 label: "Expert Installation",
               },
             ].map((feature, index) => (
@@ -143,13 +146,13 @@ export default function HeroSection() {
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
+      <div className="absolute -translate-x-1/2 bottom-8 left-1/2">
         <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 1.5, repeat: Infinity }}
-          className="w-6 h-10 rounded-full border-2 border-white/30 flex items-center justify-center"
+          className="flex items-center justify-center w-6 h-10 border-2 rounded-full border-white/30"
         >
-          <div className="w-1 h-2 bg-white/50 rounded-full" />
+          <div className="w-1 h-2 rounded-full bg-white/50" />
         </motion.div>
       </div>
     </section>

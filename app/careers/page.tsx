@@ -12,7 +12,14 @@ import {
 } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal, PromiseLikeOfReactNode } from "react";
+import {
+  Key,
+  ReactElement,
+  JSXElementConstructor,
+  ReactNode,
+  ReactPortal,
+  PromiseLikeOfReactNode,
+} from "react";
 
 export default function CareersPage() {
   const { data, isLoading, error } = useQuery({
@@ -24,7 +31,7 @@ export default function CareersPage() {
     },
   });
 
-  const router = useRouter()
+  const router = useRouter();
 
   const careers = data || [];
 
@@ -53,8 +60,9 @@ export default function CareersPage() {
               Join the Mission to Power India Sustainably
             </h1>
             <p className="text-lg md:text-xl text-white/90 mb-8">
-              Be part of a team that&apos;s revolutionizing India&apos;s energy landscape.
-              We&apos;re looking for passionate individuals to join our mission.
+              Be part of a team that&apos;s revolutionizing India&apos;s energy
+              landscape. We&apos;re looking for passionate individuals to join
+              our mission.
             </p>
             <Button size="lg" className="group">
               View Open Positions
@@ -112,7 +120,6 @@ export default function CareersPage() {
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="bg-card rounded-lg p-6 text-center"
               >
@@ -133,7 +140,6 @@ export default function CareersPage() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
             transition={{ duration: 0.5 }}
             className="text-center mb-12"
           >
@@ -151,39 +157,89 @@ export default function CareersPage() {
             <div>Error loading positions</div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {careers.map((position: { id: Key | null | undefined; title: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | PromiseLikeOfReactNode | null | undefined; location: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | PromiseLikeOfReactNode | null | undefined; type: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | PromiseLikeOfReactNode | null | undefined; salary: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | PromiseLikeOfReactNode | null | undefined; }, index: number) => (
-                <motion.div
-                  key={position.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="bg-card rounded-lg p-6 hover:shadow-lg transition-shadow"
-                >
-                  <h3 className="text-xl font-semibold mb-2">
-                    {position.title}
-                  </h3>
-                  <div className="flex flex-wrap gap-4 mb-4">
-                    <span className="text-sm bg-primary/10 text-primary px-3 py-1 rounded-full">
-                      {position.location}
-                    </span>
-                    <span className="text-sm bg-primary/10 text-primary px-3 py-1 rounded-full">
-                      {position.type}
-                    </span>
-                    {position.salary && (
-                      <span className="text-sm bg-primary/10 text-primary px-3 py-1 rounded-full">
-                        {position.salary}
-                      </span>
-                    )}
-                  </div>
-                  <Button variant="outline" className="group" 
-                  onClick={()=> router.push(`/careers/${position.id}/apply`)}
+              {careers.map(
+                (
+                  position: {
+                    id: Key | null | undefined;
+                    title:
+                      | string
+                      | number
+                      | boolean
+                      | ReactElement<any, string | JSXElementConstructor<any>>
+                      | Iterable<ReactNode>
+                      | ReactPortal
+                      | PromiseLikeOfReactNode
+                      | null
+                      | undefined;
+                    location:
+                      | string
+                      | number
+                      | boolean
+                      | ReactElement<any, string | JSXElementConstructor<any>>
+                      | Iterable<ReactNode>
+                      | ReactPortal
+                      | PromiseLikeOfReactNode
+                      | null
+                      | undefined;
+                    type:
+                      | string
+                      | number
+                      | boolean
+                      | ReactElement<any, string | JSXElementConstructor<any>>
+                      | Iterable<ReactNode>
+                      | ReactPortal
+                      | PromiseLikeOfReactNode
+                      | null
+                      | undefined;
+                    salary:
+                      | string
+                      | number
+                      | boolean
+                      | ReactElement<any, string | JSXElementConstructor<any>>
+                      | Iterable<ReactNode>
+                      | ReactPortal
+                      | PromiseLikeOfReactNode
+                      | null
+                      | undefined;
+                  },
+                  index: number
+                ) => (
+                  <motion.div
+                    key={position.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    className="bg-card rounded-lg p-6 hover:shadow-lg transition-shadow"
                   >
-                    Apply Now
-                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </Button>
-                </motion.div>
-              ))}
+                    <h3 className="text-xl font-semibold mb-2">
+                      {position.title}
+                    </h3>
+                    <div className="flex flex-wrap gap-4 mb-4">
+                      <span className="text-sm bg-primary/10 text-primary px-3 py-1 rounded-full">
+                        {position.location}
+                      </span>
+                      <span className="text-sm bg-primary/10 text-primary px-3 py-1 rounded-full">
+                        {position.type}
+                      </span>
+                      {position.salary && (
+                        <span className="text-sm bg-primary/10 text-primary px-3 py-1 rounded-full">
+                          {position.salary}
+                        </span>
+                      )}
+                    </div>
+                    <Button
+                      variant="outline"
+                      className="group"
+                      onClick={() =>
+                        router.push(`/careers/${position.id}/apply`)
+                      }
+                    >
+                      Apply Now
+                      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </Button>
+                  </motion.div>
+                )
+              )}
             </div>
           )}
         </div>
@@ -196,7 +252,6 @@ export default function CareersPage() {
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
               transition={{ duration: 0.5 }}
               className="md:w-2/3"
             >
@@ -211,7 +266,6 @@ export default function CareersPage() {
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
               <Button size="lg" variant="secondary" className="group">

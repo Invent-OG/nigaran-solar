@@ -39,8 +39,6 @@ export default function TestimonialsSection() {
       subtitle="Hear from our satisfied customers about their experience with Nigaran Solar's solutions and service."
       badgeText="Customer Reviews"
       testimonials={testimonials}
-      trustedCompanies={["TATA", "Adani", "Reliance", "L&T", "Mahindra"]}
-      trustedCompaniesTitle="Trusted by leading companies across India"
     />
   );
 }

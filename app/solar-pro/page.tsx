@@ -1,10 +1,10 @@
 "use client";
 
-import { motion } from 'framer-motion';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { ArrowRight, Users, Wallet, Trophy, BadgeCheck } from 'lucide-react';
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { ArrowRight, Users, Wallet, Trophy, BadgeCheck } from "lucide-react";
 
 export default function SolarProPage() {
   return (
@@ -22,7 +22,8 @@ export default function SolarProPage() {
               Become a Nigaran Solar Pro
             </h1>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              Join our network of solar professionals and earn rewards while helping others transition to clean energy.
+              Join our network of solar professionals and earn rewards while
+              helping others transition to clean energy.
             </p>
           </motion.div>
 
@@ -32,29 +33,29 @@ export default function SolarProPage() {
               {
                 icon: <Wallet className="h-8 w-8" />,
                 title: "Earn Rewards",
-                description: "Attractive commissions for every successful referral"
+                description:
+                  "Attractive commissions for every successful referral",
               },
               {
                 icon: <Users className="h-8 w-8" />,
                 title: "Help Your Network",
-                description: "Enable your community to save on energy costs"
+                description: "Enable your community to save on energy costs",
               },
               {
                 icon: <Trophy className="h-8 w-8" />,
                 title: "Growth Opportunities",
-                description: "Access to training and professional development"
+                description: "Access to training and professional development",
               },
               {
                 icon: <BadgeCheck className="h-8 w-8" />,
                 title: "Expert Support",
-                description: "Dedicated team to help you succeed"
-              }
+                description: "Dedicated team to help you succeed",
+              },
             ].map((benefit, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="bg-card rounded-lg p-6 text-center"
               >
@@ -71,7 +72,6 @@ export default function SolarProPage() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
             transition={{ duration: 0.5 }}
             className="max-w-2xl mx-auto bg-card rounded-lg p-8 shadow-lg"
           >
@@ -79,11 +79,15 @@ export default function SolarProPage() {
             <form className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="text-sm font-medium mb-1 block">First Name</label>
+                  <label className="text-sm font-medium mb-1 block">
+                    First Name
+                  </label>
                   <Input placeholder="John" />
                 </div>
                 <div>
-                  <label className="text-sm font-medium mb-1 block">Last Name</label>
+                  <label className="text-sm font-medium mb-1 block">
+                    Last Name
+                  </label>
                   <Input placeholder="Doe" />
                 </div>
               </div>
@@ -96,16 +100,22 @@ export default function SolarProPage() {
                 <Input type="tel" placeholder="+91 98765 43210" />
               </div>
               <div>
-                <label className="text-sm font-medium mb-1 block">Location</label>
+                <label className="text-sm font-medium mb-1 block">
+                  Location
+                </label>
                 <Input placeholder="City, State" />
               </div>
               <div>
-                <label className="text-sm font-medium mb-1 block">Profession</label>
+                <label className="text-sm font-medium mb-1 block">
+                  Profession
+                </label>
                 <Input placeholder="Current Profession" />
               </div>
               <div>
-                <label className="text-sm font-medium mb-1 block">Why do you want to join?</label>
-                <Textarea 
+                <label className="text-sm font-medium mb-1 block">
+                  Why do you want to join?
+                </label>
+                <Textarea
                   placeholder="Tell us about your interest in solar energy..."
                   className="min-h-[100px]"
                 />
