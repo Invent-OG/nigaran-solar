@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { ArrowLeft } from "lucide-react";
@@ -59,8 +60,10 @@ export default function BlogPost({ params }: { params: { id: string } }) {
                 {new Date(blog.createdAt).toLocaleDateString()}
               </p>
             </div>
-
-            <div className="prose prose-lg max-w-none">{blog.content}</div>
+            <div
+              className="prose prose-lg max-w-none"
+              dangerouslySetInnerHTML={{ __html: blog.content }}
+            />{" "}
           </div>
         </motion.div>
       </div>

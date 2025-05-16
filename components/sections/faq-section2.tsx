@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
 export default function ChargingExperience() {
-  const [activeIndex, setActiveIndex] = useState(null);
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   const accordionItems = [
     {
@@ -24,7 +24,7 @@ export default function ChargingExperience() {
     },
   ];
 
-  const toggleAccordion = (index) => {
+  const toggleAccordion = (index: number) => {
     setActiveIndex(activeIndex === index ? null : index);
   };
 
@@ -37,7 +37,7 @@ export default function ChargingExperience() {
           alt="Solar Panels"
           width={500}
           height={500}
-          className="rounded-md z-10 w-[500px] h-[500px]  object-cover"
+          className="rounded-md z-10 w-[500px] h-[500px] object-cover"
         />
       </div>
 
@@ -77,7 +77,7 @@ export default function ChargingExperience() {
                   ^
                 </span>
               </div>
-              <AnimatePresence initial={false}>
+              <AnimatePresence>
                 {activeIndex === index && (
                   <motion.div
                     key="content"

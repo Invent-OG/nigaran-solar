@@ -1,6 +1,6 @@
-"use client"; // 👈 Add this as the very first line
+"use client";
 
-import { useRef } from "react";
+import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Battery, Power, Zap } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -83,6 +83,8 @@ const Feature108 = ({
     },
   ],
 }: Feature108Props) => {
+  const [selectedTab, setSelectedTab] = useState(tabs[0].value);
+
   return (
     <section className="py-32 bg-background">
       <div className="container relative mx-auto">
@@ -105,7 +107,11 @@ const Feature108 = ({
             <Spline scene="https://prod.spline.design/fZXdoHZ9JramEa8D/scene.splinecode" />
           </div>
 
-          <Tabs defaultValue={tabs[0].value} className="relative mt-8 ">
+          <Tabs
+            value={selectedTab}
+            onValueChange={setSelectedTab}
+            className="relative mt-8"
+          >
             {/* Tabs List */}
             <motion.div
               className="flex flex-col items-center justify-center gap-4 sm:flex-row md:gap-10"
@@ -135,69 +141,71 @@ const Feature108 = ({
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <AnimatePresence>
-                {tabs.map((tab) => (
-                  <TabsContent
-                    key={tab.value}
-                    value={tab.value}
-                    className="relative z-30"
-                    asChild
-                  >
-                    <motion.div
-                      className="grid gap-20 place-items-center lg:grid-cols-2 lg:gap-10"
-                      initial={{ opacity: 0, y: 30 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -30 }}
-                      transition={{ duration: 0.4 }}
+              <AnimatePresence mode="wait">
+                {tabs
+                  .filter((tab) => tab.value === selectedTab)
+                  .map((tab) => (
+                    <TabsContent
+                      key={tab.value}
+                      value={tab.value}
+                      className="relative z-30"
+                      asChild
                     >
-                      <div className="flex flex-col gap-5">
-                        <Badge
-                          variant="outline"
-                          className="text-white w-fit bg-primary"
-                        >
-                          {tab.content.badge}
-                        </Badge>
-                        <motion.h3
-                          className="text-3xl font-semibold lg:text-5xl"
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: 0.1 }}
-                        >
-                          {tab.content.title}
-                        </motion.h3>
-                        <motion.p
-                          className="text-muted-foreground lg:text-lg"
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
+                      <motion.div
+                        className="grid gap-20 place-items-center lg:grid-cols-2 lg:gap-10"
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -30 }}
+                        transition={{ duration: 0.4 }}
+                      >
+                        <div className="flex flex-col gap-5">
+                          <Badge
+                            variant="outline"
+                            className="text-white w-fit bg-primary"
+                          >
+                            {tab.content.badge}
+                          </Badge>
+                          <motion.h3
+                            className="text-3xl font-semibold lg:text-5xl"
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 0.1 }}
+                          >
+                            {tab.content.title}
+                          </motion.h3>
+                          <motion.p
+                            className="text-muted-foreground lg:text-lg"
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 0.2 }}
+                          >
+                            {tab.content.description}
+                          </motion.p>
+                          <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: 0.3 }}
+                          >
+                            <Button className="mt-2.5 w-fit gap-2" size="lg">
+                              {tab.content.buttonText}
+                            </Button>
+                          </motion.div>
+                        </div>
+                        <motion.div
+                          className="relative h-[300px] w-full overflow-hidden rounded-xl"
+                          initial={{ scale: 0.95, opacity: 0 }}
+                          animate={{ scale: 1, opacity: 1 }}
                           transition={{ delay: 0.2 }}
                         >
-                          {tab.content.description}
-                        </motion.p>
-                        <motion.div
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          transition={{ delay: 0.3 }}
-                        >
-                          <Button className="mt-2.5 w-fit gap-2" size="lg">
-                            {tab.content.buttonText}
-                          </Button>
+                          <img
+                            src={tab.content.imageSrc}
+                            alt={tab.content.imageAlt}
+                            className="absolute inset-0 object-cover w-full h-full"
+                          />
                         </motion.div>
-                      </div>
-                      <motion.div
-                        className="relative h-[300px] w-full overflow-hidden rounded-xl"
-                        initial={{ scale: 0.95, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        transition={{ delay: 0.2 }}
-                      >
-                        <img
-                          src={tab.content.imageSrc}
-                          alt={tab.content.imageAlt}
-                          className="absolute inset-0 object-cover w-full h-full"
-                        />
                       </motion.div>
-                    </motion.div>
-                  </TabsContent>
-                ))}
+                    </TabsContent>
+                  ))}
               </AnimatePresence>
             </motion.div>
           </Tabs>

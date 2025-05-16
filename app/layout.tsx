@@ -31,7 +31,6 @@ export default function RootLayout({
       <body className={`${inter.variable} font-sans`}>
         <Providers>
           <LenisProvider />
-
           <Header />
           <main>{children}</main>
           <Footer />

@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { HTMLMotionProps, motion } from "framer-motion";
-import { ForwardedRef, forwardRef } from "react";
+import { ForwardedRef, forwardRef, CSSProperties } from "react";
 
 export const GRADIENT_ANGLES = {
   top: 0,
@@ -32,7 +32,7 @@ export const ProgressiveBlur = forwardRef(function ProgressiveBlur(
   const segmentSize = 1 / (blurLayers + 1);
 
   return (
-    <div className={cn("relative", className)} ref={ref} {...props}>
+    <motion.div className={cn("relative", className)} ref={ref} {...props}>
       {Array.from({ length: layers }).map((_, index) => {
         const angle = GRADIENT_ANGLES[direction];
         const gradientStops = [
@@ -55,14 +55,16 @@ export const ProgressiveBlur = forwardRef(function ProgressiveBlur(
           <motion.div
             key={index}
             className="pointer-events-none absolute inset-0 rounded-[inherit]"
-            style={{
-              maskImage: gradient,
-              WebkitMaskImage: gradient,
-              backdropFilter: `blur(${index * blurIntensity}px)`,
-            }}
+            style={
+              {
+                maskImage: gradient,
+                WebkitMaskImage: gradient,
+                backdropFilter: `blur(${index * blurIntensity}px)`,
+              } as CSSProperties
+            }
           />
         );
       })}
-    </div>
+    </motion.div>
   );
 });

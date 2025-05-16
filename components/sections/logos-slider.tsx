@@ -72,8 +72,11 @@ export function LogosSlider() {
         duration={30}
         gap={48}
       >
-        {logos.map((logo) => (
-          <div key={logo.id} className="flex items-center justify-center w-32">
+        {logos.map((logo, index) => (
+          <div
+            key={`${logo.id}-${index}`}
+            className="flex items-center justify-center w-32"
+          >
             <img
               src={logo.image}
               alt={logo.description}

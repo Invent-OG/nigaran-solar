@@ -25,7 +25,7 @@ const ServiceCard = ({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="group relative overflow-hidden rounded-lg bg-black/5 dark:bg-white/5 hover:bg-primary/5 dark:hover:bg-primary/10 transition-colors duration-300"
+      className="group relative overflow-hidden rounded-lg bg-black/5  hover:bg-primary/5  transition-colors duration-300"
     >
       <div className="aspect-[16/9] w-full overflow-hidden">
         <Image

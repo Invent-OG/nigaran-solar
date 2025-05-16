@@ -124,7 +124,7 @@ export default function ContactPage() {
                   </Select>
                 </div>
 
-                <AnimatePresence>
+                <AnimatePresence mode="sync">
                   {lookingFor === "commercial" && (
                     <motion.div
                       key="commercial"
