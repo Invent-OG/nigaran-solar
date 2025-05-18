@@ -7,9 +7,9 @@ import TestimonialsSection from "@/components/sections/testimonials-section";
 import BlogSection from "@/components/sections/blog-section";
 import FAQSection from "@/components/sections/faq-section";
 import AnimationProvider from "@/components/animation-provider";
-import ChargingExperience from "@/components/sections/faq-section2";
 import { LogosSlider } from "@/components/sections/logos-slider";
 import WhoWeAre from "@/components/sections/who-we-are";
+import FAQ from "@/components/sections/faq-section2";
 
 export default function Home() {
   return (
@@ -22,7 +22,7 @@ export default function Home() {
       <ExpertiseSection />
       <TestimonialsSection />
       <BlogSection />
-      <ChargingExperience />
+      <FAQ />
     </AnimationProvider>
   );
 }

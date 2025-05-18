@@ -3,8 +3,9 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { ArrowBigDown, ChevronDown } from "lucide-react";
+import { Badge } from "../ui/badge";
 
-export default function ChargingExperience() {
+export default function FAQ() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   const accordionItems = [
@@ -33,36 +34,37 @@ export default function ChargingExperience() {
     <section className=" px-6 pt-[10%] pb-[20%] relative bg-white  ">
       <div className="absolute inset-0 z-0 bg-[url('/bg-pattern.png')] bg-cover bg-center opacity-30"></div>
 
-      <div className="container flex flex-col items-center justify-between z-50 lg:flex-row">
+      <div className="container flex flex-col items-center justify-between z-40 lg:flex-row">
         {/* Left Image */}
 
-        <div className="relative  w-full mb-10 lg:w-1/2  lg:mb-0">
+        <div className="relative w-[500px] h-[500px] z-10">
+          {/* Half Circle Background */}
+          <div className="absolute left-[-80px] top-1/2 -translate-y-1/2 w-[300px] h-[300px] rounded-full bg-primary z-0"></div>
+
+          {/* Image */}
           <Image
             src="https://images.unsplash.com/photo-1613665813446-82a78c468a1d?q=80&w=3516&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt="Solar Panels"
             width={500}
             height={500}
-            className="rounded-md  z-10 w-[400px] h-[400px] border bg-current  object-cover"
-          />
-          <Image
-            src="https://images.unsplash.com/photo-1613665813446-82a78c468a1d?q=80&w=3516&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt="Solar Panels"
-            width={500}
-            height={500}
-            className="rounded-md  z-10 w-[250px] h-[250px] absolute -bottom-20 right-20 bg-slate-500  border-8 border-popover object-cover"
+            className="rounded-md border bg-current object-cover relative z-10 w-full h-full"
           />
         </div>
 
         {/* Right Content */}
-        <div className="w-full lg:w-1/2 z-50">
-          <span className="font-medium text-green-600">About Us</span>
-          <h2 className="mt-2 text-4xl font-bold leading-tight text-gray-900">
-            We Provide Best Car <br /> Charging Experiences.
-          </h2>
-          <p className="mt-4 text-gray-600">
-            Discover seamless and sustainable electric vehicle charging services
-            designed for modern lifestyles.
-          </p>
+        <div className="w-full lg:w-1/2 z-40">
+          <motion.div
+            className="flex flex-col items-start gap-4 text-left"
+            initial={{ opacity: 0, y: 100 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <Badge variant="outline"> Frequently Asked Questions</Badge>
+            <h2 className="max-w-2xl text-3xl font-extrabold md:text-4xl">
+              Find answers to common questions about solar energy solutions
+            </h2>
+            <div className="w-20 h-1  mb-6 bg-primary"></div>
+          </motion.div>
 
           {/* Accordion Section */}
           <div className="mt-8 space-y-3">
