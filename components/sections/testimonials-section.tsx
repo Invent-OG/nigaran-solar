@@ -34,11 +34,21 @@ export default function TestimonialsSection() {
     })) || [];
 
   return (
-    <AnimatedTestimonials
-      title="What Our Customers Say"
-      subtitle="Hear from our satisfied customers about their experience with Nigaran Solar's solutions and service."
-      badgeText="Customer Reviews"
-      testimonials={testimonials}
-    />
+    <div>
+      <AnimatedTestimonials
+        title="What Our Customers Say"
+        subtitle="Hear from our satisfied customers about their experience with Nigaran Solar's solutions and service."
+        badgeText="Customer Reviews"
+        testimonials={testimonials}
+      />
+      <script
+        src="https://static.elfsight.com/platform/platform.js"
+        async
+      ></script>
+      <div
+        className="elfsight-app-fe3c2b0c-5913-47c7-9b00-6121b3a4e40d  px-16"
+        data-elfsight-app-lazy
+      ></div>
+    </div>
   );
 }

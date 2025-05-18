@@ -9,6 +9,7 @@ import FAQSection from "@/components/sections/faq-section";
 import AnimationProvider from "@/components/animation-provider";
 import ChargingExperience from "@/components/sections/faq-section2";
 import { LogosSlider } from "@/components/sections/logos-slider";
+import WhoWeAre from "@/components/sections/who-we-are";
 
 export default function Home() {
   return (
@@ -16,12 +17,11 @@ export default function Home() {
       <HeroSection />
       <LogosSlider />
       <StatsSection />
+      <WhoWeAre />
       <Feature108 />
-      <FutureSection />
       <ExpertiseSection />
       <TestimonialsSection />
       <BlogSection />
-      {/* <FAQSection /> */}
       <ChargingExperience />
     </AnimationProvider>
   );

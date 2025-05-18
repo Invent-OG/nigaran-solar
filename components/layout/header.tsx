@@ -2,34 +2,69 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { ArrowDownAZ, ArrowDownAZIcon, Menu, X } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
 import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
+import { motion } from "framer-motion";
+import {
+  Menu,
+  X,
+  Calculator,
+  Briefcase,
+  Sun,
+  Building,
+  DollarSign,
+  Newspaper,
+  ShieldCheck,
+  HomeIcon,
+} from "lucide-react";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
-const navItems = [
+import type { LucideIcon } from "lucide-react";
+
+interface NavSubItem {
+  label: string;
+  href: string;
+  icon?: LucideIcon;
+}
+
+interface NavItem {
+  label: string;
+  href: string;
+  icon?: LucideIcon;
+  submenu?: NavSubItem[];
+}
+
+// Add icons to submenu items
+const navItems: NavItem[] = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   {
     label: "Solutions",
     href: "#",
     submenu: [
-      { label: "Residential Solar", href: "/residential" },
-      { label: "Commercial Solar", href: "/commercial" },
-      { label: "Solar Subsidy", href: "/subsidy" },
+      { label: "Residential Solar", href: "/residential", icon: Sun },
+      { label: "Commercial Solar", href: "/commercial", icon: Building },
+
+      { label: "Housing society", href: "/housing-society", icon: HomeIcon },
+
+      { label: "Solar Subsidy", href: "/subsidy", icon: DollarSign },
     ],
   },
-  { label: "Solar Calculator", href: "/solar-calculator" },
+
   { label: "Contact", href: "/contact" },
   {
     label: "More",
     href: "#",
     submenu: [
-      { label: "Careers", href: "/careers" },
-      { label: "Solar Pro", href: "/solar-pro" },
-      { label: "Blog", href: "/blog" },
+      { label: "Careers", href: "/careers", icon: Briefcase },
+      { label: "Solar Pro", href: "/solar-pro", icon: ShieldCheck },
+      { label: "Blog", href: "/blog", icon: Newspaper },
+      {
+        label: "Solar Calculator",
+        href: "/solar-calculator",
+        icon: Calculator,
+      },
     ],
   },
 ];
@@ -37,6 +72,9 @@ const navItems = [
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [expandedSubmenus, setExpandedSubmenus] = useState<
+    Record<string, boolean>
+  >({});
   const router = useRouter();
   const pathName = usePathname();
 
@@ -48,11 +86,30 @@ export default function Header() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-  console.log(pathName);
+
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileMenuOpen]);
+
+  const toggleSubmenu = (label: string) => {
+    setExpandedSubmenus((prev) => ({
+      ...prev,
+      [label]: !prev[label],
+    }));
+  };
+
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50  transition-all duration-300",
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         isScrolled
           ? "bg-background/80 backdrop-blur-md py-3 shadow-lg"
           : "bg-transparent py-5"
@@ -66,10 +123,10 @@ export default function Header() {
           className="flex items-center gap-2"
         >
           <Link href="/" className="text-xl font-bold flex items-center">
-            <Image src={"/nigaran-logo.png"} alt={""} width={50} height={50} />
+            <Image src="/nigaran-logo.png" alt="" width={50} height={50} />
             <span
               className={cn(
-                "ml-2 ",
+                "ml-2",
                 !isScrolled && pathName === "/" ? "text-white" : ""
               )}
             >
@@ -78,7 +135,7 @@ export default function Header() {
           </Link>
         </motion.div>
 
-        {/* Desktop Navigation */}
+        {/* Desktop Nav */}
         <nav className="hidden md:flex items-center space-x-8">
           {navItems.map((item, index) => (
             <motion.div
@@ -86,25 +143,29 @@ export default function Header() {
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: index * 0.1 }}
-              className="relative group"
+              className="relative group flex items-center space-x-1"
             >
+              {item.icon && (
+                <item.icon className="w-4 h-4 text-foreground/80" />
+              )}
               <Link
                 href={item.href}
                 className={cn(
-                  "text-foreground/80  hover:text-primary transition-colors font-medium",
+                  "text-foreground/80 hover:text-primary transition-colors font-medium",
                   !isScrolled && pathName === "/" ? "text-white" : ""
                 )}
               >
                 {item.label}
               </Link>
               {item.submenu && (
-                <div className="absolute top-full  left-0 mt-2 w-48 bg-background rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                <div className="absolute top-full left-0 mt-2 w-48 bg-background p-2 border rounded-md shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                   {item.submenu.map((subItem) => (
                     <Link
                       key={subItem.label}
                       href={subItem.href}
-                      className="block px-4   py-2 text-sm text-foreground/80 hover:text-foreground hover:bg-muted transition-colors"
+                      className="flex items-center gap-2 px-4 py-2 hover:bg-primary text-sm text-foreground/80 hover:text-foreground rounded-sm hover:text-white  transition-colors"
                     >
+                      {subItem.icon && <subItem.icon className="w-4 h-4" />}
                       {subItem.label}
                     </Link>
                   ))}
@@ -128,7 +189,7 @@ export default function Header() {
             </Button>
           </motion.div>
 
-          {/* Mobile menu button */}
+          {/* Mobile menu toggle */}
           <div className="md:hidden">
             <Button
               variant="ghost"
@@ -153,30 +214,67 @@ export default function Header() {
       {/* Mobile Navigation */}
       {mobileMenuOpen && (
         <motion.div
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: "auto" }}
-          exit={{ opacity: 0, height: 0 }}
-          className="md:hidden bg-background/95 backdrop-blur-sm"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-40 h-screen w-screen bg-gradient-to-b from-lime-500 to-lime-700 md:hidden overflow-y-auto"
         >
-          <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
+          {/* Close Button */}
+          <div className="flex justify-end p-4">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setMobileMenuOpen(false)}
+              className="text-white"
+            >
+              <X className="h-6 w-6" />
+            </Button>
+          </div>
+
+          <div className="px-6 pb-6 space-y-6 min-h-screen flex flex-col justify-start">
             {navItems.map((item) => (
               <div key={item.label}>
-                <Link
-                  href={item.href}
-                  className="text-foreground/80 hover:text-foreground py-2 px-4 rounded-md transition-colors block"
-                  onClick={() => setMobileMenuOpen(false)}
+                <div
+                  className="flex items-center justify-between px-4 py-3 text-lg font-medium text-white cursor-pointer hover:bg-white/20 rounded-md transition"
+                  onClick={() =>
+                    item.submenu
+                      ? toggleSubmenu(item.label)
+                      : setMobileMenuOpen(false)
+                  }
                 >
-                  {item.label}
-                </Link>
-                {item.submenu && (
-                  <div className="pl-8 mt-2 space-y-2">
+                  <div className="flex items-center gap-2 flex-1">
+                    {item.icon && <item.icon className="w-5 h-5" />}
+                    <Link
+                      href={item.href}
+                      onClick={(e) => {
+                        if (item.submenu) {
+                          e.preventDefault();
+                        } else {
+                          setMobileMenuOpen(false);
+                        }
+                      }}
+                      className="flex-1"
+                    >
+                      {item.label}
+                    </Link>
+                  </div>
+                  {item.submenu && (
+                    <span className="text-xl select-none text-white">
+                      {expandedSubmenus[item.label] ? "−" : "+"}
+                    </span>
+                  )}
+                </div>
+
+                {item.submenu && expandedSubmenus[item.label] && (
+                  <div className="ml-8 mt-2 space-y-2">
                     {item.submenu.map((subItem) => (
                       <Link
                         key={subItem.label}
                         href={subItem.href}
-                        className="text-foreground/70 hover:text-foreground py-1 px-4 rounded-md transition-colors block"
+                        className="flex items-center gap-2 text-white text-base py-2 px-4 rounded-md hover:bg-white/20 transition-colors"
                         onClick={() => setMobileMenuOpen(false)}
                       >
+                        {subItem.icon && <subItem.icon className="w-4 h-4" />}
                         {subItem.label}
                       </Link>
                     ))}
@@ -184,9 +282,14 @@ export default function Header() {
                 )}
               </div>
             ))}
+
             <Button
-              className="mt-2"
-              onClick={() => router.push("/consultation")}
+              className="mt-4 w-full"
+              variant={"secondary"}
+              onClick={() => {
+                setMobileMenuOpen(false);
+                router.push("/consultation");
+              }}
             >
               Get Free Quote
             </Button>

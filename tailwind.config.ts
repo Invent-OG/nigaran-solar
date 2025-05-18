@@ -1,8 +1,8 @@
 import type { Config } from 'tailwindcss';
 
 const config: Config = {
-
-  content: [
+    darkMode: ['class'],
+    content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
@@ -66,6 +66,10 @@ const config: Config = {
         sm: 'calc(var(--radius) - 4px)',
       },
       keyframes: {
+        grow: {
+          '0%': { width: '0%', opacity: '1' },
+          '100%': { opacity: '1' },
+        },
         'accordion-down': {
           from: { height: '0' },
           to: { height: 'var(--radix-accordion-content-height)' },
@@ -78,6 +82,8 @@ const config: Config = {
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+        grow: 'grow 0.4s ease-in-out forwards',
+
       },
     },
   },

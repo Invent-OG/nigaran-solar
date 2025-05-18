@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 const footerLinks = {
   legal: [
     { name: "Privacy Policy", href: "#" },
@@ -34,6 +35,7 @@ const footerLinks = {
 
 export default function Footer() {
   const [email, setEmail] = useState("");
+  const router = useRouter();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -43,7 +45,7 @@ export default function Footer() {
   const formRef = useRef<HTMLFormElement>(null);
 
   return (
-    <footer className="relative pt-40 pb-8 mt-[10%] text-white bg-black">
+    <footer className="relative pt-40 pb-8  text-white bg-black">
       {/* CONTACT SECTION (Top banner) */}
       <section className="absolute top-0  left-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary text-primary-foreground p-6 sm:p-8 md:p-10 rounded-2xl w-[90%] max-w-[1200px] flex flex-col md:flex-row items-center justify-between gap-6  shadow-lg">
         <Image
@@ -62,18 +64,31 @@ export default function Footer() {
               size={"lg"}
               variant={"secondary"}
               className="w-full sm:w-auto"
+              onClick={() => router.push("contact")}
             >
               Contact us
             </Button>
-            <div className="flex items-center gap-4">
-              <div className="p-4 bg-white rounded-full">
+            <motion.div
+              whileHover="ring"
+              className="flex items-center gap-4 cursor-pointer"
+            >
+              <motion.div
+                className="p-4 bg-white rounded-full"
+                variants={{
+                  ring: {
+                    rotate: [0, -15, 15, -10, 10, -5, 5, 0], // shaking effect
+                    transition: { duration: 0.6 },
+                  },
+                }}
+              >
                 <PhoneCall className="text-primary" />
-              </div>
+              </motion.div>
+
               <div className="text-left">
                 <div className="text-sm">Need any help</div>
                 <div className="text-lg font-extrabold">+91 96007 15993</div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
         <div className="w-full md:w-auto">

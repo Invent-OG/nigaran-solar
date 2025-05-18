@@ -1,8 +1,8 @@
 "use client";
 
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import LeadForm from '@/components/forms/lead-form';
+import LeadForm from "@/components/forms/lead-form";
 
 export default function ConsultationPage() {
   return (
@@ -10,7 +10,7 @@ export default function ConsultationPage() {
       <section className="py-16 md:py-24 bg-background">
         <div className="container">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 100 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             className="text-center mb-12"
@@ -19,12 +19,13 @@ export default function ConsultationPage() {
               Get Your Free Solar Consultation
             </h1>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              Fill out the form below and our experts will provide you with a customized solar solution.
+              Fill out the form below and our experts will provide you with a
+              customized solar solution.
             </p>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 100 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             className="max-w-md mx-auto"
@@ -32,7 +33,9 @@ export default function ConsultationPage() {
             <Tabs defaultValue="residential" className="w-full">
               <TabsList className="grid w-full grid-cols-3">
                 <TabsTrigger value="residential">Residential</TabsTrigger>
-                <TabsTrigger value="housing_society">Housing Society</TabsTrigger>
+                <TabsTrigger value="housing_society">
+                  Housing Society
+                </TabsTrigger>
                 <TabsTrigger value="commercial">Commercial</TabsTrigger>
               </TabsList>
               <div className="mt-8">

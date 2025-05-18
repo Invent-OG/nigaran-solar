@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -18,40 +18,40 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Calculator, Sun, IndianRupee, Battery, Zap } from 'lucide-react';
+import { Calculator, Sun, IndianRupee, Battery, Zap } from "lucide-react";
 
 export default function SolarCalculatorPage() {
   const [monthlyBill, setMonthlyBill] = useState<number>(0);
   const [roofArea, setRoofArea] = useState<number>(0);
-  const [location, setLocation] = useState<string>('tamil-nadu');
+  const [location, setLocation] = useState<string>("tamil-nadu");
   const [showResults, setShowResults] = useState(false);
 
   const calculateSolarSystem = () => {
     // Average electricity rate in Tamil Nadu (Rs/kWh)
     const electricityRate = 8;
-    
+
     // Monthly consumption in kWh
     const monthlyConsumption = monthlyBill / electricityRate;
-    
+
     // Daily consumption
     const dailyConsumption = monthlyConsumption / 30;
-    
+
     // Solar system size needed (kW)
     // Assuming 4 peak sun hours per day and 80% system efficiency
-    const systemSize = (dailyConsumption / (4 * 0.8));
-    
+    const systemSize = dailyConsumption / (4 * 0.8);
+
     // Area needed (assuming 100 sq ft per kW)
     const areaNeeded = systemSize * 100;
-    
+
     // System cost (assuming Rs. 45,000 per kW)
     const systemCost = systemSize * 45000;
-    
+
     // Annual savings
     const annualSavings = monthlyBill * 12;
-    
+
     // Payback period
     const paybackPeriod = systemCost / annualSavings;
-    
+
     return {
       systemSize: Math.round(systemSize * 100) / 100,
       areaNeeded: Math.round(areaNeeded),
@@ -73,7 +73,7 @@ export default function SolarCalculatorPage() {
       <section className="py-16 md:py-24 bg-background">
         <div className="container">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 100 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             className="text-center mb-12"
@@ -82,7 +82,8 @@ export default function SolarCalculatorPage() {
               Solar Calculator
             </h1>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              Calculate your solar power requirements and potential savings with our easy-to-use solar calculator.
+              Calculate your solar power requirements and potential savings with
+              our easy-to-use solar calculator.
             </p>
           </motion.div>
 
@@ -102,7 +103,7 @@ export default function SolarCalculatorPage() {
                   <Input
                     type="number"
                     placeholder="Enter your monthly bill"
-                    value={monthlyBill || ''}
+                    value={monthlyBill || ""}
                     onChange={(e) => setMonthlyBill(Number(e.target.value))}
                   />
                 </div>
@@ -114,7 +115,7 @@ export default function SolarCalculatorPage() {
                   <Input
                     type="number"
                     placeholder="Enter roof area"
-                    value={roofArea || ''}
+                    value={roofArea || ""}
                     onChange={(e) => setRoofArea(Number(e.target.value))}
                   />
                 </div>
@@ -123,10 +124,7 @@ export default function SolarCalculatorPage() {
                   <label className="text-sm font-medium mb-2 block">
                     Location
                   </label>
-                  <Select
-                    value={location}
-                    onValueChange={setLocation}
-                  >
+                  <Select value={location} onValueChange={setLocation}>
                     <SelectTrigger>
                       <SelectValue placeholder="Select your location" />
                     </SelectTrigger>
@@ -134,12 +132,14 @@ export default function SolarCalculatorPage() {
                       <SelectItem value="tamil-nadu">Tamil Nadu</SelectItem>
                       <SelectItem value="kerala">Kerala</SelectItem>
                       <SelectItem value="karnataka">Karnataka</SelectItem>
-                      <SelectItem value="andhra-pradesh">Andhra Pradesh</SelectItem>
+                      <SelectItem value="andhra-pradesh">
+                        Andhra Pradesh
+                      </SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
 
-                <Button 
+                <Button
                   className="w-full"
                   onClick={handleCalculate}
                   disabled={!monthlyBill || !roofArea}

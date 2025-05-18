@@ -119,7 +119,7 @@ export default function FutureSection() {
 
             {/* Stats floating elements */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 100 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
               className="absolute top-[5%] -right-[5%] bg-background shadow-lg rounded-lg p-3 text-sm"
@@ -129,7 +129,7 @@ export default function FutureSection() {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 100 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.5 }}
               className="absolute bottom-[5%] -left-[5%] bg-background shadow-lg rounded-lg p-3 text-sm"
