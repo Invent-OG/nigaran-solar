@@ -45,15 +45,15 @@ export default function Footer() {
   const formRef = useRef<HTMLFormElement>(null);
 
   return (
-    <footer className="relative pt-40 pb-8  text-white bg-black">
+    <footer className="relative md:pt-40 pt-[60%] pb-8  text-white bg-black">
       {/* CONTACT SECTION (Top banner) */}
-      <section className="absolute top-0  left-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary text-primary-foreground p-6 sm:p-8 md:p-10 rounded-2xl w-[90%] max-w-[1200px] flex flex-col md:flex-row items-center justify-between gap-6  shadow-lg">
+      <section className="absolute top-0  left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-[#58b33e] to-lime-700 text-primary-foreground p-6 sm:p-8 md:p-10 rounded-2xl w-[90%] max-w-[1200px] flex flex-col md:flex-row items-center justify-between gap-6  shadow-lg">
         <Image
           src="/Solar_power.png"
           alt="Solar Panels"
           width={500}
           height={100}
-          className="top-0 object-contain left -z-10 opacity-40 lg:absolute"
+          className="top-0 object-contain md:visible hidden left -z-10 opacity-40 lg:absolute"
         />
         <div className="flex flex-col w-full gap-4 md:w-2/3">
           <h2 className="text-2xl font-bold sm:text-3xl md:text-4xl">
@@ -103,7 +103,7 @@ export default function Footer() {
       </section>
 
       {/* FOOTER MAIN */}
-      <div className="flex flex-col px-[15%] pt-4 ">
+      <div className="flex flex-col lg:px-[15%] px-10 pt-4 ">
         <div className="flex flex-col justify-between gap-10 lg:flex-row">
           {/* COMPANY INFO */}
           <motion.div

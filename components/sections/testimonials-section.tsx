@@ -46,7 +46,7 @@ export default function TestimonialsSection() {
         async
       ></script>
       <div
-        className="elfsight-app-fe3c2b0c-5913-47c7-9b00-6121b3a4e40d  px-16"
+        className="elfsight-app-fe3c2b0c-5913-47c7-9b00-6121b3a4e40d"
         data-elfsight-app-lazy
       ></div>
     </div>

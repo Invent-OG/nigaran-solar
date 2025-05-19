@@ -31,28 +31,36 @@ export default function FAQ() {
   };
 
   return (
-    <section className=" px-6 pt-[10%] pb-[20%] relative bg-white  ">
+    <section className="  pt-[5%] md:pb-[20%] pb-[80%] relative bg-white  ">
       <div className="absolute inset-0 z-0 bg-[url('/bg-pattern.png')] bg-cover bg-center opacity-30"></div>
 
-      <div className="container flex flex-col items-center justify-between z-40 lg:flex-row">
+      <Image
+        src="/Wind-Power.png"
+        alt="Solar Panels"
+        width={500}
+        height={500}
+        className="absolute visible bottom-0 lg:right-0"
+      />
+
+      <div className="container flex flex-col items-center gap-10   justify-between z-40 lg:flex-row">
         {/* Left Image */}
 
-        <div className="relative w-[500px] h-[500px] z-10">
+        <div className="relative  w-full  z-10">
           {/* Half Circle Background */}
-          <div className="absolute left-[-80px] top-1/2 -translate-y-1/2 w-[300px] h-[300px] rounded-full bg-primary z-0"></div>
+          <div className="absolute left-[-80px] top-1/2 -translate-y-1/2 w-[300px] h-[300px] opacity-70 rounded-full bg-primary z-0"></div>
 
           {/* Image */}
           <Image
-            src="https://images.unsplash.com/photo-1613665813446-82a78c468a1d?q=80&w=3516&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            src="https://images.unsplash.com/photo-1613665813446-82a78c468a1d?q=80x&w=3516&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt="Solar Panels"
             width={500}
             height={500}
-            className="rounded-md border bg-current object-cover relative z-10 w-full h-full"
+            className="rounded-md  bg-current object-cover relative z-10 lg:h-[50vh] lg:w-[50vw]"
           />
         </div>
 
         {/* Right Content */}
-        <div className="w-full lg:w-1/2 z-40">
+        <div className="w-full flex flex-col justify-between my-auto gap-10 h-full   z-40">
           <motion.div
             className="flex flex-col items-start gap-4 text-left"
             initial={{ opacity: 0, y: 100 }}
@@ -63,18 +71,18 @@ export default function FAQ() {
             <h2 className="max-w-2xl text-3xl font-extrabold md:text-4xl">
               Find answers to common questions about solar energy solutions
             </h2>
-            <div className="w-20 h-1  mb-6 bg-primary"></div>
+            <div className="w-20 h-1   bg-primary"></div>
           </motion.div>
 
           {/* Accordion Section */}
-          <div className="mt-8 space-y-3">
+          <div className=" h-full space-y-2">
             {accordionItems.map((item, index) => (
-              <div key={index} className="overflow-hidden">
+              <div key={index} className="overflow-hidden ">
                 <div
                   onClick={() => toggleAccordion(index)}
                   className={`border rounded p-4 cursor-pointer font-semibold flex items-center justify-between transition-colors duration-300 ${
                     activeIndex === index
-                      ? "border-green-500 text-black"
+                      ? "border-primary text-black"
                       : "border-gray-200 bg-gray-100"
                   }`}
                 >
