@@ -1,20 +1,14 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { motion } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sun, Battery, Shield } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { LogosSlider } from "./logos-slider";
 import AshParticles from "../AshParticles";
-import { AnimatedText } from "../ui/animated-underline-text-one";
-import { HighlightText } from "../ui/animated-reveal-text";
-import { HandWrittenTitle } from "../ui/hand-writing-text";
 import { RotatingText } from "../ui/rotating-text";
-
-gsap.registerPlugin(ScrollTrigger);
 
 export default function HeroSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -22,41 +16,6 @@ export default function HeroSection() {
   const textRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        headingRef.current,
-        { opacity: 0, y: 50 },
-        { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }
-      );
-
-      gsap.fromTo(
-        textRef.current,
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.8, delay: 0.2, ease: "power2.out" }
-      );
-
-      gsap.fromTo(
-        ctaRef.current,
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.8, delay: 0.4, ease: "power2.out" }
-      );
-
-      gsap.to(".hero-background", {
-        yPercent: 30,
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
 
   return (
     <section
@@ -160,7 +119,7 @@ export default function HeroSection() {
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute -translate-x-1/2 bottom-8 left-1/2">
+      {/* <div className="absolute -translate-x-1/2 bottom-8 left-1/2">
         <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 1.5, repeat: Infinity }}
@@ -168,7 +127,7 @@ export default function HeroSection() {
         >
           <div className="w-1 h-2 rounded-full bg-white/50" />
         </motion.div>
-      </div>
+      </div> */}
     </section>
   );
 }

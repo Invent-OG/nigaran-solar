@@ -3,7 +3,20 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Building2, TrendingUp, Award, Shield } from "lucide-react";
+import {
+  ArrowRight,
+  Building2,
+  TrendingUp,
+  Award,
+  Shield,
+  MonitorSmartphone,
+  Factory,
+  Fan,
+  Leaf,
+  Coins,
+  CheckCircle,
+  Bolt,
+} from "lucide-react";
 import LeadForm from "@/components/forms/lead-form";
 
 export default function CommercialPage() {
@@ -20,21 +33,19 @@ export default function CommercialPage() {
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50" />
         </div>
-
-        <div className="container relative z-10">
+        <div className="container relative z-10 text-white">
           <motion.div
             initial={{ opacity: 0, y: 100 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="max-w-2xl text-white"
+            className="max-w-2xl"
           >
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Smarter Energy for Smarter Business
+              Power Your Business with Commercial Solar
             </h1>
-            <p className="text-lg md:text-xl text-white/90 mb-8">
-              Transform your business with our commercial solar solutions.
-              Reduce operating costs and enhance your sustainability
-              credentials.
+            <p className="text-lg md:text-xl text-white/90">
+              Nigaran Solar offers scalable solar solutions that turn sunlight
+              into long-term savings.
             </p>
           </motion.div>
         </div>
@@ -42,137 +53,175 @@ export default function CommercialPage() {
 
       {/* Lead Form Section */}
       <section className="py-16 bg-muted/30">
-        <div className="container">
+        <div className="container max-w-xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 100 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="max-w-md mx-auto bg-card rounded-lg p-8 shadow-lg"
+            className="bg-card rounded-lg p-8 shadow-lg"
           >
             <h2 className="text-2xl font-bold mb-6 text-center">
-              Get Your Free Quote
+              Get a Free Commercial Solar Quote
             </h2>
             <LeadForm type="commercial" />
           </motion.div>
         </div>
       </section>
 
-      {/* Benefits Section */}
-      <section className="py-16 md:py-24 bg-background">
-        <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 100 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Benefits for Your Business
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              Discover how commercial solar installation can benefit your
-              business
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              {
-                icon: <Building2 className="h-8 w-8" />,
-                title: "Property Value",
-                description:
-                  "Increase your property value with modern solar infrastructure",
-              },
-              {
-                icon: <TrendingUp className="h-8 w-8" />,
-                title: "ROI",
-                description:
-                  "Achieve ROI within 3-7 years with significant energy savings",
-              },
-              {
-                icon: <Award className="h-8 w-8" />,
-                title: "Green Business",
-                description:
-                  "Enhance your brand with sustainable business practices",
-              },
-              {
-                icon: <Shield className="h-8 w-8" />,
-                title: "Tax Benefits",
-                description:
-                  "Take advantage of government incentives and tax benefits",
-              },
-            ].map((benefit, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 100 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-card rounded-lg p-6 text-center"
-              >
-                <div className="w-16 h-16 bg-primary/10 text-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                  {benefit.icon}
-                </div>
-                <h3 className="text-xl font-semibold mb-2">{benefit.title}</h3>
-                <p className="text-muted-foreground">{benefit.description}</p>
-              </motion.div>
-            ))}
-          </div>
+      {/* Intro Content Section */}
+      <section className="py-16 bg-background">
+        <div className="container max-w-4xl mx-auto space-y-6 text-muted-foreground text-lg">
+          <h2 className="text-3xl font-bold text-center text-foreground">
+            Commercial Solar for Smarter Businesses
+          </h2>
+          <p>
+            Energy costs are a major expense for many organizations, but Nigaran
+            Solar offers scalable commercial solar panels that transform
+            sunlight into long-term savings. Whether it’s a warehouse, factory,
+            or office complex, our solar for business solutions are engineered
+            for performance and durability.
+          </p>
+          <p>
+            We provide end-to-end services including industrial solar
+            installation, system design, and energy audits. Reduce operational
+            costs and boost your environmental impact—choose Nigaran Solar to
+            power your business with clean, renewable energy.
+          </p>
         </div>
       </section>
 
-      {/* Case Studies Section */}
-      <section className="py-16 bg-muted/30">
-        <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 100 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Success Stories
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              See how other businesses have benefited from our solar solutions
-            </p>
-          </motion.div>
+      {/* Advantages Section */}
+      <section className="py-16 bg-muted/10">
+        <div className="container max-w-4xl mx-auto">
+          <h2 className="text-3xl font-bold mb-6 text-center text-foreground">
+            Advantages of Commercial Solar
+          </h2>
+          <ul className="list-disc space-y-4 text-muted-foreground text-lg pl-6">
+            <li>
+              <strong>Lower Energy Bills:</strong> Reduce your monthly
+              electricity costs significantly.
+            </li>
+            <li>
+              <strong>Tax Advantages:</strong> Utilize government incentives and
+              rebates available for solar panel installation.
+            </li>
+            <li>
+              <strong>Sustainability:</strong> Improve your corporate image by
+              adopting green energy.
+            </li>
+            <li>
+              <strong>Long-Term Savings:</strong> Make a one-time investment
+              that brings long-term financial benefits.
+            </li>
+          </ul>
+        </div>
+      </section>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                title: "Manufacturing Plant",
-                savings: "₹15L/year",
-                description:
-                  "Reduced energy costs by 60% with our 100kW system",
-              },
-              {
-                title: "Office Complex",
-                savings: "₹8L/year",
-                description:
-                  "Achieved carbon neutrality with rooftop solar installation",
-              },
-              {
-                title: "Shopping Mall",
-                savings: "₹20L/year",
-                description:
-                  "Complete energy independence with hybrid solar system",
-              },
-            ].map((study, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 100 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-card rounded-lg p-6"
-              >
-                <h3 className="text-xl font-semibold mb-2">{study.title}</h3>
-                <div className="text-2xl text-primary font-bold mb-2">
-                  {study.savings}
-                </div>
-                <p className="text-muted-foreground">{study.description}</p>
-              </motion.div>
-            ))}
-          </div>
+      {/* Why Choose Nigaran Solar */}
+      <section className="py-16 bg-background">
+        <div className="container max-w-4xl mx-auto">
+          <h2 className="text-3xl font-bold mb-6 text-center text-foreground">
+            Why Choose Nigaran Solar?
+          </h2>
+          <ul className="list-disc space-y-4 text-muted-foreground text-lg pl-6">
+            <li>
+              <strong>Cost Savings:</strong> Reduce electricity bills and
+              achieve long-term savings with efficient solar solutions.
+            </li>
+            <li>
+              <strong>Expert Installation & Support:</strong> Certified
+              technicians ensure professional installation and ongoing support.
+            </li>
+            <li>
+              <strong>Sustainability & Brand Image:</strong> Adopt sustainable
+              energy to boost eco-friendly branding.
+            </li>
+            <li>
+              <strong>Government Incentives:</strong> Maximize rebates and tax
+              savings to reduce your initial investment.
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      {/* Why Commercial Solar is Needed */}
+      <section className="py-16 bg-muted/10">
+        <div className="container max-w-4xl mx-auto">
+          <h2 className="text-3xl font-bold mb-6 text-center text-foreground">
+            Why Do We Need Commercial Solar?
+          </h2>
+          <ul className="list-disc space-y-4 text-muted-foreground text-lg pl-6">
+            <li>
+              High electricity consumption in commercial buildings results in
+              high operating costs.
+            </li>
+            <li>
+              Energy price fluctuations and unreliable grid supply make
+              businesses vulnerable to unpredictable costs and disruptions.
+            </li>
+            <li>
+              Corporate sustainability goals are pushing businesses to adopt
+              green energy solutions.
+            </li>
+            <li>
+              Solar offers businesses the chance to lower energy costs while
+              enhancing their green credentials.
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      {/* Uses Section */}
+      <section className="py-16 bg-background">
+        <div className="container max-w-4xl mx-auto">
+          <h2 className="text-3xl font-bold mb-6 text-center text-foreground">
+            Uses of Commercial Solar
+          </h2>
+          <ul className="list-disc space-y-4 text-muted-foreground text-lg pl-6">
+            <li>
+              <strong>Powering Office Equipment:</strong> Solar can power
+              everything from lights, air conditioning, computers, to machinery.
+            </li>
+            <li>
+              <strong>Large-scale Manufacturing Operations:</strong> Replace
+              grid electricity, reducing operational costs.
+            </li>
+            <li>
+              <strong>Cooling Systems:</strong> Run industrial cooling and
+              ventilation systems on solar to cut major energy drain.
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      {/* Benefits Section */}
+      <section className="py-16 bg-muted/10">
+        <div className="container max-w-4xl mx-auto">
+          <h2 className="text-3xl font-bold mb-6 text-center text-foreground">
+            Business Benefits of Solar
+          </h2>
+          <ul className="list-disc space-y-4 text-muted-foreground text-lg pl-6">
+            <li>
+              <strong>Cost Reduction:</strong> Solar reduces monthly electricity
+              bills, offering substantial savings.
+            </li>
+            <li>
+              <strong>Eco-Friendly:</strong> Solar energy reduces your carbon
+              footprint, enhancing your corporate image.
+            </li>
+            <li>
+              <strong>Energy Independence:</strong> Reduce reliance on the grid,
+              protect against price hikes and outages.
+            </li>
+            <li>
+              <strong>Tax Benefits:</strong> Leverage government rebates, tax
+              credits, and accelerated depreciation.
+            </li>
+            <li>
+              <strong>Increased Property Value:</strong> Solar can increase the
+              market value of your property.
+            </li>
+          </ul>
         </div>
       </section>
     </div>

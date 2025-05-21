@@ -17,6 +17,21 @@ import {
 export default function AboutPage() {
   return (
     <div className="min-h-screen pt-20">
+      {/* Meta Information */}
+      <head>
+        <title>
+          About Nigaran Solar | Leading Solar Company in Coimbatore, Tamil Nadu
+        </title>
+        <meta
+          name="description"
+          content="Nigaran Solar is a trusted solar company in Coimbatore, offering affordable and efficient solar power systems for homes and businesses across Tamil Nadu. Learn about our mission to provide sustainable solar solutions."
+        />
+        <meta
+          name="keywords"
+          content="solar company Coimbatore, solar power systems, trusted solar partner, solar solutions Tamil Nadu, solar energy provider, solar panel installation Coimbatore"
+        />
+      </head>
+
       {/* Hero Section */}
       <section className="relative h-[60vh] flex items-center">
         <div className="absolute inset-0 z-0">
@@ -37,13 +52,24 @@ export default function AboutPage() {
             className="max-w-2xl text-white"
           >
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Empowering India, One Rooftop at a Time
+              Your Leading Solar Company in TamilNadu
             </h1>
             <p className="text-lg md:text-xl text-white/90 mb-8">
-              At Nigaran Solar, we deliver eco-friendly, affordable solar
-              solutions tailored to homes and businesses. Based in Coimbatore,
-              we specialize in high-efficiency installations with a strong focus
-              on sustainability.
+              At Nigaran Solar, we are committed to providing sustainable,
+              eco-friendly, and affordable solar power solutions. As one of the
+              leading solar companies in TamilNadu, we focus on delivering
+              high-quality, customized solar systems for both residential and
+              commercial clients. Our goal is to help our customers reduce
+              energy costs and contribute to environmental conservation by
+              offering renewable energy solutions.
+              <br />
+              With years of expertise in solar panel technology and
+              installations, we’re your trusted solar partner in Tamilnadu,
+              providing unmatched service and consultation. We offer a full
+              range of solar services, including solar power systems for homes,
+              commercial establishments, and industries. Whether you're looking
+              for a residential solar installation or a large-scale solar
+              rooftop installation, we’ve got you covered.
             </p>
             <Button size="lg" className="group">
               Learn More
@@ -53,168 +79,166 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Vision & Mission Section */}
+      {/* Vision & Mission */}
       <section className="py-16 md:py-24 bg-background">
-        <div className="container">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-              className="bg-card rounded-lg p-8"
-            >
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                  <Rocket className="h-6 w-6 text-primary" />
-                </div>
-                <h2 className="text-2xl font-bold">Our Vision</h2>
-              </div>
-              <p className="text-muted-foreground mb-6">
-                To make solar energy accessible for all, paving the way for a
-                sustainable tomorrow. We envision a future where clean energy
-                powers every home and business in India.
-              </p>
-              <div className="space-y-4">
-                <div className="flex items-center gap-3">
-                  <Leaf className="h-5 w-5 text-primary" />
-                  <span>Customer Satisfaction</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Shield className="h-5 w-5 text-primary" />
-                  <span>High Quality Standards</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Zap className="h-5 w-5 text-primary" />
-                  <span>Continuous Innovation</span>
-                </div>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-              className="bg-card rounded-lg p-8"
-            >
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                  <Target className="h-6 w-6 text-primary" />
-                </div>
-                <h2 className="text-2xl font-bold">Our Mission</h2>
-              </div>
-              <p className="text-muted-foreground mb-6">
-                To replace traditional energy with clean, cost-effective solar
-                solutions for everyone. We're committed to providing innovative
-                solar technology that makes a real difference in people's lives.
-              </p>
-              <div className="space-y-4">
-                <div className="flex items-center gap-3">
-                  <Users className="h-5 w-5 text-primary" />
-                  <span>Accessible to Everyone</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Shield className="h-5 w-5 text-primary" />
-                  <span>Clean Energy Solutions</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Award className="h-5 w-5 text-primary" />
-                  <span>Cost-effective Solutions</span>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Why Choose Us Section */}
-      <section className="py-16 bg-muted/30">
-        <div className="container">
+        <div className="container grid grid-cols-1 md:grid-cols-2 gap-12">
+          {/* Vision */}
           <motion.div
-            initial={{ opacity: 0, y: 100 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-center mb-12"
+            className="bg-card rounded-lg p-8"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Why Choose Us
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              We combine expertise with dedication to deliver the best solar
-              solutions
+            <div className="flex items-center gap-4 mb-6">
+              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                <Rocket className="h-6 w-6 text-primary" />
+              </div>
+              <h2 className="text-2xl font-bold">Vision</h2>
+            </div>
+            <p className="text-muted-foreground mb-4">
+              We strive to make solar energy accessible to everyone, driving
+              positive change towards a sustainable future for generations to
+              come.
             </p>
+            <ul className="list-disc list-inside space-y-2">
+              <li>Customer Satisfaction</li>
+              <li>Hands-on free</li>
+              <li>High Quality</li>
+              <li>Professional Standards</li>
+              <li>Continuous Innovation</li>
+            </ul>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              {
-                icon: <Users className="h-8 w-8" />,
-                title: "Expert Team",
-                description:
-                  "Years of experience in solar installations and consultancy",
-              },
-              {
-                icon: <Shield className="h-8 w-8" />,
-                title: "Quality Systems",
-                description: "High-quality, durable systems built to last",
-              },
-              {
-                icon: <Award className="h-8 w-8" />,
-                title: "Customer Support",
-                description: "Dedicated support throughout your solar journey",
-              },
-              {
-                icon: <Shield className="h-8 w-8" />,
-                title: "Performance Guarantee",
-                description:
-                  "Guaranteed performance with comprehensive warranties",
-              },
-            ].map((feature, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 100 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-card rounded-lg p-6 text-center"
-              >
-                <div className="w-16 h-16 bg-primary/10 text-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                  {feature.icon}
-                </div>
-                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                <p className="text-muted-foreground">{feature.description}</p>
-              </motion.div>
-            ))}
+          {/* Mission */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            className="bg-card rounded-lg p-8"
+          >
+            <div className="flex items-center gap-4 mb-6">
+              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                <Target className="h-6 w-6 text-primary" />
+              </div>
+              <h2 className="text-2xl font-bold">Mission</h2>
+            </div>
+            <p className="text-muted-foreground mb-4">
+              To empower individuals and businesses to embrace solar energy as
+              an alternative to traditional energy sources.
+            </p>
+            <ul className="list-disc list-inside space-y-2">
+              <li>Empower individuals</li>
+              <li>Embrace solar</li>
+              <li>Clean energy</li>
+              <li>Cost-effective solution</li>
+            </ul>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Why Choose Us */}
+      <section className="py-16 bg-muted/30">
+        <div className="container space-y-8">
+          <motion.h2
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-3xl md:text-4xl font-bold text-center"
+          >
+            Why Choose Us?
+          </motion.h2>
+
+          <div className="space-y-8">
+            <div>
+              <h3 className="text-xl font-semibold">
+                Expert Team with Years of Experience
+              </h3>
+              <p className="text-muted-foreground">
+                Our team brings extensive experience in the solar power
+                industry, combining technical expertise with deep knowledge of
+                the latest renewable energy technologies. From consultation to
+                installation, you’ll work with seasoned professionals who ensure
+                every project is completed to the highest standards.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold">
+                High-Quality & Durable Solar Products
+              </h3>
+              <p className="text-muted-foreground">
+                We use only premium-grade solar panels, inverters, and
+                components from trusted global manufacturers. Our systems are
+                built to withstand harsh weather conditions while delivering
+                long-term, reliable performance.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold">
+                Excellent Customer Support
+              </h3>
+              <p className="text-muted-foreground">
+                We believe that great service doesn’t end after installation.
+                Our friendly and responsive support team is always available to
+                assist you — whether you have questions, need maintenance, or
+                want to expand your solar system in the future.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold">
+                Guaranteed Performance & Comprehensive Warranty
+              </h3>
+              <p className="text-muted-foreground">
+                With Nigaran Solar, your investment is protected. Our systems
+                come with a performance guarantee and comprehensive manufacturer
+                warranties, giving you peace of mind and confidence in your
+                energy solution.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-16 bg-primary text-primary-foreground">
-        <div className="container">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-              className="md:w-2/3"
-            >
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Ready to Start Your Solar Journey?
-              </h2>
-              <p className="text-primary-foreground/90 text-lg">
-                Let our experts help you transition to clean, sustainable
-                energy.
-              </p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <Button size="lg" variant="secondary" className="group">
-                Contact Us Now
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Button>
-            </motion.div>
+      {/* Sustainability & Call to Action */}
+      <section className="py-16 md:py-24 bg-background">
+        <div className="container space-y-12">
+          <div>
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">
+              Our Commitment to Sustainability
+            </h2>
+            <p className="text-muted-foreground">
+              We believe that investing in solar energy is an investment in the
+              future. Nigaran Solar is dedicated to helping communities
+              transition to clean energy by making solar accessible and
+              affordable. We work closely with local governments, businesses,
+              and homeowners to promote solar power adoption and reduce
+              dependence on fossil fuels.
+            </p>
+          </div>
+
+          <div>
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">
+              Service Areas
+            </h2>
+            <p className="text-muted-foreground">
+              Nigaran Solar proudly serves [insert cities or regions], offering
+              reliable and affordable solar installation services for
+              residential, commercial, and industrial clients.
+            </p>
+          </div>
+
+          <div className="text-center">
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">
+              Join the Solar Revolution
+            </h2>
+            <p className="text-muted-foreground mb-6">
+              Thousands have already made the switch to solar with Nigaran
+              Solar. Join the movement and discover how you can save money,
+              increase your property value, and help protect the environment.
+            </p>
+            <Button size="lg">
+              Learn more about our solar solutions
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
           </div>
         </div>
       </section>

@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 
-html,
+/* html,
 body {
   height: auto;
   overflow: hidden;
-}
+} */
 
 :root {
   --foreground-rgb: 0, 0, 0;
