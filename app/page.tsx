@@ -17,7 +17,7 @@ export default function Home() {
       <HeroSection />
       <LogosSlider />
       <StatsSection />
-      <WhoWeAre />
+      {/* <WhoWeAre /> */}
       <Feature108 />
       <ExpertiseSection />
       <TestimonialsSection />
