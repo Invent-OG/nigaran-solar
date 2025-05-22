@@ -1,6 +1,12 @@
 "use client";
 
-import { ReactNode, isValidElement, cloneElement } from "react";
+import {
+  ReactNode,
+  isValidElement,
+  cloneElement,
+  useEffect,
+  Fragment,
+} from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { AnimatePresence } from "framer-motion";
@@ -12,14 +18,15 @@ interface AnimationProviderProps {
 export default function AnimationProvider({
   children,
 }: AnimationProviderProps) {
-  if (typeof window !== "undefined") {
-    gsap.registerPlugin(ScrollTrigger);
-    gsap.config({
-      nullTargetWarn: false,
-    });
-  }
+  // useEffect(() => {
+  //   if (typeof window !== "undefined") {
+  //     gsap.registerPlugin(ScrollTrigger);
+  //     gsap.config({
+  //       nullTargetWarn: false,
+  //     });
+  //   }
+  // }, []);
 
-  // Ensure each child has a key if multiple children are present
   const wrappedChildren = Array.isArray(children)
     ? children.map((child, index) =>
         isValidElement(child)
@@ -28,5 +35,9 @@ export default function AnimationProvider({
       )
     : children;
 
-  return <AnimatePresence mode="sync">{wrappedChildren}</AnimatePresence>;
+  return (
+    <AnimatePresence mode="sync">
+      <Fragment>{wrappedChildren}</Fragment>
+    </AnimatePresence>
+  );
 }

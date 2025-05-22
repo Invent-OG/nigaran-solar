@@ -11,37 +11,6 @@ export default function FutureSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Rotate animation for the circular frame
-      gsap.to(".circular-frame", {
-        rotation: 360,
-        duration: 40,
-        repeat: -1,
-        ease: "none",
-      });
-
-      // Animate image on scroll
-      gsap.fromTo(
-        imageRef.current,
-        { scale: 0.8, opacity: 0.5 },
-        {
-          scale: 1,
-          opacity: 1,
-          duration: 1,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top bottom",
-            end: "center center",
-            scrub: true,
-          },
-        }
-      );
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
     <section
       ref={sectionRef}
@@ -70,7 +39,7 @@ export default function FutureSection() {
               Powering Your Future With Clean, Renewable Energy
             </h2>
             <p className="mb-8 text-lg text-muted-foreground">
-              We're committed to revolutionizing how energy is produced and
+              We&apos;re committed to revolutionizing how energy is produced and
               consumed. Our solar solutions are designed to maximize efficiency
               while minimizing environmental impact.
             </p>

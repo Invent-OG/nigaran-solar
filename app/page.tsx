@@ -15,9 +15,9 @@ export default function Home() {
   return (
     <AnimationProvider>
       <HeroSection />
-      {/* <LogosSlider /> */}
+      <LogosSlider />
       <StatsSection />
-      {/* <WhoWeAre /> */}
+      <WhoWeAre />
       <Feature108 />
       <ExpertiseSection />
       <TestimonialsSection />

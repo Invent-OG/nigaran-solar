@@ -48,13 +48,13 @@ export default function Footer() {
     <footer className="relative md:pt-40 pt-[60%] pb-8  text-white bg-black">
       {/* CONTACT SECTION (Top banner) */}
       <section className="absolute top-0  left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-[#58b33e] to-lime-700 text-primary-foreground p-6 sm:p-8 md:p-10 rounded-2xl w-[90%] max-w-[1200px] flex flex-col md:flex-row items-center justify-between gap-6  shadow-lg">
-        <Image
+        {/* <Image
           src="/Solar_power.png"
           alt="Solar Panels"
           width={500}
           height={100}
           className="top-0 object-contain md:visible hidden left -z-10 opacity-40 lg:absolute"
-        />
+        /> */}
         <div className="flex flex-col w-full gap-4 md:w-2/3">
           <h2 className="text-2xl font-bold sm:text-3xl md:text-4xl">
             Get in touch with our team of experts
@@ -91,7 +91,7 @@ export default function Footer() {
             </motion.div>
           </div>
         </div>
-        <div className="w-full md:w-auto">
+        {/* <div className="w-full md:w-auto">
           <Image
             src="/contact-us.png"
             alt="Solar Panels"
@@ -99,7 +99,7 @@ export default function Footer() {
             height={450}
             className="top-0 right-0 z-10 object-cover lg:absolute"
           />
-        </div>
+        </div> */}
       </section>
 
       {/* FOOTER MAIN */}
@@ -205,13 +205,13 @@ export default function Footer() {
         </motion.div>
       </div>
 
-      <Image
+      {/* <Image
         src={"/Solar House.png"}
         alt={"Solar House"}
         width={300}
         height={300}
         className="absolute object-cover opacity-50 -right-20 -bottom-10 "
-      />
+      /> */}
     </footer>
   );
 }

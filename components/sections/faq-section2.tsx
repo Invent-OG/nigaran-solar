@@ -34,13 +34,13 @@ export default function FAQ() {
     <section className="  pt-[5%] md:pb-[20%] pb-[80%] relative bg-white  ">
       <div className="absolute inset-0 z-0 bg-[url('/bg-pattern.png')] bg-cover bg-center opacity-30"></div>
 
-      <Image
+      {/* <Image
         src="/Wind-Power.png"
         alt="Solar Panels"
         width={500}
         height={500}
         className="absolute visible bottom-0 lg:right-0"
-      />
+      /> */}
 
       <div className="container flex flex-col items-center gap-10   justify-between z-40 lg:flex-row">
         {/* Left Image */}

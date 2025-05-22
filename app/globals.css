@@ -3,11 +3,9 @@
 @tailwind utilities;
 
 
-/* html,
-body {
-  height: auto;
-  overflow: hidden;
-} */
+html, body {
+  overflow-x: hidden;
+}
 
 :root {
   --foreground-rgb: 0, 0, 0;
@@ -43,14 +41,7 @@ body {
  
 }
 
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-}
+
 
 .circular-frame {
   animation: rotate 40s linear infinite;

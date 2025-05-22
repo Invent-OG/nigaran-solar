@@ -29,13 +29,21 @@ export default function HeroSection() {
           muted
           playsInline
           className="object-cover w-full h-full"
+          preload="auto" // or "metadata" for lighter load
         >
-          <source src="/videos/hero-video.webm" type="video/webm" />
-          <source src="/videos/hero-video.mp4" type="video/mp4" />
+          <source
+            src="https://mfnxruiqgdjqskbdthba.supabase.co/storage/v1/object/public/videos/hero-video.webm"
+            type="video/webm"
+          />
+          <source
+            src="https://mfnxruiqgdjqskbdthba.supabase.co/storage/v1/object/public/videos/hero-video.mp4"
+            type="video/mp4"
+          />
           Your browser does not support the video tag.
         </video>
+
         <div className="absolute inset-0 bg-gradient-to-r from-black/10 to-black/10 mix-blend-multiply" />
-        <AshParticles />
+        {/* <AshParticles /> */}
       </div>
 
       <div className="container relative z-10 px-4 text-center md:px-6">
@@ -119,7 +127,7 @@ export default function HeroSection() {
       </div>
 
       {/* Scroll indicator */}
-      {/* <div className="absolute -translate-x-1/2 bottom-8 left-1/2">
+      <div className="absolute -translate-x-1/2 bottom-8 left-1/2">
         <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 1.5, repeat: Infinity }}
@@ -127,7 +135,7 @@ export default function HeroSection() {
         >
           <div className="w-1 h-2 rounded-full bg-white/50" />
         </motion.div>
-      </div> */}
+      </div>
     </section>
   );
 }
