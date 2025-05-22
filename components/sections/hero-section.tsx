@@ -9,6 +9,7 @@ import { ArrowRight, Sun, Battery, Shield } from "lucide-react";
 import { useRouter } from "next/navigation";
 import AshParticles from "../AshParticles";
 import { RotatingText } from "../ui/rotating-text";
+import { GoogleReviewButton } from "../GoogleReviewButton";
 
 export default function HeroSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -127,14 +128,15 @@ export default function HeroSection() {
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute -translate-x-1/2 bottom-8 left-1/2">
-        <motion.div
+      <div className="absolute z-10 -translate-x-1/2 bottom-8 left-1/2">
+        {/* <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 1.5, repeat: Infinity }}
           className="flex items-center justify-center w-6 h-10 border-2 rounded-full border-white/30"
         >
           <div className="w-1 h-2 rounded-full bg-white/50" />
-        </motion.div>
+        </motion.div> */}
+        <GoogleReviewButton />
       </div>
     </section>
   );
