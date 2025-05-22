@@ -33,11 +33,11 @@ export default function HeroSection() {
           preload="auto" // or "metadata" for lighter load
         >
           <source
-            src="https://mfnxruiqgdjqskbdthba.supabase.co/storage/v1/object/public/videos/hero-video.webm"
+            src="https://mfnxruiqgdjqskbdthba.supabase.co/storage/v1/object/public/videos//hero-video.mp4"
             type="video/webm"
           />
           <source
-            src="https://mfnxruiqgdjqskbdthba.supabase.co/storage/v1/object/public/videos/hero-video.mp4"
+            src="https://mfnxruiqgdjqskbdthba.supabase.co/storage/v1/object/public/videos//hero-video.mp4"
             type="video/mp4"
           />
           Your browser does not support the video tag.
