@@ -5,6 +5,8 @@ import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
+import { LinearProgressBar } from "../LinearProgressBar";
+import { CircularProgressBar } from "../CircularProgressBar";
 
 const metrics = [
   { title: "Project Completion", percent: 90 },
@@ -22,7 +24,7 @@ export default function WhoWeAre() {
         {/* Image Block */}
         <div className="relative flex">
           <Image
-            src="https://mfnxruiqgdjqskbdthba.supabase.co/storage/v1/object/public/images/about-us/about-us-img1.jpg"
+            src="/about-us-img1.webp"
             alt="Solar Panels"
             width={500}
             height={500}
@@ -32,11 +34,12 @@ export default function WhoWeAre() {
 
           {/* Circular Progress */}
           <div className="absolute md:right-1/4 right-[55%] z-20 top-0">
-            <CircularProgress percent={85} label="Efficiency" />
+            {/* <CircularProgress percent={85} label="Efficiency" /> */}
+            <CircularProgressBar target={50} />
           </div>
 
           {/* Rotating Background Circle */}
-          <div className="animate-rotateLoop absolute -left-24 bottom-0 opacity-50 z-0">
+          {/* <div className="animate-rotateLoop absolute -left-24 bottom-0 opacity-50 z-0">
             <Image
               src="/circle.png"
               alt="Rotating Circle"
@@ -44,11 +47,11 @@ export default function WhoWeAre() {
               height={200}
               loading="lazy"
             />
-          </div>
+          </div> */}
 
           {/* Overlapping Image */}
           <Image
-            src="https://mfnxruiqgdjqskbdthba.supabase.co/storage/v1/object/public/images/about-us/about-us-img2.jpg"
+            src="/about-us-img2.webp"
             alt="Solar Panels Small"
             width={250}
             height={250}
@@ -76,7 +79,7 @@ export default function WhoWeAre() {
           </div>
 
           {/* Progress Bars */}
-          <div className="w-full max-w-md space-y-6">
+          {/* <div className="w-full max-w-md space-y-6">
             {metrics.map(({ title, percent }, idx) => (
               <div key={title}>
                 <span className="block text-sm font-semibold text-gray-800 mb-2">
@@ -104,8 +107,9 @@ export default function WhoWeAre() {
                 </div>
               </div>
             ))}
-          </div>
+          </div> */}
 
+          <LinearProgressBar target={80} />
           <div className="mt-6 z-20">
             <Button onClick={() => router.push("/about")}>Read more</Button>
           </div>
@@ -115,50 +119,50 @@ export default function WhoWeAre() {
   );
 }
 
-// CircularProgress Component (Optimized)
-function CircularProgress({
-  percent,
-  label,
-}: {
-  percent: number;
-  label: string;
-}) {
-  const radius = 40;
-  const stroke = 10;
-  const normalizedRadius = radius - stroke * 0.5;
-  const circumference = 2 * Math.PI * normalizedRadius;
-  const strokeDashoffset = circumference * (1 - percent / 100);
+// // CircularProgress Component (Optimized)
+// function CircularProgress({
+//   percent,
+//   label,
+// }: {
+//   percent: number;
+//   label: string;
+// }) {
+//   const radius = 40;
+//   const stroke = 10;
+//   const normalizedRadius = radius - stroke * 0.5;
+//   const circumference = 2 * Math.PI * normalizedRadius;
+//   const strokeDashoffset = circumference * (1 - percent / 100);
 
-  return (
-    <div className="absolute shadow-xl flex top-4 -left-6 z-30 p-5 rounded-md items-center gap-5 border-r-8 border-primary bg-white">
-      <svg height={radius * 2} width={radius * 2}>
-        <circle
-          stroke="#e5e7eb"
-          fill="transparent"
-          strokeWidth={stroke}
-          r={normalizedRadius}
-          cx={radius}
-          cy={radius}
-        />
-        <motion.circle
-          stroke="#58b33e"
-          fill="transparent"
-          strokeWidth={stroke}
-          strokeLinecap="round"
-          r={normalizedRadius}
-          cx={radius}
-          cy={radius}
-          strokeDasharray={circumference}
-          strokeDashoffset={circumference}
-          whileInView={{ strokeDashoffset }}
-          viewport={{ once: true }}
-          transition={{ duration: 1 }}
-        />
-      </svg>
-      <div className="absolute top-1/2 left-16 transform -translate-x-1/2 -translate-y-1/2 text-sm font-semibold">
-        {percent}%
-      </div>
-      <div className="text-xl font-bold">{label}</div>
-    </div>
-  );
-}
+//   return (
+//     <div className="absolute shadow-xl flex top-4 -left-6 z-30 p-5 rounded-md items-center gap-5 border-r-8 border-primary bg-white">
+//       <svg height={radius * 2} width={radius * 2}>
+//         <circle
+//           stroke="#e5e7eb"
+//           fill="transparent"
+//           strokeWidth={stroke}
+//           r={normalizedRadius}
+//           cx={radius}
+//           cy={radius}
+//         />
+//         <motion.circle
+//           stroke="#58b33e"
+//           fill="transparent"
+//           strokeWidth={stroke}
+//           strokeLinecap="round"
+//           r={normalizedRadius}
+//           cx={radius}
+//           cy={radius}
+//           strokeDasharray={circumference}
+//           strokeDashoffset={circumference}
+//           whileInView={{ strokeDashoffset }}
+//           viewport={{ once: true }}
+//           transition={{ duration: 1 }}
+//         />
+//       </svg>
+//       <div className="absolute top-1/2 left-16 transform -translate-x-1/2 -translate-y-1/2 text-sm font-semibold">
+//         {percent}%
+//       </div>
+//       <div className="text-xl font-bold">{label}</div>
+//     </div>
+//   );
+// }
