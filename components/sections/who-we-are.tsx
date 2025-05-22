@@ -193,7 +193,7 @@ export default function WhoWeAre() {
         {/* Image Block */}
         <div className="relative flex">
           <Image
-            src="https://mfnxruiqgdjqskbdthba.supabase.co/storage/v1/object/public/images/about-us/about-us-img1.jpg"
+            src="about-us-img1.webp"
             alt="Solar Panels"
             width={450}
             height={450}
@@ -220,7 +220,7 @@ export default function WhoWeAre() {
           </div>
 
           <Image
-            src="https://mfnxruiqgdjqskbdthba.supabase.co/storage/v1/object/public/images/about-us/about-us-img2.jpg"
+            src="about-us-img2.webp"
             alt="Solar Panels Small"
             width={250}
             height={250}
