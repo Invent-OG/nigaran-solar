@@ -14,38 +14,37 @@ export const GRADIENT_ANGLES = {
 export type ProgressiveBlurProps = {
   direction?: keyof typeof GRADIENT_ANGLES;
   blurLayers?: number;
-  className?: string;
   blurIntensity?: number;
+  maskColor?: string; // new customizable color
+  className?: string;
 } & Omit<HTMLMotionProps<"div">, "ref">;
 
 export const ProgressiveBlur = forwardRef(function ProgressiveBlur(
   {
     direction = "bottom",
-    blurLayers = 8,
-    className,
+    blurLayers = 3,
     blurIntensity = 0.25,
+    maskColor = "255, 255, 255",
+    className,
     ...props
   }: ProgressiveBlurProps,
   ref: ForwardedRef<HTMLDivElement>
 ) {
-  const layers = Math.max(blurLayers, 2);
-  const segmentSize = 1 / (blurLayers + 1);
+  const safeLayers = Math.min(Math.max(blurLayers, 2), 20);
+  const segmentSize = 1 / (safeLayers + 1);
+
+  const clamp = (val: number, min = 0, max = 1) =>
+    Math.max(min, Math.min(val, max));
 
   return (
     <motion.div className={cn("relative", className)} ref={ref} {...props}>
-      {Array.from({ length: layers }).map((_, index) => {
+      {Array.from({ length: safeLayers }).map((_, index) => {
         const angle = GRADIENT_ANGLES[direction];
-        const gradientStops = [
-          index * segmentSize,
-          (index + 1) * segmentSize,
-          (index + 2) * segmentSize,
-          (index + 3) * segmentSize,
-        ].map(
-          (pos, posIndex) =>
-            `rgba(255, 255, 255, ${posIndex === 1 || posIndex === 2 ? 1 : 0}) ${
-              pos * 100
-            }%`
-        );
+        const gradientStops = [0, 1, 2, 3].map((offset) => {
+          const pos = clamp((index + offset) * segmentSize);
+          const alpha = offset === 1 || offset === 2 ? 1 : 0;
+          return `rgba(${maskColor}, ${alpha}) ${pos * 100}%`;
+        });
 
         const gradient = `linear-gradient(${angle}deg, ${gradientStops.join(
           ", "
