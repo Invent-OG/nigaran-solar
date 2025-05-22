@@ -24,11 +24,10 @@ export default function WhoWeAre() {
         {/* Image Block */}
         <div className="relative flex">
           <Image
-            src="/about-us-img1.webp"
+            src="https://mfnxruiqgdjqskbdthba.supabase.co/storage/v1/object/public/images/about-us/about-us-img1.webp"
             alt="Solar Panels"
             width={500}
             height={500}
-            loading="lazy"
             className="rounded-xl z-10 w-[450px] h-[450px] border object-cover"
           />
 
@@ -51,11 +50,10 @@ export default function WhoWeAre() {
 
           {/* Overlapping Image */}
           <Image
-            src="/about-us-img2.webp"
+            src="https://mfnxruiqgdjqskbdthba.supabase.co/storage/v1/object/public/images/about-us/about-us-img2.webp"
             alt="Solar Panels Small"
             width={250}
             height={250}
-            loading="lazy"
             className="rounded-md z-20 absolute w-[200px] h-[200px] md:w-[250px] md:h-[250px] -bottom-20 -right-0 md:bottom-0 md:-right-1/4 bg-slate-500 border-8 border-popover object-cover"
           />
         </div>
