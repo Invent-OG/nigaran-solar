@@ -86,6 +86,7 @@
 //     </div>
 //   );
 // }
+import { Badge } from "../ui/badge";
 
 export function LogosSlider() {
   const logos = [
@@ -100,7 +101,14 @@ export function LogosSlider() {
   ];
 
   return (
-    <div className="relative h-[100px] w-full overflow-hidden">
+    <div className="relative h-[200px] flex flex-col items-center justify-center pt-6   w-full overflow-hidden">
+      <div className="flex flex-col items-center justify-center gap-2">
+        <h2 className="max-w-2xl text-3xl text-primary font-extrabold md:text-4xl">
+          Trusted By
+        </h2>
+        <Badge variant="outline">these companies</Badge>
+      </div>
+
       {/* Scroll wrapper */}
       <div className="flex w-max animate-slide gap-12 items-center h-full">
         {logos.map((image, index) => (
