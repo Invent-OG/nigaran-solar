@@ -9,6 +9,7 @@ import FAQSection from "@/components/sections/faq-section";
 import { LogosSlider } from "@/components/sections/logos-slider";
 import WhoWeAre from "@/components/sections/who-we-are";
 import FAQ from "@/components/sections/faq-section2";
+import AnimatedProgressBar from "@/components/AnimatedProgressBar";
 
 export default function Home() {
   return (
@@ -16,7 +17,8 @@ export default function Home() {
       <HeroSection />
       <LogosSlider />
       <StatsSection />
-      <WhoWeAre />
+      {/* <WhoWeAre /> */}
+      <AnimatedProgressBar />
       <Feature108 />
       <ExpertiseSection />
       <TestimonialsSection />
