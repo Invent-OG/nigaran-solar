@@ -6,6 +6,7 @@ import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import { LenisProvider } from "@/components/LenisProvider";
 import Image from "next/image";
+import SplashScreen from "@/components/SplashScreen";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
@@ -30,10 +31,12 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.variable} font-sans`}>
         <Providers>
-          <LenisProvider />
-          <Header />
-          <main>{children}</main>
-          <Footer />
+          <SplashScreen>
+            <LenisProvider />
+            <Header />
+            <main>{children}</main>
+            <Footer />
+          </SplashScreen>
         </Providers>
       </body>
     </html>
