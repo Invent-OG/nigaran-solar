@@ -7,7 +7,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sun, Battery, Shield } from "lucide-react";
 import { useRouter } from "next/navigation";
-import AshParticles from "../AshParticles";
 import { RotatingText } from "../ui/rotating-text";
 import { GoogleReviewButton } from "../GoogleReviewButton";
 
