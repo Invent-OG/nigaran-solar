@@ -35,7 +35,7 @@ export default function WhoWeAre() {
           </div>
 
           {/* Rotating Background Circle */}
-          <div className="animate-rotateLoop absolute -left-24 -bottom-1/4 opacity-50 z-0">
+          <div className="animate-rotateLoop absolute -left-24 md:-bottom-16  bottom-0 opacity-50 z-0">
             <Image
               src="/circle.png"
               alt="Rotating Circle"
@@ -51,7 +51,7 @@ export default function WhoWeAre() {
             alt="Solar Panels Small"
             width={250}
             height={250}
-            className="rounded-md z-20 absolute w-[200px] h-[200px] md:w-[250px] md:h-[250px] -bottom-20 -right-0 md:-bottom-1/4 md:-right-1/4 bg-slate-500 border-8 border-popover object-cover"
+            className="rounded-md z-20 absolute w-[200px] h-[200px] md:w-[250px] md:h-[250px] -bottom-20 -right-0 md:-bottom-1/6 md:-right-1/4 bg-slate-500 border-8 border-popover object-cover"
           />
         </div>
 
