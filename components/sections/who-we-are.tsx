@@ -197,7 +197,7 @@ export default function WhoWeAre() {
             alt="Solar Panels"
             width={450}
             height={450}
-            priority
+            loading="lazy"
             sizes="(max-width: 768px) 100vw, 50vw"
             placeholder="blur"
             blurDataURL="/blur.jpg" // Replace with your blur image if available
@@ -355,8 +355,8 @@ const MemoizedCircularProgress = React.memo(function CircularProgress({
           strokeDasharray={circumference}
           strokeDashoffset={circumference}
           whileInView={{ strokeDashoffset }}
-          viewport={{ once: true }}
-          transition={{ duration: 1 }}
+          // viewport={{ once: true }}
+          transition={{ duration: 5 }}
         />
       </svg>
       <div className="absolute top-1/2 left-16 transform -translate-x-1/2 -translate-y-1/2 text-sm font-semibold">

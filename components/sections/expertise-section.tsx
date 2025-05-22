@@ -86,7 +86,7 @@ export default function ExpertiseSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <Badge variant="outline">About Us</Badge>
+          <Badge variant="outline">Our Features</Badge>
           <h2 className="max-w-2xl text-3xl font-extrabold md:text-4xl">
             Experts In The World
             <br />
