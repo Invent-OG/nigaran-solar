@@ -24,7 +24,7 @@ export default function WhoWeAre() {
         {/* Image Block */}
         <div className="relative flex">
           <Image
-            src="https://mfnxruiqgdjqskbdthba.supabase.co/storage/v1/object/public/images/about-us/about-us-img1.webp"
+            src="https://images.unsplash.com/photo-1660330589257-813305a4a383?q=80&w=3432&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt="Solar Panels"
             width={500}
             height={500}
@@ -50,7 +50,7 @@ export default function WhoWeAre() {
 
           {/* Overlapping Image */}
           <Image
-            src="https://mfnxruiqgdjqskbdthba.supabase.co/storage/v1/object/public/images/about-us/about-us-img2.webp"
+            src="https://images.unsplash.com/photo-1719559519300-e9d2c2bf6de1?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt="Solar Panels Small"
             width={250}
             height={250}
