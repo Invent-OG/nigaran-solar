@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { motion } from "framer-motion";
 import { Leaf, BarChart3, Globe, Award, ArrowUpRight } from "lucide-react";
 import { Badge } from "../ui/badge";
+import Image from "next/image";
 
 interface ExpertiseCardProps {
   icon: JSX.Element;
@@ -12,7 +13,7 @@ interface ExpertiseCardProps {
   index: number;
 }
 
-const ExpertiseCard = ({
+const ExpertiseCardMobile = ({
   icon,
   title,
   description,
@@ -45,30 +46,81 @@ const ExpertiseCard = ({
   );
 };
 
+const ExpertiseCard = ({
+  icon,
+  title,
+  description,
+  index,
+}: ExpertiseCardProps) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 100 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+    >
+      <div className="text-center flex flex-col gap-2 items-center max-w-xs justify-center">
+        <div className="bg-primary p-5 rounded-full text-white">{icon}</div>
+        <div className="font-bold text-xl"> {title}</div>
+        <div className="text-md text-gray-500"> {description}</div>
+      </div>
+    </motion.div>
+  );
+};
+
 export default function ExpertiseSection() {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const expertiseItems = [
+  const expertiseItemsDesktop1 = [
     {
-      icon: <Leaf className="w-28 h-28" />,
+      icon: <Leaf className="w-10 h-10" />,
       title: "Environmentally Friendly",
       description:
         "Our solar solutions drastically reduce carbon footprint while providing sustainable energy for generations.",
     },
     {
-      icon: <BarChart3 className="w-28 h-28" />,
+      icon: <BarChart3 className="w-10 h-10" />,
       title: "Cost Maintenance",
       description:
         "Significant reduction in long-term energy costs, with minimal maintenance requirements for our systems.",
     },
+  ];
+
+  const expertiseItemsDesktop2 = [
     {
-      icon: <Globe className="w-28 h-28" />,
+      icon: <Globe className="w-10 h-10" />,
       title: "Global Impact",
       description:
         "Join thousands of businesses worldwide contributing to a cleaner, more sustainable planet.",
     },
     {
-      icon: <Award className="w-28 h-28" />,
+      icon: <Award className="w-10 h-10" />,
+      title: "Award-Winning Service",
+      description:
+        "Recognized for excellence in customer service and innovation in renewable energy solutions.",
+    },
+  ];
+
+  const expertiseItems = [
+    {
+      icon: <Leaf className="w-10 h-10" />,
+      title: "Environmentally Friendly",
+      description:
+        "Our solar solutions drastically reduce carbon footprint while providing sustainable energy for generations.",
+    },
+    {
+      icon: <BarChart3 className="w-10 h-10" />,
+      title: "Cost Maintenance",
+      description:
+        "Significant reduction in long-term energy costs, with minimal maintenance requirements for our systems.",
+    },
+    {
+      icon: <Globe className="w-10 h-10" />,
+      title: "Global Impact",
+      description:
+        "Join thousands of businesses worldwide contributing to a cleaner, more sustainable planet.",
+    },
+    {
+      icon: <Award className="w-10 h-10" />,
       title: "Award-Winning Service",
       description:
         "Recognized for excellence in customer service and innovation in renewable energy solutions.",
@@ -79,10 +131,10 @@ export default function ExpertiseSection() {
     <section ref={containerRef} className="py-16 relative md:py-24 ">
       <div className="absolute inset-0 z-0 bg-[url('/bg-pattern.png')] bg-cover bg-center opacity-30"></div>
 
-      <div className="container px-4 space-x-4 space-y-16  mx-auto md:px-6">
+      <div className=" container px-4 space-x-4 space-y-16  mx-auto md:px-6">
         <motion.div
           className="flex flex-col items-center gap-4 text-center"
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 100 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
@@ -94,10 +146,49 @@ export default function ExpertiseSection() {
           </h2>
           <div className="w-20 h-1 mx-auto mb-6 bg-primary"></div>
         </motion.div>
+        <div className="md:flex relative flex-col hidden justify-between gap-24 w-full ">
+          <div className="flex justify-between px-[10%] w-full">
+            {expertiseItemsDesktop1.map((item, index) => (
+              <ExpertiseCard
+                key={index}
+                icon={item.icon}
+                title={item.title}
+                description={item.description}
+                index={index}
+              />
+            ))}
+          </div>
+          <div className="flex justify-between px-[2%] w-full ">
+            {expertiseItemsDesktop2.map((item, index) => (
+              <ExpertiseCard
+                key={index}
+                icon={item.icon}
+                title={item.title}
+                description={item.description}
+                index={index}
+              />
+            ))}
+          </div>
+          <motion.div
+            initial={{ opacity: 0, y: -100, scale: 0.8 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            viewport={{ amount: 0.5 }}
+            className="absolute bottom-0 right-0 flex  justify-center"
+          >
+            <Image
+              src="https://wallpapers.com/images/hd/renewable-energy-concept-earth-solar-panels-wind-turbines-02b8mz7vgrvw8ikq-02b8mz7vgrvw8ikq.jpg"
+              alt=""
+              width={100}
+              height={100}
+              className="h-[35%] w-[35%]"
+            />
+          </motion.div>
+        </div>
 
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 md:gap-5">
+        <div className="flex flex-col gap-5 lg:hidden md:hidden">
           {expertiseItems.map((item, index) => (
-            <ExpertiseCard
+            <ExpertiseCardMobile
               key={index}
               icon={item.icon}
               title={item.title}
