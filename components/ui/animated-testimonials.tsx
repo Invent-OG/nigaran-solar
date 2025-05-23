@@ -192,7 +192,7 @@ export function AnimatedTestimonials({
           </motion.div>
 
           {/* Right */}
-          <motion.div variants={itemVariants} className="  w-full">
+          <motion.div variants={itemVariants} className=" relative w-full">
             <AnimatePresence mode="wait">
               <motion.div
                 key={testimonials[activeIndex].id}
@@ -202,11 +202,11 @@ export function AnimatedTestimonials({
                 transition={{ duration: 0.5, ease: "easeInOut" }}
                 className="w-full "
               >
-                <div className="relative flex flex-col p-8 border z-30 shadow-lg   w-full">
-                  {/* Decorative corners */}
-                  <div className="absolute w-24 h-24 -bottom-6 -left-6  bg-primary/50 z-10"></div>
-                  <div className="absolute w-24 h-24 -top-6 -right-6  bg-primary/50 z-10"></div>
+                {/* Decorative corners */}
+                <div className="absolute w-24 h-24 -bottom-6 -left-6 rounded-xl  bg-primary/50 z-10"></div>
+                <div className="absolute w-24 h-24 -top-6 -right-6 rounded-xl bg-primary/50 z-10"></div>
 
+                <div className="relative flex flex-col p-8 border z-30 shadow-lg rounded-2xl bg-white  w-full">
                   {/* Content */}
                   <div className="relative z-10 w-full flex-1 mb-6">
                     {testimonials[activeIndex].youtubeUrl ? (

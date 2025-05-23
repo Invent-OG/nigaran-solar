@@ -103,42 +103,33 @@ const Feature108 = ({
           <div className="w-20 h-1 mx-auto mb-6 bg-primary"></div>
         </motion.div>
 
-        {/* Spline Background */}
-        {/* <div className="absolute left-0 -translate-y-2/4 lg:-top-5 top-32 lg:-translate-x-1/2 -translate-x-28 z-0">
-          <Spline scene="https://prod.spline.design/fZXdoHZ9JramEa8D/scene.splinecode" />
-        </div> */}
-
         {/* Tabs */}
-
         <div className="relative z-10 mt-5 flex flex-wrap justify-center gap-4">
           {tabs.map((tab, index) => (
-            <>
-              <motion.div
-                className="flex flex-col items-center gap-4 text-center"
-                initial={{ opacity: 0, y: 100 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+            <motion.div
+              key={`tab-${index}`}
+              className="flex flex-col items-center gap-4 text-center"
+              initial={{ opacity: 0, y: 100 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+            >
+              <button
+                onClick={() => setSelectedTab(tab)}
+                className={`flex items-center gap-2 rounded-xl px-4 py-3 text-xs font-semibold transition ${
+                  selectedTab.value === tab.value
+                    ? "bg-primary text-white"
+                    : "bg-white border text-muted-foreground"
+                }`}
               >
-                <button
-                  key={tab.value}
-                  onClick={() => setSelectedTab(tab)}
-                  className={`flex items-center gap-2 rounded-xl px-4 py-3 text-xs font-semibold transition ${
-                    selectedTab.value === tab.value
-                      ? "bg-primary text-white"
-                      : "bg-white border text-muted-foreground"
-                  }`}
-                >
-                  {tab.icon}
-                  {tab.label}
-                </button>
-              </motion.div>
-            </>
+                {tab.icon}
+                {tab.label}
+              </button>
+            </motion.div>
           ))}
         </div>
 
         {/* Content */}
-
-        <div className="max-w-screen-xl  mx-auto mt-10 rounded-2xl bg-muted lg:p-16 relative z-10">
+        <div className="max-w-screen-xl mx-auto mt-10 rounded-2xl bg-muted lg:p-16 relative z-10">
           <AnimatePresence mode="wait">
             <motion.div
               key={selectedTab.value}
