@@ -15,10 +15,10 @@ export default function WhoWeAre() {
   const router = useRouter();
 
   return (
-    <section className="relative overflow-hidden">
-      <div className="absolute inset-0 z-0 bg-[url('/bg-pattern.png')] w-full bg-cover bg-center opacity-30"></div>
+    <section className="relative overflow-hidden p-[10%] bg-[#f8f8f8]">
+      {/* <div className="absolute inset-0 z-0 bg-[url('/bg-pattern.png')] w-full bg-cover bg-center opacity-30"></div> */}
 
-      <div className="container flex md:flex-row flex-col gap-10 justify-between md:p-[5%] p-[5%]">
+      <div className="container flex md:flex-row flex-col gap-10 justify-between ">
         {/* Image Block */}
         <div className="relative flex">
           <Image
@@ -26,7 +26,7 @@ export default function WhoWeAre() {
             alt="Solar Panels"
             width={500}
             height={500}
-            className="rounded-xl z-10 w-[450px] h-[450px] border object-cover"
+            className="rounded-xl z-10 w-[450px] h-[450px]  object-cover"
           />
 
           {/* Circular Progress */}
@@ -51,7 +51,7 @@ export default function WhoWeAre() {
             alt="Solar Panels Small"
             width={250}
             height={250}
-            className="rounded-md z-20 absolute w-[200px] h-[200px] md:w-[250px] md:h-[250px] -bottom-20 -right-0 md:-bottom-1/6 md:-right-1/4 bg-slate-500 border-8 border-popover object-cover"
+            className="rounded-md z-20 absolute w-[200px] h-[200px] md:w-[250px] md:h-[250px] -bottom-20 -right-0 md:-bottom-1/6 md:-right-1/4 border-[#f8f8f8] border-8  object-cover"
           />
         </div>
 
@@ -59,7 +59,8 @@ export default function WhoWeAre() {
         <div className="lg:w-1/2 flex flex-col">
           <div className="flex flex-col items-start gap-4 text-left">
             <Badge variant="outline">About us</Badge>
-            <h2 className="max-w-2xl text-3xl font-extrabold md:text-4xl">
+            <h2 className="max-w-2xl text-4xl font-extrabold md:text-5xl">
+              {" "}
               Who We Are
             </h2>
             <div className="w-20 h-1 mb-6 bg-primary"></div>
@@ -128,7 +129,7 @@ function CircularProgress({
   const strokeDashoffset = circumference * (1 - percent / 100);
 
   return (
-    <div className="absolute shadow-xl flex top-4 -left-6 z-30 p-5 rounded-md items-center gap-5 border-r-8 border-primary bg-white">
+    <div className="absolute shadow-xl flex top-4 -left-6 z-30 p-5  items-center gap-5 border-r-8 border-primary bg-white">
       <svg height={radius * 2} width={radius * 2}>
         <circle
           stroke="#e5e7eb"

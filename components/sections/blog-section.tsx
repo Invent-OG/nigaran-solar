@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useBlogs } from "@/lib/queries/blogs";
+import { Badge } from "../ui/badge";
 
 interface BlogCardProps {
   title: string;
@@ -70,32 +71,45 @@ export default function BlogSection() {
   }
 
   return (
-    <section ref={sectionRef} className="py-16 md:py-24 bg-background">
-      <div className="container mx-auto px-4 md:px-6">
+    <section ref={sectionRef} className="p-[5%] bg-[#F3F9FF]">
+      <div className="container ">
         <motion.div
           initial={{ opacity: 0, y: 100 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Insights, Trends, And Tips From Industry Experts
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Stay informed with the latest news and developments in renewable
-            energy and sustainable practices.
-          </p>
+          <div className="flex flex-col items-center gap-4 text-center">
+            <Badge variant="outline">Blogs</Badge>
+            <h2 className="max-w-2xl text-4xl font-extrabold md:text-5xl">
+              {" "}
+              Insights, Trends, And Tips From Industry Experts
+            </h2>
+            <div className="w-20 h-1 mb-6 bg-primary"></div>
+            <p className="text-lg text-muted-foreground text-justify mb-6">
+              Stay informed with the latest news and developments in renewable
+              energy and sustainable practices.
+            </p>
+          </div>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {blogs.slice(0, 3).map((post, index) => (
-            <BlogCard
-              key={post.id}
-              title={post.title}
-              excerpt={post.excerpt}
-              imageUrl={post.imageUrl}
-              index={index}
-            />
+            <>
+              <motion.div
+                initial={{ opacity: 0, y: 100 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <BlogCard
+                  key={post.id}
+                  title={post.title}
+                  excerpt={post.excerpt}
+                  imageUrl={post.imageUrl}
+                  index={index}
+                />
+              </motion.div>
+            </>
           ))}
         </div>
 

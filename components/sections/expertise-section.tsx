@@ -128,7 +128,7 @@ export default function ExpertiseSection() {
   ];
 
   return (
-    <section ref={containerRef} className="py-16 relative md:py-24 ">
+    <section ref={containerRef} className="p-[5%] relative  ">
       <div className="absolute inset-0 z-0 bg-[url('/bg-pattern.png')] bg-cover bg-center opacity-30"></div>
 
       <div className=" container px-4 space-x-4 space-y-16  mx-auto md:px-6">
@@ -139,7 +139,8 @@ export default function ExpertiseSection() {
           transition={{ duration: 0.6 }}
         >
           <Badge variant="outline">Our Features</Badge>
-          <h2 className="max-w-2xl text-3xl font-extrabold md:text-4xl">
+          <h2 className="max-w-2xl text-4xl font-extrabold md:text-5xl">
+            {" "}
             Experts In The World
             <br />
             Of Solar Energy.

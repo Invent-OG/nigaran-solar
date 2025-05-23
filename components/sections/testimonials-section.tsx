@@ -41,14 +41,16 @@ export default function TestimonialsSection() {
         badgeText="Customer Reviews"
         testimonials={testimonials}
       />
-      <script
-        src="https://static.elfsight.com/platform/platform.js"
-        async
-      ></script>
-      <div
-        className="elfsight-app-fe3c2b0c-5913-47c7-9b00-6121b3a4e40d"
-        data-elfsight-app-lazy
-      ></div>
+      <div className="py-20">
+        <script
+          src="https://static.elfsight.com/platform/platform.js"
+          async
+        ></script>
+        <div
+          className="elfsight-app-a90f3dc9-09f4-404a-b77b-d1e3e8f2242d"
+          data-elfsight-app-lazy
+        ></div>
+      </div>
     </div>
   );
 }

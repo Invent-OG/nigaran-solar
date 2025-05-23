@@ -47,7 +47,7 @@
 //             initial={{ opacity: 0, y: 100 }}
 //             whileInView={{ opacity: 1, y: 0 }}
 //             transition={{ duration: 0.5 }}
-//             className="max-w-md mx-auto bg-card rounded-lg p-8 shadow-lg"
+//             className="max-w-md mx-auto bg-card  p-8 shadow-lg"
 //           >
 //             <h2 className="text-2xl font-bold mb-6 text-center">
 //               Get Your Free Quote
@@ -106,9 +106,9 @@
 //                 initial={{ opacity: 0, y: 100 }}
 //                 whileInView={{ opacity: 1, y: 0 }}
 //                 transition={{ duration: 0.5, delay: index * 0.1 }}
-//                 className="bg-card rounded-lg p-6 text-center"
+//                 className="bg-card  p-6 text-center"
 //               >
-//                 <div className="w-16 h-16 bg-primary/10 text-primary rounded-full flex items-center justify-center mx-auto mb-4">
+//                 <div className="w-16 h-16 bg-primary/10 text-primary  flex items-center justify-center mx-auto mb-4">
 //                   {benefit.icon}
 //                 </div>
 //                 <h3 className="text-xl font-semibold mb-2">{benefit.title}</h3>

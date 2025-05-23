@@ -62,19 +62,7 @@ export default function AboutPage() {
               commercial clients. Our goal is to help our customers reduce
               energy costs and contribute to environmental conservation by
               offering renewable energy solutions.
-              <br />
-              With years of expertise in solar panel technology and
-              installations, we’re your trusted solar partner in Tamilnadu,
-              providing unmatched service and consultation. We offer a full
-              range of solar services, including solar power systems for homes,
-              commercial establishments, and industries. Whether you're looking
-              for a residential solar installation or a large-scale solar
-              rooftop installation, we’ve got you covered.
             </p>
-            <Button size="lg" className="group">
-              Learn More
-              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </Button>
           </motion.div>
         </div>
       </section>

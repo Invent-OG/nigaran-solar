@@ -86,7 +86,7 @@ const Feature108 = ({
   const [selectedTab, setSelectedTab] = useState(tabs[0]);
 
   return (
-    <section className="py-32 bg-background">
+    <section className="p-[5%] bg-background">
       <div className="container relative mx-auto">
         {/* Heading */}
         <motion.div
@@ -96,7 +96,8 @@ const Feature108 = ({
           transition={{ duration: 0.6 }}
         >
           <Badge variant="outline">{badge}</Badge>
-          <h2 className="max-w-2xl text-3xl font-extrabold md:text-4xl">
+          <h2 className="max-w-2xl text-4xl font-extrabold md:text-5xl">
+            {" "}
             {heading}
           </h2>
           <div className="w-20 h-1 mx-auto mb-6 bg-primary"></div>
@@ -108,30 +109,41 @@ const Feature108 = ({
         </div> */}
 
         {/* Tabs */}
-        <div className="relative z-10 mt-10 flex flex-wrap justify-center gap-4">
-          {tabs.map((tab) => (
-            <button
-              key={tab.value}
-              onClick={() => setSelectedTab(tab)}
-              className={`flex items-center gap-2 rounded-xl px-4 py-3 text-xs font-semibold transition ${
-                selectedTab.value === tab.value
-                  ? "bg-primary text-white"
-                  : "bg-white border text-muted-foreground"
-              }`}
-            >
-              {tab.icon}
-              {tab.label}
-            </button>
+
+        <div className="relative z-10 mt-5 flex flex-wrap justify-center gap-4">
+          {tabs.map((tab, index) => (
+            <>
+              <motion.div
+                className="flex flex-col items-center gap-4 text-center"
+                initial={{ opacity: 0, y: 100 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+              >
+                <button
+                  key={tab.value}
+                  onClick={() => setSelectedTab(tab)}
+                  className={`flex items-center gap-2 rounded-xl px-4 py-3 text-xs font-semibold transition ${
+                    selectedTab.value === tab.value
+                      ? "bg-primary text-white"
+                      : "bg-white border text-muted-foreground"
+                  }`}
+                >
+                  {tab.icon}
+                  {tab.label}
+                </button>
+              </motion.div>
+            </>
           ))}
         </div>
 
         {/* Content */}
-        <div className="max-w-screen-xl p-6 mx-auto mt-10 rounded-2xl bg-muted lg:p-16 relative z-10">
+
+        <div className="max-w-screen-xl  mx-auto mt-10 rounded-2xl bg-muted lg:p-16 relative z-10">
           <AnimatePresence mode="wait">
             <motion.div
               key={selectedTab.value}
               className="grid gap-20 place-items-center lg:grid-cols-2 lg:gap-10"
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 100 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -30 }}
               transition={{ duration: 0.4 }}

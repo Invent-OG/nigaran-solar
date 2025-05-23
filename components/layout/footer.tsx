@@ -168,12 +168,14 @@ export default function Footer() {
                 </li>
               ))}
               <li>
-                <Link
-                  href="/admin/login"
-                  className="text-gray-400 transition-colors hover:text-white"
+                <div
+                  onClick={() =>
+                    window.open("/admin/login", "_blank", "noopener,noreferrer")
+                  }
+                  className="text-gray-400 cursor-pointer transition-colors hover:text-white"
                 >
                   Admin Login
-                </Link>
+                </div>
               </li>
             </ul>
           </motion.div>

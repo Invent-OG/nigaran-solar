@@ -3,8 +3,14 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 import { Quote, Star } from "lucide-react";
-import { motion, useAnimation, useInView } from "framer-motion";
+import {
+  AnimatePresence,
+  motion,
+  useAnimation,
+  useInView,
+} from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import { cn } from "@/lib/utils";
 
 export interface Testimonial {
   id: string;
@@ -37,15 +43,18 @@ function extractYouTubeID(url: string): string | null {
 
 export function AnimatedTestimonials({
   title = "Loved by the community",
-  subtitle = "Don't just take our word for it. See what developers and companies have to say about our starter template.",
+  subtitle = "Don't just take our word for it...",
   badgeText = "Trusted by developers",
   testimonials = [],
   autoRotateInterval = 6000,
   trustedCompanies = [],
-  trustedCompaniesTitle = "Trusted by developers from companies worldwide",
+  trustedCompaniesTitle = "Trusted by developers",
   className,
 }: AnimatedTestimonialsProps) {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [autoScrollPaused, setAutoScrollPaused] = useState(false);
+  const playerRef = useRef<any>(null);
+
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
   const controls = useAnimation();
@@ -66,40 +75,79 @@ export function AnimatedTestimonials({
     visible: {
       opacity: 1,
       y: 0,
-      transition: {
-        duration: 0.5,
-        ease: "easeOut",
-      },
+      transition: { duration: 0.5, ease: "easeOut" },
     },
   };
 
+  // Load YouTube API
   useEffect(() => {
-    if (isInView) {
-      controls.start("visible");
-    }
+    if ((window as any).YT) return;
+
+    const tag = document.createElement("script");
+    tag.src = "https://www.youtube.com/iframe_api";
+    document.body.appendChild(tag);
+  }, []);
+
+  // Create player on iframe ready
+  useEffect(() => {
+    if (!testimonials[activeIndex]?.youtubeUrl) return;
+
+    const interval = setInterval(() => {
+      const iframe = document.getElementById(
+        `youtube-player-${activeIndex}`
+      ) as HTMLIFrameElement;
+
+      if (iframe && (window as any).YT && !playerRef.current) {
+        playerRef.current = new (window as any).YT.Player(
+          `youtube-player-${activeIndex}`,
+          {
+            events: {
+              onStateChange: (event: any) => {
+                const YT = (window as any).YT;
+                if (event.data === YT.PlayerState.PLAYING) {
+                  setAutoScrollPaused(true);
+                } else if (
+                  event.data === YT.PlayerState.PAUSED ||
+                  event.data === YT.PlayerState.ENDED
+                ) {
+                  setAutoScrollPaused(false);
+                }
+              },
+            },
+          }
+        );
+        clearInterval(interval);
+      }
+    }, 500);
+
+    return () => clearInterval(interval);
+  }, [activeIndex, testimonials]);
+
+  // Animate in on view
+  useEffect(() => {
+    if (isInView) controls.start("visible");
   }, [isInView, controls]);
 
+  // Auto-rotate logic
   useEffect(() => {
     if (autoRotateInterval <= 0 || testimonials.length <= 1) return;
 
     const interval = setInterval(() => {
-      setActiveIndex((current) => (current + 1) % testimonials.length);
+      if (!autoScrollPaused) {
+        setActiveIndex((current) => (current + 1) % testimonials.length);
+      }
     }, autoRotateInterval);
 
     return () => clearInterval(interval);
-  }, [autoRotateInterval, testimonials.length]);
+  }, [autoRotateInterval, testimonials.length, autoScrollPaused]);
 
-  if (testimonials.length === 0) {
-    return null;
-  }
+  if (testimonials.length === 0) return null;
 
   return (
     <section
       ref={sectionRef}
       id="testimonials"
-      className={`py-24 px-[10%] overflow-hidden bg-muted/30 ${
-        className || ""
-      }`}
+      className={`p-[5%] container overflow-hidden ${className || ""}`}
     >
       <div className="px-4 md:px-6">
         <motion.div
@@ -115,7 +163,7 @@ export function AnimatedTestimonials({
           >
             <div className="space-y-6">
               {badgeText && (
-                <div className="inline-flex items-center px-3 py-1 text-sm font-medium rounded-full bg-primary/10 text-primary">
+                <div className="inline-flex items-center px-3 py-1 text-sm font-medium  bg-primary/10 text-primary">
                   <Star className="mr-1 h-3.5 w-3.5 fill-primary" />
                   <span>{badgeText}</span>
                 </div>
@@ -144,91 +192,73 @@ export function AnimatedTestimonials({
           </motion.div>
 
           {/* Right */}
-          <motion.div
-            variants={itemVariants}
-            className="relative h-full mr-10 min-h-[300px] md:min-h-[400px]"
-          >
-            {testimonials.map((testimonial, index) => {
-              const videoId = testimonial.youtubeUrl
-                ? extractYouTubeID(testimonial.youtubeUrl)
-                : null;
-              return (
-                <motion.div
-                  key={testimonial.id}
-                  className="absolute inset-0"
-                  initial={{ opacity: 0, x: 100 }}
-                  animate={{
-                    opacity: activeIndex === index ? 1 : 0,
-                    x: activeIndex === index ? 0 : 100,
-                    scale: activeIndex === index ? 1 : 0.9,
-                  }}
-                  transition={{ duration: 0.5, ease: "easeInOut" }}
-                  style={{ zIndex: activeIndex === index ? 10 : 0 }}
-                >
-                  <div className="flex flex-col h-full p-8 border shadow-lg bg-card rounded-xl">
-                    {testimonial.rating && (
-                      <div className="flex gap-2 mb-6">
-                        {Array(testimonial.rating)
-                          .fill(0)
-                          .map((_, i) => (
-                            <Star
-                              key={i}
-                              className="w-5 h-5 text-yellow-500 fill-yellow-500"
-                            />
-                          ))}
-                      </div>
-                    )}
+          <motion.div variants={itemVariants} className="  w-full">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={testimonials[activeIndex].id}
+                initial={{ opacity: 0, x: 100 }}
+                animate={{ opacity: 1, x: 0, scale: 1 }}
+                exit={{ opacity: 0, x: -100, scale: 0.95 }}
+                transition={{ duration: 0.5, ease: "easeInOut" }}
+                className="w-full "
+              >
+                <div className="relative flex flex-col p-8 border z-30 shadow-lg   w-full">
+                  {/* Decorative corners */}
+                  <div className="absolute w-24 h-24 -bottom-6 -left-6  bg-primary/50 z-10"></div>
+                  <div className="absolute w-24 h-24 -top-6 -right-6  bg-primary/50 z-10"></div>
 
-                    <div className="relative flex-1 mb-6">
-                      {videoId ? (
-                        <div className="relative w-full h-full overflow-hidden rounded-lg">
-                          <iframe
-                            className="absolute top-0 left-0 w-full h-full rounded-lg"
-                            src={`https://www.youtube.com/embed/${videoId}`}
-                            title="YouTube video testimonial"
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
-                          ></iframe>
-                        </div>
-                      ) : (
-                        <>
-                          <Quote className="absolute w-8 h-8 rotate-180 -top-2 -left-2 text-primary/20" />
-                          <p className="relative z-10 text-lg font-medium leading-relaxed">
-                            {testimonial.content}
-                          </p>
-                        </>
-                      )}
-                    </div>
-
-                    <Separator className="my-4" />
-
-                    <div className="flex items-center gap-4">
-                      <Avatar className="w-12 h-12 border">
-                        <AvatarImage
-                          src={testimonial.imageUrl}
-                          alt={testimonial.name}
+                  {/* Content */}
+                  <div className="relative z-10 w-full flex-1 mb-6">
+                    {testimonials[activeIndex].youtubeUrl ? (
+                      <div className="w-full aspect-video overflow-hidden ">
+                        <iframe
+                          id={`youtube-player-${activeIndex}`}
+                          className="w-full h-full "
+                          src={`https://www.youtube.com/embed/${extractYouTubeID(
+                            testimonials[activeIndex].youtubeUrl!
+                          )}?enablejsapi=1`}
+                          title={`Testimonial video by ${testimonials[activeIndex].name}`}
+                          frameBorder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
                         />
-                        <AvatarFallback>
-                          {testimonial.name.charAt(0)}
-                        </AvatarFallback>
-                      </Avatar>
-                      <div>
-                        <h3 className="font-semibold">{testimonial.name}</h3>
-                        <p className="text-sm text-muted-foreground">
-                          {testimonial.role}
-                          {testimonial.company && `, ${testimonial.company}`}
-                        </p>
                       </div>
+                    ) : (
+                      <>
+                        <Quote className="absolute w-8 h-8 rotate-180 -top-2 -left-2 text-primary/20" />
+                        <p className="relative z-30 text-lg font-medium leading-relaxed">
+                          {testimonials[activeIndex].content}
+                        </p>
+                      </>
+                    )}
+                  </div>
+
+                  <Separator className="my-4 z-30" />
+
+                  <div className="flex items-center gap-4 z-30">
+                    <Avatar className="w-12 h-12 border">
+                      <AvatarImage
+                        src={testimonials[activeIndex].imageUrl}
+                        alt={testimonials[activeIndex].name}
+                      />
+                      <AvatarFallback>
+                        {testimonials[activeIndex].name.charAt(0)}
+                      </AvatarFallback>
+                    </Avatar>
+                    <div>
+                      <h3 className="font-semibold">
+                        {testimonials[activeIndex].name}
+                      </h3>
+                      <p className="text-sm text-muted-foreground">
+                        {testimonials[activeIndex].role}
+                        {testimonials[activeIndex].company &&
+                          `, ${testimonials[activeIndex].company}`}
+                      </p>
                     </div>
                   </div>
-                </motion.div>
-              );
-            })}
-
-            {/* Decorative */}
-            <div className="absolute w-24 h-24 -bottom-6 -left-6 rounded-xl bg-primary/5"></div>
-            <div className="absolute w-24 h-24 -top-6 -right-6 rounded-xl bg-primary/5"></div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </motion.div>
         </motion.div>
       </div>

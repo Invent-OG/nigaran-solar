@@ -39,7 +39,7 @@ import { cn } from "@/lib/utils";
 //     >
 //       <div
 //         className={cn(
-//           "flex flex-col items-center text-center  z-20 relative bg-white hover:shadow-2xl shadow-md transition-all duration-500  py-10 rounded-2xl ",
+//           "flex flex-col items-center text-center  z-20 relative bg-white hover:shadow-2xl shadow-md transition-all duration-500  py-10  ",
 //           className
 //         )}
 //       >
