@@ -178,13 +178,13 @@ export default function StatsSection() {
           />
         ))}
       </div>
-      <Image
+      {/* <Image
         src="/windmill.svg"
         alt="Solar Panels"
         width={500}
         height={500}
         className="absolute bottom-0 right-0 z-10 object-cover"
-      />
+      /> */}
     </section>
   );
 }

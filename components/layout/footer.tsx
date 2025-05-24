@@ -91,7 +91,7 @@ export default function Footer() {
             </motion.div>
           </div>
         </div>
-        {/* <div className="w-full md:w-auto">
+        <div className="w-full md:w-auto">
           <Image
             src="/contact-us.png"
             alt="Solar Panels"
@@ -99,7 +99,7 @@ export default function Footer() {
             height={450}
             className="top-0 right-0 z-10 object-cover lg:absolute"
           />
-        </div> */}
+        </div>
       </section>
 
       {/* FOOTER MAIN */}
