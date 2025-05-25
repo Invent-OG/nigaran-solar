@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 html, body {
   overflow-x: hidden;
 }
@@ -12,7 +11,6 @@ html, body {
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
 }
-
 
 @layer base {
   :root {
@@ -37,11 +35,9 @@ html, body {
     --ring: 142 72% 29%;
     --radius: 0.5rem;
   }
+  
 
- 
 }
-
-
 
 .circular-frame {
   animation: rotate 40s linear infinite;
@@ -72,4 +68,120 @@ html, body {
 
 .service-card:hover {
   transform: translateY(-5px);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* ripple.css */
+
+.ripple-background {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  background: white;
+  animation: ripple 15s infinite;
+  box-shadow: 0px 0px 1px 0px #57b13f/20;
+}
+
+.xxlarge {
+  width: 1000px;
+  height: 1000px;
+  left: -500px;
+  bottom: -500px;
+}
+
+.xlarge {
+  width: 800px;
+  height: 800px;
+  left: -400px;
+  bottom: -400px;
+}
+
+.large {
+  width: 600px;
+  height: 600px;
+  left: -300px;
+  bottom: -300px;
+}
+
+.medium {
+  width: 400px;
+  height: 400px;
+  left: -200px;
+  bottom: -200px;
+}
+
+.small {
+  width: 200px;
+  height: 200px;
+  left: -100px;
+  bottom: -100px;
+}
+
+.shade1 {
+  opacity: 0.2;
+}
+.shade2 {
+  opacity: 0.5;
+}
+.shade3 {
+  opacity: 0.7;
+}
+.shade4 {
+  opacity: 0.8;
+}
+.shade5 {
+  opacity: 0.9;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0.8);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(0.8);
+  }
+}
+
+@theme inline {
+  --animate-aurora: aurora 8s ease-in-out infinite alternate;
+ 
+  @keyframes aurora {
+    0% {
+      background-position: 0% 50%;
+      transform: rotate(-5deg) scale(0.9);
+    }
+    25% {
+      background-position: 50% 100%;
+      transform: rotate(5deg) scale(1.1);
+    }
+    50% {
+      background-position: 100% 50%;
+      transform: rotate(-3deg) scale(0.95);
+    }
+    75% {
+      background-position: 50% 0%;
+      transform: rotate(3deg) scale(1.05);
+    }
+    100% {
+      background-position: 0% 50%;
+      transform: rotate(-5deg) scale(0.9);
+    }
+  }
 }

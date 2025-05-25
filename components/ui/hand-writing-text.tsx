@@ -61,7 +61,7 @@ function HandWrittenTitle({
         </motion.h1>
         {subtitle && (
           <motion.p
-            className="text-xl text-black/80 dark:text-white/80"
+            className="text-xl  dark:text-white/80"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1, duration: 0.8 }}

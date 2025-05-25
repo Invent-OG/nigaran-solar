@@ -86,7 +86,7 @@ const Feature108 = ({
   const [selectedTab, setSelectedTab] = useState(tabs[0]);
 
   return (
-    <section className="p-[5%] bg-background">
+    <section className="lg:p-[5%]  px-[2%] py-[10%] text-black/80 bg-background">
       <div className="container relative mx-auto">
         {/* Heading */}
         <motion.div
@@ -96,7 +96,7 @@ const Feature108 = ({
           transition={{ duration: 0.6 }}
         >
           <Badge variant="outline">{badge}</Badge>
-          <h2 className="max-w-2xl text-4xl font-extrabold md:text-5xl">
+          <h2 className="max-w-2xl text-4xl font-extrabold md:text-5xl text-black/80">
             {" "}
             {heading}
           </h2>
@@ -129,7 +129,7 @@ const Feature108 = ({
         </div>
 
         {/* Content */}
-        <div className="max-w-screen-xl mx-auto mt-10 rounded-2xl bg-muted lg:p-16 relative z-10">
+        <div className="max-w-screen-xl mx-auto mt-10 rounded-2xl bg-muted lg:p-16 p-5 relative z-10">
           <AnimatePresence mode="wait">
             <motion.div
               key={selectedTab.value}

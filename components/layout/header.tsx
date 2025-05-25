@@ -127,7 +127,10 @@ export default function Header() {
             <span
               className={cn(
                 "ml-2",
-                !isScrolled && pathName === "/" ? "text-white" : ""
+                (!isScrolled && pathName === "/") ||
+                  (!isScrolled && pathName === "/consultation")
+                  ? "text-white"
+                  : ""
               )}
             >
               Nigaran Solar
@@ -152,7 +155,10 @@ export default function Header() {
                 href={item.href}
                 className={cn(
                   "text-foreground/80 hover:text-primary transition-colors font-medium",
-                  !isScrolled && pathName === "/" ? "text-white" : ""
+                  (!isScrolled && pathName === "/") ||
+                    (!isScrolled && pathName === "/consultation")
+                    ? "text-white"
+                    : ""
                 )}
               >
                 {item.label}

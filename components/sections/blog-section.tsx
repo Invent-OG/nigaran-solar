@@ -71,7 +71,10 @@ export default function BlogSection() {
   }
 
   return (
-    <section ref={sectionRef} className="p-[5%] bg-[#F3F9FF]">
+    <section
+      ref={sectionRef}
+      className="lg:p-[5%] px-[2%] py-[10%] bg-[#F3F9FF]"
+    >
       <div className="container ">
         <motion.div
           initial={{ opacity: 0, y: 100 }}
@@ -81,8 +84,7 @@ export default function BlogSection() {
         >
           <div className="flex flex-col items-center gap-4 text-center">
             <Badge variant="outline">Blogs</Badge>
-            <h2 className="max-w-2xl text-4xl font-extrabold md:text-5xl">
-              {" "}
+            <h2 className="max-w-2xl text-4xl font-extrabold md:text-5xl text-black/80">
               Insights, Trends, And Tips From Industry Experts
             </h2>
             <div className="w-20 h-1 mb-6 bg-primary"></div>

@@ -63,7 +63,7 @@ export default function CommercialPage() {
             <h2 className="text-2xl font-bold mb-6 text-center">
               Get a Free Commercial Solar Quote
             </h2>
-            <LeadForm type="commercial" />
+            <LeadForm type="commercial" title={""} description={""} />
           </motion.div>
         </div>
       </section>

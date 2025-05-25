@@ -13,24 +13,25 @@ import {
   Leaf,
   Zap,
 } from "lucide-react";
+import Head from "next/head";
 
 export default function AboutPage() {
   return (
     <div className="min-h-screen pt-20">
       {/* Meta Information */}
-      <head>
+      <Head>
         <title>
           About Nigaran Solar | Leading Solar Company in Coimbatore, Tamil Nadu
         </title>
         <meta
           name="description"
-          content="Nigaran Solar is a trusted solar company in Coimbatore, offering affordable and efficient solar power systems for homes and businesses across Tamil Nadu. Learn about our mission to provide sustainable solar solutions."
+          content="Nigaran Solar is a trusted solar company in Coimbatore..."
         />
         <meta
           name="keywords"
-          content="solar company Coimbatore, solar power systems, trusted solar partner, solar solutions Tamil Nadu, solar energy provider, solar panel installation Coimbatore"
+          content="solar company Coimbatore, solar power systems..."
         />
-      </head>
+      </Head>
 
       {/* Hero Section */}
       <section className="relative h-[60vh] flex items-center">

@@ -15,52 +15,62 @@ export default function WhoWeAre() {
   const router = useRouter();
 
   return (
-    <section className="relative overflow-hidden p-[10%] bg-[#f8f8f8]">
+    <section className="relative overflow-hidden lg:p-[10%] px-[2%] py-[10%] bg-[#f8f8f8]">
       {/* <div className="absolute inset-0 z-0 bg-[url('/bg-pattern.png')] w-full bg-cover bg-center opacity-30"></div> */}
 
       <div className="container flex md:flex-row flex-col gap-10 justify-between ">
         {/* Image Block */}
         <div className="relative flex">
-          <Image
-            src="https://images.unsplash.com/photo-1660330589257-813305a4a383?q=80&w=3432&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt="Solar Panels"
-            width={500}
-            height={500}
-            className="rounded-xl z-10 w-[450px] h-[450px]  object-cover"
-          />
-
-          {/* Circular Progress */}
-          <div className="absolute md:right-1/4 right-[55%] z-20 top-0">
-            <CircularProgress percent={85} label="Efficiency" />
-          </div>
-
-          {/* Rotating Background Circle */}
-          <div className="animate-rotateLoop absolute -left-24 md:-bottom-16  bottom-0 opacity-50 z-0">
+          <motion.div
+            initial={{ opacity: 0, y: 100 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
             <Image
-              src="/circle.png"
-              alt="Rotating Circle"
-              width={200}
-              height={200}
-              loading="lazy"
+              src="https://images.unsplash.com/photo-1660330589257-813305a4a383?q=80&w=3432&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt="Solar Panels"
+              width={500}
+              height={500}
+              className="rounded-xl z-10 w-[450px] h-[450px]  object-cover"
             />
-          </div>
 
-          {/* Overlapping Image */}
-          <Image
-            src="https://images.unsplash.com/photo-1719559519300-e9d2c2bf6de1?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt="Solar Panels Small"
-            width={250}
-            height={250}
-            className="rounded-md z-20 absolute w-[200px] h-[200px] md:w-[250px] md:h-[250px] -bottom-20 -right-0 md:-bottom-1/6 md:-right-1/4 border-[#f8f8f8] border-8  object-cover"
-          />
+            {/* Circular Progress */}
+            <div className="absolute md:right-1/4 right-[55%] z-20 top-0">
+              <CircularProgress percent={85} label="Efficiency" />
+            </div>
+
+            {/* Rotating Background Circle */}
+            <div className="animate-rotateLoop absolute -left-24 md:-bottom-16  bottom-0 opacity-50 z-0">
+              <Image
+                src="/circle.png"
+                alt="Rotating Circle"
+                width={200}
+                height={200}
+                loading="lazy"
+              />
+            </div>
+
+            {/* Overlapping Image */}
+            <Image
+              src="https://images.unsplash.com/photo-1719559519300-e9d2c2bf6de1?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt="Solar Panels Small"
+              width={250}
+              height={250}
+              className="rounded-2xl z-20 absolute w-[200px] h-[200px] md:w-[250px] md:h-[250px] -bottom-20 -right-6 md:-bottom-1/6 md:-right-1/4 border-[#f8f8f8] border-8  object-cover"
+            />
+          </motion.div>
         </div>
 
         {/* Text Section */}
         <div className="lg:w-1/2 flex flex-col">
-          <div className="flex flex-col items-start gap-4 text-left">
+          <motion.div
+            initial={{ opacity: 0, y: 100 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="flex flex-col items-start gap-4 text-left"
+          >
             <Badge variant="outline">About us</Badge>
-            <h2 className="max-w-2xl text-4xl font-extrabold md:text-5xl">
-              {" "}
+            <h2 className="max-w-2xl text-4xl font-extrabold md:text-5xl text-black/80">
               Who We Are
             </h2>
             <div className="w-20 h-1 mb-6 bg-primary"></div>
@@ -72,13 +82,13 @@ export default function WhoWeAre() {
               assist in lowering electricity expenses, promoting energy
               self-sufficiency, and fostering a more sustainable future.
             </p>
-          </div>
+          </motion.div>
 
           {/* Progress Bars */}
           <div className="w-full max-w-md space-y-6">
             {metrics.map(({ title, percent }, idx) => (
               <div key={title}>
-                <span className="block text-sm font-semibold text-gray-800 mb-2">
+                <span className="block text-sm font-semibold text-black/80 mb-2">
                   {title}
                 </span>
                 <div className="w-full h-2 bg-black/10 rounded-full relative">
@@ -129,7 +139,7 @@ function CircularProgress({
   const strokeDashoffset = circumference * (1 - percent / 100);
 
   return (
-    <div className="absolute shadow-xl flex top-4 -left-6 z-30 p-5  items-center gap-5 border-r-8 border-primary bg-white">
+    <div className="absolute shadow-xl flex top-4 -left-6 z-30 p-5 rounded-xl text-black/80 items-center gap-5 border-r-8 border-primary bg-white">
       <svg height={radius * 2} width={radius * 2}>
         <circle
           stroke="#e5e7eb"

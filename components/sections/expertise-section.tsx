@@ -25,21 +25,17 @@ const ExpertiseCardMobile = ({
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
     >
-      <div className="relative w-full max-w-md mx-auto overflow-hidden rounded-lg shadow-lg h-full bg-white transition-all duration-500 group">
-        <div className="relative block p-8 no-underline bg-white">
-          <div className="absolute h-[130px] w-[100px] bg-primary rounded-full top-[-75px] right-[-75px] z-0 transition-transform duration-500 group-hover:scale-[10]"></div>
+      <div className="relative  overflow-hidden rounded-lg p-8 shadow-lg h-full bg-white transition-all duration-500 group">
+        <div className="absolute h-[130px] w-[100px] bg-primary rounded-full top-[-75px] right-[-75px] z-0 transition-transform duration-500 group-hover:scale-[10]"></div>
 
-          <div className="relative z-10">
-            <div className=" font-bold text-[20px] mb-6 min-h-[57px] group-hover:text-white overflow-hidden">
-              {title}
-            </div>
-            <span className="font-bold transition-colors text-gray-500 duration-500 group-hover:text-white">
-              {description}
-            </span>
+        <div className="relative z-10">
+          <div className=" font-bold text-[20px] flex mb-5 gap-2 items-center min-h-[57px] group-hover:text-white overflow-hidden">
+            <div className=" bg-primary rounded-full ">{icon}</div>
+            {title}
           </div>
-        </div>
-        <div className="absolute -bottom-4 -left-10 opacity-20 group-hover:text-white text-primary">
-          {icon}
+          <span className=" transition-colors text-gray-500 duration-500 group-hover:text-white">
+            {description}
+          </span>
         </div>
       </div>
     </motion.div>
@@ -128,10 +124,13 @@ export default function ExpertiseSection() {
   ];
 
   return (
-    <section ref={containerRef} className="p-[5%] relative  ">
+    <section
+      ref={containerRef}
+      className="lg:p-[5%] px-[2%] py-[10%] relative text-black/80 "
+    >
       <div className="absolute inset-0 z-0 bg-[url('/bg-pattern.png')] bg-cover bg-center opacity-30"></div>
 
-      <div className=" container px-4 space-x-4 space-y-16  mx-auto md:px-6">
+      <div className=" container ">
         <motion.div
           className="flex flex-col items-center gap-4 text-center"
           initial={{ opacity: 0, y: 100 }}
@@ -139,7 +138,7 @@ export default function ExpertiseSection() {
           transition={{ duration: 0.6 }}
         >
           <Badge variant="outline">Our Features</Badge>
-          <h2 className="max-w-2xl text-4xl font-extrabold md:text-5xl">
+          <h2 className="max-w-2xl text-4xl font-extrabold md:text-5xl text-black/80">
             {" "}
             Experts In The World
             <br />

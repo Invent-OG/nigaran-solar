@@ -147,7 +147,9 @@ export function AnimatedTestimonials({
     <section
       ref={sectionRef}
       id="testimonials"
-      className={`p-[5%] container overflow-hidden ${className || ""}`}
+      className={`lg:p-[5%] px-[2%] py-[10%] container overflow-hidden ${
+        className || ""
+      }`}
     >
       <div className="px-4 md:px-6">
         <motion.div
@@ -163,12 +165,12 @@ export function AnimatedTestimonials({
           >
             <div className="space-y-6">
               {badgeText && (
-                <div className="inline-flex items-center px-3 py-1 text-sm font-medium  bg-primary/10 text-primary">
+                <div className="inline-flex items-center px-3 py-1 text-sm font-medium rounded-full bg-primary/10 text-primary">
                   <Star className="mr-1 h-3.5 w-3.5 fill-primary" />
                   <span>{badgeText}</span>
                 </div>
               )}
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
+              <h2 className="max-w-2xl text-4xl font-extrabold md:text-5xl text-black/80">
                 {title}
               </h2>
               <p className="max-w-[600px] text-muted-foreground md:text-xl/relaxed">

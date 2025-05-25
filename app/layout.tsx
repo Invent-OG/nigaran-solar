@@ -1,14 +1,12 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Outfit } from "next/font/google";
 import { Providers } from "./providers";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import { LenisProvider } from "@/components/LenisProvider";
-import Image from "next/image";
-import SplashScreen from "@/components/SplashScreen";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const inter = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
 
 export const metadata: Metadata = {
   title:

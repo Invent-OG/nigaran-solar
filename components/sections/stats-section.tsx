@@ -129,7 +129,7 @@ const StatCard = ({
           className
         )}
       >
-        <div className="absolute opacity-30 -bottom-3 -left-5 text-primary">
+        <div className="absolute opacity-10 -bottom-3 -left-5 text-primary">
           {icon}
         </div>
         <div
@@ -166,7 +166,7 @@ export default function StatsSection() {
   ];
 
   return (
-    <section className="relative py-16 md:py-24 bg-primary px-[15%]">
+    <section className="relative py-16 md:py-24 bg-gradient-to-br from-primary via-[#58b03f] to-[#397628] px-[15%]">
       <div className="z-20 grid grid-cols-1 gap-10 md:grid-cols-3">
         {stats.map((stat, index) => (
           <StatCard
