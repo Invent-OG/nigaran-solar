@@ -132,7 +132,7 @@ export default function ConsultationPage() {
   }, [emblaApi]);
 
   return (
-    <div className="relative min-h-screen px-4 pb-[50%] lg:py-[8%] sm:px-8 md:px-12 lg:px-20 overflow-hidden">
+    <div className="relative min-h-screen px-4 pb-[50%] pt-[20%] lg:py-[8%]  md:px-12 lg:px-20 overflow-hidden">
       <RippleBackground />
 
       <section className="relative container mx-auto mt-12 sm:mt-20 pb-20 z-10">

@@ -109,12 +109,14 @@ export default function LeadForm({ type, description, title }: LeadFormProps) {
                 name="companyName"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-white">Company Name</FormLabel>
+                    <FormLabel className="text-black/ lg:text-white">
+                      Company Name
+                    </FormLabel>
                     <FormControl>
                       <Input
                         {...field}
                         placeholder="Enter company name"
-                        className="bg-white/20 backdrop-blur-sm border border-white/30 text-white placeholder-white/60"
+                        className="bg-white/20 backdrop-blur-sm border border-white/30 text-black/ lg:text-white placeholder-white/60"
                       />
                     </FormControl>
                     <FormMessage />
@@ -128,12 +130,14 @@ export default function LeadForm({ type, description, title }: LeadFormProps) {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-white">Name</FormLabel>
+                  <FormLabel className="text-black/ lg:text-white">
+                    Name
+                  </FormLabel>
                   <FormControl>
                     <Input
                       {...field}
                       placeholder="Enter your name"
-                      className="bg-white/20 backdrop-blur-sm border border-white/30 text-white placeholder-white/60"
+                      className="bg-white/20 backdrop-blur-sm border border-white/30 text-black/ lg:text-white placeholder-white/60"
                     />
                   </FormControl>
                   <FormMessage />
@@ -146,12 +150,14 @@ export default function LeadForm({ type, description, title }: LeadFormProps) {
               name="whatsappNumber"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-white">WhatsApp Number</FormLabel>
+                  <FormLabel className="text-black/ lg:text-white">
+                    WhatsApp Number
+                  </FormLabel>
                   <FormControl>
                     <Input
                       {...field}
                       placeholder="Enter your WhatsApp number"
-                      className="bg-white/20 backdrop-blur-sm border border-white/30 text-white placeholder-white/60"
+                      className="bg-white/20 backdrop-blur-sm border border-white/30 text-black/ lg:text-white placeholder-white/60"
                     />
                   </FormControl>
                   <FormMessage />
@@ -164,7 +170,7 @@ export default function LeadForm({ type, description, title }: LeadFormProps) {
               name="electricityBill"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-white">
+                  <FormLabel className="text-black/ lg:text-white">
                     {type === "commercial" ? "Monthly" : "Bi-Monthly"}{" "}
                     Electricity Bill (₹)
                   </FormLabel>
@@ -174,7 +180,7 @@ export default function LeadForm({ type, description, title }: LeadFormProps) {
                       {...field}
                       onChange={(e) => field.onChange(Number(e.target.value))}
                       placeholder="Enter your electricity bill amount"
-                      className="bg-white/20 backdrop-blur-sm border border-white/30 text-white placeholder-white/60"
+                      className="bg-white/20 backdrop-blur-sm border border-white/30 text-black/ lg:text-white placeholder-white/60"
                     />
                   </FormControl>
                   <FormMessage />
@@ -187,12 +193,14 @@ export default function LeadForm({ type, description, title }: LeadFormProps) {
               name="city"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-white">City</FormLabel>
+                  <FormLabel className="text-black/ lg:text-white">
+                    City
+                  </FormLabel>
                   <FormControl>
                     <Input
                       {...field}
                       placeholder="Enter your city"
-                      className="bg-white/20 backdrop-blur-sm border border-white/30 text-white placeholder-white/60"
+                      className="bg-white/20 backdrop-blur-sm border border-white/30 text-black/ lg:text-white placeholder-white/60"
                     />
                   </FormControl>
                   <FormMessage />

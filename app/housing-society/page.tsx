@@ -51,7 +51,7 @@ export default function HousingSocietyPage() {
             <h2 className="text-2xl font-bold mb-6 text-center">
               Get Your Free Quote
             </h2>
-            <LeadForm type="housing_society" />
+            <LeadForm type="housing_society" title={""} description={""} />
           </motion.div>
         </div>
       </section>
