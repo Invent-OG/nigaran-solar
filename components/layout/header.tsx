@@ -48,7 +48,7 @@ const navItems: NavItem[] = [
 
       { label: "Housing society", href: "/housing-society", icon: HomeIcon },
 
-      { label: "Solar Subsidy", href: "/subsidy", icon: DollarSign },
+      // { label: "Solar Subsidy", href: "/subsidy", icon: DollarSign },
     ],
   },
 
