@@ -4,7 +4,7 @@ import { Battery, Home, Zap } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
-import Spline from "@splinetool/react-spline";
+
 import Image from "next/image";
 
 interface TabContent {
