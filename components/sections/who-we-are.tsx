@@ -31,6 +31,7 @@ export default function WhoWeAre() {
               alt="Solar Panels"
               width={500}
               height={500}
+              loading="lazy"
               className="rounded-xl z-10 w-[450px] h-[450px]  object-cover"
             />
 
@@ -55,6 +56,7 @@ export default function WhoWeAre() {
               src="https://images.unsplash.com/photo-1719559519300-e9d2c2bf6de1?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt="Solar Panels Small"
               width={250}
+              loading="lazy"
               height={250}
               className="rounded-2xl z-20 absolute w-[200px] h-[200px] md:w-[250px] md:h-[250px] -bottom-20 -right-6 md:-bottom-1/6 md:-right-1/4 border-[#f8f8f8] border-8  object-cover"
             />
