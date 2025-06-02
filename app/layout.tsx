@@ -2,8 +2,10 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
 import { Providers } from "./providers";
-import ClientLayout from "@/components/ClientLayout";
+import Header from "@/components/layout/header";
+import Footer from "@/components/layout/footer";
 import { LenisProvider } from "@/components/LenisProvider";
+import ClientLayout from "@/components/ClientLayout";
 
 const inter = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
 
