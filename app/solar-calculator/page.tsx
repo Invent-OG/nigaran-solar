@@ -28,22 +28,11 @@ import {
   Clock,
   BarChart,
   Lightbulb,
-  FileText,
   IndianRupee,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/pagination";
-import { ShootingStars } from "@/components/ui/shooting-stars";
 import RippleBackground from "@/components/RippleBackground";
-
-const images = [
-  "https://images.pexels.com/photos/9875364/pexels-photo-9875364.jpeg",
-  "https://images.pexels.com/photos/2800832/pexels-photo-2800832.jpeg",
-  "https://images.pexels.com/photos/4215110/pexels-photo-4215110.jpeg",
-];
+import { ShootingStars } from "@/components/ui/shooting-stars";
 
 export default function SolarCalculatorPage() {
   const [monthlyBill, setMonthlyBill] = useState<number>(0);
@@ -310,137 +299,6 @@ export default function SolarCalculatorPage() {
         </section>
       )}
 
-      {/* About Section */}
-      <section className="py-16 bg-muted/30">
-        <div className="container">
-          <motion.div
-            className="flex flex-col items-center gap-4 text-center mb-12"
-            initial={{ opacity: 0, y: 100 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <Badge variant="outline">About Our Calculator</Badge>
-            <h2 className="max-w-2xl text-4xl font-extrabold md:text-5xl text-black/80">
-              Calculate Your Solar Savings
-            </h2>
-            <div className="w-20 h-1 mx-auto mb-6 bg-primary"></div>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              Before making the decision to go solar, use our solar savings
-              calculator to get a detailed estimate of how much you can save on
-              your electricity bills. By inputting your energy usage, roof size, and
-              location, our tool helps you understand the potential savings, ROI, and
-              payback period for your solar installation.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-12">
-            {/* Features */}
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="space-y-6"
-            >
-              <h3 className="text-2xl font-bold">Features of the Solar Calculator</h3>
-              <ul className="space-y-4">
-                <li className="flex items-start gap-3">
-                  <div className="p-1 mt-1 rounded-full bg-primary/20">
-                    <CheckCircle className="h-4 w-4 text-primary" />
-                  </div>
-                  <p><span className="font-semibold">Instant Results:</span> Get an estimate instantly based on your energy data.</p>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="p-1 mt-1 rounded-full bg-primary/20">
-                    <CheckCircle className="h-4 w-4 text-primary" />
-                  </div>
-                  <p><span className="font-semibold">Customized Estimates:</span> Tailored to your specific energy consumption and geographical location.</p>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="p-1 mt-1 rounded-full bg-primary/20">
-                    <CheckCircle className="h-4 w-4 text-primary" />
-                  </div>
-                  <p><span className="font-semibold">Easy to Use:</span> Simple interface that requires just a few details to calculate your potential savings.</p>
-                </li>
-              </ul>
-
-              <h3 className="text-2xl font-bold mt-8">Why Do You Need a Solar Calculator?</h3>
-              <ul className="space-y-4">
-                <li className="flex items-start gap-3">
-                  <div className="p-1 mt-1 rounded-full bg-primary/20">
-                    <CheckCircle className="h-4 w-4 text-primary" />
-                  </div>
-                  <p>People are often unsure of the exact costs and savings they would get from installing solar power systems, especially when trying to estimate their energy needs.</p>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="p-1 mt-1 rounded-full bg-primary/20">
-                    <CheckCircle className="h-4 w-4 text-primary" />
-                  </div>
-                  <p>Without a clear understanding of how much energy they use and how solar can offset their costs, customers may be hesitant to invest in solar.</p>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="p-1 mt-1 rounded-full bg-primary/20">
-                    <CheckCircle className="h-4 w-4 text-primary" />
-                  </div>
-                  <p>The Solar Calculator helps prospective solar customers quickly calculate their potential savings, costs, and system size requirements before they make a decision.</p>
-                </li>
-              </ul>
-            </motion.div>
-
-            {/* Uses and Benefits */}
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="space-y-6"
-            >
-              <h3 className="text-2xl font-bold">Uses</h3>
-              <ul className="space-y-4">
-                <li className="flex items-start gap-3">
-                  <div className="p-1 mt-1 rounded-full bg-primary/20">
-                    <CheckCircle className="h-4 w-4 text-primary" />
-                  </div>
-                  <p><span className="font-semibold">Estimate Savings:</span> You can use the Solar Calculator to estimate how much money you could save on your electricity bill by installing solar panels.</p>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="p-1 mt-1 rounded-full bg-primary/20">
-                    <CheckCircle className="h-4 w-4 text-primary" />
-                  </div>
-                  <p><span className="font-semibold">Determine System Size:</span> The calculator helps you figure out the right size of solar system needed based on your home or business&apos;s energy consumption.</p>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="p-1 mt-1 rounded-full bg-primary/20">
-                    <CheckCircle className="h-4 w-4 text-primary" />
-                  </div>
-                  <p><span className="font-semibold">Cost Projection:</span> It provides a clear cost breakdown, helping users understand installation costs, payback period, and long-term savings.</p>
-                </li>
-              </ul>
-
-              <h3 className="text-2xl font-bold mt-8">Benefits</h3>
-              <ul className="space-y-4">
-                <li className="flex items-start gap-3">
-                  <div className="p-1 mt-1 rounded-full bg-primary/20">
-                    <CheckCircle className="h-4 w-4 text-primary" />
-                  </div>
-                  <p><span className="font-semibold">Quick and Accurate Estimates:</span> Get an instant understanding of how much you can save and what system size is right for you.</p>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="p-1 mt-1 rounded-full bg-primary/20">
-                    <CheckCircle className="h-4 w-4 text-primary" />
-                  </div>
-                  <p><span className="font-semibold">Customizable:</span> Input your monthly electricity usage, roof size, and location, and get a personalized solar plan.</p>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="p-1 mt-1 rounded-full bg-primary/20">
-                    <CheckCircle className="h-4 w-4 text-primary" />
-                  </div>
-                  <p><span className="font-semibold">Financial Clarity:</span> Provides a detailed financial overview, helping you plan for solar installation and understand your long-term savings and ROI.</p>
-                </li>
-              </ul>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
       {/* How It Works Section */}
       <section className="py-16 bg-background">
         <div className="container">
@@ -463,7 +321,7 @@ export default function SolarCalculatorPage() {
                 step: "01",
                 title: "Input Your Details",
                 description: "Enter basic details such as your monthly electricity usage, location, and roof size.",
-                icon: <FileText className="h-10 w-10 text-primary" />
+                icon: <Calculator className="h-10 w-10 text-primary" />
               },
               {
                 step: "02",
@@ -475,13 +333,13 @@ export default function SolarCalculatorPage() {
                 step: "03",
                 title: "Estimate Costs and Savings",
                 description: "The tool will provide an estimate of the installation cost, savings on electricity bills, and the payback period.",
-                icon: <Calculator className="h-10 w-10 text-primary" />
+                icon: <IndianRupee className="h-10 w-10 text-primary" />
               },
               {
                 step: "04",
                 title: "Account for Incentives",
                 description: "It factors in available government incentives and rebates to give you an accurate idea of the final price.",
-                icon: <IndianRupee className="h-10 w-10 text-primary" />
+                icon: <Lightbulb className="h-10 w-10 text-primary" />
               },
             ].map((step, index) => (
               <motion.div
