@@ -16,6 +16,8 @@ import {
   Newspaper,
   ShieldCheck,
   HomeIcon,
+  Zap,
+  Battery,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -51,7 +53,15 @@ const navItems: NavItem[] = [
       // { label: "Solar Subsidy", href: "/subsidy", icon: DollarSign },
     ],
   },
-
+  {
+    label: "Services",
+    href: "#",
+    submenu: [
+       { label: "On-Grid Solar", href: "/on-grid-solar", icon: Zap },
+      { label: "Off-Grid Solar", href: "/off-grid-solar", icon: Battery },
+    ]
+  },
+  
   { label: "Contact", href: "/contact" },
   {
     label: "More",
