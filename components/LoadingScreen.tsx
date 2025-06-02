@@ -20,6 +20,7 @@ export default function LoadingScreen({
   minLoadingTime = 1000,
 }: LoadingScreenProps) {
   const [loading, setLoading] = useState(true);
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     const startTime = Date.now();
@@ -29,6 +30,9 @@ export default function LoadingScreen({
     // Function to check if we can finish loading
     const checkLoadingComplete = () => {
       const elapsedTime = Date.now() - startTime;
+      
+      // Update progress
+      setProgress(Math.min(100, (imagesLoaded / totalImages) * 100));
       
       // Only complete loading if minimum time has passed AND all images are loaded
       if (elapsedTime >= minLoadingTime && imagesLoaded === totalImages) {
@@ -46,6 +50,7 @@ export default function LoadingScreen({
       };
       img.onerror = () => {
         // Count error as loaded to avoid hanging
+        console.warn(`Failed to load image: ${src}`);
         imagesLoaded++;
         checkLoadingComplete();
       };
@@ -56,7 +61,17 @@ export default function LoadingScreen({
       checkLoadingComplete();
     }, minLoadingTime);
 
-    return () => clearTimeout(timer);
+    // Animate progress even if no images are loaded yet
+    const progressTimer = setInterval(() => {
+      if (imagesLoaded === 0) {
+        setProgress((prev) => Math.min(prev + 5, 90)); // Cap at 90% until actual loading completes
+      }
+    }, 200);
+
+    return () => {
+      clearTimeout(timer);
+      clearInterval(progressTimer);
+    };
   }, [imagesToPreload, minLoadingTime]);
 
   return (
@@ -92,14 +107,17 @@ export default function LoadingScreen({
             >
               Nigaran Solar
             </motion.h1>
-            <div className="w-48 h-1 bg-white/20 rounded-full overflow-hidden">
+            <div className="w-64 h-2 bg-white/20 rounded-full overflow-hidden">
               <motion.div
                 className="h-full bg-white"
                 initial={{ width: "0%" }}
-                animate={{ width: "100%" }}
-                transition={{ duration: 1.5, ease: "easeInOut" }}
+                animate={{ width: `${progress}%` }}
+                transition={{ duration: 0.3 }}
               />
             </div>
+            <p className="mt-2 text-white/80 text-sm">
+              {progress < 100 ? "Loading..." : "Ready"}
+            </p>
           </motion.div>
         </motion.div>
       ) : (
