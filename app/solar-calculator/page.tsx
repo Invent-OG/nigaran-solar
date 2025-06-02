@@ -37,6 +37,7 @@ import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import { ShootingStars } from "@/components/ui/shooting-stars";
+import RippleBackground from "@/components/RippleBackground";
 
 const images = [
   "https://images.pexels.com/photos/9875364/pexels-photo-9875364.jpeg",
@@ -95,28 +96,8 @@ export default function SolarCalculatorPage() {
   return (
     <div className="min-h-screen pt-20">
       {/* Hero Section */}
-      <section className="relative lg:h-[80vh] flex items-center">
-        <div className="absolute inset-0 z-0">
-          <Swiper
-            modules={[Autoplay, Pagination]}
-            autoplay={{ delay: 5000, disableOnInteraction: false }}
-            loop
-            pagination={{ clickable: true }}
-            className="w-full h-full"
-          >
-            {images.map((src, index) => (
-              <SwiperSlide key={index}>
-                <img
-                  src={src}
-                  alt={`Slide ${index + 1}`}
-                  className="object-cover w-full h-full"
-                />
-                <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50" />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
-
+      <section className="relative min-h-[80vh] flex items-center">
+        <RippleBackground />
         <div className="container relative z-10 flex flex-col items-center justify-between w-full gap-10 py-10 lg:flex-row lg:p-0">
           <motion.div
             initial={{ opacity: 0, y: 100 }}
@@ -137,7 +118,7 @@ export default function SolarCalculatorPage() {
             initial={{ opacity: 0, y: 100 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="lg:w-[40%] bg-white/10 backdrop-blur-md p-6 rounded-lg border border-white/30"
+            className="w-full lg:w-[40%] bg-white/10 backdrop-blur-md p-6 rounded-lg border border-white/30"
           >
             <h3 className="text-xl font-semibold text-white mb-4">Solar Calculator</h3>
             <div className="space-y-4">
@@ -524,14 +505,35 @@ export default function SolarCalculatorPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-primary text-primary-foreground">
-        <div className="container">
+      <section className="relative py-16 overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-primary"></div>
+          {/* Multiple shooting star layers with different colors and speeds */}
+          <ShootingStars
+            starColor="#9E00FF"
+            trailColor="#2EB9DF"
+            minSpeed={15}
+            maxSpeed={35}
+            minDelay={1000}
+            maxDelay={3000}
+          />
+          <ShootingStars
+            starColor="#FF0099"
+            trailColor="#FFB800"
+            minSpeed={10}
+            maxSpeed={25}
+            minDelay={2000}
+            maxDelay={4000}
+          />
+        </div>
+        
+        <div className="container relative z-10">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
-              className="md:w-2/3"
+              className="md:w-2/3 text-white"
             >
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
                 Ready to Start Your Solar Journey?
