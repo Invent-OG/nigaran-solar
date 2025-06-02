@@ -5,8 +5,6 @@ import { Providers } from "./providers";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import { LenisProvider } from "@/components/LenisProvider";
-import LoadingScreen from "@/components/LoadingScreen";
-import { usePathname } from "next/navigation";
 
 const inter = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
 
@@ -32,36 +30,11 @@ export default function RootLayout({
       <body className={`${inter.variable} font-sans`}>
         <Providers>
           <LenisProvider />
-          <ClientLayout>{children}</ClientLayout>
+          <Header />
+          <main>{children}</main>
+          <Footer />
         </Providers>
       </body>
     </html>
-  );
-}
-
-// Client component to handle pathname check
-"use client";
-
-function ClientLayout({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname();
-  const isAdminPage = pathname?.startsWith("/admin");
-
-  // Skip loading screen for admin pages
-  if (isAdminPage) {
-    return (
-      <>
-        <Header />
-        <main>{children}</main>
-        <Footer />
-      </>
-    );
-  }
-
-  return (
-    <LoadingScreen>
-      <Header />
-      <main>{children}</main>
-      <Footer />
-    </LoadingScreen>
   );
 }
