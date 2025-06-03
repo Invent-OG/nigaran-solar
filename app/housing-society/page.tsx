@@ -54,10 +54,13 @@ electricity costs for eco-friendly housing societies."
           >
             {images.map((src, index) => (
               <SwiperSlide key={index}>
-                <img
+                <Image
                   src={src}
                   alt={`Slide ${index + 1}`}
-                  className="object-cover w-full h-full"
+                  fill
+                  className="object-cover"
+                  priority
+                  sizes="100vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50" />
               </SwiperSlide>
@@ -160,10 +163,14 @@ electricity costs for eco-friendly housing societies."
             <div className="grid gap-6 md:grid-cols-3">
               {/* Card 1 */}
               <div className="relative flex flex-col justify-between overflow-hidden text-center transition-shadow duration-300 bg-white rounded-lg shadow-lg group hover:shadow-xl">
-                <img
+                <Image
                   src="https://images.pexels.com/photos/1108101/pexels-photo-1108101.jpeg"
                   alt="Lower Bills"
+                  width={600}
+                  height={400}
                   className="object-cover w-full transition-all duration-500 h-1/2 group-hover:scale-105"
+                  placeholder="blur"
+                  blurDataURL="/placeholder.png"
                 />
                 <div className="absolute right-[40%]  top-[40%] shadow-lg p-6 rounded-full bg-primary">
                   <PiggyBank className="w-8 h-8 text-white" />
@@ -181,10 +188,14 @@ electricity costs for eco-friendly housing societies."
 
               {/* Card 2 */}
               <div className="relative flex flex-col justify-between overflow-hidden text-center transition-shadow duration-300 bg-white rounded-lg shadow-lg group hover:shadow-xl">
-                <img
+                <Image
                   src="https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg"
                   alt="Property Value"
+                  width={600}
+                  height={400}
                   className="object-cover w-full transition-all duration-500 h-1/2 group-hover:scale-105"
+                  placeholder="blur"
+                  blurDataURL="/placeholder.png"
                 />
                 <div className="absolute right-[40%]  top-[40%] shadow-lg p-6 rounded-full bg-primary">
                   <Home className="w-8 h-8 text-white" />
@@ -202,10 +213,14 @@ electricity costs for eco-friendly housing societies."
 
               {/* Card 3 */}
               <div className="relative flex flex-col justify-between overflow-hidden text-center transition-shadow duration-300 bg-white rounded-lg shadow-lg group hover:shadow-xl">
-                <img
+                <Image
                   src="https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg"
                   alt="Community Engagement"
+                  width={600}
+                  height={400}
                   className="object-cover w-full transition-all duration-500 h-1/2 group-hover:scale-105"
+                  placeholder="blur"
+                  blurDataURL="/placeholder.png"
                 />
 
                 <div className="absolute right-[40%]  top-[40%] shadow-lg p-6 rounded-full bg-primary">

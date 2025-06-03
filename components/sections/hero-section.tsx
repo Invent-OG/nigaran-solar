@@ -35,10 +35,7 @@ export default function HeroSection() {
             src="https://mfnxruiqgdjqskbdthba.supabase.co/storage/v1/object/public/videos//hero-video.mp4"
             type="video/webm"
           /> */}
-          <source
-            src="https://mfnxruiqgdjqskbdthba.supabase.co/storage/v1/object/public/videos//hero-video%20(4)%20(1).mp4"
-            type="video/mp4"
-          />
+          <source src="/videos/hero-video.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
 
