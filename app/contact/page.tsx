@@ -13,6 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import Head from "next/head";
 
 export default function ContactPage() {
   const [lookingFor, setLookingFor] = useState("");
@@ -25,6 +26,20 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen pt-20">
+      {/* Meta Information */}
+      <Head>
+        <title>
+          Contact Nigaran Solar | Solar Energy Solutions in Coimbatore
+        </title>
+        <meta
+          name="description"
+          content="Get in touch with Nigaran Solar for expert solar consultation, installation, and solar solutions in Coimbatore and Tamil Nadu. Contact us today to start your journey to energy independence with solar power."
+        />
+        <meta
+          name="keywords"
+          content="Contact Nigaran Solar, solar consultation, solar energy Coimbatore, solar panel installation Coimbatore, get free solar consultation, solar installation Tamil Nadu"
+        />
+      </Head>
       <section className="py-16 md:py-24 bg-background">
         <div className="container">
           <motion.div {...fadeInUp()} className="text-center mb-12">

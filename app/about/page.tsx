@@ -73,15 +73,15 @@ export default function AboutPage() {
       {/* Meta Information */}
       <Head>
         <title>
-          About Nigaran Solar | Leading Solar Company in Coimbatore, Tamil Nadu
+About Nigaran Solar | Leading Solar Company in Coimbatore, Tamil Nadu
         </title>
         <meta
           name="description"
-          content="Nigaran Solar is a trusted solar company in Coimbatore..."
+          content="Nigaran Solar is a trusted solar company in Coimbatore, offering affordable and efficient solar power systems for homes and businesses across Tamil Nadu. Learn about our mission to provide sustainable solar solutions."
         />
         <meta
           name="keywords"
-          content="solar company Coimbatore, solar power systems..."
+          content="solar company Coimbatore, solar power systems, trusted solar partner, solar solutions Tamil Nadu, solar energy provider, solar panel installation Coimbatore"
         />
       </Head>
 

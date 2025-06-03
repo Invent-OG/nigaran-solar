@@ -5,19 +5,19 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { 
-  ArrowRight, 
-  Users, 
-  Wallet, 
-  Trophy, 
-  BadgeCheck, 
-  Home, 
-  Briefcase, 
-  DollarSign, 
-  ShieldCheck, 
-  Eye, 
+import {
+  ArrowRight,
+  Users,
+  Wallet,
+  Trophy,
+  BadgeCheck,
+  Home,
+  Briefcase,
+  DollarSign,
+  ShieldCheck,
+  Eye,
   Zap,
-  Newspaper
+  Newspaper,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import LeadForm from "@/components/forms/lead-form";
@@ -26,6 +26,7 @@ import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import { ShootingStars } from "@/components/ui/shooting-stars";
+import Head from "next/head";
 
 const images = [
   "https://images.pexels.com/photos/2800832/pexels-photo-2800832.jpeg",
@@ -36,6 +37,22 @@ const images = [
 export default function SolarProPage() {
   return (
     <div className="min-h-screen pt-20">
+      {/* Meta Information */}
+      <Head>
+        <title>
+          Become a Solar Pro | Partner with Nigaran Solar | Solar Installer
+          Program
+        </title>
+        <meta
+          name="description"
+          content="Join Nigaran Solar Pro Program - Our exclusive referral program.
+Here you can earn rewards after every successful solar installation process that you refer."
+        />
+        <meta
+          name="keywords"
+          content="Contact Nigaran Solar, solar consultation, solar energy Coimbatore, solar panel installation Coimbatore, get free solar consultation, solar installation Tamil Nadu"
+        />
+      </Head>
       {/* Hero Section */}
       <section className="relative lg:h-[80vh] flex items-center">
         <div className="absolute inset-0 z-0">
@@ -70,7 +87,8 @@ export default function SolarProPage() {
               Become a <span className="text-primary">Nigaran Solar Pro</span>
             </h1>
             <p className="mb-8 text-lg md:text-xl text-white/90">
-              Join our network of solar professionals and earn rewards while helping others transition to clean energy.
+              Join our network of solar professionals and earn rewards while
+              helping others transition to clean energy.
             </p>
           </motion.div>
 
@@ -81,21 +99,46 @@ export default function SolarProPage() {
             transition={{ duration: 0.5 }}
             className="lg:w-[40%] bg-white/10 backdrop-blur-md p-6 rounded-lg border border-white/30"
           >
-            <h3 className="text-xl font-semibold text-white mb-4">Join Our Network</h3>
+            <h3 className="text-xl font-semibold text-white mb-4">
+              Join Our Network
+            </h3>
             <form className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <Input placeholder="First Name" className="bg-white/20 backdrop-blur-sm border border-white/30 text-white placeholder-white/60" />
+                  <Input
+                    placeholder="First Name"
+                    className="bg-white/20 backdrop-blur-sm border border-white/30 text-white placeholder-white/60"
+                  />
                 </div>
                 <div>
-                  <Input placeholder="Last Name" className="bg-white/20 backdrop-blur-sm border border-white/30 text-white placeholder-white/60" />
+                  <Input
+                    placeholder="Last Name"
+                    className="bg-white/20 backdrop-blur-sm border border-white/30 text-white placeholder-white/60"
+                  />
                 </div>
               </div>
-              <Input type="email" placeholder="Email Address" className="bg-white/20 backdrop-blur-sm border border-white/30 text-white placeholder-white/60" />
-              <Input type="tel" placeholder="Phone Number" className="bg-white/20 backdrop-blur-sm border border-white/30 text-white placeholder-white/60" />
-              <Input placeholder="Location" className="bg-white/20 backdrop-blur-sm border border-white/30 text-white placeholder-white/60" />
-              <Input placeholder="Profession" className="bg-white/20 backdrop-blur-sm border border-white/30 text-white placeholder-white/60" />
-              <Textarea placeholder="Why do you want to join?" className="bg-white/20 backdrop-blur-sm border border-white/30 text-white placeholder-white/60" />
+              <Input
+                type="email"
+                placeholder="Email Address"
+                className="bg-white/20 backdrop-blur-sm border border-white/30 text-white placeholder-white/60"
+              />
+              <Input
+                type="tel"
+                placeholder="Phone Number"
+                className="bg-white/20 backdrop-blur-sm border border-white/30 text-white placeholder-white/60"
+              />
+              <Input
+                placeholder="Location"
+                className="bg-white/20 backdrop-blur-sm border border-white/30 text-white placeholder-white/60"
+              />
+              <Input
+                placeholder="Profession"
+                className="bg-white/20 backdrop-blur-sm border border-white/30 text-white placeholder-white/60"
+              />
+              <Textarea
+                placeholder="Why do you want to join?"
+                className="bg-white/20 backdrop-blur-sm border border-white/30 text-white placeholder-white/60"
+              />
               <Button className="w-full bg-white text-black hover:bg-white/90">
                 Submit Application
                 <ArrowRight className="ml-2 h-4 w-4" />
@@ -126,7 +169,8 @@ export default function SolarProPage() {
               {
                 icon: <Wallet className="h-8 w-8" />,
                 title: "Earn Rewards",
-                description: "Attractive commissions for every successful referral",
+                description:
+                  "Attractive commissions for every successful referral",
               },
               {
                 icon: <Users className="h-8 w-8" />,
@@ -229,7 +273,7 @@ export default function SolarProPage() {
               }
             }
           `}</style>
-          
+
           <motion.div
             className="flex flex-col items-center gap-4 text-center text-white"
             initial={{ opacity: 0, y: 100 }}
@@ -249,25 +293,33 @@ export default function SolarProPage() {
             <li className="flex items-start gap-4">
               <Home className="w-6 h-6 text-primary mt-1" />
               <span>
-                <strong className="text-white">Homeowners or customers</strong> who&apos;ve already installed solar
+                <strong className="text-white">Homeowners or customers</strong>{" "}
+                who&apos;ve already installed solar
               </span>
             </li>
             <li className="flex items-start gap-4">
               <Briefcase className="w-6 h-6 text-primary mt-1" />
               <span>
-                <strong className="text-white">Electricians, plumbers, and local service providers</strong> with customer networks
+                <strong className="text-white">
+                  Electricians, plumbers, and local service providers
+                </strong>{" "}
+                with customer networks
               </span>
             </li>
             <li className="flex items-start gap-4">
               <Users className="w-6 h-6 text-primary mt-1" />
               <span>
-                <strong className="text-white">Real estate agents and housing society managers</strong> with property connections
+                <strong className="text-white">
+                  Real estate agents and housing society managers
+                </strong>{" "}
+                with property connections
               </span>
             </li>
             <li className="flex items-start gap-4">
               <Newspaper className="w-6 h-6 text-primary mt-1" />
               <span>
-                <strong className="text-white">Influencers or bloggers</strong> in the home improvement niche
+                <strong className="text-white">Influencers or bloggers</strong>{" "}
+                in the home improvement niche
               </span>
             </li>
           </ul>
@@ -295,20 +347,21 @@ export default function SolarProPage() {
               {
                 step: "01",
                 title: "Sign Up",
-                description: "Complete the registration form to join our network",
-                icon: <Users className="h-10 w-10 text-primary" />
+                description:
+                  "Complete the registration form to join our network",
+                icon: <Users className="h-10 w-10 text-primary" />,
               },
               {
                 step: "02",
                 title: "Refer",
                 description: "Share solar benefits with your network",
-                icon: <Zap className="h-10 w-10 text-primary" />
+                icon: <Zap className="h-10 w-10 text-primary" />,
               },
               {
                 step: "03",
                 title: "Earn",
                 description: "Get rewarded for successful installations",
-                icon: <DollarSign className="h-10 w-10 text-primary" />
+                icon: <DollarSign className="h-10 w-10 text-primary" />,
               },
             ].map((step, index) => (
               <motion.div
@@ -318,12 +371,16 @@ export default function SolarProPage() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="relative p-6 overflow-hidden transition duration-300 transform bg-white rounded-lg shadow-md hover:bg-primary hover:text-white hover:shadow-xl group"
               >
-                <div className="mb-4">
-                  {step.icon}
+                <div className="mb-4">{step.icon}</div>
+                <div className="text-4xl font-bold mb-4 text-primary group-hover:text-white">
+                  {step.step}
                 </div>
-                <div className="text-4xl font-bold mb-4 text-primary group-hover:text-white">{step.step}</div>
-                <h3 className="text-xl font-semibold mb-2 group-hover:text-white">{step.title}</h3>
-                <p className="text-muted-foreground group-hover:text-white">{step.description}</p>
+                <h3 className="text-xl font-semibold mb-2 group-hover:text-white">
+                  {step.title}
+                </h3>
+                <p className="text-muted-foreground group-hover:text-white">
+                  {step.description}
+                </p>
                 <div className="absolute inset-0 z-0 opacity-0 group-hover:opacity-40 transition-opacity duration-300 bg-[url('/bg-pattern.png')] pointer-events-none" />
               </motion.div>
             ))}
@@ -340,7 +397,9 @@ export default function SolarProPage() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <Badge variant="outline" className="bg-white/10 text-white">Why Choose Us</Badge>
+            <Badge variant="outline" className="bg-white/10 text-white">
+              Why Choose Us
+            </Badge>
             <h2 className="max-w-2xl text-4xl font-extrabold md:text-5xl">
               Why Refer with Nigaran Solar?
             </h2>
@@ -352,22 +411,26 @@ export default function SolarProPage() {
               {
                 icon: <ShieldCheck className="h-6 w-6" />,
                 title: "Trusted Brand",
-                description: "MNRE-approved solar company with 500+ successful installations",
+                description:
+                  "MNRE-approved solar company with 500+ successful installations",
               },
               {
                 icon: <Zap className="h-6 w-6" />,
                 title: "Faster Conversions",
-                description: "Dedicated team ensures your leads are followed up professionally",
+                description:
+                  "Dedicated team ensures your leads are followed up professionally",
               },
               {
                 icon: <Eye className="h-6 w-6" />,
                 title: "Transparent Tracking",
-                description: "You'll be notified at every stage — from lead to installation",
+                description:
+                  "You'll be notified at every stage — from lead to installation",
               },
               {
                 icon: <DollarSign className="h-6 w-6" />,
                 title: "Timely Payouts",
-                description: "Receive your commissions via UPI or bank transfer at right time",
+                description:
+                  "Receive your commissions via UPI or bank transfer at right time",
               },
             ].map((item, index) => (
               <motion.div
@@ -423,7 +486,7 @@ export default function SolarProPage() {
                 className="w-full h-full object-cover rounded-lg"
               />
             </motion.div>
-            
+
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -435,25 +498,37 @@ export default function SolarProPage() {
                   <div className="p-1 mt-1 rounded-full bg-primary/20">
                     <ArrowRight className="h-4 w-4 text-primary" />
                   </div>
-                  <p>As the solar energy market grows, more and more people are looking to adopt renewable energy solutions.</p>
+                  <p>
+                    As the solar energy market grows, more and more people are
+                    looking to adopt renewable energy solutions.
+                  </p>
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="p-1 mt-1 rounded-full bg-primary/20">
                     <ArrowRight className="h-4 w-4 text-primary" />
                   </div>
-                  <p>Many homeowners and businesses are interested in solar but need trustworthy guidance.</p>
+                  <p>
+                    Many homeowners and businesses are interested in solar but
+                    need trustworthy guidance.
+                  </p>
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="p-1 mt-1 rounded-full bg-primary/20">
                     <ArrowRight className="h-4 w-4 text-primary" />
                   </div>
-                  <p>The Solar Pro Referral Program helps spread awareness about solar energy while providing a way to earn commissions.</p>
+                  <p>
+                    The Solar Pro Referral Program helps spread awareness about
+                    solar energy while providing a way to earn commissions.
+                  </p>
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="p-1 mt-1 rounded-full bg-primary/20">
                     <ArrowRight className="h-4 w-4 text-primary" />
                   </div>
-                  <p>This program taps into the potential for earning income from helping others switch to a cleaner energy source.</p>
+                  <p>
+                    This program taps into the potential for earning income from
+                    helping others switch to a cleaner energy source.
+                  </p>
                 </li>
               </ul>
             </motion.div>
@@ -479,23 +554,37 @@ export default function SolarProPage() {
                 </h2>
                 <div className="w-20 h-1 bg-primary mb-6"></div>
               </div>
-              
+
               <ul className="space-y-4">
                 <li className="p-4 bg-card rounded-lg shadow-sm">
-                  <h3 className="font-semibold text-lg mb-2 text-primary">Referral Program</h3>
-                  <p className="text-muted-foreground">Earn commissions by referring customers who install with Nigaran Solar.</p>
+                  <h3 className="font-semibold text-lg mb-2 text-primary">
+                    Referral Program
+                  </h3>
+                  <p className="text-muted-foreground">
+                    Earn commissions by referring customers who install with
+                    Nigaran Solar.
+                  </p>
                 </li>
                 <li className="p-4 bg-card rounded-lg shadow-sm">
-                  <h3 className="font-semibold text-lg mb-2 text-primary">Income Opportunity</h3>
-                  <p className="text-muted-foreground">Share solar benefits with your network and get paid.</p>
+                  <h3 className="font-semibold text-lg mb-2 text-primary">
+                    Income Opportunity
+                  </h3>
+                  <p className="text-muted-foreground">
+                    Share solar benefits with your network and get paid.
+                  </p>
                 </li>
                 <li className="p-4 bg-card rounded-lg shadow-sm">
-                  <h3 className="font-semibold text-lg mb-2 text-primary">Spread Awareness</h3>
-                  <p className="text-muted-foreground">Promote the environmental and financial benefits of solar power.</p>
+                  <h3 className="font-semibold text-lg mb-2 text-primary">
+                    Spread Awareness
+                  </h3>
+                  <p className="text-muted-foreground">
+                    Promote the environmental and financial benefits of solar
+                    power.
+                  </p>
                 </li>
               </ul>
             </motion.div>
-            
+
             {/* Benefits */}
             <motion.div
               initial={{ opacity: 0, y: 50 }}
@@ -510,31 +599,43 @@ export default function SolarProPage() {
                 </h2>
                 <div className="w-20 h-1 bg-primary mb-6"></div>
               </div>
-              
+
               <ul className="space-y-4">
                 <li className="p-4 bg-card rounded-lg shadow-sm">
-                  <h3 className="font-semibold text-lg mb-2 text-primary">Earn Passive Income</h3>
-                  <p className="text-muted-foreground">Commission for every successful installation.</p>
+                  <h3 className="font-semibold text-lg mb-2 text-primary">
+                    Earn Passive Income
+                  </h3>
+                  <p className="text-muted-foreground">
+                    Commission for every successful installation.
+                  </p>
                 </li>
                 <li className="p-4 bg-card rounded-lg shadow-sm">
-                  <h3 className="font-semibold text-lg mb-2 text-primary">No Investment Required</h3>
+                  <h3 className="font-semibold text-lg mb-2 text-primary">
+                    No Investment Required
+                  </h3>
                   <p className="text-muted-foreground">Just refer and earn.</p>
                 </li>
                 <li className="p-4 bg-card rounded-lg shadow-sm">
-                  <h3 className="font-semibold text-lg mb-2 text-primary">Support Clean Energy</h3>
-                  <p className="text-muted-foreground">Help build a sustainable future.</p>
+                  <h3 className="font-semibold text-lg mb-2 text-primary">
+                    Support Clean Energy
+                  </h3>
+                  <p className="text-muted-foreground">
+                    Help build a sustainable future.
+                  </p>
                 </li>
                 <li className="p-4 bg-card rounded-lg shadow-sm">
-                  <h3 className="font-semibold text-lg mb-2 text-primary">Flexible Earning Potential</h3>
-                  <p className="text-muted-foreground">The more you refer, the more you earn.</p>
+                  <h3 className="font-semibold text-lg mb-2 text-primary">
+                    Flexible Earning Potential
+                  </h3>
+                  <p className="text-muted-foreground">
+                    The more you refer, the more you earn.
+                  </p>
                 </li>
               </ul>
             </motion.div>
           </div>
         </div>
       </section>
-
-    
     </div>
   );
 }

@@ -21,6 +21,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
+import Head from "next/head";
 
 const images = [
   "https://images.pexels.com/photos/2800832/pexels-photo-2800832.jpeg",
@@ -31,6 +32,22 @@ const images = [
 export default function HousingSocietyPage() {
   return (
     <div className="min-h-screen pt-20">
+      {/* Meta Information */}
+      <Head>
+        <title>
+          Affordable Residential Solar Panels in Coimbatore & Tamil Nadu |
+          Nigaran Solar
+        </title>
+        <meta
+          name="description"
+          content="Switch to affordable residential solar panels from Nigaran Solar. We offer efficient solar power systems for homes in Tamil Nadu with government subsidies and expert installation. Save on your electricity bills today!"
+        />
+        <meta
+          name="keywords"
+          content="residential solar panels, solar for home in Tamil Nadu, residential solar installation, solar rooftop installation Tamil Nadu, solar panel prices India, solar panels for homes"
+        />
+      </Head>
+
       {/* Hero Section */}
       <section className="relative lg:h-[80vh] flex items-center">
         <div className="absolute inset-0 z-0">

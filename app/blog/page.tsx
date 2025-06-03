@@ -12,6 +12,7 @@ import {
   Presentation as PresentationChart,
 } from "lucide-react";
 import { useBlogs } from "@/lib/queries/blogs";
+import Head from "next/head";
 
 export default function BlogPage() {
   const { data, isLoading, error } = useBlogs();
@@ -20,6 +21,21 @@ export default function BlogPage() {
 
   return (
     <div className="min-h-screen pt-20">
+      {/* Meta Information */}
+      <Head>
+        <title>
+          Solar Energy Blog | Solar Tips, News & Insights | Nigaran Solar
+        </title>
+        <meta
+          name="description"
+          content="Stay updated with the latest in solar energy. Explore tips, news, government schemes, and installation guides from Nigaran Solar's blog."
+        />
+        <meta
+          name="keywords"
+          content="Contact Nigaran Solar, solar consultation, solar energy Coimbatore, solar panel installation Coimbatore, get free solar consultation, solar installation Tamil Nadu"
+        />
+      </Head>
+
       {/* Hero Section */}
       <section className="py-16 md:py-24 bg-background">
         <div className="container">

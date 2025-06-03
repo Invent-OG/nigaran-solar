@@ -35,6 +35,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
+import Head from "next/head";
 
 const images = [
   "https://images.pexels.com/photos/2800832/pexels-photo-2800832.jpeg",
@@ -45,6 +46,23 @@ const images = [
 export default function CommercialPage() {
   return (
     <div className="min-h-screen pt-20">
+
+      {/* Meta Information */}
+      <Head>
+        <title>
+Commercial Solar Solutions in Coimbatore & Tamil Nadu | Nigaran Solar
+        </title>
+        <meta
+          name="description"
+          content="Reduce energy costs and improve sustainability with commercial solar solutions from Nigaran Solar. We offer customized solar systems for businesses in Coimbatore and Tamil Nadu. Start saving today with solar energy."
+        />
+        <meta
+          name="keywords"
+          content="commercial solar solutions, business solar panels, solar power systems Tamil Nadu, solar rooftop installation Tamil Nadu, solar for businesses, solar panel for commercial use Coimbatore."
+        />
+      </Head>
+
+
       {/* Hero Section */}
       <section className="relative lg:h-[80vh] flex items-center">
         <div className="absolute inset-0 z-0">

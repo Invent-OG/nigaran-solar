@@ -32,6 +32,7 @@ import {
   ReactPortal,
   PromiseLikeOfReactNode,
 } from "react";
+import Head from "next/head";
 
 const images = [
   "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg",
@@ -55,6 +56,22 @@ export default function CareersPage() {
 
   return (
     <div className="min-h-screen pt-20">
+      {/* Meta Information */}
+      <Head>
+        <title>
+          Join Our Team | Careers at Nigaran Solar | Solar Jobs in India
+        </title>
+        <meta
+          name="description"
+          content="Explore exciting solar energy careers with Nigaran Solar. Join a leading solar company in India and make a difference in the clean energy revolution.
+  "
+        />
+        <meta
+          name="keywords"
+          content="Contact Nigaran Solar, solar consultation, solar energy Coimbatore, solar panel installation Coimbatore, get free solar consultation, solar installation Tamil Nadu"
+        />
+      </Head>
+
       {/* Hero Section */}
       <section className="relative lg:h-[80vh] flex items-center">
         <div className="absolute inset-0 z-0">
@@ -144,16 +161,17 @@ export default function CareersPage() {
               className="flex flex-col justify-center"
             >
               <p className="text-lg text-muted-foreground mb-6">
-                At Nigaran Solar, we believe in creating a brighter, cleaner, and more
-                sustainable future—and we know it all starts with the right people. If
-                you&apos;re passionate about renewable energy, innovation, and making a real
-                impact, we invite you to join our growing team.
+                At Nigaran Solar, we believe in creating a brighter, cleaner,
+                and more sustainable future—and we know it all starts with the
+                right people. If you&apos;re passionate about renewable energy,
+                innovation, and making a real impact, we invite you to join our
+                growing team.
               </p>
               <p className="text-lg text-muted-foreground">
-                Whether you&apos;re an experienced professional or just starting your career,
-                we offer a dynamic work environment, ongoing learning, and the
-                opportunity to be part of a mission-driven company that is transforming
-                lives through solar energy.
+                Whether you&apos;re an experienced professional or just starting
+                your career, we offer a dynamic work environment, ongoing
+                learning, and the opportunity to be part of a mission-driven
+                company that is transforming lives through solar energy.
               </p>
             </motion.div>
           </div>
@@ -252,14 +270,17 @@ export default function CareersPage() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <Badge variant="outline" className="text-white border-white/30">Our Team</Badge>
+            <Badge variant="outline" className="text-white border-white/30">
+              Our Team
+            </Badge>
             <h2 className="max-w-2xl text-4xl font-extrabold md:text-5xl">
               Who We&apos;re Looking For
             </h2>
             <div className="w-20 h-1 mx-auto mb-6 bg-primary"></div>
             <p className="text-lg text-white/80 max-w-3xl">
-              We are always on the lookout for passionate, skilled, and committed
-              individuals to join our solar mission. Some roles we regularly hire for include:
+              We are always on the lookout for passionate, skilled, and
+              committed individuals to join our solar mission. Some roles we
+              regularly hire for include:
             </p>
           </motion.div>
 
@@ -295,8 +316,8 @@ export default function CareersPage() {
             transition={{ duration: 0.5, delay: 0.5 }}
             className="text-center text-white/80 mt-8"
           >
-            Whether you&apos;re in engineering, marketing, operations, or customer
-            service—we may have a place for you!
+            Whether you&apos;re in engineering, marketing, operations, or
+            customer service—we may have a place for you!
           </motion.p>
         </div>
       </section>
@@ -320,8 +341,9 @@ export default function CareersPage() {
               </div>
 
               <p className="text-lg text-muted-foreground mb-6">
-                We don&apos;t just offer jobs—we help you build a career. At Nigaran Solar,
-                your efforts are recognized, and performance is rewarded. We offer:
+                We don&apos;t just offer jobs—we help you build a career. At
+                Nigaran Solar, your efforts are recognized, and performance is
+                rewarded. We offer:
               </p>
 
               <ul className="space-y-4">
@@ -335,7 +357,9 @@ export default function CareersPage() {
                   <div className="p-1 mt-1 rounded-full bg-primary/20">
                     <CheckCircle className="h-4 w-4 text-primary" />
                   </div>
-                  <p>Opportunities for internal promotions and leadership roles</p>
+                  <p>
+                    Opportunities for internal promotions and leadership roles
+                  </p>
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="p-1 mt-1 rounded-full bg-primary/20">
@@ -388,7 +412,9 @@ export default function CareersPage() {
           {isLoading ? (
             <div className="text-center py-8">Loading open positions...</div>
           ) : error ? (
-            <div className="text-center py-8 text-red-500">Error loading positions</div>
+            <div className="text-center py-8 text-red-500">
+              Error loading positions
+            </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {careers.map(
@@ -555,9 +581,10 @@ export default function CareersPage() {
                 Join the Solar Movement
               </h2>
               <p className="text-primary-foreground/90 text-lg">
-                At Nigaran Solar, we don&apos;t just work—we create change. Come be a part
-                of something meaningful. Help us light up homes, empower communities,
-                and shape a greener tomorrow. Apply now and let&apos;s build the future together.
+                At Nigaran Solar, we don&apos;t just work—we create change. Come
+                be a part of something meaningful. Help us light up homes,
+                empower communities, and shape a greener tomorrow. Apply now and
+                let&apos;s build the future together.
               </p>
             </motion.div>
             <motion.div
