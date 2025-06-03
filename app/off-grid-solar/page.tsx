@@ -50,9 +50,12 @@ export default function OffGridSolarPage() {
           >
             {images.map((src, index) => (
               <SwiperSlide key={index}>
-                <img
+                <Image
                   src={src}
                   alt={`Slide ${index + 1}`}
+                  height={100}
+                  width={100}
+                  loading="lazy"
                   className="object-cover w-full h-full"
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50" />
@@ -76,19 +79,7 @@ export default function OffGridSolarPage() {
             </p>
           </motion.div>
 
-          {/* Lead Form Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 100 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="lg:w-[40%]"
-          >
-            <LeadForm
-              type="residential"
-              title={"Get Your Free Quote"}
-              description={""}
-            />
-          </motion.div>
+       
         </div>
       </section>
 
@@ -149,8 +140,10 @@ export default function OffGridSolarPage() {
                 <Image
                   src="https://images.pexels.com/photos/235725/pexels-photo-235725.jpeg"
                   alt="Farm"
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  height={100}
+                  width={100}
+                  loading="lazy"
+                  className="object-cover transition-transform h-full w-full duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
                   <Home className="h-10 w-10 text-white" />
@@ -174,8 +167,10 @@ export default function OffGridSolarPage() {
                 <Image
                   src="https://images.pexels.com/photos/2462015/pexels-photo-2462015.jpeg"
                   alt="Rural Home"
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  height={100}
+                  width={100}
+                  loading="lazy"
+                  className="object-cover transition-transform h-full w-full duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
                   <Building className="h-10 w-10 text-white" />
@@ -193,14 +188,17 @@ export default function OffGridSolarPage() {
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all group"
+              className="bg-white rounded-xl overflow-hidden h-full w-full shadow-lg hover:shadow-xl transition-all group"
             >
               <div className="h-48 relative overflow-hidden">
                 <Image
+                loading="lazy"
                   src="https://images.pexels.com/photos/2760241/pexels-photo-2760241.jpeg"
                   alt="Construction Site"
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  height={100}
+                  width={100}
+                  
+                  className="object-cover transition-transform h-full w-full duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
                   <Wrench className="h-10 w-10 text-white" />
@@ -224,8 +222,10 @@ export default function OffGridSolarPage() {
                 <Image
                   src="https://images.pexels.com/photos/1797393/pexels-photo-1797393.jpeg"
                   alt="Remote Area"
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  loading="lazy"
+                     height={100}
+                  width={100}
+                  className="object-cover transition-transform h-full w-full duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
                   <MapPin className="h-10 w-10 text-white" />
@@ -246,7 +246,10 @@ export default function OffGridSolarPage() {
       <section className="relative flex flex-col items-center lg:flex-row ">
         {/* Left Side Image */}
         <div className="w-full h-full lg:w-1/2">
-          <img
+          <Image
+          loading="lazy"
+             height={100}
+                  width={100}
             src="https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=3132&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt="Off-Grid Solar Panels"
             className="shadow-lg object-cover w-full h-[70vh]"
@@ -376,7 +379,7 @@ export default function OffGridSolarPage() {
                 Remote Locations
               </h3>
               <p className="text-muted-foreground">
-                Perfect for rural homes, farms, and off-the-grid resorts where traditional power lines don't reach.
+                Perfect for rural homes, farms, and off-the-grid resorts where traditional power lines don&apos;t reach.
               </p>
             </motion.div>
 
@@ -414,19 +417,26 @@ export default function OffGridSolarPage() {
       </section>
 
       {/* Benefits Section */}
-      <section className="py-16 bg-muted/30">
-        <div className="container">
+ <section 
+      
+      className="relative py-16 text-lg   bg-cover bg-center"
+        style={{
+          backgroundImage:
+            "url('https://images.pexels.com/photos/4254160/pexels-photo-4254160.jpeg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}>        <div className="container">
           <motion.div
             className="flex flex-col items-center gap-4 text-center mb-12"
             initial={{ opacity: 0, y: 100 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <Badge variant="outline">Advantages</Badge>
-            <h2 className="max-w-2xl text-4xl font-extrabold md:text-5xl">
+            <Badge variant="outline" className="text-white">Advantages</Badge>
+            <h2 className="max-w-2xl text-4xl text-white font-extrabold md:text-5xl">
               Benefits of Off-Grid Solar
             </h2>
-            <div className="w-20 h-1 mx-auto mb-6 bg-primary"></div>
+            <div className="w-20 h-1 mx-auto mb-6 bg-white"></div>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -532,16 +542,25 @@ export default function OffGridSolarPage() {
       </section>
 
       {/* Key Features Section */}
-      <section className="py-16 bg-muted/30">
-        <div className="container">
+      <section className=" relative py-16 pb-56 bg-black">
+       <div className="absolute inset-0 z-0">
+                <Image
+                  src="/pattern-bg.png"
+                  alt="Residential Solar Installation"
+                  fill
+                  className="object-cover"
+                />
+                <div className="absolute  bg-gradient-to-r from-black/70 to-black/50" />
+              </div>
+        <div className="container relative inset-1 z-40">
           <motion.div
             className="flex flex-col items-center gap-4 text-center mb-12"
             initial={{ opacity: 0, y: 100 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <Badge variant="outline">Features</Badge>
-            <h2 className="max-w-2xl text-4xl font-extrabold md:text-5xl">
+            <Badge variant="outline" className="text-white">Features</Badge>
+            <h2 className="max-w-2xl text-4xl text-white font-extrabold md:text-5xl">
               Key Features
             </h2>
             <div className="w-20 h-1 mx-auto mb-6 bg-primary"></div>
@@ -602,36 +621,7 @@ export default function OffGridSolarPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-16 bg-primary text-primary-foreground">
-        <div className="container">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-              className="md:w-2/3"
-            >
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Ready for Energy Independence?
-              </h2>
-              <p className="text-primary-foreground/90 text-lg">
-                Contact us today for a free consultation and quote for your off-grid solar system.
-              </p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <Button size="lg" variant="secondary" className="group">
-                Get Started
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Button>
-            </motion.div>
-          </div>
-        </div>
-      </section>
+      
     </div>
   );
 }

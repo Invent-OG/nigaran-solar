@@ -462,7 +462,7 @@ export default function SolarProPage() {
       </section>
 
       {/* Uses & Benefits Section */}
-      <section className="py-16 bg-muted/30">
+      <section className="py-16 pb-52 bg-muted/30">
         <div className="container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Uses */}
@@ -534,36 +534,7 @@ export default function SolarProPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-16 bg-primary text-primary-foreground">
-        <div className="container">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-              className="md:w-2/3"
-            >
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Ready to Join the Solar Revolution?
-              </h2>
-              <p className="text-primary-foreground/90 text-lg">
-                Become a Solar Pro today and start earning while making a positive impact on the environment.
-              </p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <Button size="lg" variant="secondary" className="group">
-                Apply Now
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Button>
-            </motion.div>
-          </div>
-        </div>
-      </section>
+    
     </div>
   );
 }

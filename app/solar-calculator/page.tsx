@@ -95,7 +95,7 @@ export default function SolarCalculatorPage() {
             className="lg:max-w-[60%] text-white"
           >
             <h1 className="mb-6 text-4xl font-bold md:text-5xl">
-              Calculate Your <span className="text-primary">Solar Savings</span> Instantly
+              Calculate Your Solar Savings Instantly
             </h1>
             <p className="mb-8 text-lg md:text-xl text-white/90">
               Try our free solar calculator to estimate your monthly savings, return on investment, and energy output based on your specific needs and location.
@@ -300,7 +300,7 @@ export default function SolarCalculatorPage() {
       )}
 
       {/* How It Works Section */}
-      <section className="py-16 bg-background">
+      <section className="py-16 pb-52 bg-background">
         <div className="container">
           <motion.div
             className="flex flex-col items-center gap-4 text-center mb-12"
@@ -362,57 +362,7 @@ export default function SolarCalculatorPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="relative py-16 overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-primary"></div>
-          {/* Multiple shooting star layers with different colors and speeds */}
-          <ShootingStars
-            starColor="#9E00FF"
-            trailColor="#2EB9DF"
-            minSpeed={15}
-            maxSpeed={35}
-            minDelay={1000}
-            maxDelay={3000}
-          />
-          <ShootingStars
-            starColor="#FF0099"
-            trailColor="#FFB800"
-            minSpeed={10}
-            maxSpeed={25}
-            minDelay={2000}
-            maxDelay={4000}
-          />
-        </div>
-        
-        <div className="container relative z-10">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-              className="md:w-2/3 text-white"
-            >
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Ready to Start Your Solar Journey?
-              </h2>
-              <p className="text-primary-foreground/90 text-lg">
-                Get a free consultation with our solar experts to discuss your specific needs and requirements.
-              </p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <Button size="lg" variant="secondary" className="group">
-                Contact Us Now
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Button>
-            </motion.div>
-          </div>
-        </div>
-      </section>
+     
     </div>
   );
 }

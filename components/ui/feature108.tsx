@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 
 import Image from "next/image";
+import Link from "next/link";
 
 interface TabContent {
   badge: string;
@@ -14,6 +15,7 @@ interface TabContent {
   buttonText: string;
   imageSrc: string;
   imageAlt: string;
+  link: string;
 }
 
 interface Tab {
@@ -49,6 +51,7 @@ const Feature108 = ({
         imageSrc:
           "https://images.pexels.com/photos/356049/pexels-photo-356049.jpeg",
         imageAlt: "On-grid solar system installation",
+        link: "/residential",
       },
     },
     {
@@ -64,6 +67,7 @@ const Feature108 = ({
         imageSrc:
           "https://images.pexels.com/photos/2800832/pexels-photo-2800832.jpeg",
         imageAlt: "Off-grid solar installation",
+        link: "/commercial",
       },
     },
     {
@@ -79,6 +83,7 @@ const Feature108 = ({
         imageSrc:
           "https://images.pexels.com/photos/414837/pexels-photo-414837.jpeg",
         imageAlt: "Hybrid solar system",
+        link: "/housing-society",
       },
     },
   ],
@@ -168,9 +173,11 @@ const Feature108 = ({
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.3 }}
                 >
-                  <Button className="mt-2.5 w-fit gap-2" size="lg">
-                    {selectedTab.content.buttonText}
-                  </Button>
+                  <Link href={selectedTab.content.link} passHref>
+                    <Button className="mt-2.5 w-fit gap-2" size="lg">
+                      {selectedTab.content.buttonText}
+                    </Button>
+                  </Link>
                 </motion.div>
               </div>
 
