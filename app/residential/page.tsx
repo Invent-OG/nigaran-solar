@@ -256,7 +256,8 @@ export default function ResidentialPage() {
       {/* Meta Information */}
       <Head>
         <title>
-Affordable Residential Solar Panels in Coimbatore & Tamil Nadu | Nigaran Solar
+          Affordable Residential Solar Panels in Coimbatore & Tamil Nadu |
+          Nigaran Solar
         </title>
         <meta
           name="description"
@@ -435,12 +436,6 @@ Affordable Residential Solar Panels in Coimbatore & Tamil Nadu | Nigaran Solar
           </motion.div>
 
           <ul className="mt-6 space-y-6 text-lg text-muted/90">
-            <li className="flex items-start gap-4">
-              <span>
-                Nigaran Rising electricity bills can be a huge burden on
-                homeowners.
-              </span>
-            </li>
             <li className="flex items-start gap-4">
               <span>
                 The growing demand for electricity, combined with frequent power

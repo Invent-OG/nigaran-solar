@@ -68,7 +68,9 @@ export default function CareersPage() {
         />
         <meta
           name="keywords"
-          content="Contact Nigaran Solar, solar consultation, solar energy Coimbatore, solar panel installation Coimbatore, get free solar consultation, solar installation Tamil Nadu"
+          content="solar jobs, solar jobs vacancy in tamilnadu, solar company careers,
+renewable energy jobs, solar technician jobs, green energy careers,
+join solar company, Nigaran Solar careers"
         />
       </Head>
 

@@ -50,7 +50,8 @@ Here you can earn rewards after every successful solar installation process that
         />
         <meta
           name="keywords"
-          content="Contact Nigaran Solar, solar consultation, solar energy Coimbatore, solar panel installation Coimbatore, get free solar consultation, solar installation Tamil Nadu"
+          content="solar referral program, refer and earn solar, solar commission, earn
+money from solar referrals, solar affiliate program, Nigaran Solar Pro"
         />
       </Head>
       {/* Hero Section */}

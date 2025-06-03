@@ -32,7 +32,9 @@ export default function BlogPage() {
         />
         <meta
           name="keywords"
-          content="Contact Nigaran Solar, solar consultation, solar energy Coimbatore, solar panel installation Coimbatore, get free solar consultation, solar installation Tamil Nadu"
+          content="solar energy blog, renewable energy news, solar tips, solar
+technology updates, solar power benefits, clean energy blog, solar
+installation advice"
         />
       </Head>
 

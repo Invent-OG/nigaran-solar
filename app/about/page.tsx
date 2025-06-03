@@ -73,7 +73,7 @@ export default function AboutPage() {
       {/* Meta Information */}
       <Head>
         <title>
-About Nigaran Solar | Leading Solar Company in Coimbatore, Tamil Nadu
+          About Nigaran Solar | Leading Solar Company in Coimbatore, Tamil Nadu
         </title>
         <meta
           name="description"
@@ -131,12 +131,12 @@ About Nigaran Solar | Leading Solar Company in Coimbatore, Tamil Nadu
         <div className="flex flex-col justify-center w-full gap-5 lg:flex-row lg:gap-24">
           <FlipCard className="h-96 lg:w-2/6">
             <FlipCardFront className="rounded-xl">
-              <img
-                width={1015}
-                height={678}
+              <Image
                 src="https://images.unsplash.com/photo-1674056982333-5a2f304e4906?q=80&w=2813&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 alt="nike air jordan"
+                fill
                 className="object-cover size-full"
+                priority
               />
             </FlipCardFront>
             <FlipCardBack className="flex flex-col items-center justify-center rounded-xl bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-amber-100 via-primary to-amber-50 px-4 py-6 text-center text-white">
@@ -165,12 +165,12 @@ About Nigaran Solar | Leading Solar Company in Coimbatore, Tamil Nadu
 
           <FlipCard flipDirection="vertical" className="h-96 lg:w-2/6">
             <FlipCardFront className="rounded-xl">
-              <img
-                width={542}
-                height={678}
+              <Image
                 src="https://images.unsplash.com/photo-1618558287205-05960522136a?q=80&w=3904&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 alt="nike air jordan"
+                fill
                 className="object-cover size-full"
+                priority
               />
             </FlipCardFront>
             <FlipCardBack className="flex flex-col items-center justify-center rounded-xl bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-amber-100 via-[#048BCF] to-amber-50 px-4 py-6 text-center text-white">
@@ -232,10 +232,13 @@ About Nigaran Solar | Leading Solar Company in Coimbatore, Tamil Nadu
           <div className="grid gap-6 md:grid-cols-3">
             {/* Card 1 */}
             <div className="relative flex flex-col justify-between overflow-hidden text-center transition-shadow duration-300 bg-white rounded-lg shadow-lg group hover:shadow-xl">
-              <img
+              <Image
                 src="https://images.pexels.com/photos/1108101/pexels-photo-1108101.jpeg"
                 alt="Lower Bills"
-                className="object-cover w-full transition-all duration-500 h-1/2 group-hover:scale-105"
+                width={600}
+                height={400}
+                className="object-cover w-full h-full"
+                priority
               />
               <div className="absolute right-[40%]  top-[35%] shadow-lg p-6 rounded-full bg-primary">
                 <Users className="w-8 h-8 text-white" />
@@ -256,10 +259,13 @@ About Nigaran Solar | Leading Solar Company in Coimbatore, Tamil Nadu
 
             {/* Card 2 */}
             <div className="relative flex flex-col justify-between overflow-hidden text-center transition-shadow duration-300 bg-white rounded-lg shadow-lg group hover:shadow-xl">
-              <img
+              <Image
                 src="https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg"
                 alt="Property Value"
-                className="object-cover w-full transition-all duration-500 h-1/2 group-hover:scale-105"
+                width={600}
+                height={400}
+                className="object-cover w-full h-full"
+                priority
               />
               <div className="absolute right-[40%]  top-[35%] shadow-lg p-6 rounded-full bg-primary">
                 <ShieldCheck className="w-8 h-8 text-white" />
@@ -279,10 +285,13 @@ About Nigaran Solar | Leading Solar Company in Coimbatore, Tamil Nadu
 
             {/* Card 3 */}
             <div className="relative flex flex-col justify-between overflow-hidden text-center transition-shadow duration-300 bg-white rounded-lg shadow-lg group hover:shadow-xl">
-              <img
+              <Image
                 src="https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg"
                 alt="Community Engagement"
-                className="object-cover w-full transition-all duration-500 h-1/2 group-hover:scale-105"
+                width={600}
+                height={400}
+                className="object-cover w-full h-full"
+                priority
               />
 
               <div className="absolute right-[40%]  top-[35%] shadow-lg p-6 rounded-full bg-primary">
@@ -303,10 +312,13 @@ About Nigaran Solar | Leading Solar Company in Coimbatore, Tamil Nadu
 
             {/* Card 4 */}
             <div className="relative flex flex-col justify-between overflow-hidden text-center transition-shadow duration-300 bg-white rounded-lg shadow-lg group hover:shadow-xl">
-              <img
+              <Image
                 src="https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg"
                 alt="Community Engagement"
-                className="object-cover w-full transition-all duration-500 h-1/2 group-hover:scale-105"
+                width={600}
+                height={400}
+                className="object-cover w-full h-full"
+                priority
               />
 
               <div className="absolute right-[40%]  top-[35%] shadow-lg p-6 rounded-full bg-primary">
@@ -349,7 +361,7 @@ About Nigaran Solar | Leading Solar Company in Coimbatore, Tamil Nadu
       </div>
 
       {/* Sustainability & Call to Action */}
-      <section className="p-[5%] pb-[10%] bg-background">
+      <section className="p-[5%] md:pb-[10%] pb-[80%] bg-background">
         <div className="container space-y-12">
           <div>
             <h2 className="mb-4 text-2xl font-bold md:text-3xl">
@@ -370,9 +382,9 @@ About Nigaran Solar | Leading Solar Company in Coimbatore, Tamil Nadu
               Service Areas{" "}
             </h2>
             <p className="text-muted-foreground">
-              Nigaran Solar proudly serves [insert cities or regions], offering
-              reliable and affordable solar installation services for
-              residential, commercial, and industrial clients.
+              Nigaran Solar proudly serves across tamilnadu, offering reliable
+              and affordable solar installation services for residential,
+              commercial, and industrial clients.
             </p>
           </div>
           <CTASection

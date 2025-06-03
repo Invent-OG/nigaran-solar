@@ -10,13 +10,14 @@ import { useBlogs } from "@/lib/queries/blogs";
 import { Badge } from "../ui/badge";
 
 interface BlogCardProps {
+  id: string;
   title: string;
   excerpt: string;
   imageUrl: string;
   index: number;
 }
 
-const BlogCard = ({ title, excerpt, imageUrl, index }: BlogCardProps) => {
+const BlogCard = ({ id, title, excerpt, imageUrl, index }: BlogCardProps) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -39,9 +40,14 @@ const BlogCard = ({ title, excerpt, imageUrl, index }: BlogCardProps) => {
           {title}
         </h3>
         <p className="text-muted-foreground mb-4 line-clamp-3">{excerpt}</p>
-        <Button variant="link" className="p-0 h-auto font-medium text-primary">
-          Read More <ArrowRight className="ml-1 h-4 w-4" />
-        </Button>
+        <Link href={`/blog/${id}`}>
+          <Button
+            variant="link"
+            className="p-0 h-auto font-medium text-primary"
+          >
+            Read More <ArrowRight className="ml-1 h-4 w-4" />
+          </Button>
+        </Link>
       </div>
     </motion.div>
   );
@@ -105,6 +111,7 @@ export default function BlogSection() {
               >
                 <BlogCard
                   key={post.id}
+                  id={post.id}
                   title={post.title}
                   excerpt={post.excerpt}
                   imageUrl={post.imageUrl}

@@ -8,7 +8,7 @@ import { sendLeadThankYouEmail } from '@/lib/email';
 const leadSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
   whatsappNumber: z.string().regex(/^[6-9]\d{9}$/, 'Please enter a valid Indian mobile number'),
-  electricityBill: z.number().min(1, 'Please enter your electricity bill amount'),
+  electricityBill: z.string().min(1, 'Please enter your electricity bill amount'),
   city: z.string().min(2, 'Please enter your city'),
   companyName: z.string().optional(),
   type: z.enum(['residential', 'housing_society', 'commercial'])

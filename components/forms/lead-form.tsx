@@ -7,6 +7,13 @@ import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
   Form,
   FormControl,
   FormField,
@@ -31,9 +38,10 @@ const leadFormSchema = z.object({
   whatsappNumber: z
     .string()
     .regex(phoneRegex, "Please enter a valid Indian mobile number"),
+  // electricityBill is validated as a string, as required.
   electricityBill: z
-    .number()
-    .min(1, "Please enter your electricity bill amount"),
+    .string()
+    .min(1, "Please select your electricity bill range"),
   city: z.string().min(2, "Please enter your city"),
   companyName: z.string().optional(),
   type: z.enum(["residential", "housing_society", "commercial"]),
@@ -56,7 +64,8 @@ export default function LeadForm({ type, description, title }: LeadFormProps) {
     defaultValues: {
       name: "",
       whatsappNumber: "",
-      electricityBill: 0,
+      // electricityBill is initialized as an empty string, as required.
+      electricityBill: "",
       city: "",
       companyName: "",
       type,
@@ -109,14 +118,14 @@ export default function LeadForm({ type, description, title }: LeadFormProps) {
                 name="companyName"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-black/ lg:text-white">
+                    <FormLabel className="text-black/ text-white">
                       Company Name
                     </FormLabel>
                     <FormControl>
                       <Input
                         {...field}
                         placeholder="Enter company name"
-                        className="bg-white/20 backdrop-blur-sm border border-white/30 text-black/ lg:text-white placeholder-white/60"
+                        className="bg-white/20 backdrop-blur-sm border border-white/30 text-black/ text-white placeholder-white/60"
                       />
                     </FormControl>
                     <FormMessage />
@@ -130,14 +139,12 @@ export default function LeadForm({ type, description, title }: LeadFormProps) {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-black/ lg:text-white">
-                    Name
-                  </FormLabel>
+                  <FormLabel className="text-black/ text-white">Name</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
                       placeholder="Enter your name"
-                      className="bg-white/20 backdrop-blur-sm border border-white/30 text-black/ lg:text-white placeholder-white/60"
+                      className="bg-white/20 backdrop-blur-sm border border-white/30 text-black/ text-white placeholder-white/60"
                     />
                   </FormControl>
                   <FormMessage />
@@ -150,14 +157,14 @@ export default function LeadForm({ type, description, title }: LeadFormProps) {
               name="whatsappNumber"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-black/ lg:text-white">
+                  <FormLabel className="text-black/ text-white">
                     WhatsApp Number
                   </FormLabel>
                   <FormControl>
                     <Input
                       {...field}
                       placeholder="Enter your WhatsApp number"
-                      className="bg-white/20 backdrop-blur-sm border border-white/30 text-black/ lg:text-white placeholder-white/60"
+                      className="bg-white/20 backdrop-blur-sm border border-white/30 text-black/ text-white placeholder-white/60"
                     />
                   </FormControl>
                   <FormMessage />
@@ -170,19 +177,38 @@ export default function LeadForm({ type, description, title }: LeadFormProps) {
               name="electricityBill"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-black/ lg:text-white">
+                  <FormLabel className="text-black/ text-white">
                     {type === "commercial" ? "Monthly" : "Bi-Monthly"}{" "}
                     Electricity Bill (₹)
                   </FormLabel>
-                  <FormControl>
-                    <Input
-                      type="number"
-                      {...field}
-                      onChange={(e) => field.onChange(Number(e.target.value))}
-                      placeholder="Enter your electricity bill amount"
-                      className="bg-white/20 backdrop-blur-sm border border-white/30 text-black/ lg:text-white placeholder-white/60"
-                    />
-                  </FormControl>
+                  <Select onValueChange={field.onChange} value={field.value}>
+                    <FormControl>
+                      <SelectTrigger className="bg-white/20 backdrop-blur-sm border border-white/30 text-white">
+                        <SelectValue placeholder="Select your electricity bill range" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent className="text-black">
+                      {(type === "residential"
+                        ? [
+                            "Less than 3,000/-",
+                            "3,000/- to 5,000/-",
+                            "5,000/- to 10,000/-",
+                            "10,000/- and above",
+                          ]
+                        : [
+                            "Less than 10,000/-",
+                            "10,000/- to 25,000/-",
+                            "25,000/- to 50,000/-",
+                            "50,000/- to 1,00,000/-",
+                            "1,00,000/- and above",
+                          ]
+                      ).map((option) => (
+                        <SelectItem key={option} value={option}>
+                          {option}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                   <FormMessage />
                 </FormItem>
               )}
@@ -193,14 +219,12 @@ export default function LeadForm({ type, description, title }: LeadFormProps) {
               name="city"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-black/ lg:text-white">
-                    City
-                  </FormLabel>
+                  <FormLabel className="text-black/ text-white">City</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
                       placeholder="Enter your city"
-                      className="bg-white/20 backdrop-blur-sm border border-white/30 text-black/ lg:text-white placeholder-white/60"
+                      className="bg-white/20 backdrop-blur-sm border border-white/30 text-black/ text-white placeholder-white/60"
                     />
                   </FormControl>
                   <FormMessage />

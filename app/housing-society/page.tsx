@@ -34,17 +34,11 @@ export default function HousingSocietyPage() {
     <div className="min-h-screen pt-20">
       {/* Meta Information */}
       <Head>
-        <title>
-          Affordable Residential Solar Panels in Coimbatore & Tamil Nadu |
-          Nigaran Solar
-        </title>
+        <title>Community Solar for Housing Societies | Nigaran Solar</title>
         <meta
           name="description"
-          content="Switch to affordable residential solar panels from Nigaran Solar. We offer efficient solar power systems for homes in Tamil Nadu with government subsidies and expert installation. Save on your electricity bills today!"
-        />
-        <meta
-          name="keywords"
-          content="residential solar panels, solar for home in Tamil Nadu, residential solar installation, solar rooftop installation Tamil Nadu, solar panel prices India, solar panels for homes"
+          content="Power lifts, pumps & lights with solar. Nigaran Solar offers tailored systems to cut shared
+electricity costs for eco-friendly housing societies."
         />
       </Head>
 

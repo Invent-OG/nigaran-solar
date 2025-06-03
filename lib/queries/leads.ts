@@ -5,7 +5,7 @@ export interface Lead {
   id: string;
   name: string;
   whatsappNumber: string;
-  electricityBill: number;
+  electricityBill: string; // Assuming this is a string representing the bill amount
   city: string;
   companyName?: string;
   type: 'residential' | 'housing_society' | 'commercial';
