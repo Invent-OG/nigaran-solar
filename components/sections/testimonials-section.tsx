@@ -41,7 +41,7 @@ export default function TestimonialsSection() {
         badgeText="Customer Reviews"
         testimonials={testimonials}
       />
-      <div className="py-20">
+      {/* <div className="py-20">
         <script
           src="https://static.elfsight.com/platform/platform.js"
           async
@@ -50,7 +50,7 @@ export default function TestimonialsSection() {
           className="elfsight-app-a90f3dc9-09f4-404a-b77b-d1e3e8f2242d"
           data-elfsight-app-lazy
         ></div>
-      </div>
+      </div> */}
     </div>
   );
 }

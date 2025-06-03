@@ -88,9 +88,14 @@ export function AnimatedTestimonials({
     document.body.appendChild(tag);
   }, []);
 
-  // Create player on iframe ready
+  // Create player on iframe ready, always destroy previous player before creating new one
   useEffect(() => {
     if (!testimonials[activeIndex]?.youtubeUrl) return;
+
+    if (playerRef.current) {
+      playerRef.current.destroy?.();
+      playerRef.current = null;
+    }
 
     const interval = setInterval(() => {
       const iframe = document.getElementById(
@@ -104,13 +109,16 @@ export function AnimatedTestimonials({
             events: {
               onStateChange: (event: any) => {
                 const YT = (window as any).YT;
-                if (event.data === YT.PlayerState.PLAYING) {
-                  setAutoScrollPaused(true);
-                } else if (
-                  event.data === YT.PlayerState.PAUSED ||
-                  event.data === YT.PlayerState.ENDED
-                ) {
-                  setAutoScrollPaused(false);
+                switch (event.data) {
+                  case YT.PlayerState.PLAYING:
+                    setAutoScrollPaused(true);
+                    break;
+                  case YT.PlayerState.PAUSED:
+                  case YT.PlayerState.ENDED:
+                    setAutoScrollPaused(false);
+                    break;
+                  default:
+                    break;
                 }
               },
             },
@@ -120,7 +128,13 @@ export function AnimatedTestimonials({
       }
     }, 500);
 
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+      if (playerRef.current) {
+        playerRef.current.destroy?.();
+        playerRef.current = null;
+      }
+    };
   }, [activeIndex, testimonials]);
 
   // Animate in on view
