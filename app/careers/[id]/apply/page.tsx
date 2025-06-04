@@ -149,22 +149,22 @@ export default function CareerApplicationPage() {
   };
 
   if (careerLoading) {
-    return <div className="min-h-screen pt-20 container">Loading...</div>;
+    return <div className="container min-h-screen pt-20">Loading...</div>;
   }
 
   const career = careerData?.career;
 
   if (!career) {
     return (
-      <div className="min-h-screen pt-20 container">Position not found</div>
+      <div className="container min-h-screen pt-20">Position not found</div>
     );
   }
 
   return (
-    <div className="min-h-screen pt-20">
+    <div className="min-h-screen pt-20 py-[80%] lg:py-32">
       <div className="container py-8">
         <Button variant="ghost" onClick={() => router.back()} className="mb-8">
-          <ArrowLeft className="h-4 w-4 mr-2" />
+          <ArrowLeft className="w-4 h-4 mr-2" />
           Back to Careers
         </Button>
 
@@ -175,7 +175,7 @@ export default function CareerApplicationPage() {
           className="max-w-2xl mx-auto"
         >
           <div className="mb-8">
-            <h1 className="text-3xl font-bold mb-2">
+            <h1 className="mb-2 text-3xl font-bold">
               Apply for {career.title}
             </h1>
             <p className="text-muted-foreground">
@@ -184,7 +184,7 @@ export default function CareerApplicationPage() {
             </p>
           </div>
 
-          <div className="bg-card rounded-lg p-6 shadow-lg">
+          <div className="p-6 rounded-lg shadow-lg bg-card">
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
@@ -252,8 +252,8 @@ export default function CareerApplicationPage() {
                               if (file) await handleFileUpload(file);
                             }}
                           />
-                          {fileUrl && (
-                            <p className="text-sm text-green-600 mt-2">
+                          {/* {fileUrl && (
+                            <p className="mt-2 text-sm text-green-600">
                               Uploaded:{" "}
                               <a
                                 href={fileUrl}
@@ -264,7 +264,7 @@ export default function CareerApplicationPage() {
                                 {fileUrl}
                               </a>
                             </p>
-                          )}
+                          )} */}
                         </>
                       </FormControl>
                       <FormMessage />

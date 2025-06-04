@@ -46,11 +46,10 @@ const images = [
 export default function CommercialPage() {
   return (
     <div className="min-h-screen pt-20">
-
       {/* Meta Information */}
       <Head>
         <title>
-Commercial Solar Solutions in Coimbatore & Tamil Nadu | Nigaran Solar
+          Commercial Solar Solutions in Coimbatore & Tamil Nadu | Nigaran Solar
         </title>
         <meta
           name="description"
@@ -61,7 +60,6 @@ Commercial Solar Solutions in Coimbatore & Tamil Nadu | Nigaran Solar
           content="commercial solar solutions, business solar panels, solar power systems Tamil Nadu, solar rooftop installation Tamil Nadu, solar for businesses, solar panel for commercial use Coimbatore."
         />
       </Head>
-
 
       {/* Hero Section */}
       <section className="relative lg:h-[80vh] flex items-center">
@@ -75,10 +73,13 @@ Commercial Solar Solutions in Coimbatore & Tamil Nadu | Nigaran Solar
           >
             {images.map((src, index) => (
               <SwiperSlide key={index}>
-                <img
+                <Image
                   src={src}
                   alt={`Slide ${index + 1}`}
+                  fill
+                  sizes="100vw"
                   className="object-cover w-full h-full"
+                  priority={index === 0}
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50" />
               </SwiperSlide>
@@ -179,10 +180,13 @@ Commercial Solar Solutions in Coimbatore & Tamil Nadu | Nigaran Solar
       <section className="relative flex flex-col items-center lg:flex-row ">
         {/* Left Side Image */}
         <div className="w-full h-full lg:w-1/2">
-          <img
+          <Image
             src="https://www.soleosenergy.com/wp-content/uploads/2024/09/Solar-installation_web.jpg1_.webp"
             alt="Commercial Solar Panels"
-            className=" shadow-lg object-cover w-full h-[70vh]"
+            width={1920}
+            height={1080}
+            className="shadow-lg object-cover w-full h-[70vh]"
+            priority
           />
         </div>
 
@@ -306,70 +310,6 @@ Commercial Solar Solutions in Coimbatore & Tamil Nadu | Nigaran Solar
         </div>
       </section>
 
-      {/* Why Commercial Solar is Needed */}
-      <section className="relative py-16 ">
-        <BsFillBuildingsFill
-          className="absolute bottom-0 -right-10 opacity-40 text-primary"
-          size={250}
-        />
-
-        <div className="container mx-auto">
-          <motion.div
-            className="flex flex-col items-center gap-4 text-center"
-            initial={{ opacity: 0, y: 100 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <Badge variant="outline" className="">
-              Why Choose
-            </Badge>
-            <h2 className="max-w-2xl text-4xl font-extrabold md:text-5xl">
-              Why Do We Need Commercial Solar?
-            </h2>
-            <div className="w-20 h-1 mx-auto mb-6 bg-primary"></div>
-          </motion.div>
-
-          <div className="grid gap-5 lg:grid-cols-4 ">
-            <div className="flex flex-col items-center gap-4 p-5 text-center rounded-xl">
-              <div className="p-5 rounded-full shadow-lg bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-primary via-primary/10 to-primary">
-                <Bolt className="w-16 h-16 text-white" />
-              </div>
-              <span className="text-muted-foreground">
-                High electricity consumption in commercial buildings results in
-                high operating costs.
-              </span>
-            </div>
-            <div className="flex flex-col items-center gap-4 p-5 text-center rounded-xl">
-              <div className="p-5 rounded-full shadow-lg bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-primary via-primary/10 to-primary">
-                <Shield className="w-16 h-16 text-white" />
-              </div>
-              <span className="text-muted-foreground">
-                Energy price fluctuations and unreliable grid supply make
-                businesses vulnerable to unpredictable costs and disruptions.
-              </span>
-            </div>
-            <div className="flex flex-col items-center gap-4 p-5 text-center rounded-xl">
-              <div className="p-5 rounded-full shadow-lg bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-primary via-primary/10 to-primary">
-                <Leaf className="w-16 h-16 text-white" />
-              </div>
-              <span className="text-muted-foreground">
-                Corporate sustainability goals are pushing businesses to adopt
-                green energy solutions.
-              </span>
-            </div>
-            <div className="flex flex-col items-center gap-4 p-5 text-center rounded-xl">
-              <div className="p-5 rounded-full shadow-lg bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-primary via-primary/10 to-primary">
-                <TrendingUp className="w-16 h-16 text-white" />
-              </div>
-              <span className="text-muted-foreground">
-                Solar offers businesses the chance to lower energy costs while
-                enhancing their green credentials.
-              </span>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Uses Section */}
       <section className="py-16 bg-muted/50">
         <div className="container mx-auto text-center">
@@ -415,6 +355,74 @@ Commercial Solar Solutions in Coimbatore & Tamil Nadu | Nigaran Solar
                 Solar energy can also run industrial cooling and ventilation
                 systems, which can be a major energy drain.
               </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Why Commercial Solar is Needed */}
+      <section className="relative py-16 bg-black/80">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/pattern-bg.png"
+            alt="Residential Solar Installation"
+            fill
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50" />
+        </div>
+        <div className="container relative mx-auto">
+          <motion.div
+            className="flex flex-col items-center gap-4 text-center"
+            initial={{ opacity: 0, y: 100 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <Badge variant="outline" className="text-white">
+              Why Choose
+            </Badge>
+            <h2 className="max-w-2xl text-4xl font-extrabold text-white md:text-5xl">
+              Why Do We Need Commercial Solar?
+            </h2>
+            <div className="w-20 h-1 mx-auto mb-6 bg-primary"></div>
+          </motion.div>
+
+          <div className="grid gap-5 lg:grid-cols-4 ">
+            <div className="flex flex-col items-center gap-4 p-5 text-center rounded-xl">
+              <div className="p-5 rounded-full shadow-lg bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-primary via-primary/10 to-primary">
+                <Bolt className="w-16 h-16 text-white" />
+              </div>
+              <span className="text-muted-foreground">
+                High electricity consumption in commercial buildings results in
+                high operating costs.
+              </span>
+            </div>
+            <div className="flex flex-col items-center gap-4 p-5 text-center rounded-xl">
+              <div className="p-5 rounded-full shadow-lg bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-primary via-primary/10 to-primary">
+                <Shield className="w-16 h-16 text-white" />
+              </div>
+              <span className="text-muted-foreground">
+                Energy price fluctuations and unreliable grid supply make
+                businesses vulnerable to unpredictable costs and disruptions.
+              </span>
+            </div>
+            <div className="flex flex-col items-center gap-4 p-5 text-center rounded-xl">
+              <div className="p-5 rounded-full shadow-lg bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-primary via-primary/10 to-primary">
+                <Leaf className="w-16 h-16 text-white" />
+              </div>
+              <span className="text-muted-foreground">
+                Corporate sustainability goals are pushing businesses to adopt
+                green energy solutions.
+              </span>
+            </div>
+            <div className="flex flex-col items-center gap-4 p-5 text-center rounded-xl">
+              <div className="p-5 rounded-full shadow-lg bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-primary via-primary/10 to-primary">
+                <TrendingUp className="w-16 h-16 text-white" />
+              </div>
+              <span className="text-muted-foreground">
+                Solar offers businesses the chance to lower energy costs while
+                enhancing their green credentials.
+              </span>
             </div>
           </div>
         </div>

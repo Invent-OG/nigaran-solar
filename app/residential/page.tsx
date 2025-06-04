@@ -458,18 +458,61 @@ export default function ResidentialPage() {
         </div>
       </section>
 
+      {/* How It Works */}
+      <section className="py-16 bg-muted/60">
+        <div className="container max-w-4xl mx-auto">
+          <motion.div
+            className="flex flex-col items-center gap-4 pb-10 text-center"
+            initial={{ opacity: 0, y: 100 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <Badge variant="outline">works</Badge>
+            <h2 className="max-w-2xl text-4xl font-extrabold md:text-5xl text-black/80">
+              How It Works
+            </h2>
+            <div className="w-20 h-1 mx-auto mb-6 bg-primary"></div>
+          </motion.div>
+          <ol className="pl-6 space-y-4 text-lg list-decimal text-muted-foreground">
+            <li>
+              Solar Panels absorb sunlight and convert it into Direct Current
+              (DC) electricity.
+            </li>
+            <li>
+              Inverter: The DC electricity is converted to Alternating Current
+              (AC), which is used to power household appliances.
+            </li>
+            <li>
+              Net Metering: Excess energy generated during the day is sent back
+              to the grid, and homeowners can receive credits to offset future
+              bills.
+            </li>
+          </ol>
+        </div>
+      </section>
+
       {/* Uses of Solar */}
-      <section className="w-full   p-[5%] gap-5 container  flex flex-col items-center justify-center">
+      <section className="w-full relative  p-[5%] gap-5 bg-black/90  flex flex-col items-center justify-center">
+        <div className="absolute inset-0 z-0 p-0 m-0">
+          <Image
+            src="/pattern-bg.png"
+            alt="Residential Solar Installation"
+            fill
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50" />
+        </div>
+
         <motion.div
-          className="flex flex-col items-center gap-4 pb-10 text-center"
+          className="relative z-20 flex flex-col items-center gap-4 pb-10 text-center"
           initial={{ opacity: 0, y: 100 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <Badge variant="outline" className="">
+          <Badge variant="outline" className="text-white">
             Uses
           </Badge>
-          <h2 className="max-w-2xl text-4xl font-extrabold md:text-5xl ">
+          <h2 className="max-w-2xl text-4xl font-extrabold text-white md:text-5xl ">
             Uses of Solar Energy
           </h2>
           <div className="w-20 h-1 mx-auto mb-6 bg-primary"></div>
@@ -508,9 +551,8 @@ export default function ResidentialPage() {
                     ></path>
                   </svg>
 
-                  <div className="flex flex-col gap-2 p-7 ">
+                  <div className="flex flex-col items-center justify-center gap-2 p-7 ">
                     <div className="flex items-center gap-3">
-                      <CheckCircle className="text-green-600" />
                       <h3 className="text-xl font-semibold">{use.title}</h3>
                     </div>
 
@@ -520,39 +562,6 @@ export default function ResidentialPage() {
               </div>
             </motion.div>
           ))}
-        </div>
-      </section>
-
-      {/* How It Works */}
-      <section className="py-16 bg-muted/60">
-        <div className="container max-w-4xl mx-auto">
-          <motion.div
-            className="flex flex-col items-center gap-4 pb-10 text-center"
-            initial={{ opacity: 0, y: 100 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <Badge variant="outline">works</Badge>
-            <h2 className="max-w-2xl text-4xl font-extrabold md:text-5xl text-black/80">
-              How It Works
-            </h2>
-            <div className="w-20 h-1 mx-auto mb-6 bg-primary"></div>
-          </motion.div>
-          <ol className="pl-6 space-y-4 text-lg list-decimal text-muted-foreground">
-            <li>
-              Solar Panels absorb sunlight and convert it into Direct Current
-              (DC) electricity.
-            </li>
-            <li>
-              Inverter: The DC electricity is converted to Alternating Current
-              (AC), which is used to power household appliances.
-            </li>
-            <li>
-              Net Metering: Excess energy generated during the day is sent back
-              to the grid, and homeowners can receive credits to offset future
-              bills.
-            </li>
-          </ol>
         </div>
       </section>
 

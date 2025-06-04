@@ -31,10 +31,6 @@ export default function HeroSection() {
           className="object-cover w-full h-full"
           preload="auto" // or "metadata" for lighter load
         >
-          {/* <source
-            src="https://mfnxruiqgdjqskbdthba.supabase.co/storage/v1/object/public/videos//hero-video.mp4"
-            type="video/webm"
-          /> */}
           <source src="/videos/hero-video.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
