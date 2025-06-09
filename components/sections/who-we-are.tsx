@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
+import { memo } from "react";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 
@@ -11,14 +12,12 @@ const metrics = [
   { title: "Emission Reduction", percent: 75 },
 ];
 
-export default function WhoWeAre() {
+const WhoWeAre = () => {
   const router = useRouter();
 
   return (
     <section className="relative overflow-hidden lg:p-[10%] px-[2%] py-[10%] bg-[#f8f8f8]">
-      {/* <div className="absolute inset-0 z-0 bg-[url('/bg-pattern.png')] w-full bg-cover bg-center opacity-30"></div> */}
-
-      <div className="container flex md:flex-row flex-col gap-10 justify-between ">
+      <div className="container flex md:flex-row flex-col gap-10 justify-between">
         {/* Image Block */}
         <div className="relative flex">
           <motion.div
@@ -32,7 +31,7 @@ export default function WhoWeAre() {
               width={500}
               height={500}
               loading="lazy"
-              className="rounded-xl z-10 w-[450px] h-[450px]  object-cover"
+              className="rounded-xl z-10 w-[450px] h-[450px] object-cover"
             />
 
             {/* Circular Progress */}
@@ -41,7 +40,7 @@ export default function WhoWeAre() {
             </div>
 
             {/* Rotating Background Circle */}
-            <div className="animate-rotateLoop absolute -left-24 md:-bottom-16  bottom-0 opacity-50 z-0">
+            <div className="animate-rotateLoop absolute -left-24 md:-bottom-16 bottom-0 opacity-50 z-0">
               <Image
                 src="/circle.png"
                 alt="Rotating Circle"
@@ -53,12 +52,12 @@ export default function WhoWeAre() {
 
             {/* Overlapping Image */}
             <Image
-              src="https://images.unsplash.com/photo-1719559519300-e9d2c2bf6de1?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              src="https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=3132&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt="Solar Panels Small"
               width={250}
               loading="lazy"
               height={250}
-              className="rounded-2xl z-20 absolute w-[200px] h-[200px] md:w-[250px] md:h-[250px] -bottom-20 -right-6 md:-bottom-1/6 md:-right-1/4 border-[#f8f8f8] border-8  object-cover"
+              className="rounded-2xl z-20 absolute w-[200px] h-[200px] md:w-[250px] md:h-[250px] -bottom-20 -right-6 md:-bottom-1/6 md:-right-1/4 border-[#f8f8f8] border-8 object-cover"
             />
           </motion.div>
         </div>
@@ -124,10 +123,10 @@ export default function WhoWeAre() {
       </div>
     </section>
   );
-}
+};
 
 // CircularProgress Component (Optimized)
-function CircularProgress({
+const CircularProgress = memo(function CircularProgress({
   percent,
   label,
 }: {
@@ -172,4 +171,6 @@ function CircularProgress({
       <div className="text-xl font-bold">{label}</div>
     </div>
   );
-}
+});
+
+export default memo(WhoWeAre);

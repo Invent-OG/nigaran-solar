@@ -4,7 +4,14 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
-    domains: ['images.pexels.com', 'images.unsplash.com', 'assets.aceternity.com', 'turbifycdn.com', 'avatars.githubusercontent.com'],
+    domains: [
+      'images.pexels.com', 
+      'images.unsplash.com', 
+      'assets.aceternity.com', 
+      'turbifycdn.com', 
+      'avatars.githubusercontent.com',
+      'wallpapers.com'
+    ],
     formats: ['image/avif', 'image/webp'],
   },
   webpack(config) {
