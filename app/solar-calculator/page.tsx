@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -38,24 +38,15 @@ import {
   Lightbulb,
   IndianRupee,
   Home,
-  Coins,
-  LineChart,
-  AreaChart,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import RippleBackground from "@/components/RippleBackground";
-import { ShootingStars } from "@/components/ui/shooting-stars";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/pagination";
 import Image from "next/image";
 import Head from "next/head";
 
-// Default calculator values
+// Default calculator values - memoized to avoid recreating on each render
 const defaultCalculatorValues = [
   { minBill: 0, maxBill: 2880, kW: 2, area: 128, costBefore: 160000, costAfter: 100000 },
   { minBill: 2881, maxBill: 5820, kW: 3, area: 192, costBefore: 210000, costAfter: 132000 },
@@ -74,11 +65,8 @@ const formSchema = z.object({
   location: z.string().min(1, "Please select your location"),
 });
 
-const images = [
-  "https://images.pexels.com/photos/356036/pexels-photo-356036.jpeg",
-  "https://images.pexels.com/photos/159397/solar-panel-array-power-sun-electricity-159397.jpeg",
-  "https://images.pexels.com/photos/9875364/pexels-photo-9875364.jpeg",
-];
+// Hero background image - static instead of slider for better performance
+const heroImage = "https://images.pexels.com/photos/356036/pexels-photo-356036.jpeg";
 
 export default function SolarCalculatorPage() {
   const [showResults, setShowResults] = useState(false);
@@ -140,35 +128,21 @@ export default function SolarCalculatorPage() {
           name="description"
           content="Calculate your potential solar savings with Nigaran Solar's free calculator. Get instant estimates on system size, costs, ROI, and payback period based on your energy usage in Tamil Nadu."
         />
-        <meta
-          name="keywords"
-          content="solar calculator, solar savings calculator, solar ROI calculator, solar panel cost calculator, solar energy savings Tamil Nadu, solar investment calculator"
-        />
       </Head>
 
       {/* Hero Section */}
       <section className="relative lg:h-[80vh] flex items-center">
         <div className="absolute inset-0 z-0">
-          <Swiper
-            modules={[Autoplay, Pagination]}
-            autoplay={{ delay: 5000, disableOnInteraction: false }}
-            loop
-            pagination={{ clickable: true }}
-            className="w-full h-full"
-          >
-            {images.map((src, index) => (
-              <SwiperSlide key={index}>
-                <Image
-                  src={src}
-                  alt={`Solar panels ${index + 1}`}
-                  fill
-                  className="object-cover w-full h-full"
-                  priority={index === 0}
-                />
-                <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50" />
-              </SwiperSlide>
-            ))}
-          </Swiper>
+          <div className="relative w-full h-full">
+            <Image
+              src={heroImage}
+              alt="Solar panels"
+              fill
+              className="object-cover w-full h-full"
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50" />
+          </div>
         </div>
 
         <div className="container relative z-10 flex flex-col items-center justify-between w-full gap-10 py-10 lg:flex-row lg:p-0">
@@ -333,7 +307,7 @@ export default function SolarCalculatorPage() {
                     <Card>
                       <CardHeader className="pb-2">
                         <CardTitle className="flex items-center gap-2 text-lg">
-                          <Coins className="w-5 h-5 text-primary" />
+                          <IndianRupee className="w-5 h-5 text-primary" />
                           Cost After Subsidy
                         </CardTitle>
                       </CardHeader>
@@ -493,77 +467,10 @@ export default function SolarCalculatorPage() {
       </section>
 
       {/* Why You Need a Solar Calculator */}
-      <section className="relative flex flex-col items-center lg:flex-row">
-        {/* Left Side Image */}
-        <div className="w-full h-full lg:w-1/2">
-          <Image
-            src="https://images.pexels.com/photos/3943716/pexels-photo-3943716.jpeg"
-            alt="Solar Calculator Benefits"
-            width={800}
-            height={600}
-            className="shadow-lg object-cover w-full h-[70vh]"
-          />
-        </div>
-
-        {/* Right Side Content */}
-        <div className="w-full flex flex-col p-[5%] lg:w-1/2 items-center bg-black/90 justify-center lg:h-[70vh]">
-          {/* Background with stars */}
-          <div className="absolute inset-0">
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.15)_0%,rgba(0,0,0,0)_80%)]" />
-            <div className="absolute inset-0 stars" />
-          </div>
-
-          {/* Multiple shooting star layers with different colors and speeds */}
-          <ShootingStars
-            starColor="#9E00FF"
-            trailColor="#2EB9DF"
-            minSpeed={15}
-            maxSpeed={35}
-            minDelay={1000}
-            maxDelay={3000}
-          />
-          <ShootingStars
-            starColor="#FF0099"
-            trailColor="#FFB800"
-            minSpeed={10}
-            maxSpeed={25}
-            minDelay={2000}
-            maxDelay={4000}
-          />
-
-          <style jsx>{`
-            .stars {
-              background-image: radial-gradient(
-                  2px 2px at 20px 30px,
-                  #eee,
-                  rgba(0, 0, 0, 0)
-                ),
-                radial-gradient(2px 2px at 40px 70px, #fff, rgba(0, 0, 0, 0)),
-                radial-gradient(2px 2px at 50px 160px, #ddd, rgba(0, 0, 0, 0)),
-                radial-gradient(2px 2px at 90px 40px, #fff, rgba(0, 0, 0, 0)),
-                radial-gradient(2px 2px at 130px 80px, #fff, rgba(0, 0, 0, 0)),
-                radial-gradient(2px 2px at 160px 120px, #ddd, rgba(0, 0, 0, 0));
-              background-repeat: repeat;
-              background-size: 200px 200px;
-              animation: twinkle 5s ease-in-out infinite;
-              opacity: 0.5;
-            }
-
-            @keyframes twinkle {
-              0% {
-                opacity: 0.5;
-              }
-              50% {
-                opacity: 0.8;
-              }
-              100% {
-                opacity: 0.5;
-              }
-            }
-          `}</style>
-          
+      <section className="relative py-16 bg-black/90">
+        <div className="container">
           <motion.div
-            className="flex flex-col items-center gap-4 text-center text-white"
+            className="flex flex-col items-center gap-4 text-center text-white mb-12"
             initial={{ opacity: 0, y: 100 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -577,30 +484,50 @@ export default function SolarCalculatorPage() {
             <div className="w-20 h-1 mx-auto mb-6 bg-primary"></div>
           </motion.div>
 
-          <ul className="mt-6 space-y-6 text-lg text-white/80">
-            <li className="flex items-start gap-4">
-              <Calculator className="w-6 h-6 mt-1 text-primary" />
-              <span>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="bg-white/10 rounded-lg p-6 text-white"
+            >
+              <Calculator className="w-10 h-10 text-primary mb-4" />
+              <h3 className="text-xl font-semibold mb-2">Understand Costs & Savings</h3>
+              <p className="text-white/80">
                 People are often unsure of the exact costs and savings they would get from installing solar power systems, especially when trying to estimate their energy needs.
-              </span>
-            </li>
-            <li className="flex items-start gap-4">
-              <LineChart className="w-6 h-6 mt-1 text-primary" />
-              <span>
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="bg-white/10 rounded-lg p-6 text-white"
+            >
+              <Zap className="w-10 h-10 text-primary mb-4" />
+              <h3 className="text-xl font-semibold mb-2">Make Informed Decisions</h3>
+              <p className="text-white/80">
                 Without a clear understanding of how much energy they use and how solar can offset their costs, customers may be hesitant to invest in solar.
-              </span>
-            </li>
-            <li className="flex items-start gap-4">
-              <AreaChart className="w-6 h-6 mt-1 text-primary" />
-              <span>
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="bg-white/10 rounded-lg p-6 text-white"
+            >
+              <Sun className="w-10 h-10 text-primary mb-4" />
+              <h3 className="text-xl font-semibold mb-2">Simplify Decision-Making</h3>
+              <p className="text-white/80">
                 The Solar Calculator helps prospective solar customers quickly calculate their potential savings, costs, and system size requirements before they make a decision.
-              </span>
-            </li>
-          </ul>
+              </p>
+            </motion.div>
+          </div>
         </div>
       </section>
 
-      {/* Uses Section */}
+      {/* Uses and Benefits Combined Section */}
       <section className="py-16 bg-background">
         <div className="container">
           <motion.div
@@ -609,128 +536,85 @@ export default function SolarCalculatorPage() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <Badge variant="outline">Uses</Badge>
+            <Badge variant="outline">Uses & Benefits</Badge>
             <h2 className="max-w-2xl text-4xl font-extrabold md:text-5xl">
-              Uses of Solar Calculator
+              How Our Solar Calculator Helps You
             </h2>
             <div className="w-20 h-1 mx-auto mb-6 bg-primary"></div>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="bg-white rounded-lg p-8 shadow-lg hover:shadow-xl transition-all border-l-4 border-primary"
-            >
-              <h3 className="text-2xl font-semibold mb-4 flex items-center gap-3">
-                <IndianRupee className="h-6 w-6 text-primary" />
-                Estimate Savings
-              </h3>
-              <p className="text-muted-foreground">
-                You can use the Solar Calculator to estimate how much money you could save on your electricity bill by installing solar panels.
-              </p>
-            </motion.div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="space-y-6">
+              <h3 className="text-2xl font-bold">Uses</h3>
+              <ul className="space-y-4">
+                <li className="flex items-start gap-3">
+                  <div className="p-1 mt-1 rounded-full bg-primary/20">
+                    <IndianRupee className="w-4 h-4 text-primary" />
+                  </div>
+                  <div>
+                    <p className="font-medium">Estimate Savings</p>
+                    <p className="text-muted-foreground">You can use the Solar Calculator to estimate how much money you could save on your electricity bill by installing solar panels.</p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="p-1 mt-1 rounded-full bg-primary/20">
+                    <Sun className="w-4 h-4 text-primary" />
+                  </div>
+                  <div>
+                    <p className="font-medium">Determine System Size</p>
+                    <p className="text-muted-foreground">The calculator helps you figure out the right size of solar system needed based on your home or business's energy consumption.</p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="p-1 mt-1 rounded-full bg-primary/20">
+                    <BarChart className="w-4 h-4 text-primary" />
+                  </div>
+                  <div>
+                    <p className="font-medium">Cost Projection</p>
+                    <p className="text-muted-foreground">It provides a clear cost breakdown, helping users understand installation costs, payback period, and long-term savings.</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="bg-white rounded-lg p-8 shadow-lg hover:shadow-xl transition-all border-l-4 border-primary"
-            >
-              <h3 className="text-2xl font-semibold mb-4 flex items-center gap-3">
-                <Sun className="h-6 w-6 text-primary" />
-                Determine System Size
-              </h3>
-              <p className="text-muted-foreground">
-                The calculator helps you figure out the right size of solar system needed based on your home or business's energy consumption.
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="bg-white rounded-lg p-8 shadow-lg hover:shadow-xl transition-all border-l-4 border-primary"
-            >
-              <h3 className="text-2xl font-semibold mb-4 flex items-center gap-3">
-                <BarChart className="h-6 w-6 text-primary" />
-                Cost Projection
-              </h3>
-              <p className="text-muted-foreground">
-                It provides a clear cost breakdown, helping users understand installation costs, payback period, and long-term savings.
-              </p>
-            </motion.div>
+            <div className="space-y-6">
+              <h3 className="text-2xl font-bold">Benefits</h3>
+              <ul className="space-y-4">
+                <li className="flex items-start gap-3">
+                  <div className="p-1 mt-1 rounded-full bg-primary/20">
+                    <Zap className="w-4 h-4 text-primary" />
+                  </div>
+                  <div>
+                    <p className="font-medium">Quick and Accurate Estimates</p>
+                    <p className="text-muted-foreground">Get an instant understanding of how much you can save and what system size is right for you.</p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="p-1 mt-1 rounded-full bg-primary/20">
+                    <Home className="w-4 h-4 text-primary" />
+                  </div>
+                  <div>
+                    <p className="font-medium">Customizable</p>
+                    <p className="text-muted-foreground">Input your monthly electricity usage, roof size, and location, and get a personalized solar plan.</p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="p-1 mt-1 rounded-full bg-primary/20">
+                    <Clock className="w-4 h-4 text-primary" />
+                  </div>
+                  <div>
+                    <p className="font-medium">Saves Time</p>
+                    <p className="text-muted-foreground">Instead of waiting for a consultant, you can quickly evaluate if solar is the right choice for your home or business.</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Benefits Section */}
-      <section 
-        className="relative py-16 text-lg bg-cover bg-center"
-        style={{
-          backgroundImage:
-            "url('https://images.pexels.com/photos/4254160/pexels-photo-4254160.jpeg')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}>
-        <div className="absolute inset-0 bg-black/70" />
-        <div className="container relative z-10">
-          <motion.div
-            className="flex flex-col items-center gap-4 text-center mb-12"
-            initial={{ opacity: 0, y: 100 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <Badge variant="outline" className="text-white">Benefits</Badge>
-            <h2 className="max-w-2xl text-4xl font-extrabold text-white md:text-5xl">
-              Benefits of Solar Calculator
-            </h2>
-            <div className="w-20 h-1 mx-auto mb-6 bg-white"></div>
-          </motion.div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              {
-                icon: <Zap className="h-10 w-10" />,
-                title: "Quick and Accurate Estimates",
-                description: "Get an instant understanding of how much you can save and what system size is right for you."
-              },
-              {
-                icon: <Home className="h-10 w-10" />,
-                title: "Customizable",
-                description: "Input your monthly electricity usage, roof size, and location, and get a personalized solar plan."
-              },
-              {
-                icon: <Lightbulb className="h-10 w-10" />,
-                title: "No Obligation",
-                description: "It's a free tool that requires no commitment, giving you the information you need to make an informed decision."
-              },
-              {
-                icon: <Clock className="h-10 w-10" />,
-                title: "Saves Time",
-                description: "Instead of waiting for a consultant, you can quickly evaluate if solar is the right choice for your home or business."
-              },
-            ].map((benefit, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white rounded-lg p-6 text-center shadow-md hover:shadow-lg transition-all"
-              >
-                <div className="w-16 h-16 bg-primary/10 text-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                  {benefit.icon}
-                </div>
-                <h3 className="text-xl font-semibold mb-2">{benefit.title}</h3>
-                <p className="text-muted-foreground">{benefit.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* How It Works Section */}
-      <section className="py-16 pb-32 bg-background">
+      {/* How It Works Section - Simplified */}
+      <section className="py-16 pb-32 bg-muted/30">
         <div className="container">
           <motion.div
             className="flex flex-col items-center gap-4 mb-12 text-center"
@@ -745,59 +629,43 @@ export default function SolarCalculatorPage() {
             <div className="w-20 h-1 mx-auto mb-6 bg-primary"></div>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              {
-                step: "01",
-                title: "Input Your Details",
-                description:
-                  "Enter basic details such as your monthly electricity usage, location, and roof size.",
-                icon: <Calculator className="w-10 h-10 text-primary" />,
-              },
-              {
-                step: "02",
-                title: "Solar System Size",
-                description:
-                  "Based on your energy consumption, the calculator will recommend an ideal solar system size to meet your needs.",
-                icon: <Sun className="w-10 h-10 text-primary" />,
-              },
-              {
-                step: "03",
-                title: "Estimate Costs and Savings",
-                description:
-                  "The tool will provide an estimate of the installation cost, savings on electricity bills, and the payback period.",
-                icon: <IndianRupee className="w-10 h-10 text-primary" />,
-              },
-              {
-                step: "04",
-                title: "Account for Incentives",
-                description:
-                  "It factors in available government incentives and rebates to give you an accurate idea of the final price.",
-                icon: <Lightbulb className="w-10 h-10 text-primary" />,
-              },
-            ].map((step, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="relative p-6 overflow-hidden transition duration-300 transform bg-white rounded-lg shadow-md hover:bg-primary hover:text-white hover:shadow-xl group"
-              >
-                <div className="mb-4 text-3xl font-bold text-primary/20 group-hover:text-white/20">
-                  {step.step}
-                </div>
-                <div className="mb-4 text-primary group-hover:text-white">
-                  {step.icon}
-                </div>
-                <h3 className="mb-2 text-xl font-semibold group-hover:text-white">
-                  {step.title}
-                </h3>
-                <p className="text-muted-foreground group-hover:text-white">
-                  {step.description}
-                </p>
-                <div className="absolute inset-0 z-0 opacity-0 group-hover:opacity-40 transition-opacity duration-300 bg-[url('/bg-pattern.png')] pointer-events-none" />
-              </motion.div>
-            ))}
+          <div className="max-w-3xl mx-auto">
+            <ol className="relative border-l border-primary/30">
+              {[
+                {
+                  title: "Input Your Details",
+                  description: "Enter basic details such as your monthly electricity usage, location, and roof size.",
+                  icon: <Calculator className="w-6 h-6 text-white" />,
+                },
+                {
+                  title: "Solar System Size",
+                  description: "Based on your energy consumption, the calculator will recommend an ideal solar system size to meet your needs.",
+                  icon: <Sun className="w-6 h-6 text-white" />,
+                },
+                {
+                  title: "Estimate Costs and Savings",
+                  description: "The tool will provide an estimate of the installation cost, savings on electricity bills, and the payback period.",
+                  icon: <IndianRupee className="w-6 h-6 text-white" />,
+                },
+                {
+                  title: "Account for Incentives",
+                  description: "It factors in available government incentives and rebates to give you an accurate idea of the final price.",
+                  icon: <Lightbulb className="w-6 h-6 text-white" />,
+                },
+              ].map((step, index) => (
+                <li key={index} className="mb-10 ml-6">
+                  <span className="absolute flex items-center justify-center w-10 h-10 rounded-full -left-5 bg-primary">
+                    {step.icon}
+                  </span>
+                  <h3 className="flex items-center mb-2 text-xl font-semibold">
+                    {step.title}
+                  </h3>
+                  <p className="text-muted-foreground">
+                    {step.description}
+                  </p>
+                </li>
+              ))}
+            </ol>
           </div>
         </div>
       </section>
