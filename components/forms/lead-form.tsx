@@ -52,10 +52,16 @@ type LeadFormData = z.infer<typeof leadFormSchema>;
 interface LeadFormProps {
   title: string;
   description: string;
+  textColor?: string;
   type: "residential" | "housing_society" | "commercial";
 }
 
-export default function LeadForm({ type, description, title }: LeadFormProps) {
+export default function LeadForm({
+  type,
+  description,
+  title,
+  textColor,
+}: LeadFormProps) {
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const createLeadMutation = useCreateLead();
 
@@ -76,6 +82,7 @@ export default function LeadForm({ type, description, title }: LeadFormProps) {
     try {
       await createLeadMutation.mutateAsync(data);
       setSubmitSuccess(true);
+
       form.reset();
     } catch (error) {
       console.error("Failed to submit lead:", error);
@@ -84,8 +91,8 @@ export default function LeadForm({ type, description, title }: LeadFormProps) {
 
   if (submitSuccess) {
     return (
-      <div className="text-center p-6 bg-green-50 rounded-lg">
-        <h3 className="text-xl font-semibold text-green-800 mb-2">
+      <div className="p-6 text-center rounded-lg bg-green-50">
+        <h3 className="mb-2 text-xl font-semibold text-green-800">
           Thank You!
         </h3>
         <p className="text-green-700">
@@ -96,9 +103,9 @@ export default function LeadForm({ type, description, title }: LeadFormProps) {
   }
 
   return (
-    <Card className="relative overflow-hidden shadow-2xl bg-white/10 backdrop-blur-md border border-white/30">
+    <Card className="relative overflow-hidden border shadow-2xl bg-white/10 backdrop-blur-md border-white/30">
       <CardHeader className="text-center">
-        <CardTitle className="text-3xl text-white font-bold">{title}</CardTitle>
+        <CardTitle className="text-3xl font-bold text-white">{title}</CardTitle>
         <CardDescription className="text-white/70">
           {description}
         </CardDescription>
@@ -107,7 +114,7 @@ export default function LeadForm({ type, description, title }: LeadFormProps) {
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             {createLeadMutation.isError && (
-              <div className="p-3 text-sm text-red-500 bg-red-100/60 rounded-md">
+              <div className="p-3 text-sm text-red-500 rounded-md bg-red-100/60">
                 An error occurred. Please try again.
               </div>
             )}
@@ -118,14 +125,12 @@ export default function LeadForm({ type, description, title }: LeadFormProps) {
                 name="companyName"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-black/ text-white">
-                      Company Name
-                    </FormLabel>
+                    <FormLabel className={textColor}>Company Name</FormLabel>
                     <FormControl>
                       <Input
                         {...field}
                         placeholder="Enter company name"
-                        className="bg-white/20 backdrop-blur-sm border border-white/30 text-black/ text-white placeholder-white/60"
+                        className="border bg-white/20 backdrop-blur-sm border-white/30 placeholder-white/60"
                       />
                     </FormControl>
                     <FormMessage />
@@ -139,12 +144,12 @@ export default function LeadForm({ type, description, title }: LeadFormProps) {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-black/ text-white">Name</FormLabel>
+                  <FormLabel className={textColor}>Name</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
                       placeholder="Enter your name"
-                      className="bg-white/20 backdrop-blur-sm border border-white/30 text-black/ text-white placeholder-white/60"
+                      className="border bg-white/20 backdrop-blur-sm border-white/30 placeholder-white/60"
                     />
                   </FormControl>
                   <FormMessage />
@@ -157,14 +162,12 @@ export default function LeadForm({ type, description, title }: LeadFormProps) {
               name="whatsappNumber"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-black/ text-white">
-                    WhatsApp Number
-                  </FormLabel>
+                  <FormLabel className={textColor}>WhatsApp Number</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
                       placeholder="Enter your WhatsApp number"
-                      className="bg-white/20 backdrop-blur-sm border border-white/30 text-black/ text-white placeholder-white/60"
+                      className="border bg-white/20 backdrop-blur-sm border-white/30 placeholder-white/60"
                     />
                   </FormControl>
                   <FormMessage />
@@ -177,13 +180,13 @@ export default function LeadForm({ type, description, title }: LeadFormProps) {
               name="electricityBill"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-black/ text-white">
+                  <FormLabel className={textColor}>
                     {type === "commercial" ? "Monthly" : "Bi-Monthly"}{" "}
                     Electricity Bill (₹)
                   </FormLabel>
                   <Select onValueChange={field.onChange} value={field.value}>
                     <FormControl>
-                      <SelectTrigger className="bg-white/20 backdrop-blur-sm border border-white/30 text-white">
+                      <SelectTrigger className="text-white border bg-white/20 backdrop-blur-sm border-white/30">
                         <SelectValue placeholder="Select your electricity bill range" />
                       </SelectTrigger>
                     </FormControl>
@@ -219,12 +222,12 @@ export default function LeadForm({ type, description, title }: LeadFormProps) {
               name="city"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-black/ text-white">City</FormLabel>
+                  <FormLabel className={textColor}>City</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
                       placeholder="Enter your city"
-                      className="bg-white/20 backdrop-blur-sm border border-white/30 text-black/ text-white placeholder-white/60"
+                      className="border bg-white/20 backdrop-blur-sm border-white/30 placeholder-white/60"
                     />
                   </FormControl>
                   <FormMessage />
@@ -234,7 +237,7 @@ export default function LeadForm({ type, description, title }: LeadFormProps) {
 
             <Button
               type="submit"
-              className="w-full bg-white text-black hover:bg-white/90"
+              className="w-full text-black bg-white hover:bg-white/90"
               disabled={createLeadMutation.isPending}
             >
               {createLeadMutation.isPending

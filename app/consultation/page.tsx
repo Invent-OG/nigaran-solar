@@ -1,79 +1,3 @@
-// "use client";
-
-// import { motion } from "framer-motion";
-// import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-// import LeadForm from "@/components/forms/lead-form";
-// import { ShineBorder } from "@/components/magicui/shine-border";
-// import { BorderBeam } from "@/components/magicui/border-beam";
-// import { Button } from "@/components/ui/button";
-// import {
-//   Card,
-//   CardHeader,
-//   CardTitle,
-//   CardDescription,
-//   CardContent,
-//   CardFooter,
-// } from "@/components/ui/card";
-// import { Label } from "@radix-ui/react-label";
-// import { Input } from "@/components/ui/input";
-
-// export default function ConsultationPage() {
-//   return (
-//     <div className="min-h-screen pt-20">
-//       <section className="py-16 md:py-24 bg-background">
-//         <div className="container">
-//           <motion.div
-//             initial={{ opacity: 0, y: 100 }}
-//             animate={{ opacity: 1, y: 0 }}
-//             transition={{ duration: 0.5 }}
-//             className="text-center mb-12"
-//           >
-//             <h1 className="text-3xl md:text-4xl font-bold mb-4">
-//               Get Your Free Solar Consultation
-//             </h1>
-//             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-//               Fill out the form below and our experts will provide you with a
-//               customized solar solution.
-//             </p>
-//           </motion.div>
-
-//           <motion.div
-//             initial={{ opacity: 0, y: 100 }}
-//             animate={{ opacity: 1, y: 0 }}
-//             transition={{ duration: 0.5, delay: 0.2 }}
-//             className="max-w-md mx-auto"
-//           >
-//             <Tabs defaultValue="residential" className="w-full">
-//               <TabsList className="grid w-full grid-cols-3">
-//                 <TabsTrigger value="residential">Residential</TabsTrigger>
-//                 <TabsTrigger value="housing_society">
-//                   Housing Society
-//                 </TabsTrigger>
-//                 <TabsTrigger value="commercial">Commercial</TabsTrigger>
-//               </TabsList>
-//               <div className="mt-8">
-//                 <TabsContent value="residential">
-//                   <LeadForm type="residential" title={""} description={""} />
-//                 </TabsContent>
-//                 <TabsContent value="housing_society">
-//                   <LeadForm
-//                     type="housing_society"
-//                     title={""}
-//                     description={""}
-//                   />
-//                 </TabsContent>
-//                 <TabsContent value="commercial">
-//                   <LeadForm type="commercial" title={""} description={""} />
-//                 </TabsContent>
-//               </div>
-//             </Tabs>
-//           </motion.div>
-//         </div>
-//       </section>
-//     </div>
-//   );
-// }
-
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
@@ -135,17 +59,17 @@ export default function ConsultationPage() {
     <div className="relative min-h-screen px-4 pb-[50%] pt-[20%] lg:py-[8%]  md:px-12 lg:px-20 overflow-hidden">
       <RippleBackground />
 
-      <section className="relative container mx-auto mt-12 sm:mt-20 pb-20 z-10">
+      <section className="container relative z-10 pb-20 mx-auto mt-12 sm:mt-20">
         <motion.div
           initial={{ opacity: 0, y: 100 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-start"
+          className="flex flex-col items-start gap-10 lg:flex-row lg:gap-16"
         >
           {/* Carousel Section */}
           <div className="w-full lg:max-w-xl">
             <div className="mb-6 text-white">
-              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
+              <h1 className="mb-2 text-2xl font-bold sm:text-3xl md:text-4xl">
                 Get Your Free Solar Consultation
               </h1>
               <p className="text-sm sm:text-base text-white/70">
@@ -154,7 +78,7 @@ export default function ConsultationPage() {
               </p>
             </div>
 
-            <div className="overflow-hidden rounded-xl relative" ref={emblaRef}>
+            <div className="relative overflow-hidden rounded-xl" ref={emblaRef}>
               <div className="flex">
                 {slides.map((slide, index) => (
                   <div
@@ -169,11 +93,11 @@ export default function ConsultationPage() {
                       className="rounded-xl"
                     />
                     {/* Overlay Heading and Description */}
-                    <div className="absolute inset-0 bg-black/40 rounded-xl flex flex-col justify-end p-4 sm:p-6">
-                      <h3 className="text-white text-lg sm:text-xl font-semibold">
+                    <div className="absolute inset-0 flex flex-col justify-end p-4 bg-black/40 rounded-xl sm:p-6">
+                      <h3 className="text-lg font-semibold text-white sm:text-xl">
                         {slide.heading}
                       </h3>
-                      <p className="text-white/80 text-sm sm:text-base">
+                      <p className="text-sm text-white/80 sm:text-base">
                         {slide.description}
                       </p>
                     </div>
@@ -182,7 +106,7 @@ export default function ConsultationPage() {
               </div>
             </div>
 
-            <div className="flex justify-center mt-4 gap-2">
+            <div className="flex justify-center gap-2 mt-4">
               {slides.map((_, index) => (
                 <button
                   key={index}
@@ -196,9 +120,9 @@ export default function ConsultationPage() {
           </div>
 
           {/* Form Section */}
-          <div className="w-full lg:max-w-xl  text-white">
+          <div className="w-full text-white lg:max-w-xl">
             {/* Buttons */}
-            <div className="flex flex-row gap-3 sm:gap-4 mb-6">
+            <div className="flex flex-row gap-3 mb-6 sm:gap-4">
               <div
                 onClick={() => setFormType("residential")}
                 className={`cursor-pointer py-3 lg:px-4  w-full flex items-center justify-center gap-2 rounded-xl text-xs lg:text-sm sm:text-base transition ${
@@ -234,6 +158,7 @@ export default function ConsultationPage() {
             {/* Dynamic Form */}
             {formType === "residential" && (
               <LeadForm
+                textColor="lg:text-white text-black"
                 type="residential"
                 title="Residential Solar Solutions"
                 description="Optimize your home's energy with our customized residential solar plans."
@@ -241,6 +166,7 @@ export default function ConsultationPage() {
             )}
             {formType === "housing_society" && (
               <LeadForm
+                textColor="lg:text-white text-black"
                 type="housing_society"
                 title="Housing Society Solutions"
                 description="Affordable solar solutions designed for housing societies and communities."
@@ -248,6 +174,7 @@ export default function ConsultationPage() {
             )}
             {formType === "commercial" && (
               <LeadForm
+                textColor="lg:text-white text-black"
                 type="commercial"
                 title="Commercial Solar Plans"
                 description="Efficient solar power options tailored for your commercial needs."

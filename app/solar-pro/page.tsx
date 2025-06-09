@@ -27,6 +27,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { ShootingStars } from "@/components/ui/shooting-stars";
 import Head from "next/head";
+import { Label } from "@radix-ui/react-label";
 
 const images = [
   "https://images.pexels.com/photos/2800832/pexels-photo-2800832.jpeg",
@@ -66,10 +67,12 @@ money from solar referrals, solar affiliate program, Nigaran Solar Pro"
           >
             {images.map((src, index) => (
               <SwiperSlide key={index}>
-                <img
+                <Image
                   src={src}
                   alt={`Slide ${index + 1}`}
                   className="object-cover w-full h-full"
+                  width={1920}
+                  height={1080}
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50" />
               </SwiperSlide>
@@ -100,49 +103,56 @@ money from solar referrals, solar affiliate program, Nigaran Solar Pro"
             transition={{ duration: 0.5 }}
             className="lg:w-[40%] bg-white/10 backdrop-blur-md p-6 rounded-lg border border-white/30"
           >
-            <h3 className="text-xl font-semibold text-white mb-4">
+            <h3 className="mb-4 text-xl font-semibold text-white">
               Join Our Network
             </h3>
             <form className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <div>
+                  <Label className="my-2 text-white">First Name</Label>
                   <Input
                     placeholder="First Name"
-                    className="bg-white/20 backdrop-blur-sm border border-white/30 text-white placeholder-white/60"
+                    className="text-white border bg-white/20 backdrop-blur-sm border-white/30 placeholder-white/60"
                   />
                 </div>
                 <div>
+                  <Label className="mb-2 text-white">Last Name</Label>
                   <Input
                     placeholder="Last Name"
-                    className="bg-white/20 backdrop-blur-sm border border-white/30 text-white placeholder-white/60"
+                    className="text-white border bg-white/20 backdrop-blur-sm border-white/30 placeholder-white/60"
                   />
                 </div>
               </div>
+              <Label className="mb-2 text-white">Email Address</Label>
               <Input
                 type="email"
                 placeholder="Email Address"
-                className="bg-white/20 backdrop-blur-sm border border-white/30 text-white placeholder-white/60"
+                className="text-white border bg-white/20 backdrop-blur-sm border-white/30 placeholder-white/60"
               />
+              <Label className="mb-2 text-white">Phone Number</Label>
               <Input
                 type="tel"
                 placeholder="Phone Number"
-                className="bg-white/20 backdrop-blur-sm border border-white/30 text-white placeholder-white/60"
+                className="text-white border bg-white/20 backdrop-blur-sm border-white/30 placeholder-white/60"
               />
+              <Label className="mb-2 text-white">Location</Label>
               <Input
                 placeholder="Location"
-                className="bg-white/20 backdrop-blur-sm border border-white/30 text-white placeholder-white/60"
+                className="text-white border bg-white/20 backdrop-blur-sm border-white/30 placeholder-white/60"
               />
+              <Label className="mb-2 text-white">Profession</Label>
               <Input
                 placeholder="Profession"
-                className="bg-white/20 backdrop-blur-sm border border-white/30 text-white placeholder-white/60"
+                className="text-white border bg-white/20 backdrop-blur-sm border-white/30 placeholder-white/60"
               />
+              <Label className="mb-2 text-white">Why Join</Label>
               <Textarea
                 placeholder="Why do you want to join?"
-                className="bg-white/20 backdrop-blur-sm border border-white/30 text-white placeholder-white/60"
+                className="text-white border bg-white/20 backdrop-blur-sm border-white/30 placeholder-white/60"
               />
-              <Button className="w-full bg-white text-black hover:bg-white/90">
+              <Button className="w-full text-black bg-white hover:bg-white/90">
                 Submit Application
-                <ArrowRight className="ml-2 h-4 w-4" />
+                <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
             </form>
           </motion.div>
@@ -165,26 +175,26 @@ money from solar referrals, solar affiliate program, Nigaran Solar Pro"
             <div className="w-20 h-1 mx-auto mb-6 bg-primary"></div>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
+          <div className="grid grid-cols-1 gap-8 mt-12 md:grid-cols-2 lg:grid-cols-4">
             {[
               {
-                icon: <Wallet className="h-8 w-8" />,
+                icon: <Wallet className="w-8 h-8" />,
                 title: "Earn Rewards",
                 description:
                   "Attractive commissions for every successful referral",
               },
               {
-                icon: <Users className="h-8 w-8" />,
+                icon: <Users className="w-8 h-8" />,
                 title: "Help Your Network",
                 description: "Enable your community to save on energy costs",
               },
               {
-                icon: <Trophy className="h-8 w-8" />,
+                icon: <Trophy className="w-8 h-8" />,
                 title: "Growth Opportunities",
                 description: "Access to training and professional development",
               },
               {
-                icon: <BadgeCheck className="h-8 w-8" />,
+                icon: <BadgeCheck className="w-8 h-8" />,
                 title: "Expert Support",
                 description: "Dedicated team to help you succeed",
               },
@@ -194,12 +204,12 @@ money from solar referrals, solar affiliate program, Nigaran Solar Pro"
                 initial={{ opacity: 0, y: 100 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-card rounded-lg p-6 text-center hover:shadow-xl transition-shadow"
+                className="p-6 text-center transition-shadow rounded-lg bg-card hover:shadow-xl"
               >
-                <div className="w-16 h-16 bg-primary/10 text-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="flex items-center justify-center w-16 h-16 mx-auto mb-4 rounded-full bg-primary/10 text-primary">
                   {benefit.icon}
                 </div>
-                <h3 className="text-xl font-semibold mb-2">{benefit.title}</h3>
+                <h3 className="mb-2 text-xl font-semibold">{benefit.title}</h3>
                 <p className="text-muted-foreground">{benefit.description}</p>
               </motion.div>
             ))}
@@ -292,14 +302,14 @@ money from solar referrals, solar affiliate program, Nigaran Solar Pro"
 
           <ul className="mt-6 space-y-6 text-lg text-white/80">
             <li className="flex items-start gap-4">
-              <Home className="w-6 h-6 text-primary mt-1" />
+              <Home className="w-6 h-6 mt-1 text-primary" />
               <span>
                 <strong className="text-white">Homeowners or customers</strong>{" "}
                 who&apos;ve already installed solar
               </span>
             </li>
             <li className="flex items-start gap-4">
-              <Briefcase className="w-6 h-6 text-primary mt-1" />
+              <Briefcase className="w-6 h-6 mt-1 text-primary" />
               <span>
                 <strong className="text-white">
                   Electricians, plumbers, and local service providers
@@ -308,7 +318,7 @@ money from solar referrals, solar affiliate program, Nigaran Solar Pro"
               </span>
             </li>
             <li className="flex items-start gap-4">
-              <Users className="w-6 h-6 text-primary mt-1" />
+              <Users className="w-6 h-6 mt-1 text-primary" />
               <span>
                 <strong className="text-white">
                   Real estate agents and housing society managers
@@ -317,7 +327,7 @@ money from solar referrals, solar affiliate program, Nigaran Solar Pro"
               </span>
             </li>
             <li className="flex items-start gap-4">
-              <Newspaper className="w-6 h-6 text-primary mt-1" />
+              <Newspaper className="w-6 h-6 mt-1 text-primary" />
               <span>
                 <strong className="text-white">Influencers or bloggers</strong>{" "}
                 in the home improvement niche
@@ -331,7 +341,7 @@ money from solar referrals, solar affiliate program, Nigaran Solar Pro"
       <section className="py-16 bg-muted/50">
         <div className="container">
           <motion.div
-            className="flex flex-col items-center gap-4 text-center mb-12"
+            className="flex flex-col items-center gap-4 mb-12 text-center"
             initial={{ opacity: 0, y: 100 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -343,26 +353,26 @@ money from solar referrals, solar affiliate program, Nigaran Solar Pro"
             <div className="w-20 h-1 mx-auto mb-6 bg-primary"></div>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
             {[
               {
                 step: "01",
                 title: "Sign Up",
                 description:
                   "Complete the registration form to join our network",
-                icon: <Users className="h-10 w-10 text-primary" />,
+                icon: <Users className="w-10 h-10 text-primary" />,
               },
               {
                 step: "02",
                 title: "Refer",
                 description: "Share solar benefits with your network",
-                icon: <Zap className="h-10 w-10 text-primary" />,
+                icon: <Zap className="w-10 h-10 text-primary" />,
               },
               {
                 step: "03",
                 title: "Earn",
                 description: "Get rewarded for successful installations",
-                icon: <DollarSign className="h-10 w-10 text-primary" />,
+                icon: <DollarSign className="w-10 h-10 text-primary" />,
               },
             ].map((step, index) => (
               <motion.div
@@ -373,10 +383,10 @@ money from solar referrals, solar affiliate program, Nigaran Solar Pro"
                 className="relative p-6 overflow-hidden transition duration-300 transform bg-white rounded-lg shadow-md hover:bg-primary hover:text-white hover:shadow-xl group"
               >
                 <div className="mb-4">{step.icon}</div>
-                <div className="text-4xl font-bold mb-4 text-primary group-hover:text-white">
+                <div className="mb-4 text-4xl font-bold text-primary group-hover:text-white">
                   {step.step}
                 </div>
-                <h3 className="text-xl font-semibold mb-2 group-hover:text-white">
+                <h3 className="mb-2 text-xl font-semibold group-hover:text-white">
                   {step.title}
                 </h3>
                 <p className="text-muted-foreground group-hover:text-white">
@@ -390,15 +400,15 @@ money from solar referrals, solar affiliate program, Nigaran Solar Pro"
       </section>
 
       {/* Why Refer Section */}
-      <section className="py-16 bg-primary text-white">
+      <section className="py-16 text-white bg-primary">
         <div className="container">
           <motion.div
-            className="flex flex-col items-center gap-4 text-center mb-12"
+            className="flex flex-col items-center gap-4 mb-12 text-center"
             initial={{ opacity: 0, y: 100 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <Badge variant="outline" className="bg-white/10 text-white">
+            <Badge variant="outline" className="text-white bg-white/10">
               Why Choose Us
             </Badge>
             <h2 className="max-w-2xl text-4xl font-extrabold md:text-5xl">
@@ -407,28 +417,28 @@ money from solar referrals, solar affiliate program, Nigaran Solar Pro"
             <div className="w-20 h-1 mx-auto mb-6 bg-white"></div>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
             {[
               {
-                icon: <ShieldCheck className="h-6 w-6" />,
+                icon: <ShieldCheck className="w-6 h-6" />,
                 title: "Trusted Brand",
                 description:
                   "MNRE-approved solar company with 500+ successful installations",
               },
               {
-                icon: <Zap className="h-6 w-6" />,
+                icon: <Zap className="w-6 h-6" />,
                 title: "Faster Conversions",
                 description:
                   "Dedicated team ensures your leads are followed up professionally",
               },
               {
-                icon: <Eye className="h-6 w-6" />,
+                icon: <Eye className="w-6 h-6" />,
                 title: "Transparent Tracking",
                 description:
                   "You'll be notified at every stage — from lead to installation",
               },
               {
-                icon: <DollarSign className="h-6 w-6" />,
+                icon: <DollarSign className="w-6 h-6" />,
                 title: "Timely Payouts",
                 description:
                   "Receive your commissions via UPI or bank transfer at right time",
@@ -439,15 +449,15 @@ money from solar referrals, solar affiliate program, Nigaran Solar Pro"
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="flex gap-6 p-6 bg-white/10 backdrop-blur-md rounded-lg border border-white/20"
+                className="flex gap-6 p-6 border rounded-lg bg-white/10 backdrop-blur-md border-white/20"
               >
                 <div className="flex-shrink-0">
-                  <div className="p-3 rounded-full bg-white/20 text-white">
+                  <div className="p-3 text-white rounded-full bg-white/20">
                     {item.icon}
                   </div>
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+                  <h3 className="mb-2 text-xl font-semibold">{item.title}</h3>
                   <p className="text-white/80">{item.description}</p>
                 </div>
               </motion.div>
@@ -460,7 +470,7 @@ money from solar referrals, solar affiliate program, Nigaran Solar Pro"
       <section className="py-16 bg-background">
         <div className="container">
           <motion.div
-            className="flex flex-col items-center gap-4 text-center mb-12"
+            className="flex flex-col items-center gap-4 mb-12 text-center"
             initial={{ opacity: 0, y: 100 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -472,7 +482,7 @@ money from solar referrals, solar affiliate program, Nigaran Solar Pro"
             <div className="w-20 h-1 mx-auto mb-6 bg-primary"></div>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -484,7 +494,7 @@ money from solar referrals, solar affiliate program, Nigaran Solar Pro"
                 alt="Solar Pro Network"
                 width={600}
                 height={400}
-                className="w-full h-full object-cover rounded-lg"
+                className="object-cover w-full h-full rounded-lg"
               />
             </motion.div>
 
@@ -497,7 +507,7 @@ money from solar referrals, solar affiliate program, Nigaran Solar Pro"
               <ul className="space-y-4">
                 <li className="flex items-start gap-3">
                   <div className="p-1 mt-1 rounded-full bg-primary/20">
-                    <ArrowRight className="h-4 w-4 text-primary" />
+                    <ArrowRight className="w-4 h-4 text-primary" />
                   </div>
                   <p>
                     As the solar energy market grows, more and more people are
@@ -506,7 +516,7 @@ money from solar referrals, solar affiliate program, Nigaran Solar Pro"
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="p-1 mt-1 rounded-full bg-primary/20">
-                    <ArrowRight className="h-4 w-4 text-primary" />
+                    <ArrowRight className="w-4 h-4 text-primary" />
                   </div>
                   <p>
                     Many homeowners and businesses are interested in solar but
@@ -515,7 +525,7 @@ money from solar referrals, solar affiliate program, Nigaran Solar Pro"
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="p-1 mt-1 rounded-full bg-primary/20">
-                    <ArrowRight className="h-4 w-4 text-primary" />
+                    <ArrowRight className="w-4 h-4 text-primary" />
                   </div>
                   <p>
                     The Solar Pro Referral Program helps spread awareness about
@@ -524,7 +534,7 @@ money from solar referrals, solar affiliate program, Nigaran Solar Pro"
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="p-1 mt-1 rounded-full bg-primary/20">
-                    <ArrowRight className="h-4 w-4 text-primary" />
+                    <ArrowRight className="w-4 h-4 text-primary" />
                   </div>
                   <p>
                     This program taps into the potential for earning income from
@@ -540,7 +550,7 @@ money from solar referrals, solar affiliate program, Nigaran Solar Pro"
       {/* Uses & Benefits Section */}
       <section className="py-16 pb-52 bg-muted/30">
         <div className="container">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
             {/* Uses */}
             <motion.div
               initial={{ opacity: 0, y: 50 }}
@@ -553,12 +563,12 @@ money from solar referrals, solar affiliate program, Nigaran Solar Pro"
                 <h2 className="text-3xl font-bold md:text-4xl text-black/80">
                   Uses of Solar Pro
                 </h2>
-                <div className="w-20 h-1 bg-primary mb-6"></div>
+                <div className="w-20 h-1 mb-6 bg-primary"></div>
               </div>
 
               <ul className="space-y-4">
-                <li className="p-4 bg-card rounded-lg shadow-sm">
-                  <h3 className="font-semibold text-lg mb-2 text-primary">
+                <li className="p-4 rounded-lg shadow-sm bg-card">
+                  <h3 className="mb-2 text-lg font-semibold text-primary">
                     Referral Program
                   </h3>
                   <p className="text-muted-foreground">
@@ -566,16 +576,16 @@ money from solar referrals, solar affiliate program, Nigaran Solar Pro"
                     Nigaran Solar.
                   </p>
                 </li>
-                <li className="p-4 bg-card rounded-lg shadow-sm">
-                  <h3 className="font-semibold text-lg mb-2 text-primary">
+                <li className="p-4 rounded-lg shadow-sm bg-card">
+                  <h3 className="mb-2 text-lg font-semibold text-primary">
                     Income Opportunity
                   </h3>
                   <p className="text-muted-foreground">
                     Share solar benefits with your network and get paid.
                   </p>
                 </li>
-                <li className="p-4 bg-card rounded-lg shadow-sm">
-                  <h3 className="font-semibold text-lg mb-2 text-primary">
+                <li className="p-4 rounded-lg shadow-sm bg-card">
+                  <h3 className="mb-2 text-lg font-semibold text-primary">
                     Spread Awareness
                   </h3>
                   <p className="text-muted-foreground">
@@ -598,34 +608,34 @@ money from solar referrals, solar affiliate program, Nigaran Solar Pro"
                 <h2 className="text-3xl font-bold md:text-4xl text-black/80">
                   Benefits of Solar Pro
                 </h2>
-                <div className="w-20 h-1 bg-primary mb-6"></div>
+                <div className="w-20 h-1 mb-6 bg-primary"></div>
               </div>
 
               <ul className="space-y-4">
-                <li className="p-4 bg-card rounded-lg shadow-sm">
-                  <h3 className="font-semibold text-lg mb-2 text-primary">
+                <li className="p-4 rounded-lg shadow-sm bg-card">
+                  <h3 className="mb-2 text-lg font-semibold text-primary">
                     Earn Passive Income
                   </h3>
                   <p className="text-muted-foreground">
                     Commission for every successful installation.
                   </p>
                 </li>
-                <li className="p-4 bg-card rounded-lg shadow-sm">
-                  <h3 className="font-semibold text-lg mb-2 text-primary">
+                <li className="p-4 rounded-lg shadow-sm bg-card">
+                  <h3 className="mb-2 text-lg font-semibold text-primary">
                     No Investment Required
                   </h3>
                   <p className="text-muted-foreground">Just refer and earn.</p>
                 </li>
-                <li className="p-4 bg-card rounded-lg shadow-sm">
-                  <h3 className="font-semibold text-lg mb-2 text-primary">
+                <li className="p-4 rounded-lg shadow-sm bg-card">
+                  <h3 className="mb-2 text-lg font-semibold text-primary">
                     Support Clean Energy
                   </h3>
                   <p className="text-muted-foreground">
                     Help build a sustainable future.
                   </p>
                 </li>
-                <li className="p-4 bg-card rounded-lg shadow-sm">
-                  <h3 className="font-semibold text-lg mb-2 text-primary">
+                <li className="p-4 rounded-lg shadow-sm bg-card">
+                  <h3 className="mb-2 text-lg font-semibold text-primary">
                     Flexible Earning Potential
                   </h3>
                   <p className="text-muted-foreground">

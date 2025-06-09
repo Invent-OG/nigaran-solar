@@ -18,12 +18,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { 
-  Calculator, 
-  Sun, 
-  Battery, 
-  Zap, 
-  CheckCircle, 
+import {
+  Calculator,
+  Sun,
+  Battery,
+  Zap,
+  CheckCircle,
   ArrowRight,
   Clock,
   BarChart,
@@ -98,7 +98,9 @@ export default function SolarCalculatorPage() {
               Calculate Your Solar Savings Instantly
             </h1>
             <p className="mb-8 text-lg md:text-xl text-white/90">
-              Try our free solar calculator to estimate your monthly savings, return on investment, and energy output based on your specific needs and location.
+              Try our free solar calculator to estimate your monthly savings,
+              return on investment, and energy output based on your specific
+              needs and location.
             </p>
           </motion.div>
 
@@ -109,10 +111,12 @@ export default function SolarCalculatorPage() {
             transition={{ duration: 0.5 }}
             className="w-full lg:w-[40%] bg-white/10 backdrop-blur-md p-6 rounded-lg border border-white/30"
           >
-            <h3 className="text-xl font-semibold text-white mb-4">Solar Calculator</h3>
+            <h3 className="mb-4 text-xl font-semibold text-white">
+              Solar Calculator
+            </h3>
             <div className="space-y-4">
               <div>
-                <label className="text-sm font-medium mb-2 block text-white">
+                <label className="block mb-2 text-sm font-medium text-white">
                   Monthly Electricity Bill (₹)
                 </label>
                 <Input
@@ -120,12 +124,12 @@ export default function SolarCalculatorPage() {
                   placeholder="Enter your monthly bill"
                   value={monthlyBill || ""}
                   onChange={(e) => setMonthlyBill(Number(e.target.value))}
-                  className="bg-white/20 backdrop-blur-sm border border-white/30 text-white placeholder-white/60"
+                  className="text-white border bg-white/20 backdrop-blur-sm border-white/30 placeholder-white/60"
                 />
               </div>
 
               <div>
-                <label className="text-sm font-medium mb-2 block text-white">
+                <label className="block mb-2 text-sm font-medium text-white">
                   Available Roof Area (sq ft)
                 </label>
                 <Input
@@ -133,16 +137,16 @@ export default function SolarCalculatorPage() {
                   placeholder="Enter roof area"
                   value={roofArea || ""}
                   onChange={(e) => setRoofArea(Number(e.target.value))}
-                  className="bg-white/20 backdrop-blur-sm border border-white/30 text-white placeholder-white/60"
+                  className="text-white border bg-white/20 backdrop-blur-sm border-white/30 placeholder-white/60"
                 />
               </div>
 
               <div>
-                <label className="text-sm font-medium mb-2 block text-white">
+                <label className="block mb-2 text-sm font-medium text-white">
                   Location
                 </label>
                 <Select value={location} onValueChange={setLocation}>
-                  <SelectTrigger className="bg-white/20 backdrop-blur-sm border border-white/30 text-white">
+                  <SelectTrigger className="text-white border bg-white/20 backdrop-blur-sm border-white/30">
                     <SelectValue placeholder="Select your location" />
                   </SelectTrigger>
                   <SelectContent>
@@ -157,7 +161,7 @@ export default function SolarCalculatorPage() {
               </div>
 
               <Button
-                className="w-full bg-white text-black hover:bg-white/90"
+                className="w-full text-black bg-white hover:bg-white/90"
                 onClick={handleCalculate}
                 disabled={!monthlyBill || !roofArea}
               >
@@ -181,19 +185,20 @@ export default function SolarCalculatorPage() {
               <Card className="border-primary/20">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-2xl">
-                    <Sun className="h-6 w-6 text-primary" />
+                    <Sun className="w-6 h-6 text-primary" />
                     Your Solar System Estimate
                   </CardTitle>
                   <CardDescription>
-                    Based on your inputs, here&apos;s what your solar system could look like
+                    Based on your inputs, here&apos;s what your solar system
+                    could look like
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
                     <Card>
                       <CardHeader className="pb-2">
-                        <CardTitle className="text-lg flex items-center gap-2">
-                          <Sun className="h-5 w-5 text-primary" />
+                        <CardTitle className="flex items-center gap-2 text-lg">
+                          <Sun className="w-5 h-5 text-primary" />
                           System Size
                         </CardTitle>
                       </CardHeader>
@@ -209,8 +214,8 @@ export default function SolarCalculatorPage() {
 
                     <Card>
                       <CardHeader className="pb-2">
-                        <CardTitle className="text-lg flex items-center gap-2">
-                          <IndianRupee className="h-5 w-5 text-primary" />
+                        <CardTitle className="flex items-center gap-2 text-lg">
+                          <IndianRupee className="w-5 h-5 text-primary" />
                           Estimated Cost
                         </CardTitle>
                       </CardHeader>
@@ -226,8 +231,8 @@ export default function SolarCalculatorPage() {
 
                     <Card>
                       <CardHeader className="pb-2">
-                        <CardTitle className="text-lg flex items-center gap-2">
-                          <Battery className="h-5 w-5 text-primary" />
+                        <CardTitle className="flex items-center gap-2 text-lg">
+                          <Battery className="w-5 h-5 text-primary" />
                           Annual Savings
                         </CardTitle>
                       </CardHeader>
@@ -243,8 +248,8 @@ export default function SolarCalculatorPage() {
 
                     <Card>
                       <CardHeader className="pb-2">
-                        <CardTitle className="text-lg flex items-center gap-2">
-                          <Clock className="h-5 w-5 text-primary" />
+                        <CardTitle className="flex items-center gap-2 text-lg">
+                          <Clock className="w-5 h-5 text-primary" />
                           Payback Period
                         </CardTitle>
                       </CardHeader>
@@ -260,8 +265,8 @@ export default function SolarCalculatorPage() {
 
                     <Card>
                       <CardHeader className="pb-2">
-                        <CardTitle className="text-lg flex items-center gap-2">
-                          <Zap className="h-5 w-5 text-primary" />
+                        <CardTitle className="flex items-center gap-2 text-lg">
+                          <Zap className="w-5 h-5 text-primary" />
                           CO₂ Reduction
                         </CardTitle>
                       </CardHeader>
@@ -277,8 +282,8 @@ export default function SolarCalculatorPage() {
 
                     <Card>
                       <CardHeader className="pb-2">
-                        <CardTitle className="text-lg flex items-center gap-2">
-                          <BarChart className="h-5 w-5 text-primary" />
+                        <CardTitle className="flex items-center gap-2 text-lg">
+                          <BarChart className="w-5 h-5 text-primary" />
                           Roof Area Needed
                         </CardTitle>
                       </CardHeader>
@@ -303,7 +308,7 @@ export default function SolarCalculatorPage() {
       <section className="py-16 pb-52 bg-background">
         <div className="container">
           <motion.div
-            className="flex flex-col items-center gap-4 text-center mb-12"
+            className="flex flex-col items-center gap-4 mb-12 text-center"
             initial={{ opacity: 0, y: 100 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -315,31 +320,35 @@ export default function SolarCalculatorPage() {
             <div className="w-20 h-1 mx-auto mb-6 bg-primary"></div>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
             {[
               {
                 step: "01",
                 title: "Input Your Details",
-                description: "Enter basic details such as your monthly electricity usage, location, and roof size.",
-                icon: <Calculator className="h-10 w-10 text-primary" />
+                description:
+                  "Enter basic details such as your monthly electricity usage, location, and roof size.",
+                icon: <Calculator className="w-10 h-10 text-primary" />,
               },
               {
                 step: "02",
                 title: "Solar System Size",
-                description: "Based on your energy consumption, the calculator will recommend an ideal solar system size to meet your needs.",
-                icon: <Sun className="h-10 w-10 text-primary" />
+                description:
+                  "Based on your energy consumption, the calculator will recommend an ideal solar system size to meet your needs.",
+                icon: <Sun className="w-10 h-10 text-primary" />,
               },
               {
                 step: "03",
                 title: "Estimate Costs and Savings",
-                description: "The tool will provide an estimate of the installation cost, savings on electricity bills, and the payback period.",
-                icon: <IndianRupee className="h-10 w-10 text-primary" />
+                description:
+                  "The tool will provide an estimate of the installation cost, savings on electricity bills, and the payback period.",
+                icon: <IndianRupee className="w-10 h-10 text-primary" />,
               },
               {
                 step: "04",
                 title: "Account for Incentives",
-                description: "It factors in available government incentives and rebates to give you an accurate idea of the final price.",
-                icon: <Lightbulb className="h-10 w-10 text-primary" />
+                description:
+                  "It factors in available government incentives and rebates to give you an accurate idea of the final price.",
+                icon: <Lightbulb className="w-10 h-10 text-primary" />,
               },
             ].map((step, index) => (
               <motion.div
@@ -349,20 +358,24 @@ export default function SolarCalculatorPage() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="relative p-6 overflow-hidden transition duration-300 transform bg-white rounded-lg shadow-md hover:bg-primary hover:text-white hover:shadow-xl group"
               >
-                <div className="text-3xl font-bold text-primary/20 mb-4 group-hover:text-white/20">{step.step}</div>
+                <div className="mb-4 text-3xl font-bold text-primary/20 group-hover:text-white/20">
+                  {step.step}
+                </div>
                 <div className="mb-4 text-primary group-hover:text-white">
                   {step.icon}
                 </div>
-                <h3 className="text-xl font-semibold mb-2 group-hover:text-white">{step.title}</h3>
-                <p className="text-muted-foreground group-hover:text-white">{step.description}</p>
+                <h3 className="mb-2 text-xl font-semibold group-hover:text-white">
+                  {step.title}
+                </h3>
+                <p className="text-muted-foreground group-hover:text-white">
+                  {step.description}
+                </p>
                 <div className="absolute inset-0 z-0 opacity-0 group-hover:opacity-40 transition-opacity duration-300 bg-[url('/bg-pattern.png')] pointer-events-none" />
               </motion.div>
             ))}
           </div>
         </div>
       </section>
-
-     
     </div>
   );
 }

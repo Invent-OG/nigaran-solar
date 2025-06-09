@@ -93,6 +93,7 @@ electricity costs for eco-friendly housing societies."
             className="lg:w-[40%]"
           >
             <LeadForm
+              textColor="text-white"
               type="housing_society"
               title={"Get Your Free Quote"}
               description={""}

@@ -112,6 +112,7 @@ export default function CommercialPage() {
             className="lg:w-[40%]"
           >
             <LeadForm
+              textColor="text-white"
               type="commercial"
               title={"Get Your Free Quote"}
               description={""}

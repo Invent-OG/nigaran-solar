@@ -317,6 +317,7 @@ export default function ResidentialPage() {
             className="lg:w-[40%]"
           >
             <LeadForm
+              textColor="text-white"
               type="residential"
               title={"Get Your Free Quote"}
               description={""}
