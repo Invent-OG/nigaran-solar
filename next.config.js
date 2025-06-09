@@ -9,9 +9,13 @@ const nextConfig = {
       'images.unsplash.com', 
       'assets.aceternity.com', 
       'turbifycdn.com', 
+      "cdn.britannica.com",
+      'cdn.pixabay.com',
       'avatars.githubusercontent.com',
       'wallpapers.com',
-      "www.soleosenergy.com"
+      "www.soleosenergy.com",
+      "bsmedia.business-standard.com",
+      "images.remotePatterns.com"
     ],
     formats: ['image/avif', 'image/webp'],
   },
@@ -29,8 +33,6 @@ const nextConfig = {
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
   },
-  // Optimize images
-  swcMinify: true,
   poweredByHeader: false,
 };
 

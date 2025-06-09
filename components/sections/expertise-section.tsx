@@ -25,15 +25,15 @@ const ExpertiseCardMobile = ({
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
     >
-      <div className="relative  overflow-hidden rounded-lg p-8 shadow-lg h-full bg-white transition-all duration-500 group">
+      <div className="relative h-full p-8 overflow-hidden transition-all duration-500 bg-white rounded-lg shadow-lg group">
         <div className="absolute h-[130px] w-[100px] bg-primary rounded-full top-[-75px] right-[-75px] z-0 transition-transform duration-500 group-hover:scale-[10]"></div>
 
         <div className="relative z-10">
           <div className=" font-bold text-[20px] flex mb-5 gap-2 items-center min-h-[57px] group-hover:text-white overflow-hidden">
-            <div className=" bg-primary rounded-full ">{icon}</div>
+            <div className="rounded-full bg-primary">{icon}</div>
             {title}
           </div>
-          <span className=" transition-colors text-gray-500 duration-500 group-hover:text-white">
+          <span className="text-gray-500 transition-colors duration-500 group-hover:text-white">
             {description}
           </span>
         </div>
@@ -54,10 +54,10 @@ const ExpertiseCard = ({
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
     >
-      <div className="text-center flex flex-col gap-2 items-center max-w-xs justify-center">
-        <div className="bg-primary p-5 rounded-full text-white">{icon}</div>
-        <div className="font-bold text-xl"> {title}</div>
-        <div className="text-md text-gray-500"> {description}</div>
+      <div className="flex flex-col items-center justify-center max-w-xs gap-2 text-center">
+        <div className="p-5 text-white rounded-full bg-primary">{icon}</div>
+        <div className="text-xl font-bold"> {title}</div>
+        <div className="text-gray-500 text-md"> {description}</div>
       </div>
     </motion.div>
   );
@@ -130,7 +130,7 @@ export default function ExpertiseSection() {
     >
       <div className="absolute inset-0 z-0 bg-[url('/bg-pattern.png')] bg-cover bg-center opacity-30"></div>
 
-      <div className=" container ">
+      <div className="container ">
         <motion.div
           className="flex flex-col items-center gap-4 text-center"
           initial={{ opacity: 0, y: 100 }}
@@ -146,7 +146,7 @@ export default function ExpertiseSection() {
           </h2>
           <div className="w-20 h-1 mx-auto mb-6 bg-primary"></div>
         </motion.div>
-        <div className="md:flex relative flex-col hidden justify-between gap-24 w-full ">
+        <div className="relative flex-col justify-between hidden w-full gap-24 md:flex ">
           <div className="flex justify-between px-[10%] w-full">
             {expertiseItemsDesktop1.map((item, index) => (
               <ExpertiseCard
@@ -174,14 +174,15 @@ export default function ExpertiseSection() {
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
             viewport={{ amount: 0.5 }}
-            className="absolute bottom-0 right-0 flex  justify-center"
+            className="absolute bottom-0 flex justify-center right-1/3"
           >
             <Image
               src="https://wallpapers.com/images/hd/renewable-energy-concept-earth-solar-panels-wind-turbines-02b8mz7vgrvw8ikq-02b8mz7vgrvw8ikq.jpg"
               alt=""
-              width={100}
-              height={100}
-              className="h-[35%] w-[35%]"
+              width={400}
+              height={400}
+              className="object-cover w-full h-full rounded-lg "
+              loading="lazy"
             />
           </motion.div>
         </div>

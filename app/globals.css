@@ -47,9 +47,7 @@ html, body {
     --animate-fourth: moveHorizontal 40s ease infinite;
     --animate-fifth: moveInCircle 20s ease infinite;
   }
-  .dark {
-    --brand: 31 97% 72%;
-  }
+ 
 
 }
 

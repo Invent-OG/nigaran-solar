@@ -1,5 +1,4 @@
 "use client";
-
 import React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -13,12 +12,12 @@ export default function BlogPost({ params }: { params: { id: string } }) {
   const { data, isLoading, error } = useBlog(params.id);
 
   if (isLoading) {
-    return <div className="min-h-screen pt-20 container">Loading...</div>;
+    return <div className="container min-h-screen pt-20">Loading...</div>;
   }
 
   if (error || !data?.blog) {
     return (
-      <div className="min-h-screen pt-20 container">
+      <div className="container min-h-screen pt-20">
         Error loading blog post
       </div>
     );
@@ -30,7 +29,7 @@ export default function BlogPost({ params }: { params: { id: string } }) {
     <div className="min-h-screen pt-20">
       <div className="container py-8">
         <Button variant="ghost" onClick={() => router.back()} className="mb-8">
-          <ArrowLeft className="h-4 w-4 mr-2" />
+          <ArrowLeft className="w-4 h-4 mr-2" />
           Back to Blogs
         </Button>
 
@@ -50,13 +49,13 @@ export default function BlogPost({ params }: { params: { id: string } }) {
 
           <div className="max-w-3xl mx-auto">
             <div className="mb-6">
-              <span className="text-sm text-primary font-medium">
+              <span className="text-sm font-medium text-primary">
                 {blog.category}
               </span>
-              <h1 className="text-3xl md:text-4xl font-bold mt-2">
+              <h1 className="mt-2 text-3xl font-bold md:text-4xl">
                 {blog.title}
               </h1>
-              <p className="text-muted-foreground mt-2">
+              <p className="mt-2 text-muted-foreground">
                 {new Date(blog.createdAt).toLocaleDateString()}
               </p>
             </div>

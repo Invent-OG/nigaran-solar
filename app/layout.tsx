@@ -46,7 +46,7 @@ export default function RootLayout({
         <Providers>
           <LenisProvider />
           <Header />
-          <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+          <Suspense fallback={<div className="flex items-center justify-center min-h-screen">Loading...</div>}>
             <main>{children}</main>
           </Suspense>
           <Footer />
