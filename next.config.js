@@ -10,7 +10,8 @@ const nextConfig = {
       'assets.aceternity.com', 
       'turbifycdn.com', 
       'avatars.githubusercontent.com',
-      'wallpapers.com'
+      'wallpapers.com',
+      "www.soleosenergy.com"
     ],
     formats: ['image/avif', 'image/webp'],
   },
