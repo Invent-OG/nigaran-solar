@@ -2,10 +2,9 @@
 
 import { useRef } from "react";
 import { motion } from "framer-motion";
-import { Leaf, BarChart3, Globe, Award } from "lucide-react";
+import { Leaf, BarChart3, Globe, Award, ArrowUpRight } from "lucide-react";
 import { Badge } from "../ui/badge";
 import Image from "next/image";
-import { memo } from "react";
 
 interface ExpertiseCardProps {
   icon: JSX.Element;
@@ -14,7 +13,7 @@ interface ExpertiseCardProps {
   index: number;
 }
 
-const ExpertiseCardMobile = memo(({
+const ExpertiseCardMobile = ({
   icon,
   title,
   description,
@@ -26,26 +25,24 @@ const ExpertiseCardMobile = memo(({
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
     >
-      <div className="relative overflow-hidden rounded-lg p-8 shadow-lg h-full bg-white transition-all duration-500 group">
+      <div className="relative  overflow-hidden rounded-lg p-8 shadow-lg h-full bg-white transition-all duration-500 group">
         <div className="absolute h-[130px] w-[100px] bg-primary rounded-full top-[-75px] right-[-75px] z-0 transition-transform duration-500 group-hover:scale-[10]"></div>
 
         <div className="relative z-10">
-          <div className="font-bold text-[20px] flex mb-5 gap-2 items-center min-h-[57px] group-hover:text-white overflow-hidden">
-            <div className="bg-primary rounded-full">{icon}</div>
+          <div className=" font-bold text-[20px] flex mb-5 gap-2 items-center min-h-[57px] group-hover:text-white overflow-hidden">
+            <div className=" bg-primary rounded-full ">{icon}</div>
             {title}
           </div>
-          <span className="transition-colors text-gray-500 duration-500 group-hover:text-white">
+          <span className=" transition-colors text-gray-500 duration-500 group-hover:text-white">
             {description}
           </span>
         </div>
       </div>
     </motion.div>
   );
-});
+};
 
-ExpertiseCardMobile.displayName = "ExpertiseCardMobile";
-
-const ExpertiseCard = memo(({
+const ExpertiseCard = ({
   icon,
   title,
   description,
@@ -64,11 +61,9 @@ const ExpertiseCard = memo(({
       </div>
     </motion.div>
   );
-});
+};
 
-ExpertiseCard.displayName = "ExpertiseCard";
-
-const ExpertiseSection = () => {
+export default function ExpertiseSection() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const expertiseItemsDesktop1 = [
@@ -179,14 +174,14 @@ const ExpertiseSection = () => {
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
             viewport={{ amount: 0.5 }}
-            className="absolute bottom-0 right-0 flex justify-center"
+            className="absolute bottom-0 right-0 flex  justify-center"
           >
             <Image
-              src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?q=80&w=2072&auto=format&fit=crop"
-              alt="Renewable energy concept"
-              width={400}
-              height={300}
-              className="h-[35%] w-[35%] object-cover rounded-lg"
+              src="https://wallpapers.com/images/hd/renewable-energy-concept-earth-solar-panels-wind-turbines-02b8mz7vgrvw8ikq-02b8mz7vgrvw8ikq.jpg"
+              alt=""
+              width={100}
+              height={100}
+              className="h-[35%] w-[35%]"
             />
           </motion.div>
         </div>
@@ -205,6 +200,4 @@ const ExpertiseSection = () => {
       </div>
     </section>
   );
-};
-
-export default memo(ExpertiseSection);
+}
