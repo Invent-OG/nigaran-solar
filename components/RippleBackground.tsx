@@ -1,10 +1,11 @@
 "use client";
 
-export default function RippleBackground() {
+import { memo } from "react";
+
+const RippleBackground = memo(() => {
   return (
     <div
       className="ripple-background bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))]
-
 from-[#58b03f]
 via-[#539c3f]
 to-[#325927]"
@@ -16,4 +17,8 @@ to-[#325927]"
       <div className="circle small shade5" />
     </div>
   );
-}
+});
+
+RippleBackground.displayName = "RippleBackground";
+
+export default RippleBackground;

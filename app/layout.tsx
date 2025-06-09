@@ -5,10 +5,17 @@ import { Providers } from "./providers";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import { LenisProvider } from "@/components/LenisProvider";
+import { Suspense } from "react";
+import { Toaster } from "@/components/ui/sonner";
 
-const inter = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
+const inter = Outfit({ 
+  subsets: ["latin"], 
+  variable: "--font-outfit",
+  display: 'swap', // Optimize font loading
+});
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.nigaran.in'),
   title:
     "Leading Solar Energy Solutions in Coimbatore | Nigaran Solar Tamil Nadu",
   description:
@@ -16,7 +23,15 @@ export const metadata: Metadata = {
   keywords:
     "solar energy, solar panels, solar power systems, on-grid solar, off-grid solar, hybrid solar systems, residential solar, commercial solar, solar solutions Tamil Nadu, solar companies in TamilNadu",
   icons: {
-    icon: "/favicon.png", // path to your PNG logo
+    icon: "/favicon.png",
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'en_IN',
+    url: 'https://www.nigaran.in',
+    title: 'Nigaran Solar - Leading Solar Energy Solutions in Tamil Nadu',
+    description: 'Top-quality solar panel solutions for homes and businesses in Coimbatore and Tamil Nadu.',
+    siteName: 'Nigaran Solar',
   },
 };
 
@@ -31,8 +46,11 @@ export default function RootLayout({
         <Providers>
           <LenisProvider />
           <Header />
-          <main>{children}</main>
+          <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+            <main>{children}</main>
+          </Suspense>
           <Footer />
+          <Toaster />
         </Providers>
       </body>
     </html>

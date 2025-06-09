@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -11,14 +11,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
 import {
   Card,
   CardContent,
@@ -31,23 +23,18 @@ import {
   Sun,
   Battery,
   Zap,
-  CheckCircle,
-  ArrowRight,
   Clock,
   BarChart,
   Lightbulb,
   IndianRupee,
-  Home,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
-import Image from "next/image";
+import RippleBackground from "@/components/RippleBackground";
+import { ShootingStars } from "@/components/ui/shooting-stars";
 import Head from "next/head";
 
-// Default calculator values - memoized to avoid recreating on each render
-const defaultCalculatorValues = [
+// Define the solar calculator data structure
+const solarCalculatorData = [
   { minBill: 0, maxBill: 2880, kW: 2, area: 128, costBefore: 160000, costAfter: 100000 },
   { minBill: 2881, maxBill: 5820, kW: 3, area: 192, costBefore: 210000, costAfter: 132000 },
   { minBill: 5821, maxBill: 9180, kW: 4, area: 256, costBefore: 270000, costAfter: 192000 },
@@ -59,92 +46,63 @@ const defaultCalculatorValues = [
   { minBill: 26506, maxBill: 29970, kW: 10, area: 576, costBefore: 560000, costAfter: 482000 },
 ];
 
-const formSchema = z.object({
-  monthlyBill: z.string().min(1, "Please enter your monthly bill"),
-  roofArea: z.string().min(1, "Please enter your roof area"),
-  location: z.string().min(1, "Please select your location"),
-});
-
-// Hero background image - static instead of slider for better performance
-const heroImage = "https://images.pexels.com/photos/356036/pexels-photo-356036.jpeg";
-
 export default function SolarCalculatorPage() {
+  const [monthlyBill, setMonthlyBill] = useState<number>(0);
+  const [roofArea, setRoofArea] = useState<number>(0);
+  const [location, setLocation] = useState<string>("tamil-nadu");
   const [showResults, setShowResults] = useState(false);
-  const [calculationResults, setCalculationResults] = useState<any>(null);
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      monthlyBill: "",
-      roofArea: "",
-      location: "tamil-nadu",
-    },
-  });
+  // Memoize the calculation to avoid unnecessary recalculations
+  const results = useMemo(() => {
+    // Find the appropriate solar system based on the monthly bill
+    const solarSystem = solarCalculatorData.find(
+      (data) => monthlyBill >= data.minBill && monthlyBill <= data.maxBill
+    ) || solarCalculatorData[0];
 
-  const calculateSolarSystem = (values: z.infer<typeof formSchema>) => {
-    const monthlyBill = parseInt(values.monthlyBill);
-    const roofArea = parseInt(values.roofArea);
+    // Calculate annual savings (bi-monthly bill * 6)
+    const annualSavings = monthlyBill * 6;
     
-    // Find the appropriate system size based on monthly bill
-    const biMonthlyBill = monthlyBill * 2;
-    const matchingSystem = defaultCalculatorValues.find(
-      system => biMonthlyBill >= system.minBill && biMonthlyBill <= system.maxBill
-    ) || defaultCalculatorValues[defaultCalculatorValues.length - 1];
-    
-    // Calculate annual savings and payback period
-    const annualSavings = monthlyBill * 12;
-    const paybackPeriod = matchingSystem.costAfter / (biMonthlyBill / 2);
+    // Calculate payback period (cost after subsidy / (bi-monthly bill / 2))
+    const paybackPeriod = solarSystem.costAfter / (monthlyBill / 2);
     
     // Calculate CO2 reduction (rough estimate: 0.82 kg CO2 per kWh)
-    const monthlyConsumption = monthlyBill / 8; // Assuming 8 Rs/kWh
+    const monthlyConsumption = monthlyBill / 8; // Assuming Rs. 8 per kWh
     const co2Reduction = Math.round(monthlyConsumption * 12 * 0.82);
-    
-    return {
-      systemSize: matchingSystem.kW,
-      areaNeeded: matchingSystem.area,
-      systemCost: matchingSystem.costBefore,
-      subsidizedCost: matchingSystem.costAfter,
-      annualSavings: annualSavings,
-      paybackPeriod: Math.round(paybackPeriod * 10) / 10,
-      co2Reduction: co2Reduction,
-      roofAreaSufficient: roofArea >= matchingSystem.area,
-    };
-  };
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    const results = calculateSolarSystem(values);
-    setCalculationResults(results);
+    return {
+      systemSize: solarSystem.kW,
+      areaNeeded: solarSystem.area,
+      systemCost: solarSystem.costBefore,
+      subsidizedCost: solarSystem.costAfter,
+      annualSavings,
+      paybackPeriod: Math.round(paybackPeriod * 10) / 10,
+      co2Reduction,
+    };
+  }, [monthlyBill]);
+
+  const handleCalculate = useCallback(() => {
     setShowResults(true);
-  };
+  }, []);
+
+  const fadeInUp = (delay = 0) => ({
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.5, delay },
+  });
 
   return (
     <div className="min-h-screen pt-20">
-      {/* Meta Information */}
       <Head>
-        <title>
-          Solar Savings Calculator | Estimate Your Solar ROI | Nigaran Solar
-        </title>
+        <title>Solar Savings Calculator | Nigaran Solar</title>
         <meta
           name="description"
-          content="Calculate your potential solar savings with Nigaran Solar's free calculator. Get instant estimates on system size, costs, ROI, and payback period based on your energy usage in Tamil Nadu."
+          content="Calculate your potential solar savings with Nigaran Solar's free calculator. Get estimates on system size, costs, and ROI for your home or business."
         />
       </Head>
 
       {/* Hero Section */}
-      <section className="relative lg:h-[80vh] flex items-center">
-        <div className="absolute inset-0 z-0">
-          <div className="relative w-full h-full">
-            <Image
-              src={heroImage}
-              alt="Solar panels"
-              fill
-              className="object-cover w-full h-full"
-              priority
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50" />
-          </div>
-        </div>
-
+      <section className="relative min-h-[80vh] flex items-center">
+        <RippleBackground />
         <div className="container relative z-10 flex flex-col items-center justify-between w-full gap-10 py-10 lg:flex-row lg:p-0">
           <motion.div
             initial={{ opacity: 0, y: 100 }}
@@ -172,84 +130,66 @@ export default function SolarCalculatorPage() {
             <h3 className="mb-4 text-xl font-semibold text-white">
               Solar Calculator
             </h3>
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-                <FormField
-                  control={form.control}
-                  name="monthlyBill"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-white">Monthly Electricity Bill (₹)</FormLabel>
-                      <FormControl>
-                        <Input
-                          type="number"
-                          placeholder="Enter your monthly bill"
-                          className="text-white border bg-white/20 backdrop-blur-sm border-white/30 placeholder-white/60"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage className="text-red-300" />
-                    </FormItem>
-                  )}
+            <div className="space-y-4">
+              <div>
+                <label className="block mb-2 text-sm font-medium text-white">
+                  Monthly Electricity Bill (₹)
+                </label>
+                <Input
+                  type="number"
+                  placeholder="Enter your monthly bill"
+                  value={monthlyBill || ""}
+                  onChange={(e) => setMonthlyBill(Number(e.target.value))}
+                  className="text-white border bg-white/20 backdrop-blur-sm border-white/30 placeholder-white/60"
                 />
+              </div>
 
-                <FormField
-                  control={form.control}
-                  name="roofArea"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-white">Available Roof Area (sq ft)</FormLabel>
-                      <FormControl>
-                        <Input
-                          type="number"
-                          placeholder="Enter roof area"
-                          className="text-white border bg-white/20 backdrop-blur-sm border-white/30 placeholder-white/60"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage className="text-red-300" />
-                    </FormItem>
-                  )}
+              <div>
+                <label className="block mb-2 text-sm font-medium text-white">
+                  Available Roof Area (sq ft)
+                </label>
+                <Input
+                  type="number"
+                  placeholder="Enter roof area"
+                  value={roofArea || ""}
+                  onChange={(e) => setRoofArea(Number(e.target.value))}
+                  className="text-white border bg-white/20 backdrop-blur-sm border-white/30 placeholder-white/60"
                 />
+              </div>
 
-                <FormField
-                  control={form.control}
-                  name="location"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-white">Location</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
-                        <FormControl>
-                          <SelectTrigger className="text-white border bg-white/20 backdrop-blur-sm border-white/30">
-                            <SelectValue placeholder="Select your location" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          <SelectItem value="tamil-nadu">Tamil Nadu</SelectItem>
-                          <SelectItem value="kerala">Kerala</SelectItem>
-                          <SelectItem value="karnataka">Karnataka</SelectItem>
-                          <SelectItem value="andhra-pradesh">Andhra Pradesh</SelectItem>
-                        </SelectContent>
-                      </Select>
-                      <FormMessage className="text-red-300" />
-                    </FormItem>
-                  )}
-                />
+              <div>
+                <label className="block mb-2 text-sm font-medium text-white">
+                  Location
+                </label>
+                <Select value={location} onValueChange={setLocation}>
+                  <SelectTrigger className="text-white border bg-white/20 backdrop-blur-sm border-white/30">
+                    <SelectValue placeholder="Select your location" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="tamil-nadu">Tamil Nadu</SelectItem>
+                    <SelectItem value="kerala">Kerala</SelectItem>
+                    <SelectItem value="karnataka">Karnataka</SelectItem>
+                    <SelectItem value="andhra-pradesh">
+                      Andhra Pradesh
+                    </SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
 
-                <Button
-                  className="w-full text-black bg-white hover:bg-white/90"
-                  type="submit"
-                >
-                  Calculate Solar Requirements
-                </Button>
-              </form>
-            </Form>
+              <Button
+                className="w-full text-black bg-white hover:bg-white/90"
+                onClick={handleCalculate}
+                disabled={!monthlyBill || !roofArea}
+              >
+                Calculate Solar Requirements
+              </Button>
+            </div>
           </motion.div>
         </div>
       </section>
 
       {/* Results Section */}
-      {showResults && calculationResults && (
+      {showResults && (
         <section className="py-16 bg-background">
           <div className="container">
             <motion.div
@@ -265,7 +205,8 @@ export default function SolarCalculatorPage() {
                     Your Solar System Estimate
                   </CardTitle>
                   <CardDescription>
-                    Based on your inputs, here&apos;s what your solar system could look like
+                    Based on your inputs, here&apos;s what your solar system
+                    could look like
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -279,7 +220,7 @@ export default function SolarCalculatorPage() {
                       </CardHeader>
                       <CardContent>
                         <div className="text-3xl font-bold text-primary">
-                          {calculationResults.systemSize} kW
+                          {results.systemSize} kW
                         </div>
                         <p className="text-sm text-muted-foreground">
                           Recommended capacity for your consumption
@@ -296,27 +237,10 @@ export default function SolarCalculatorPage() {
                       </CardHeader>
                       <CardContent>
                         <div className="text-3xl font-bold">
-                          ₹{calculationResults.systemCost.toLocaleString()}
+                          ₹{results.subsidizedCost.toLocaleString()}
                         </div>
                         <p className="text-sm text-muted-foreground">
-                          Before subsidies
-                        </p>
-                      </CardContent>
-                    </Card>
-
-                    <Card>
-                      <CardHeader className="pb-2">
-                        <CardTitle className="flex items-center gap-2 text-lg">
-                          <IndianRupee className="w-5 h-5 text-primary" />
-                          Cost After Subsidy
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <div className="text-3xl font-bold text-green-600">
-                          ₹{calculationResults.subsidizedCost.toLocaleString()}
-                        </div>
-                        <p className="text-sm text-muted-foreground">
-                          With government subsidies
+                          After subsidies and incentives
                         </p>
                       </CardContent>
                     </Card>
@@ -330,7 +254,7 @@ export default function SolarCalculatorPage() {
                       </CardHeader>
                       <CardContent>
                         <div className="text-3xl font-bold text-green-600">
-                          ₹{calculationResults.annualSavings.toLocaleString()}
+                          ₹{results.annualSavings.toLocaleString()}
                         </div>
                         <p className="text-sm text-muted-foreground">
                           Estimated yearly electricity savings
@@ -347,10 +271,27 @@ export default function SolarCalculatorPage() {
                       </CardHeader>
                       <CardContent>
                         <div className="text-3xl font-bold">
-                          {calculationResults.paybackPeriod} years
+                          {results.paybackPeriod} years
                         </div>
                         <p className="text-sm text-muted-foreground">
                           Time to recover your investment
+                        </p>
+                      </CardContent>
+                    </Card>
+
+                    <Card>
+                      <CardHeader className="pb-2">
+                        <CardTitle className="flex items-center gap-2 text-lg">
+                          <Zap className="w-5 h-5 text-primary" />
+                          CO₂ Reduction
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="text-3xl font-bold">
+                          {results.co2Reduction} kg/year
+                        </div>
+                        <p className="text-sm text-muted-foreground">
+                          Estimated carbon footprint reduction
                         </p>
                       </CardContent>
                     </Card>
@@ -364,28 +305,13 @@ export default function SolarCalculatorPage() {
                       </CardHeader>
                       <CardContent>
                         <div className="text-3xl font-bold">
-                          {calculationResults.areaNeeded} sq ft
+                          {results.areaNeeded} sq ft
                         </div>
                         <p className="text-sm text-muted-foreground">
-                          {calculationResults.roofAreaSufficient 
-                            ? "Your roof area is sufficient" 
-                            : "Your roof area may be insufficient"}
+                          Estimated space required for installation
                         </p>
                       </CardContent>
                     </Card>
-                  </div>
-
-                  <div className="p-4 mt-6 text-center bg-primary/10 rounded-lg">
-                    <p className="text-lg font-medium">
-                      Ready to start saving? Get a detailed consultation from our experts.
-                    </p>
-                    <Button 
-                      className="mt-4"
-                      onClick={() => window.location.href = '/consultation'}
-                    >
-                      Get Free Consultation
-                      <ArrowRight className="w-4 h-4 ml-2" />
-                    </Button>
                   </div>
                 </CardContent>
               </Card>
@@ -394,227 +320,8 @@ export default function SolarCalculatorPage() {
         </section>
       )}
 
-      {/* About Solar Calculator Section */}
-      <section className="py-16 bg-muted/30">
-        <div className="container">
-          <motion.div
-            className="flex flex-col items-center gap-4 text-center mb-12"
-            initial={{ opacity: 0, y: 100 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <Badge variant="outline">About</Badge>
-            <h2 className="max-w-2xl text-4xl font-extrabold md:text-5xl text-black/80">
-              Solar Calculator
-            </h2>
-            <div className="w-20 h-1 mx-auto mb-6 bg-primary"></div>
-            <p className="max-w-3xl text-lg text-muted-foreground">
-              Curious about how much you could save with solar? Try the Nigaran
-              Solar savings calculator—a free tool that estimates your monthly
-              savings, return on investment, and energy output.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <div className="relative overflow-hidden rounded-lg">
-                <Image
-                  src="https://images.pexels.com/photos/3943716/pexels-photo-3943716.jpeg"
-                  alt="Solar Calculator"
-                  width={600}
-                  height={400}
-                  className="object-cover w-full h-full"
-                />
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <h3 className="text-2xl font-bold mb-4">Calculate Your Solar Savings</h3>
-              <p className="text-muted-foreground mb-6">
-                Before making the decision to go solar, use our solar savings
-                calculator to get a detailed estimate of how much you can save on
-                your electricity bills. By inputting your energy usage, roof size, and
-                location, our tool helps you understand the potential savings, ROI, and
-                payback period for your solar installation.
-              </p>
-              
-              <h4 className="text-xl font-semibold mb-2">Features of the Solar Calculator:</h4>
-              <ul className="space-y-2 mb-6">
-                <li className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-primary mt-0.5" />
-                  <span>Instant Results: Get an estimate instantly based on your energy data.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-primary mt-0.5" />
-                  <span>Customized Estimates: Tailored to your specific energy consumption and geographical location.</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-primary mt-0.5" />
-                  <span>Easy to Use: Simple interface that requires just a few details to calculate your potential savings.</span>
-                </li>
-              </ul>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Why You Need a Solar Calculator */}
-      <section className="relative py-16 bg-black/90">
-        <div className="container">
-          <motion.div
-            className="flex flex-col items-center gap-4 text-center text-white mb-12"
-            initial={{ opacity: 0, y: 100 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <Badge variant="outline" className="text-white">
-              Why You Need
-            </Badge>
-            <h2 className="max-w-2xl text-4xl font-extrabold md:text-5xl">
-              Why Do You Need a Solar Calculator?
-            </h2>
-            <div className="w-20 h-1 mx-auto mb-6 bg-primary"></div>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="bg-white/10 rounded-lg p-6 text-white"
-            >
-              <Calculator className="w-10 h-10 text-primary mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Understand Costs & Savings</h3>
-              <p className="text-white/80">
-                People are often unsure of the exact costs and savings they would get from installing solar power systems, especially when trying to estimate their energy needs.
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="bg-white/10 rounded-lg p-6 text-white"
-            >
-              <Zap className="w-10 h-10 text-primary mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Make Informed Decisions</h3>
-              <p className="text-white/80">
-                Without a clear understanding of how much energy they use and how solar can offset their costs, customers may be hesitant to invest in solar.
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="bg-white/10 rounded-lg p-6 text-white"
-            >
-              <Sun className="w-10 h-10 text-primary mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Simplify Decision-Making</h3>
-              <p className="text-white/80">
-                The Solar Calculator helps prospective solar customers quickly calculate their potential savings, costs, and system size requirements before they make a decision.
-              </p>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Uses and Benefits Combined Section */}
+      {/* How It Works Section */}
       <section className="py-16 bg-background">
-        <div className="container">
-          <motion.div
-            className="flex flex-col items-center gap-4 text-center mb-12"
-            initial={{ opacity: 0, y: 100 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <Badge variant="outline">Uses & Benefits</Badge>
-            <h2 className="max-w-2xl text-4xl font-extrabold md:text-5xl">
-              How Our Solar Calculator Helps You
-            </h2>
-            <div className="w-20 h-1 mx-auto mb-6 bg-primary"></div>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="space-y-6">
-              <h3 className="text-2xl font-bold">Uses</h3>
-              <ul className="space-y-4">
-                <li className="flex items-start gap-3">
-                  <div className="p-1 mt-1 rounded-full bg-primary/20">
-                    <IndianRupee className="w-4 h-4 text-primary" />
-                  </div>
-                  <div>
-                    <p className="font-medium">Estimate Savings</p>
-                    <p className="text-muted-foreground">You can use the Solar Calculator to estimate how much money you could save on your electricity bill by installing solar panels.</p>
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="p-1 mt-1 rounded-full bg-primary/20">
-                    <Sun className="w-4 h-4 text-primary" />
-                  </div>
-                  <div>
-                    <p className="font-medium">Determine System Size</p>
-                    <p className="text-muted-foreground">The calculator helps you figure out the right size of solar system needed based on your home or business's energy consumption.</p>
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="p-1 mt-1 rounded-full bg-primary/20">
-                    <BarChart className="w-4 h-4 text-primary" />
-                  </div>
-                  <div>
-                    <p className="font-medium">Cost Projection</p>
-                    <p className="text-muted-foreground">It provides a clear cost breakdown, helping users understand installation costs, payback period, and long-term savings.</p>
-                  </div>
-                </li>
-              </ul>
-            </div>
-
-            <div className="space-y-6">
-              <h3 className="text-2xl font-bold">Benefits</h3>
-              <ul className="space-y-4">
-                <li className="flex items-start gap-3">
-                  <div className="p-1 mt-1 rounded-full bg-primary/20">
-                    <Zap className="w-4 h-4 text-primary" />
-                  </div>
-                  <div>
-                    <p className="font-medium">Quick and Accurate Estimates</p>
-                    <p className="text-muted-foreground">Get an instant understanding of how much you can save and what system size is right for you.</p>
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="p-1 mt-1 rounded-full bg-primary/20">
-                    <Home className="w-4 h-4 text-primary" />
-                  </div>
-                  <div>
-                    <p className="font-medium">Customizable</p>
-                    <p className="text-muted-foreground">Input your monthly electricity usage, roof size, and location, and get a personalized solar plan.</p>
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="p-1 mt-1 rounded-full bg-primary/20">
-                    <Clock className="w-4 h-4 text-primary" />
-                  </div>
-                  <div>
-                    <p className="font-medium">Saves Time</p>
-                    <p className="text-muted-foreground">Instead of waiting for a consultant, you can quickly evaluate if solar is the right choice for your home or business.</p>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* How It Works Section - Simplified */}
-      <section className="py-16 pb-32 bg-muted/30">
         <div className="container">
           <motion.div
             className="flex flex-col items-center gap-4 mb-12 text-center"
@@ -629,44 +336,104 @@ export default function SolarCalculatorPage() {
             <div className="w-20 h-1 mx-auto mb-6 bg-primary"></div>
           </motion.div>
 
-          <div className="max-w-3xl mx-auto">
-            <ol className="relative border-l border-primary/30">
-              {[
-                {
-                  title: "Input Your Details",
-                  description: "Enter basic details such as your monthly electricity usage, location, and roof size.",
-                  icon: <Calculator className="w-6 h-6 text-white" />,
-                },
-                {
-                  title: "Solar System Size",
-                  description: "Based on your energy consumption, the calculator will recommend an ideal solar system size to meet your needs.",
-                  icon: <Sun className="w-6 h-6 text-white" />,
-                },
-                {
-                  title: "Estimate Costs and Savings",
-                  description: "The tool will provide an estimate of the installation cost, savings on electricity bills, and the payback period.",
-                  icon: <IndianRupee className="w-6 h-6 text-white" />,
-                },
-                {
-                  title: "Account for Incentives",
-                  description: "It factors in available government incentives and rebates to give you an accurate idea of the final price.",
-                  icon: <Lightbulb className="w-6 h-6 text-white" />,
-                },
-              ].map((step, index) => (
-                <li key={index} className="mb-10 ml-6">
-                  <span className="absolute flex items-center justify-center w-10 h-10 rounded-full -left-5 bg-primary">
-                    {step.icon}
-                  </span>
-                  <h3 className="flex items-center mb-2 text-xl font-semibold">
-                    {step.title}
-                  </h3>
-                  <p className="text-muted-foreground">
-                    {step.description}
-                  </p>
-                </li>
-              ))}
-            </ol>
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+            {[
+              {
+                step: "01",
+                title: "Input Your Details",
+                description:
+                  "Enter basic details such as your monthly electricity usage, location, and roof size.",
+                icon: <Calculator className="w-10 h-10 text-primary" />,
+              },
+              {
+                step: "02",
+                title: "Solar System Size",
+                description:
+                  "Based on your energy consumption, the calculator will recommend an ideal solar system size to meet your needs.",
+                icon: <Sun className="w-10 h-10 text-primary" />,
+              },
+              {
+                step: "03",
+                title: "Estimate Costs and Savings",
+                description:
+                  "The tool will provide an estimate of the installation cost, savings on electricity bills, and the payback period.",
+                icon: <IndianRupee className="w-10 h-10 text-primary" />,
+              },
+              {
+                step: "04",
+                title: "Account for Incentives",
+                description:
+                  "It factors in available government incentives and rebates to give you an accurate idea of the final price.",
+                icon: <Lightbulb className="w-10 h-10 text-primary" />,
+              },
+            ].map((step, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="relative p-6 overflow-hidden transition duration-300 transform bg-white rounded-lg shadow-md hover:bg-primary hover:text-white hover:shadow-xl group"
+              >
+                <div className="mb-4 text-3xl font-bold text-primary/20 group-hover:text-white/20">
+                  {step.step}
+                </div>
+                <div className="mb-4 text-primary group-hover:text-white">
+                  {step.icon}
+                </div>
+                <h3 className="mb-2 text-xl font-semibold group-hover:text-white">
+                  {step.title}
+                </h3>
+                <p className="text-muted-foreground group-hover:text-white">
+                  {step.description}
+                </p>
+                <div className="absolute inset-0 z-0 opacity-0 group-hover:opacity-40 transition-opacity duration-300 bg-[url('/bg-pattern.png')] pointer-events-none" />
+              </motion.div>
+            ))}
           </div>
+        </div>
+      </section>
+
+      {/* Additional Information Section */}
+      <section className="relative py-16 text-white bg-black/90">
+        <div className="absolute inset-0 z-0">
+          <ShootingStars
+            starColor="#9E00FF"
+            trailColor="#2EB9DF"
+            minSpeed={15}
+            maxSpeed={35}
+            minDelay={1000}
+            maxDelay={3000}
+          />
+        </div>
+        
+        <div className="container relative z-10">
+          <motion.div {...fadeInUp()} className="max-w-3xl mx-auto space-y-8">
+            <h2 className="text-3xl font-bold text-center">Solar Calculator</h2>
+            <p className="text-lg">
+              Curious about how much you could save with solar? Try the Nigaran
+              Solar solar savings calculator—a free tool that estimates your monthly
+              savings, return on investment, and energy output. Our solar ROI
+              estimator uses your roof size, energy usage, and location in
+              Coimbatore or beyond to deliver accurate predictions.
+            </p>
+            
+            <h3 className="text-2xl font-semibold">Why do you need a solar calculator?</h3>
+            <ul className="space-y-2 list-disc list-inside">
+              <li>People are often unsure of the exact costs and savings they would get from installing solar power systems</li>
+              <li>Without a clear understanding of energy usage, customers may be hesitant to invest in solar</li>
+              <li>The Solar Calculator helps prospective customers quickly calculate potential savings, costs, and system requirements</li>
+              <li>Having a calculator tool simplifies the decision-making process by providing instant, easy-to-understand estimates</li>
+            </ul>
+            
+            <h3 className="text-2xl font-semibold">Benefits</h3>
+            <ul className="space-y-2 list-disc list-inside">
+              <li><strong>Quick and Accurate Estimates:</strong> Get an instant understanding of how much you can save</li>
+              <li><strong>Customizable:</strong> Input your monthly electricity usage, roof size, and location for a personalized solar plan</li>
+              <li><strong>No Obligation:</strong> It's a free tool that requires no commitment</li>
+              <li><strong>Saves Time:</strong> Quickly evaluate if solar is the right choice for your home or business</li>
+              <li><strong>Financial Clarity:</strong> Provides a detailed financial overview, helping you understand long-term savings and ROI</li>
+            </ul>
+          </motion.div>
         </div>
       </section>
     </div>
