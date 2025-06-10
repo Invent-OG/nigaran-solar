@@ -13,6 +13,7 @@ const nextConfig = {
       'wallpapers.com'
     ],
     formats: ['image/avif', 'image/webp'],
+    unoptimized: true,
   },
   webpack(config) {
     config.module.rules.push({
@@ -22,15 +23,6 @@ const nextConfig = {
     });
     return config;
   },
-  // Enable output compression
-  compress: true,
-  // Reduce bundle size by removing console statements in production
-  compiler: {
-    removeConsole: process.env.NODE_ENV === 'production',
-  },
-  // Optimize images
-  swcMinify: true,
-  poweredByHeader: false,
 };
 
 module.exports = nextConfig;

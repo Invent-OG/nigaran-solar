@@ -7,7 +7,3 @@ Host: https://www.nigaran.in/
 
 # Sitemaps
 Sitemap: https://www.nigaran.in/sitemap.xml
-
-# Disallow admin paths
-Disallow: /admin/
-Disallow: /api/
