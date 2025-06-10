@@ -14,57 +14,51 @@ interface ExpertiseCardProps {
   index: number;
 }
 
-const ExpertiseCardMobile = memo(({
-  icon,
-  title,
-  description,
-  index,
-}: ExpertiseCardProps) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 100 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-    >
-      <div className="relative overflow-hidden rounded-lg p-8 shadow-lg h-full bg-white transition-all duration-500 group">
-        <div className="absolute h-[130px] w-[100px] bg-primary rounded-full top-[-75px] right-[-75px] z-0 transition-transform duration-500 group-hover:scale-[10]"></div>
+const ExpertiseCardMobile = memo(
+  ({ icon, title, description, index }: ExpertiseCardProps) => {
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 100 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: index * 0.1 }}
+      >
+        <div className="relative h-full p-8 overflow-hidden transition-all duration-500 bg-white rounded-lg shadow-lg group">
+          <div className="absolute h-[130px] w-[100px] bg-primary rounded-full top-[-75px] right-[-75px] z-0 transition-transform duration-500 group-hover:scale-[10]"></div>
 
-        <div className="relative z-10">
-          <div className="font-bold text-[20px] flex mb-5 gap-2 items-center min-h-[57px] group-hover:text-white overflow-hidden">
-            <div className="bg-primary rounded-full">{icon}</div>
-            {title}
+          <div className="relative z-10">
+            <div className="font-bold text-[20px] flex mb-5 gap-2 items-center min-h-[57px] group-hover:text-white overflow-hidden">
+              <div className="rounded-full bg-primary">{icon}</div>
+              {title}
+            </div>
+            <span className="text-gray-500 transition-colors duration-500 group-hover:text-white">
+              {description}
+            </span>
           </div>
-          <span className="transition-colors text-gray-500 duration-500 group-hover:text-white">
-            {description}
-          </span>
         </div>
-      </div>
-    </motion.div>
-  );
-});
+      </motion.div>
+    );
+  }
+);
 
 ExpertiseCardMobile.displayName = "ExpertiseCardMobile";
 
-const ExpertiseCard = memo(({
-  icon,
-  title,
-  description,
-  index,
-}: ExpertiseCardProps) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 100 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-    >
-      <div className="text-center flex flex-col gap-2 items-center max-w-xs justify-center">
-        <div className="bg-primary p-5 rounded-full text-white">{icon}</div>
-        <div className="font-bold text-xl"> {title}</div>
-        <div className="text-md text-gray-500"> {description}</div>
-      </div>
-    </motion.div>
-  );
-});
+const ExpertiseCard = memo(
+  ({ icon, title, description, index }: ExpertiseCardProps) => {
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 100 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: index * 0.1 }}
+      >
+        <div className="flex flex-col items-center justify-center max-w-xs gap-2 text-center">
+          <div className="p-5 text-white rounded-full bg-primary">{icon}</div>
+          <div className="text-xl font-bold"> {title}</div>
+          <div className="text-gray-500 text-md"> {description}</div>
+        </div>
+      </motion.div>
+    );
+  }
+);
 
 ExpertiseCard.displayName = "ExpertiseCard";
 
@@ -135,7 +129,7 @@ const ExpertiseSection = () => {
     >
       <div className="absolute inset-0 z-0 bg-[url('/bg-pattern.png')] bg-cover bg-center opacity-30"></div>
 
-      <div className=" container ">
+      <div className="container ">
         <motion.div
           className="flex flex-col items-center gap-4 text-center"
           initial={{ opacity: 0, y: 100 }}
@@ -151,7 +145,7 @@ const ExpertiseSection = () => {
           </h2>
           <div className="w-20 h-1 mx-auto mb-6 bg-primary"></div>
         </motion.div>
-        <div className="md:flex relative flex-col hidden justify-between gap-24 w-full ">
+        <div className="relative flex-col justify-between hidden w-full gap-24 md:flex ">
           <div className="flex justify-between px-[10%] w-full">
             {expertiseItemsDesktop1.map((item, index) => (
               <ExpertiseCard
@@ -182,7 +176,7 @@ const ExpertiseSection = () => {
             className="absolute bottom-0 right-0 flex justify-center"
           >
             <Image
-              src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?q=80&w=2072&auto=format&fit=crop"
+              src="https://wallpapers.com/images/hd/renewable-energy-concept-earth-solar-panels-wind-turbines-02b8mz7vgrvw8ikq-02b8mz7vgrvw8ikq.jpg"
               alt="Renewable energy concept"
               width={400}
               height={300}

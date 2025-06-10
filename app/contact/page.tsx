@@ -40,11 +40,11 @@ export default function ContactPage() {
           content="Contact Nigaran Solar, solar consultation, solar energy Coimbatore, solar panel installation Coimbatore, get free solar consultation, solar installation Tamil Nadu"
         />
       </Head>
-      <section className="py-16 md:py-24 bg-background">
+      <section className="py-16  lg:pb-52 pb-[80%] bg-background">
         <div className="container">
-          <motion.div {...fadeInUp()} className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">Contact Us</h1>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+          <motion.div {...fadeInUp()} className="mb-12 text-center">
+            <h1 className="mb-6 text-4xl font-bold md:text-5xl">Contact Us</h1>
+            <p className="max-w-3xl mx-auto text-lg text-muted-foreground">
               Ready to make the switch to clean, renewable solar energy? Contact
               us today! Whether you’re interested in residential solar panels or
               commercial solar solutions, our team at Nigaran Solar is here to
@@ -52,20 +52,20 @@ export default function ContactPage() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
             {/* Contact Info */}
             <motion.div {...fadeInUp(0.2)}>
               <div className="space-y-8">
                 <div>
-                  <h2 className="font-semibold text-lg mb-2">Phone:</h2>
+                  <h2 className="mb-2 text-lg font-semibold">Phone:</h2>
                   <p>+91 96007 15993</p>
                 </div>
                 <div>
-                  <h2 className="font-semibold text-lg mb-2">Email:</h2>
+                  <h2 className="mb-2 text-lg font-semibold">Email:</h2>
                   <p>info@nigaransolar.com</p>
                 </div>
                 <div>
-                  <h2 className="font-semibold text-lg mb-2">
+                  <h2 className="mb-2 text-lg font-semibold">
                     Registered Office:
                   </h2>
                   <p>No.52, Theo Saro Villa</p>
@@ -73,7 +73,7 @@ export default function ContactPage() {
                   <p>Madurai-625017</p>
                 </div>
                 <div>
-                  <h2 className="font-semibold text-lg mb-2">Work Office:</h2>
+                  <h2 className="mb-2 text-lg font-semibold">Work Office:</h2>
                   <p>No.G1a/62, Periya Subbannan Street</p>
                   <p>KK Pudur, Saibaba Colony</p>
                   <p>Coimbatore-641038</p>
@@ -84,7 +84,7 @@ export default function ContactPage() {
             {/* Form */}
             <motion.div
               {...fadeInUp(0.3)}
-              className="bg-card rounded-lg p-6 shadow-lg"
+              className="p-6 rounded-lg shadow-lg bg-card"
             >
               <form className="space-y-4">
                 <div>

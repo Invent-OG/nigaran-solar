@@ -39,43 +39,43 @@ installation advice"
       </Head>
 
       {/* Hero Section */}
-      <section className="py-16 md:py-24 bg-background">
+      <section className="py-16 lg:pb-52 pb-[80%] bg-background">
         <div className="container">
           <motion.div
             initial={{ opacity: 0, y: 100 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-center mb-12"
+            className="mb-12 text-center"
           >
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
+            <h1 className="mb-6 text-4xl font-bold md:text-5xl">
               Solar Energy Insights & Updates
             </h1>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+            <p className="max-w-3xl mx-auto text-lg text-muted-foreground">
               Stay informed with the latest news, trends, and expert advice
               about solar energy and sustainable living.
             </p>
           </motion.div>
 
           {/* Categories */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+          <div className="grid grid-cols-1 gap-8 mb-16 md:grid-cols-2 lg:grid-cols-4">
             {[
               {
-                icon: <BookOpen className="h-8 w-8" />,
+                icon: <BookOpen className="w-8 h-8" />,
                 title: "Solar Basics",
                 description: "Learn the fundamentals of solar energy systems",
               },
               {
-                icon: <FileText className="h-8 w-8" />,
+                icon: <FileText className="w-8 h-8" />,
                 title: "Installation Tips",
                 description: "Expert guidance for optimal solar setup",
               },
               {
-                icon: <Government className="h-8 w-8" />,
+                icon: <Government className="w-8 h-8" />,
                 title: "Government Schemes",
                 description: "Latest updates on solar policies and subsidies",
               },
               {
-                icon: <PresentationChart className="h-8 w-8" />,
+                icon: <PresentationChart className="w-8 h-8" />,
                 title: "Case Studies",
                 description: "Real success stories from our customers",
               },
@@ -85,12 +85,12 @@ installation advice"
                 initial={{ opacity: 0, y: 100 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-card rounded-lg p-6 text-center cursor-pointer hover:shadow-lg transition-shadow"
+                className="p-6 text-center transition-shadow rounded-lg cursor-pointer bg-card hover:shadow-lg"
               >
-                <div className="w-16 h-16 bg-primary/10 text-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="flex items-center justify-center w-16 h-16 mx-auto mb-4 rounded-full bg-primary/10 text-primary">
                   {category.icon}
                 </div>
-                <h3 className="text-xl font-semibold mb-2">{category.title}</h3>
+                <h3 className="mb-2 text-xl font-semibold">{category.title}</h3>
                 <p className="text-muted-foreground">{category.description}</p>
               </motion.div>
             ))}
@@ -98,20 +98,20 @@ installation advice"
 
           {/* Blog Posts */}
           {isLoading ? (
-            <div className="text-center py-8">Loading blog posts...</div>
+            <div className="py-8 text-center">Loading blog posts...</div>
           ) : error ? (
-            <div className="text-center py-8 text-red-500">
+            <div className="py-8 text-center text-red-500">
               Error loading blog posts
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
               {blogs.map((blog, index) => (
                 <motion.div
                   key={blog.id}
                   initial={{ opacity: 0, y: 100 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="bg-card rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow"
+                  className="overflow-hidden transition-shadow rounded-lg shadow-sm bg-card hover:shadow-lg"
                 >
                   <div className="relative h-48">
                     <Image
@@ -123,21 +123,21 @@ installation advice"
                   </div>
                   <div className="p-6">
                     <div className="flex items-center gap-4 mb-3">
-                      <span className="text-sm text-primary font-medium">
+                      <span className="text-sm font-medium text-primary">
                         {blog.category}
                       </span>
                       <span className="text-sm text-muted-foreground">
                         {new Date(blog.createdAt).toLocaleDateString()}
                       </span>
                     </div>
-                    <h3 className="text-xl font-semibold mb-2">{blog.title}</h3>
-                    <p className="text-muted-foreground mb-4">{blog.excerpt}</p>
+                    <h3 className="mb-2 text-xl font-semibold">{blog.title}</h3>
+                    <p className="mb-4 text-muted-foreground">{blog.excerpt}</p>
                     <Link href={`/blog/${blog.id}`}>
                       <Button
                         variant="link"
-                        className="p-0 h-auto font-medium text-primary"
+                        className="h-auto p-0 font-medium text-primary"
                       >
-                        Read More <ArrowRight className="ml-1 h-4 w-4" />
+                        Read More <ArrowRight className="w-4 h-4 ml-1" />
                       </Button>
                     </Link>
                   </div>

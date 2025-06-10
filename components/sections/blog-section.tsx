@@ -24,7 +24,7 @@ const BlogCard = ({ id, title, excerpt, imageUrl, index }: BlogCardProps) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="group bg-card rounded-xl overflow-hidden shadow-sm"
+      className="overflow-hidden shadow-sm group bg-card rounded-xl"
     >
       <div className="aspect-[16/9] relative overflow-hidden">
         <Image
@@ -32,20 +32,20 @@ const BlogCard = ({ id, title, excerpt, imageUrl, index }: BlogCardProps) => {
           alt={title}
           width={600}
           height={338}
-          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"
         />
       </div>
       <div className="p-6">
-        <h3 className="text-xl font-semibold mb-3 line-clamp-2 group-hover:text-primary transition-colors">
+        <h3 className="mb-3 text-xl font-semibold transition-colors line-clamp-2 group-hover:text-primary">
           {title}
         </h3>
-        <p className="text-muted-foreground mb-4 line-clamp-3">{excerpt}</p>
+        <p className="mb-4 text-muted-foreground line-clamp-3">{excerpt}</p>
         <Link href={`/blog/${id}`}>
           <Button
             variant="link"
-            className="p-0 h-auto font-medium text-primary"
+            className="h-auto p-0 font-medium text-primary"
           >
-            Read More <ArrowRight className="ml-1 h-4 w-4" />
+            Read More <ArrowRight className="w-4 h-4 ml-1" />
           </Button>
         </Link>
       </div>
@@ -86,7 +86,7 @@ export default function BlogSection() {
           initial={{ opacity: 0, y: 100 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-12"
+          className="mb-12 text-center"
         >
           <div className="flex flex-col items-center gap-4 text-center">
             <Badge variant="outline">Blogs</Badge>
@@ -94,39 +94,38 @@ export default function BlogSection() {
               Insights, Trends, And Tips From Industry Experts
             </h2>
             <div className="w-20 h-1 mb-6 bg-primary"></div>
-            <p className="text-lg text-muted-foreground text-justify mb-6">
+            <p className="mb-6 text-lg text-justify text-muted-foreground">
               Stay informed with the latest news and developments in renewable
               energy and sustainable practices.
             </p>
           </div>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {blogs.slice(0, 3).map((post, index) => (
-            <>
-              <motion.div
-                initial={{ opacity: 0, y: 100 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-              >
-                <BlogCard
-                  key={post.id}
-                  id={post.id}
-                  title={post.title}
-                  excerpt={post.excerpt}
-                  imageUrl={post.imageUrl}
-                  index={index}
-                />
-              </motion.div>
-            </>
+            <motion.div
+              key={post.id}
+              initial={{ opacity: 0, y: 100 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+            >
+              <BlogCard
+                key={post.id}
+                id={post.id}
+                title={post.title}
+                excerpt={post.excerpt}
+                imageUrl={post.imageUrl}
+                index={index}
+              />
+            </motion.div>
           ))}
         </div>
 
-        <div className="text-center mt-12">
+        <div className="mt-12 text-center">
           <Link href="/blog">
             <Button variant="outline" className="group">
               View All Articles
-              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
             </Button>
           </Link>
         </div>

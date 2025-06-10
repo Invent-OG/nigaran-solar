@@ -158,7 +158,6 @@ export default function ConsultationPage() {
             {/* Dynamic Form */}
             {formType === "residential" && (
               <LeadForm
-                textColor="lg:text-white text-black"
                 type="residential"
                 title="Residential Solar Solutions"
                 description="Optimize your home's energy with our customized residential solar plans."
@@ -166,7 +165,6 @@ export default function ConsultationPage() {
             )}
             {formType === "housing_society" && (
               <LeadForm
-                textColor="lg:text-white text-black"
                 type="housing_society"
                 title="Housing Society Solutions"
                 description="Affordable solar solutions designed for housing societies and communities."
@@ -174,7 +172,6 @@ export default function ConsultationPage() {
             )}
             {formType === "commercial" && (
               <LeadForm
-                textColor="lg:text-white text-black"
                 type="commercial"
                 title="Commercial Solar Plans"
                 description="Efficient solar power options tailored for your commercial needs."

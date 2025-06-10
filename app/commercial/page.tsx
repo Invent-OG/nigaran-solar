@@ -112,7 +112,6 @@ export default function CommercialPage() {
             className="lg:w-[40%]"
           >
             <LeadForm
-              textColor="text-white"
               type="commercial"
               title={"Get Your Free Quote"}
               description={""}
@@ -430,7 +429,7 @@ export default function CommercialPage() {
       </section>
 
       {/* Benefits Section */}
-      <section className="pt-16 pb-52">
+      <section className="pt-16 lg:pb-52 pb-[80%]">
         <div className="container mx-auto">
           <motion.div
             className="flex flex-col items-center gap-4 text-center"

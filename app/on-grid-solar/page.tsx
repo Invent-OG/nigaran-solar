@@ -19,7 +19,6 @@ import {
   Lightbulb,
   IndianRupee,
 } from "lucide-react";
-import LeadForm from "@/components/forms/lead-form";
 import { Badge } from "@/components/ui/badge";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
@@ -31,12 +30,14 @@ const onGridContent = {
   hero: {
     title: "On-Grid Solar Solutions for Modern Living",
     highlight: "On-Grid",
-    description: "Reduce your electricity bills with our grid-tied solar solutions. Perfect for homes and businesses connected to the utility grid.",
+    description:
+      "Reduce your electricity bills with our grid-tied solar solutions. Perfect for homes and businesses connected to the utility grid.",
   },
   intro: {
     badge: "On-Grid Solar",
     heading: "Grid-Tied Solar Solutions",
-    paragraph: "An on-grid solar system is ideal for homes and businesses connected to the utility grid. Nigaran Solar's grid-tied solar solutions in Coimbatore offer the dual benefit of self-use and exporting surplus power through net metering solar policies. You'll receive credits for the energy you send back to the grid, significantly reducing your electricity bills. Our systems are built for seamless integration, with smart inverters and high-efficiency panels to ensure reliability and savings all year long.",
+    paragraph:
+      "An on-grid solar system is ideal for homes and businesses connected to the utility grid. Nigaran Solar's grid-tied solar solutions in Coimbatore offer the dual benefit of self-use and exporting surplus power through net metering solar policies. You'll receive credits for the energy you send back to the grid, significantly reducing your electricity bills. Our systems are built for seamless integration, with smart inverters and high-efficiency panels to ensure reliability and savings all year long.",
   },
   idealFor: {
     badge: "Ideal For",
@@ -44,24 +45,30 @@ const onGridContent = {
     items: [
       {
         title: "City-based Homeowners",
-        description: "Perfect for urban residences with reliable grid connection, allowing you to reduce bills while staying connected to the utility grid.",
+        description:
+          "Perfect for urban residences with reliable grid connection, allowing you to reduce bills while staying connected to the utility grid.",
         icon: "Home",
         imageAlt: "City Home",
-        imageSrc: "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg",
+        imageSrc:
+          "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg",
       },
       {
         title: "Commercial Offices",
-        description: "Ideal for businesses with steady electricity access looking to reduce operational costs and enhance sustainability credentials.",
+        description:
+          "Ideal for businesses with steady electricity access looking to reduce operational costs and enhance sustainability credentials.",
         icon: "Building",
         imageAlt: "Commercial Office",
-        imageSrc: "https://images.pexels.com/photos/1098460/pexels-photo-1098460.jpeg",
+        imageSrc:
+          "https://images.pexels.com/photos/1098460/pexels-photo-1098460.jpeg",
       },
       {
         title: "Schools and Colleges",
-        description: "Educational institutions aiming to lower their carbon footprint while creating learning opportunities about renewable energy.",
+        description:
+          "Educational institutions aiming to lower their carbon footprint while creating learning opportunities about renewable energy.",
         icon: "School",
         imageAlt: "School",
-        imageSrc: "https://images.pexels.com/photos/256520/pexels-photo-256520.jpeg",
+        imageSrc:
+          "https://images.pexels.com/photos/256520/pexels-photo-256520.jpeg",
       },
     ],
   },
@@ -90,12 +97,14 @@ const onGridContent = {
       {
         icon: "Home",
         title: "Residential Power",
-        description: "Can be used for residential homes, providing clean energy for daily household needs while staying connected to the grid for backup and excess energy export.",
+        description:
+          "Can be used for residential homes, providing clean energy for daily household needs while staying connected to the grid for backup and excess energy export.",
       },
       {
         icon: "Building",
         title: "Commercial Power",
-        description: "Great for businesses and factories that can use most of their energy during the day when the sun is shining, maximizing direct consumption and ROI.",
+        description:
+          "Great for businesses and factories that can use most of their energy during the day when the sun is shining, maximizing direct consumption and ROI.",
       },
     ],
   },
@@ -106,22 +115,26 @@ const onGridContent = {
       {
         icon: "PiggyBank",
         title: "Affordable Setup",
-        description: "On-grid systems are cheaper to install than off-grid systems because they don't require batteries.",
+        description:
+          "On-grid systems are cheaper to install than off-grid systems because they don't require batteries.",
       },
       {
         icon: "Zap",
         title: "Net Metering Benefits",
-        description: "Excess energy can be sent back to the grid, and users get credits or rebates on their electricity bills.",
+        description:
+          "Excess energy can be sent back to the grid, and users get credits or rebates on their electricity bills.",
       },
       {
         icon: "Wrench",
         title: "Low Maintenance",
-        description: "On-grid systems have minimal maintenance as there are no batteries to manage or replace.",
+        description:
+          "On-grid systems have minimal maintenance as there are no batteries to manage or replace.",
       },
       {
         icon: "ArrowRight",
         title: "Quick ROI",
-        description: "The installation costs are recouped quickly, and long-term savings can be enjoyed for 20+ years.",
+        description:
+          "The installation costs are recouped quickly, and long-term savings can be enjoyed for 20+ years.",
       },
     ],
   },
@@ -148,7 +161,8 @@ const onGridContent = {
   },
   cta: {
     heading: "Ready to Switch to Solar?",
-    description: "Contact us today for a free consultation and quote for your on-grid solar system.",
+    description:
+      "Contact us today for a free consultation and quote for your on-grid solar system.",
     button: "Get Started",
   },
 };
@@ -196,8 +210,13 @@ export default function OnGridSolarPage() {
             className="lg:max-w-[60%] text-white"
           >
             <h1 className="mb-6 text-4xl font-bold md:text-5xl">
-              <span className="text-primary">{onGridContent.hero.highlight} </span>
-              {onGridContent.hero.title.replace(`${onGridContent.hero.highlight} `, "")}
+              <span className="text-primary">
+                {onGridContent.hero.highlight}{" "}
+              </span>
+              {onGridContent.hero.title.replace(
+                `${onGridContent.hero.highlight} `,
+                ""
+              )}
             </h1>
             <p className="mb-8 text-lg md:text-xl text-white/90">
               {onGridContent.hero.description}
@@ -224,7 +243,7 @@ export default function OnGridSolarPage() {
             <div className="w-20 h-1 mx-auto mb-6 bg-primary"></div>
           </motion.div>
 
-          <p className="text-muted-foreground text-center max-w-4xl mx-auto">
+          <p className="max-w-4xl mx-auto text-center text-muted-foreground">
             {onGridContent.intro.paragraph}
           </p>
         </div>
@@ -234,7 +253,7 @@ export default function OnGridSolarPage() {
       <section className="py-16 bg-muted/30">
         <div className="container mx-auto">
           <motion.div
-            className="flex flex-col items-center gap-4 text-center mb-12"
+            className="flex flex-col items-center gap-4 mb-12 text-center"
             initial={{ opacity: 0, y: 100 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -245,19 +264,18 @@ export default function OnGridSolarPage() {
             </h2>
             <div className="w-20 h-1 mx-auto mb-6 bg-primary"></div>
           </motion.div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
             {onGridContent.idealFor.items.map((item, idx) => {
               const Icon = { Home, Building, School }[item.icon];
               return (
                 <motion.div
                   key={item.title}
-                  initial={{ opacity: 0, y:  100 }}
+                  initial={{ opacity: 0, y: 100 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5 ,delay: idx * 0.2 }}
-                  className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all group"
+                  transition={{ duration: 0.5, delay: idx * 0.2 }}
+                  className="overflow-hidden transition-all bg-white shadow-lg rounded-xl hover:shadow-xl group"
                 >
-                  <div className="h-48 relative overflow-hidden">
+                  <div className="relative h-48 overflow-hidden">
                     <Image
                       src={item.imageSrc}
                       alt={item.imageAlt}
@@ -266,12 +284,12 @@ export default function OnGridSolarPage() {
                       width={100}
                       className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
-                      {Icon && <Icon className="h-10 w-10 text-white" />}
+                    <div className="absolute inset-0 flex items-end p-6 bg-gradient-to-t from-black/60 to-transparent">
+                      {Icon && <Icon className="w-10 h-10 text-white" />}
                     </div>
                   </div>
                   <div className="p-6">
-                    <h3 className="text-xl font-semibold mb-3">{item.title}</h3>
+                    <h3 className="mb-3 text-xl font-semibold">{item.title}</h3>
                     <p className="text-muted-foreground">{item.description}</p>
                   </div>
                 </motion.div>
@@ -288,8 +306,8 @@ export default function OnGridSolarPage() {
           <Image
             src="https://images.unsplash.com/photo-1613665813446-82a78c468a1d?q=80&w=2958&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt="On-Grid Solar Panels"
-              height={100}
-                  width={100}
+            height={100}
+            width={100}
             className="shadow-lg object-cover w-full h-[70vh]"
           />
         </div>
@@ -350,7 +368,7 @@ export default function OnGridSolarPage() {
               }
             }
           `}</style>
-          
+
           <motion.div
             className="flex flex-col items-center gap-4 text-center text-white"
             initial={{ opacity: 0, y: 100 }}
@@ -371,7 +389,7 @@ export default function OnGridSolarPage() {
               const Icon = { Lightbulb, IndianRupee, ShieldCheck }[item.icon];
               return (
                 <li className="flex items-start gap-4" key={idx}>
-                  {Icon && <Icon className="w-6 h-6 text-primary mt-1" />}
+                  {Icon && <Icon className="w-6 h-6 mt-1 text-primary" />}
                   <span>{item.text}</span>
                 </li>
               );
@@ -384,7 +402,7 @@ export default function OnGridSolarPage() {
       <section className="py-16 bg-background">
         <div className="container">
           <motion.div
-            className="flex flex-col items-center gap-4 text-center mb-12"
+            className="flex flex-col items-center gap-4 mb-12 text-center"
             initial={{ opacity: 0, y: 100 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -395,7 +413,7 @@ export default function OnGridSolarPage() {
             </h2>
             <div className="w-20 h-1 mx-auto mb-6 bg-primary"></div>
           </motion.div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
             {onGridContent.uses.items.map((item, idx) => {
               const Icon = { Home, Building }[item.icon];
               return (
@@ -404,10 +422,10 @@ export default function OnGridSolarPage() {
                   initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: idx * 0.1 }}
-                  className="bg-white rounded-lg p-8 shadow-lg hover:shadow-xl transition-all border-l-4 border-primary"
+                  className="p-8 transition-all bg-white border-l-4 rounded-lg shadow-lg hover:shadow-xl border-primary"
                 >
-                  <h3 className="text-2xl font-semibold mb-4 flex items-center gap-3">
-                    {Icon && <Icon className="h-6 w-6 text-primary" />}
+                  <h3 className="flex items-center gap-3 mb-4 text-2xl font-semibold">
+                    {Icon && <Icon className="w-6 h-6 text-primary" />}
                     {item.title}
                   </h3>
                   <p className="text-muted-foreground">{item.description}</p>
@@ -419,29 +437,32 @@ export default function OnGridSolarPage() {
       </section>
 
       {/* Benefits Section */}
-      <section 
-      
-      className="relative py-16 text-lg   bg-cover bg-center"
+      <section
+        className="relative py-16 text-lg bg-center bg-cover"
         style={{
           backgroundImage:
             "url('https://images.pexels.com/photos/4254160/pexels-photo-4254160.jpeg')",
           backgroundSize: "cover",
           backgroundPosition: "center",
-        }}>
+        }}
+      >
         <div className="container">
           <motion.div
-            className="flex flex-col items-center gap-4 text-center mb-12"
+            className="flex flex-col items-center gap-4 mb-12 text-center"
             initial={{ opacity: 0, y: 100 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <Badge variant="outline" className="text-white"> {onGridContent.benefits.badge}</Badge>
+            <Badge variant="outline" className="text-white">
+              {" "}
+              {onGridContent.benefits.badge}
+            </Badge>
             <h2 className="max-w-2xl text-4xl font-extrabold text-white md:text-5xl">
               {onGridContent.benefits.heading}
             </h2>
             <div className="w-20 h-1 mx-auto mb-6 bg-white"></div>
           </motion.div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
             {onGridContent.benefits.items.map((benefit, index) => {
               const Icon = { PiggyBank, Zap, Wrench, ArrowRight }[benefit.icon];
               return (
@@ -450,12 +471,14 @@ export default function OnGridSolarPage() {
                   initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="bg-white rounded-lg p-6 text-center shadow-md hover:shadow-lg transition-all"
+                  className="p-6 text-center transition-all bg-white rounded-lg shadow-md hover:shadow-lg"
                 >
-                  <div className="w-16 h-16 bg-primary/10 text-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                    {Icon && <Icon className="h-10 w-10" />}
+                  <div className="flex items-center justify-center w-16 h-16 mx-auto mb-4 rounded-full bg-primary/10 text-primary">
+                    {Icon && <Icon className="w-10 h-10" />}
                   </div>
-                  <h3 className="text-xl font-semibold mb-2">{benefit.title}</h3>
+                  <h3 className="mb-2 text-xl font-semibold">
+                    {benefit.title}
+                  </h3>
                   <p className="text-muted-foreground">{benefit.description}</p>
                 </motion.div>
               );
@@ -465,10 +488,10 @@ export default function OnGridSolarPage() {
       </section>
 
       {/* Technical Specs Section */}
-      <section className="py-16 pb-32 bg-background">
+      <section className="py-16  lg:pb-52 pb-[80%] bg-background">
         <div className="container">
           <motion.div
-            className="flex flex-col items-center gap-4 text-center mb-12"
+            className="flex flex-col items-center gap-4 mb-12 text-center"
             initial={{ opacity: 0, y: 100 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -479,8 +502,8 @@ export default function OnGridSolarPage() {
             </h2>
             <div className="w-20 h-1 mx-auto mb-6 bg-primary"></div>
           </motion.div>
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-            <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x">
+          <div className="overflow-hidden bg-white rounded-lg shadow-lg">
+            <div className="grid grid-cols-1 divide-y md:grid-cols-3 md:divide-y-0 md:divide-x">
               {onGridContent.specs.items.map((spec, idx) => {
                 const Icon = { Battery, ShieldCheck, Wrench }[spec.icon];
                 return (
@@ -491,10 +514,10 @@ export default function OnGridSolarPage() {
                     transition={{ duration: 0.5, delay: idx * 0.1 }}
                     className="p-8 text-center"
                   >
-                    <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                      {Icon && <Icon className="h-8 w-8 text-primary" />}
+                    <div className="flex items-center justify-center w-16 h-16 mx-auto mb-4 rounded-full bg-primary/10">
+                      {Icon && <Icon className="w-8 h-8 text-primary" />}
                     </div>
-                    <h3 className="text-xl font-semibold mb-2">{spec.title}</h3>
+                    <h3 className="mb-2 text-xl font-semibold">{spec.title}</h3>
                     <p className="text-muted-foreground">{spec.description}</p>
                   </motion.div>
                 );
@@ -505,7 +528,6 @@ export default function OnGridSolarPage() {
       </section>
 
       {/* CTA Section */}
-     
     </div>
   );
 }

@@ -29,9 +29,9 @@ export function FeaturesSectionWithCardGradient() {
   };
 
   return (
-    <div className="py-20 container lg:py-30">
+    <div className="container py-20 lg:py-30">
       <motion.div
-        className="flex flex-col items-center mb-6 gap-4 text-center"
+        className="flex flex-col items-center gap-4 mb-6 text-center"
         initial={{ opacity: 0, y: 100 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -42,7 +42,7 @@ export function FeaturesSectionWithCardGradient() {
         </h2>
         <div className="w-20 h-1 mx-auto mb-6 bg-primary"></div>
       </motion.div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 lg:grid-cols-4 lg:gap-10 md:gap-2 max-w-7xl mx-auto">
+      <div className="grid grid-cols-1 gap-5 mx-auto sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-10 md:gap-2 max-w-7xl">
         {grid.map((feature, index) => {
           const Icon = iconMap[feature.title] || Zap; // fallback icon
 
@@ -55,16 +55,16 @@ export function FeaturesSectionWithCardGradient() {
             >
               <div
                 key={feature.title}
-                className="relative bg-gradient-to-b dark:from-neutral-900 from-neutral-100 dark:to-neutral-950 to-white p-6 rounded-3xl overflow-hidden"
+                className="relative p-6 overflow-hidden bg-gradient-to-b dark:from-neutral-900 from-neutral-100 dark:to-neutral-950 to-white rounded-3xl"
               >
                 <Grid size={20} />
-                <div className="flex items-center space-x-3 relative z-20">
+                <div className="relative z-20 flex items-center space-x-3">
                   <Icon className="w-6 h-6 text-primary dark:text-primary-light" />
                   <p className="text-base font-bold text-neutral-800 dark:text-white">
                     {feature.title}
                   </p>
                 </div>
-                <p className="text-neutral-600 dark:text-neutral-400 mt-4 text-base font-normal relative z-20">
+                <p className="relative z-20 mt-4 text-base font-normal text-neutral-600 dark:text-neutral-400">
                   {feature.description}
                 </p>
               </div>
@@ -146,7 +146,7 @@ export const Grid = ({
           x="-12"
           y="4"
           squares={p}
-          className="absolute inset-0 h-full w-full  mix-blend-overlay dark:fill-white/10 dark:stroke-white/10 stroke-black/10 fill-primary/30"
+          className="absolute inset-0 w-full h-full mix-blend-overlay dark:fill-white/10 dark:stroke-white/10 stroke-black/10 fill-primary/30"
         />
       </div>
     </div>

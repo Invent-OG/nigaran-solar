@@ -60,7 +60,7 @@ export default function LeadForm({
   type,
   description,
   title,
-  textColor,
+  textColor = "text-gray-700",
 }: LeadFormProps) {
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const createLeadMutation = useCreateLead();
@@ -103,12 +103,10 @@ export default function LeadForm({
   }
 
   return (
-    <Card className="relative overflow-hidden border shadow-2xl bg-white/10 backdrop-blur-md border-white/30">
+    <Card className="relative overflow-hidden bg-white border shadow-2xl border-white/30">
       <CardHeader className="text-center">
-        <CardTitle className="text-3xl font-bold text-white">{title}</CardTitle>
-        <CardDescription className="text-white/70">
-          {description}
-        </CardDescription>
+        <CardTitle className="text-3xl font-bold ">{title}</CardTitle>
+        <CardDescription className="">{description}</CardDescription>
       </CardHeader>
       <CardContent>
         <Form {...form}>
@@ -130,7 +128,7 @@ export default function LeadForm({
                       <Input
                         {...field}
                         placeholder="Enter company name"
-                        className="border bg-white/20 backdrop-blur-sm border-white/30 placeholder-white/60"
+                        className="border placeholder-white/60"
                       />
                     </FormControl>
                     <FormMessage />
@@ -149,7 +147,7 @@ export default function LeadForm({
                     <Input
                       {...field}
                       placeholder="Enter your name"
-                      className="border bg-white/20 backdrop-blur-sm border-white/30 placeholder-white/60"
+                      className="border placeholder-white/60"
                     />
                   </FormControl>
                   <FormMessage />
@@ -167,7 +165,7 @@ export default function LeadForm({
                     <Input
                       {...field}
                       placeholder="Enter your WhatsApp number"
-                      className="border bg-white/20 backdrop-blur-sm border-white/30 placeholder-white/60"
+                      className="border placeholder-white/60"
                     />
                   </FormControl>
                   <FormMessage />
@@ -186,7 +184,7 @@ export default function LeadForm({
                   </FormLabel>
                   <Select onValueChange={field.onChange} value={field.value}>
                     <FormControl>
-                      <SelectTrigger className="text-white border bg-white/20 backdrop-blur-sm border-white/30">
+                      <SelectTrigger className="border ">
                         <SelectValue placeholder="Select your electricity bill range" />
                       </SelectTrigger>
                     </FormControl>
@@ -227,7 +225,7 @@ export default function LeadForm({
                     <Input
                       {...field}
                       placeholder="Enter your city"
-                      className="border bg-white/20 backdrop-blur-sm border-white/30 placeholder-white/60"
+                      className="border placeholder-white/60"
                     />
                   </FormControl>
                   <FormMessage />
@@ -237,7 +235,7 @@ export default function LeadForm({
 
             <Button
               type="submit"
-              className="w-full text-black bg-white hover:bg-white/90"
+              className="w-full"
               disabled={createLeadMutation.isPending}
             >
               {createLeadMutation.isPending

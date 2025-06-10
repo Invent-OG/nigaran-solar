@@ -20,7 +20,6 @@ import {
   Newspaper,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import LeadForm from "@/components/forms/lead-form";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
@@ -548,7 +547,7 @@ money from solar referrals, solar affiliate program, Nigaran Solar Pro"
       </section>
 
       {/* Uses & Benefits Section */}
-      <section className="py-16 pb-52 bg-muted/30">
+      <section className="py-16 lg:pb-52 pb-[80%] bg-muted/30">
         <div className="container">
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
             {/* Uses */}
