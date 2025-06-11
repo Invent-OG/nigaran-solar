@@ -26,9 +26,8 @@ import {
 } from "@/components/ui/flip-card";
 import { Badge } from "@/components/ui/badge";
 import { CTASection } from "@/components/blocks/cta-with-rectangle";
-import { AnimatedTestimonials } from "@/components/ui/animated-testimonial2";
-// import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 import { RiCustomerService2Line } from "react-icons/ri";
+import { Testimonials } from "@/components/ui/testimonials";
 
 export default function AboutPage() {
   const testimonials = [
@@ -340,7 +339,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <div className="p-[5%]">
+      <div className="p-[5%] ">
         <motion.div
           className="flex flex-col items-center gap-4 text-center"
           initial={{ opacity: 0, y: 100 }}
@@ -357,7 +356,10 @@ export default function AboutPage() {
           </h2>
           <div className="w-20 h-1 mx-auto mb-6 bg-primary"></div>
         </motion.div>
-        <AnimatedTestimonials testimonials={testimonials} />
+
+        <div className="block">
+          <Testimonials />
+        </div>
       </div>
 
       {/* Sustainability & Call to Action */}
