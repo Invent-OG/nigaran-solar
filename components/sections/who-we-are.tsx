@@ -16,8 +16,8 @@ const WhoWeAre = () => {
   const router = useRouter();
 
   return (
-    <section className="relative overflow-hidden lg:p-[10%] px-[2%] py-[10%] bg-[#f8f8f8]">
-      <div className="container flex md:flex-row flex-col gap-10 justify-between">
+    <section className="relative overflow-hidden   py-[10%] bg-[#f8f8f8]">
+      <div className="container flex flex-col justify-between gap-10 xl:flex-row">
         {/* Image Block */}
         <div className="relative flex">
           <motion.div
@@ -40,7 +40,7 @@ const WhoWeAre = () => {
             </div>
 
             {/* Rotating Background Circle */}
-            <div className="animate-rotateLoop absolute -left-24 md:-bottom-16 bottom-0 opacity-50 z-0">
+            <div className="absolute bottom-0 z-0 opacity-50 animate-rotateLoop -left-24 md:-bottom-16">
               <Image
                 src="/circle.png"
                 alt="Rotating Circle"
@@ -57,13 +57,13 @@ const WhoWeAre = () => {
               width={250}
               loading="lazy"
               height={250}
-              className="rounded-2xl z-20 absolute w-[200px] h-[200px] md:w-[250px] md:h-[250px] -bottom-20 -right-6 md:-bottom-1/6 md:-right-1/4 border-[#f8f8f8] border-8 object-cover"
+              className="rounded-2xl z-20 absolute w-[200px] h-[200px] xl:w-[250px] xl:h-[250px] -bottom-20 -right-6 xl:-bottom-1/6 xl:-right-1/4 border-[#f8f8f8] border-8 object-cover"
             />
           </motion.div>
         </div>
 
         {/* Text Section */}
-        <div className="lg:w-1/2 flex flex-col">
+        <div className="flex flex-col lg:w-1/2">
           <motion.div
             initial={{ opacity: 0, y: 100 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -75,7 +75,7 @@ const WhoWeAre = () => {
               Who We Are
             </h2>
             <div className="w-20 h-1 mb-6 bg-primary"></div>
-            <p className="text-lg text-muted-foreground text-justify mb-6">
+            <p className="mb-6 text-lg text-justify text-muted-foreground">
               Nigaran Solar is a prominent solar energy provider in Coimbatore
               and throughout Tamil Nadu. Having extensive experience in solar
               panel installation and consultation, we provide efficient,
@@ -89,16 +89,16 @@ const WhoWeAre = () => {
           <div className="w-full max-w-md space-y-6">
             {metrics.map(({ title, percent }, idx) => (
               <div key={title}>
-                <span className="block text-sm font-semibold text-black/80 mb-2">
+                <span className="block mb-2 text-sm font-semibold text-black/80">
                   {title}
                 </span>
-                <div className="w-full h-2 bg-black/10 rounded-full relative">
+                <div className="relative w-full h-2 rounded-full bg-black/10">
                   <motion.div
                     initial={{ width: 0 }}
                     whileInView={{ width: `${percent}%` }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: idx * 0.2 }}
-                    className="h-full bg-primary rounded-full"
+                    className="h-full rounded-full bg-primary"
                   >
                     <motion.span
                       initial={{ opacity: 0, y: 5 }}
@@ -116,7 +116,7 @@ const WhoWeAre = () => {
             ))}
           </div>
 
-          <div className="mt-6 z-20">
+          <div className="z-20 mt-6">
             <Button onClick={() => router.push("/about")}>Read more</Button>
           </div>
         </div>
@@ -140,7 +140,7 @@ const CircularProgress = memo(function CircularProgress({
   const strokeDashoffset = circumference * (1 - percent / 100);
 
   return (
-    <div className="absolute shadow-xl flex top-4 -left-6 z-30 p-5 rounded-xl text-black/80 items-center gap-5 border-r-8 border-primary bg-white">
+    <div className="absolute z-30 flex items-center gap-5 p-5 bg-white border-r-8 shadow-xl top-4 -left-6 rounded-xl text-black/80 border-primary">
       <svg height={radius * 2} width={radius * 2}>
         <circle
           stroke="#e5e7eb"
@@ -165,7 +165,7 @@ const CircularProgress = memo(function CircularProgress({
           transition={{ duration: 1 }}
         />
       </svg>
-      <div className="absolute top-1/2 left-16 transform -translate-x-1/2 -translate-y-1/2 text-sm font-semibold">
+      <div className="absolute text-sm font-semibold transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-16">
         {percent}%
       </div>
       <div className="text-xl font-bold">{label}</div>

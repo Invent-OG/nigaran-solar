@@ -109,7 +109,7 @@ const Feature108 = ({
         </motion.div>
 
         {/* Tabs */}
-        <div className="relative z-10 mt-5 flex flex-wrap justify-center gap-4">
+        <div className="relative z-10 flex flex-wrap justify-center gap-4 mt-5">
           {tabs.map((tab, index) => (
             <motion.div
               key={`tab-${index}`}
@@ -134,7 +134,7 @@ const Feature108 = ({
         </div>
 
         {/* Content */}
-        <div className="max-w-screen-xl mx-auto mt-10 rounded-2xl bg-muted lg:p-16 p-5 relative z-10">
+        <div className="relative z-10 max-w-screen-xl p-5 mx-auto mt-10 rounded-2xl bg-muted lg:p-16">
           <AnimatePresence mode="wait">
             <motion.div
               key={selectedTab.value}

@@ -4,14 +4,16 @@ import { ProgressiveBlur } from "../ui/progressive-blur";
 
 export function LogosSlider() {
   const logos = [
-    "/Brand Logo/Polycab Logo.webp",
-    "/Brand Logo/ReNew Logo.webp",
-    "/Brand Logo/Sungrow Logo.webp",
-    "/Brand Logo/Vikram_Solar_logo.webp",
-    "/Brand Logo/Polycab Logo.webp",
-    "/Brand Logo/ReNew Logo.webp",
-    "/Brand Logo/Sungrow Logo.webp",
-    "/Brand Logo/Vikram_Solar_logo.webp",
+    "/Brand Logo/logos_Adani.webp",
+    "/Brand Logo/logos_Enphase.webp",
+    "/Brand Logo/logos_Goldi.webp",
+    "/Brand Logo/logos_Polycab.webp",
+    "/Brand Logo/logos_Premier Energies.webp",
+    "/Brand Logo/logos_Rayzon Solar.webp",
+    "/Brand Logo/logos_renew.webp",
+    "/Brand Logo/logos_Saatvik.webp",
+    "/Brand Logo/logos_Sungrow.webp",
+    "/Brand Logo/logos_Vikram Solar.webp",
   ];
 
   return (
@@ -33,9 +35,9 @@ export function LogosSlider() {
             <Image
               src={image}
               alt={`Logo ${index}`}
-              width={128}
-              height={28}
-              className="object-contain transition-transform duration-300 ease-in-out md:w-20 md:h-20 lg:w-24 lg:h-24 hover:scale-110"
+              width={100}
+              height={100}
+              className="object-contain transition-transform duration-300 ease-in-out hover:scale-110"
             />
           </div>
         ))}

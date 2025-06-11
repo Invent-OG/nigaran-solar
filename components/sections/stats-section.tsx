@@ -125,7 +125,7 @@ const StatCard = ({
     >
       <div
         className={cn(
-          "flex flex-col items-center text-center z-20 relative bg-white hover:shadow-2xl shadow-md transition-all duration-500 py-10 rounded-2xl",
+          "flex flex-col items-center text-center  z-20 relative bg-white hover:shadow-2xl shadow-md transition-all duration-500 py-10 rounded-2xl",
           className
         )}
       >
@@ -134,7 +134,7 @@ const StatCard = ({
         </div>
         <div
           ref={numberRef}
-          className="mb-2 text-3xl font-extrabold text-primary md:text-6xl"
+          className="mb-2 text-4xl font-extrabold text-primary "
         >
           {value}
         </div>
