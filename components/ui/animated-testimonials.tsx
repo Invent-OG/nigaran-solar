@@ -3,6 +3,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 import { Quote, Star } from "lucide-react";
+import Image from "next/image";
 import {
   AnimatePresence,
   motion,
@@ -10,7 +11,6 @@ import {
   useInView,
 } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import { cn } from "@/lib/utils";
 
 export interface Testimonial {
   id: string;
@@ -36,7 +36,7 @@ export interface AnimatedTestimonialsProps {
 
 function extractYouTubeID(url: string): string | null {
   const match = url.match(
-    /(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([\w-]{11})/
+    /(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{11})/
   );
   return match ? match[1] : null;
 }
@@ -208,7 +208,7 @@ export function AnimatedTestimonials({
           </motion.div>
 
           {/* Right */}
-          <motion.div variants={itemVariants} className=" relative w-full">
+          <motion.div variants={itemVariants} className="relative w-full ">
             <AnimatePresence mode="wait">
               <motion.div
                 key={testimonials[activeIndex].id}
@@ -219,17 +219,35 @@ export function AnimatedTestimonials({
                 className="w-full "
               >
                 {/* Decorative corners */}
-                <div className="absolute w-24 h-24 -bottom-6 -left-6 rounded-xl  bg-primary/50 z-10"></div>
-                <div className="absolute w-24 h-24 -top-6 -right-6 rounded-xl bg-primary/50 z-10"></div>
+                <div className="absolute z-10 w-24 h-24 -bottom-6 -left-6 rounded-xl bg-primary/50"></div>
+                <div className="absolute z-10 w-24 h-24 -top-6 -right-6 rounded-xl bg-primary/50"></div>
 
-                <div className="relative flex flex-col p-8 border z-30 shadow-lg rounded-2xl bg-white  w-full">
+                <div className="relative z-30 flex flex-col w-full p-8 bg-white border shadow-lg rounded-2xl">
                   {/* Content */}
-                  <div className="relative z-10 w-full flex-1 mb-6">
+                  <div className="relative z-10 flex-1 w-full mb-6">
                     {testimonials[activeIndex].youtubeUrl ? (
-                      <div className="w-full aspect-video overflow-hidden ">
+                      <div className="w-full overflow-hidden aspect-video ">
+                        {testimonials[activeIndex].youtubeUrl?.includes(
+                          "/shorts/"
+                        ) && (
+                          <svg
+                            className="absolute mb-2 -top-4 -left-4 text-primary/20"
+                            width="60"
+                            height="60"
+                            viewBox="0 0 98.94 122.88"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              fill="#F40407"
+                              fillRule="evenodd"
+                              clipRule="evenodd"
+                              d="M63.49,2.71c11.59-6.04,25.94-1.64,32.04,9.83c6.1,11.47,1.65,25.66-9.94,31.7l-9.53,5.01 c8.21,0.3,16.04,4.81,20.14,12.52c6.1,11.47,1.66,25.66-9.94,31.7l-50.82,26.7c-11.59,6.04-25.94,1.64-32.04-9.83 c-6.1-11.47-1.65-25.66,9.94-31.7l9.53-5.01c-8.21-0.3-16.04-4.81-20.14-12.52c-6.1-11.47-1.65-25.66,9.94-31.7L63.49,2.71 L63.49,2.71z M36.06,42.53l30.76,18.99l-30.76,18.9V42.53L36.06,42.53z"
+                            />
+                          </svg>
+                        )}
                         <iframe
                           id={`youtube-player-${activeIndex}`}
-                          className="w-full h-full "
+                          className="w-full h-full rounded-xl"
                           src={`https://www.youtube.com/embed/${extractYouTubeID(
                             testimonials[activeIndex].youtubeUrl!
                           )}?enablejsapi=1`}
@@ -249,9 +267,9 @@ export function AnimatedTestimonials({
                     )}
                   </div>
 
-                  <Separator className="my-4 z-30" />
+                  <Separator className="z-30 my-4" />
 
-                  <div className="flex items-center gap-4 z-30">
+                  <div className="z-30 flex items-center gap-4">
                     <Avatar className="w-12 h-12 border">
                       <AvatarImage
                         src={testimonials[activeIndex].imageUrl}
