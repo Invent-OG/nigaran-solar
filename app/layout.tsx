@@ -5,6 +5,7 @@ import { Providers } from "./providers";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import { LenisProvider } from "@/components/LenisProvider";
+import FloatingContactButtons from "@/components/FloatingContactButtons";
 
 const inter = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
 
@@ -37,6 +38,7 @@ export default function RootLayout({
           <main>{children}</main>
           <Footer />
         </Providers>
+        <FloatingContactButtons />
       </body>
     </html>
   );
