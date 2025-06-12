@@ -1,17 +1,23 @@
-import { NextResponse } from 'next/server';
-import { z } from 'zod';
-import { db } from '@/lib/db';
-import { careers } from '@/lib/db/schema';
-import { eq } from 'drizzle-orm';
+import { NextResponse } from "next/server";
+import { z } from "zod";
+import { db } from "@/lib/db";
+import { careers } from "@/lib/db/schema";
+import { eq } from "drizzle-orm";
 
 const careerSchema = z.object({
-  title: z.string().min(2, 'Title must be at least 2 characters'),
-  type: z.enum(['Full-Time', 'Part-Time', 'Internship']),
-  location: z.string().min(2, 'Location must be at least 2 characters'),
-  description: z.string().min(10, 'Description must be at least 10 characters'),
-  requirements: z.string().min(10, 'Requirements must be at least 10 characters'),
+  title: z.string().min(2, "Title must be at least 2 characters"),
+  type: z.enum(["Full-Time", "Part-Time", "Internship"]),
+  location: z.string().min(2, "Location must be at least 2 characters"),
+  description: z.string().min(10, "Description must be at least 10 characters"),
+  requirements: z
+    .string()
+    .min(10, "Requirements must be at least 10 characters"),
   salary: z.string().optional(),
-  applyUrl: z.string().url('Please enter a valid URL').optional().or(z.literal(''))
+  applyUrl: z
+    .string()
+    .url("Please enter a valid URL")
+    .optional()
+    .or(z.literal("")),
 });
 
 export async function GET(
@@ -19,17 +25,22 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
-    const [career] = await db.select().from(careers).where(eq(careers.id, params.id));
+    const [career] = await db
+      .select()
+      .from(careers)
+      .where(eq(careers.id, params.id));
+    console.log("Fetching career with ID:", params.id);
     if (!career) {
       return NextResponse.json(
-        { success: false, error: 'Career not found' },
+        { success: false, error: "Career not found" },
         { status: 404 }
       );
     }
     return NextResponse.json({ success: true, career });
   } catch (error) {
+    console.error("GET /api/careers/[id] error:", error);
     return NextResponse.json(
-      { success: false, error: 'Internal server error' },
+      { success: false, error: "Internal server error" },
       { status: 500 }
     );
   }
@@ -40,21 +51,25 @@ export async function DELETE(
   { params }: { params: { id: string } }
 ) {
   try {
+    console.log("Deleting career with ID:", params.id);
     await db.delete(careers).where(eq(careers.id, params.id));
     return NextResponse.json({ success: true });
   } catch (error) {
     return NextResponse.json(
-      { success: false, error: 'Internal server error' },
+      { success: false, error: "Internal server error" },
       { status: 500 }
     );
   }
 }
 
-
-export async function PATCH(req: Request, { params }: { params: { id: string } }) {
+export async function PATCH(
+  req: Request,
+  { params }: { params: { id: string } }
+) {
   try {
     const id = params.id;
     const body = await req.json();
+    console.log("Patching career with ID:", id, "Data:", body);
 
     const updated = await db
       .update(careers)
