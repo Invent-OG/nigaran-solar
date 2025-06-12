@@ -11,7 +11,7 @@ export async function GET(req: NextRequest) {
 
   const params = new URLSearchParams({
     code,
-    redirect_uri: "http://localhost:3000/api/zoho/callback",
+    redirect_uri: process.env.ZB_REDIRECT_URI!,
     client_id: process.env.ZB_CLIENT_ID!,
     client_secret: process.env.ZB_CLIENT_SECRET!,
     grant_type: "authorization_code",

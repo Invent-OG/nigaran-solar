@@ -12,18 +12,21 @@ export const getZohoAccessToken = async (): Promise<string> => {
     refresh_token: process.env.ZB_REFRESH_TOKEN!,
     client_id: process.env.ZB_CLIENT_ID!,
     client_secret: process.env.ZB_CLIENT_SECRET!,
-    grant_type: 'refresh_token',
+    grant_type: "refresh_token",
   });
 
-  const response = await fetch(`https://accounts.zoho.in/oauth/v2/token?${params}`, {
-    method: 'POST',
-  });
+  const response = await fetch(
+    `https://accounts.zoho.in/oauth/v2/token?${params}`,
+    {
+      method: "POST",
+    }
+  );
 
   const data = await response.json();
 
   if (!response.ok || !data.access_token) {
-    console.error('Zoho Token Error:', data);
-    throw new Error('Failed to fetch Zoho access token');
+    console.error("Zoho Token Error:", data);
+    throw new Error("Failed to fetch Zoho access token");
   }
 
   cachedToken = data.access_token;
