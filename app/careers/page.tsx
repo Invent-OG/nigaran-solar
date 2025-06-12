@@ -219,7 +219,7 @@ join solar company, Nigaran Solar careers"
                       variant="outline"
                       className="group"
                       onClick={() =>
-                        router.push(`/careers/${position.id}apply`)
+                        router.push(`/careers/${position.id}/apply`)
                       }
                     >
                       Apply Now
