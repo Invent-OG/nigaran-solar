@@ -109,7 +109,7 @@ export default function CommercialPage() {
             initial={{ opacity: 0, y: 100 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="lg:w-[40%]"
+            className="lg:w-[40%] w-full"
           >
             <LeadForm
               type="commercial"

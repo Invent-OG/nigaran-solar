@@ -1,13 +1,13 @@
-import { Resend } from 'resend';
+import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY || '');
+const resend = new Resend(process.env.RESEND_API_KEY || "");
 
 export async function sendLeadThankYouEmail(email: string, name: string) {
   try {
     await resend.emails.send({
-      from: 'Nigaran Solar <no-reply@nigaransolar.com>',
+      from: "Nigaran Solar <no-reply@nigaransolar.com>",
       to: email,
-      subject: 'Thank You for Your Interest in Solar Energy',
+      subject: "Thank You for Your Interest in Solar Energy",
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h1 style="color: #166534;">Thank you, ${name}!</h1>
@@ -20,17 +20,21 @@ export async function sendLeadThankYouEmail(email: string, name: string) {
       `,
     });
   } catch (error) {
-    console.error('Failed to send lead thank you email:', error);
+    console.error("Failed to send lead thank you email:", error);
     throw error;
   }
 }
 
-export async function sendJobApplicationConfirmation(email: string, name: string, position: string) {
+export async function sendJobApplicationConfirmation(
+  email: string,
+  name: string,
+  position: string
+) {
   try {
     await resend.emails.send({
-      from: 'Nigaran Solar Careers <careers@nigaransolar.com>',
+      from: "Nigaran Solar Careers <careers@nigaransolar.com>",
       to: email,
-      subject: 'Application Received - Nigaran Solar',
+      subject: "Application Received - Nigaran Solar",
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h1 style="color: #166534;">Thank you for applying, ${name}!</h1>
@@ -43,7 +47,7 @@ export async function sendJobApplicationConfirmation(email: string, name: string
       `,
     });
   } catch (error) {
-    console.error('Failed to send job application confirmation:', error);
+    console.error("Failed to send job application confirmation:", error);
     throw error;
   }
 }

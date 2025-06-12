@@ -100,56 +100,43 @@ money from solar referrals, solar affiliate program, Nigaran Solar Pro"
             initial={{ opacity: 0, y: 100 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="lg:w-[40%] bg-white/10 backdrop-blur-md p-6 rounded-lg border border-white/30"
+            className="lg:w-[40%] w-full bg-white  p-6 rounded-lg border border-white/30"
           >
-            <h3 className="mb-4 text-xl font-semibold text-white">
+            <h3 className="mb-4 text-2xl font-bold text-center ">
               Join Our Network
             </h3>
-            <form className="space-y-4">
+            <form className="space-y-2 ">
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                <div>
-                  <Label className="my-2 text-white">First Name</Label>
-                  <Input
-                    placeholder="First Name"
-                    className="text-white border bg-white/20 backdrop-blur-sm border-white/30 placeholder-white/60"
-                  />
+                <div className="flex flex-col gap-2">
+                  <Label className="">First Name</Label>
+                  <Input placeholder="First Name" className="" />
                 </div>
-                <div>
-                  <Label className="mb-2 text-white">Last Name</Label>
-                  <Input
-                    placeholder="Last Name"
-                    className="text-white border bg-white/20 backdrop-blur-sm border-white/30 placeholder-white/60"
-                  />
+                <div className="flex flex-col gap-2">
+                  <Label className="">Last Name</Label>
+                  <Input placeholder="Last Name" className="" />
                 </div>
               </div>
-              <Label className="mb-2 text-white">Email Address</Label>
-              <Input
-                type="email"
-                placeholder="Email Address"
-                className="text-white border bg-white/20 backdrop-blur-sm border-white/30 placeholder-white/60"
-              />
-              <Label className="mb-2 text-white">Phone Number</Label>
-              <Input
-                type="tel"
-                placeholder="Phone Number"
-                className="text-white border bg-white/20 backdrop-blur-sm border-white/30 placeholder-white/60"
-              />
-              <Label className="mb-2 text-white">Location</Label>
-              <Input
-                placeholder="Location"
-                className="text-white border bg-white/20 backdrop-blur-sm border-white/30 placeholder-white/60"
-              />
-              <Label className="mb-2 text-white">Profession</Label>
-              <Input
-                placeholder="Profession"
-                className="text-white border bg-white/20 backdrop-blur-sm border-white/30 placeholder-white/60"
-              />
-              <Label className="mb-2 text-white">Why Join</Label>
-              <Textarea
-                placeholder="Why do you want to join?"
-                className="text-white border bg-white/20 backdrop-blur-sm border-white/30 placeholder-white/60"
-              />
-              <Button className="w-full text-black bg-white hover:bg-white/90">
+              <div className="flex flex-col gap-2">
+                <Label className="">Email Address</Label>
+                <Input type="email" placeholder="Email Address" className="" />
+              </div>
+              <div className="flex flex-col gap-2">
+                <Label className="">Phone Number</Label>
+                <Input type="tel" placeholder="Phone Number" className="" />
+              </div>
+              <div className="flex flex-col gap-2">
+                <Label className="">Location</Label>
+                <Input placeholder="Location" className="" />
+              </div>
+              <div className="flex flex-col gap-2">
+                <Label className="">Profession</Label>
+                <Input placeholder="Profession" className="" />
+              </div>
+              <div className="flex flex-col gap-2">
+                <Label className="">Why Join</Label>
+                <Textarea placeholder="Why do you want to join?" className="" />
+              </div>
+              <Button className="w-full">
                 Submit Application
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
