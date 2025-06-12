@@ -28,7 +28,7 @@ export const getZohoAccessToken = async (): Promise<string> => {
     console.error("Zoho Token Error:", data);
     throw new Error("Failed to fetch Zoho access token");
   }
-
+  console.log("Zoho token response:", data);
   cachedToken = data.access_token;
   // Token expires in 3600s = 1 hour
   tokenExpiry = now + (data.expires_in || 3600) * 1000 - 60 * 1000; // refresh 1 min early
