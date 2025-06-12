@@ -218,9 +218,7 @@ join solar company, Nigaran Solar careers"
                     <Button
                       variant="outline"
                       className="group"
-                      onClick={() =>
-                        router.push(`/careers/${position.id}/apply`)
-                      }
+                      onClick={() => router.push(`/careers/${position.id}`)}
                     >
                       Apply Now
                       <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
