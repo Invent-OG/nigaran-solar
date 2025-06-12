@@ -3,8 +3,12 @@
 
 import { Phone, MessageSquare, Download } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
+import { usePathname } from "next/navigation";
 
 export default function FloatingContactButtons() {
+  const pathname = usePathname();
+  if (pathname.startsWith("/admin")) return null;
+
   return (
     <div className="fixed z-50 flex flex-col gap-3 bottom-5 right-5">
       {/* WhatsApp Button */}
