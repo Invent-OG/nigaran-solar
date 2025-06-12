@@ -21,6 +21,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { ArrowLeft } from "lucide-react";
 import { toast } from "sonner"; // ✅ Sonner toast
 import { supabase } from "@/lib/supabase/client";
+import { useCareer } from "@/lib/queries/careers";
 
 const applicationSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -38,14 +39,9 @@ export default function CareerApplicationPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [fileUrl, setFileUrl] = useState<string | null>(null);
 
-  const { data: careerData, isLoading: careerLoading } = useQuery({
-    queryKey: ["career", params.id],
-    queryFn: async () => {
-      const res = await fetch(`/api/careers/${params.id}`);
-      if (!res.ok) throw new Error("Failed to fetch career details");
-      return res.json();
-    },
-  });
+  const { data: careerData, isLoading: careerLoading } = useCareer(
+    params.id as string
+  );
 
   const form = useForm<ApplicationFormData>({
     resolver: zodResolver(applicationSchema),
