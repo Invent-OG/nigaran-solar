@@ -19,7 +19,7 @@ export async function POST(req: Request) {
           City: body.city,
           Company_Name: body.companyName || "N/A",
           Monthly_Electricity_Bill: body.electricityBill,
-          Description: body.type,
+          Looking_For: body.type,
         },
       ],
       trigger: ["workflow"],
