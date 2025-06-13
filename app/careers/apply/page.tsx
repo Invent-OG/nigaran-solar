@@ -39,9 +39,9 @@ export default function CareerApplicationPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [fileUrl, setFileUrl] = useState<string | null>(null);
 
-  const { data: careerData, isLoading: careerLoading } = useCareer(
-    params.id as string
-  );
+  // const { data: careerData, isLoading: careerLoading } = useCareer(
+  //   params.id as string
+  // );
 
   const form = useForm<ApplicationFormData>({
     resolver: zodResolver(applicationSchema),
@@ -144,17 +144,17 @@ export default function CareerApplicationPage() {
     toast.success("Resume uploaded successfully.");
   };
 
-  if (careerLoading) {
-    return <div className="container min-h-screen pt-20">Loading...</div>;
-  }
+  // if (careerLoading) {
+  //   return <div className="container min-h-screen pt-20">Loading...</div>;
+  // }
 
-  const career = careerData?.career;
+  // const career = careerData?.career;
 
-  if (!career) {
-    return (
-      <div className="container min-h-screen pt-20">Position not found</div>
-    );
-  }
+  // if (!career) {
+  //   return (
+  //     <div className="container min-h-screen pt-20">Position not found</div>
+  //   );
+  // }
 
   return (
     <div className="min-h-screen pt-20 py-[80%] lg:py-32">
@@ -171,9 +171,9 @@ export default function CareerApplicationPage() {
           className="max-w-2xl mx-auto"
         >
           <div className="mb-8">
-            <h1 className="mb-2 text-3xl font-bold">
+            {/* <h1 className="mb-2 text-3xl font-bold">
               Apply for {career.title}
-            </h1>
+            </h1> */}
             <p className="text-muted-foreground">
               Complete the form below to apply for this position. Make sure to
               provide accurate contact information.
