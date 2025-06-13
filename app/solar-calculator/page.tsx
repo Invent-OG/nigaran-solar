@@ -187,12 +187,18 @@ export default function SolarCalculatorPage() {
     <div className="min-h-screen pt-20">
       {/* Meta Information */}
       <Head>
-        <title>
-          Solar Savings Calculator | Estimate Your Solar ROI | Nigaran Solar
-        </title>
+        <title>Solar Calculator India | Estimate Savings | Nigaran Solar</title>
         <meta
           name="description"
-          content="Calculate your potential solar savings with Nigaran Solar's free calculator. Get instant estimates on system size, costs, ROI, and payback period based on your energy usage in Tamil Nadu."
+          content="Use Nigaran Solar’s free solar calculator to estimate your
+savings, system size, and cost. Plan your switch to solar in Tamil Nadu with
+confidence"
+        />
+        <meta
+          name="keywords"
+          content="free solar calculator, solar savings calculator, solar panel cost
+calculator, rooftop solar calculator Tamil Nadu, solar energy calculator, Nigaran
+Solar calculator, Tamil Nadu solar subsidy calculator"
         />
       </Head>
 

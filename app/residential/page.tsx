@@ -255,17 +255,17 @@ export default function ResidentialPage() {
     <div className="pt-20 ">
       {/* Meta Information */}
       <Head>
-        <title>
-          Affordable Residential Solar Panels in Coimbatore & Tamil Nadu |
-          Nigaran Solar
-        </title>
+        <title>Residential Solar Panels | Nigaran Solar</title>
         <meta
           name="description"
-          content="Switch to affordable residential solar panels from Nigaran Solar. We offer efficient solar power systems for homes in Tamil Nadu with government subsidies and expert installation. Save on your electricity bills today!"
+          content="Power your home with Nigaran Solar. Get affordable, efficient
+residential solar panels in Tamil Nadu with subsidies & expert installation"
         />
         <meta
           name="keywords"
-          content="residential solar panels, solar for home in Tamil Nadu, residential solar installation, solar rooftop installation Tamil Nadu, solar panel prices India, solar panels for homes"
+          content="residential solar panels in tamilnadu, solar for home in Tamil
+Nadu, residential solar installation, solar rooftop installation Tamil Nadu, solar
+panel prices India, solar panels for homes"
         />
       </Head>
       {/* Hero Section */}

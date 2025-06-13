@@ -23,18 +23,17 @@ export default function BlogPage() {
     <div className="min-h-screen pt-20">
       {/* Meta Information */}
       <Head>
-        <title>
-          Solar Energy Blog | Solar Tips, News & Insights | Nigaran Solar
-        </title>
+        <title>Solar Energy Blog | Solar Tips & Insights | Nigaran Solar</title>
         <meta
           name="description"
-          content="Stay updated with the latest in solar energy. Explore tips, news, government schemes, and installation guides from Nigaran Solar's blog."
+          content="Stay updated with the latest in solar energy. Explore tips, news,
+government schemes, and installation guides from Nigaran Solar's blog."
         />
         <meta
           name="keywords"
           content="solar energy blog, renewable energy news, solar tips, solar
-technology updates, solar power benefits, clean energy blog, solar
-installation advice"
+technology updates, solar power benefits, clean energy blog, solar installation
+advice"
         />
       </Head>
 

@@ -48,16 +48,18 @@ export default function CommercialPage() {
     <div className="min-h-screen pt-20">
       {/* Meta Information */}
       <Head>
-        <title>
-          Commercial Solar Solutions in Coimbatore & Tamil Nadu | Nigaran Solar
-        </title>
+        <title>Commercial Solar in Coimbatore | Nigaran Solar</title>
         <meta
           name="description"
-          content="Reduce energy costs and improve sustainability with commercial solar solutions from Nigaran Solar. We offer customized solar systems for businesses in Coimbatore and Tamil Nadu. Start saving today with solar energy."
+          content="Cut energy costs with Nigaran Solar’s custom commercial
+systems. Serving Coimbatore & Tamil Nadu with expert solar solutions for
+businesses"
         />
         <meta
           name="keywords"
-          content="commercial solar solutions, business solar panels, solar power systems Tamil Nadu, solar rooftop installation Tamil Nadu, solar for businesses, solar panel for commercial use Coimbatore."
+          content="commercial solar solutions, solar solutions for businesses, solar
+power systems Tamil Nadu, solar rooftop installation Tamil Nadu, solar for
+businesses, solar panel for commercial use Coimbatore."
         />
       </Head>
 

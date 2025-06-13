@@ -37,8 +37,14 @@ export default function HousingSocietyPage() {
         <title>Community Solar for Housing Societies | Nigaran Solar</title>
         <meta
           name="description"
-          content="Power lifts, pumps & lights with solar. Nigaran Solar offers tailored systems to cut shared
-electricity costs for eco-friendly housing societies."
+          content=" Power lifts, pumps & lights with solar. Nigaran Solar offers
+tailored systems to cut shared electricity costs for eco-friendly housing societies."
+        />
+        <meta
+          name="keywords"
+          content="solar for housing society in tamilnadu , solar system for housing
+society, housing society solar power, solar rooftop for housing society, housing
+society solar"
         />
       </Head>
 

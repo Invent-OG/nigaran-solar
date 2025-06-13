@@ -29,15 +29,19 @@ export default function ContactPage() {
       {/* Meta Information */}
       <Head>
         <title>
-          Contact Nigaran Solar | Solar Energy Solutions in Coimbatore
+          Contact Nigaran Solar | Solar Energy Solutions in Tamilnadu{" "}
         </title>
         <meta
           name="description"
-          content="Get in touch with Nigaran Solar for expert solar consultation, installation, and solar solutions in Coimbatore and Tamil Nadu. Contact us today to start your journey to energy independence with solar power."
+          content="Connect with Nigaran Solar for expert solar consultation and
+installation in Coimbatore & Tamil Nadu. Start your journey to energy
+independence today!"
         />
         <meta
           name="keywords"
-          content="Contact Nigaran Solar, solar consultation, solar energy Coimbatore, solar panel installation Coimbatore, get free solar consultation, solar installation Tamil Nadu"
+          content="Contact Nigaran Solar, solar consultation, solar energy
+Coimbatore, solar panel installation Coimbatore, get free solar consultation, solar
+installation Tamil Nadu"
         />
       </Head>
       <section className="py-16  lg:pb-52 pb-[80%] bg-background">

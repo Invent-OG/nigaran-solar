@@ -25,6 +25,7 @@ import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import { ShootingStars } from "@/components/ui/shooting-stars";
+import Head from "next/head";
 
 const onGridContent = {
   hero: {
@@ -176,6 +177,24 @@ const images = [
 export default function OnGridSolarPage() {
   return (
     <div className="min-h-screen pt-20">
+      {/* Meta Information */}
+      <Head>
+        <title>
+          Grid-Tied Solar Power for Homes & Businesses | Nigaran Solar
+        </title>
+        <meta
+          name="description"
+          content="Install reliable on-grid solar systems with Nigaran Solar. Save
+on electricity bills and get net metering benefits across Tamil Nadu."
+        />
+        <meta
+          name="keywords"
+          content="on-grid solar system Tamil Nadu, grid-tied solar for home India,
+solar net metering Tamil Nadu, rooftop solar for business, Nigaran on-grid solar,
+best solar company in Tamil Nadu"
+        />
+      </Head>
+
       {/* Hero Section */}
       <section className="relative lg:h-[80vh] flex items-center">
         <div className="absolute inset-0 z-0">

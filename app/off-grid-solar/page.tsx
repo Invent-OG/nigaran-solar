@@ -27,6 +27,7 @@ import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import { ShootingStars } from "@/components/ui/shooting-stars";
+import Head from "next/head";
 
 const images = [
   "https://images.pexels.com/photos/356036/pexels-photo-356036.jpeg",
@@ -37,6 +38,25 @@ const images = [
 export default function OffGridSolarPage() {
   return (
     <div className="min-h-screen pt-20">
+      {/* Meta Information */}
+      <Head>
+        <title>
+          Off-Grid Solar Power Systems in Tamil Nadu | Nigaran Solar{" "}
+        </title>
+        <meta
+          name="description"
+          content="Get complete energy freedom with off-grid solar from Nigaran
+Solar. Perfect for rural areas & backup power—efficient, reliable, and
+subsidy-ready."
+        />
+        <meta
+          name="keywords"
+          content="off-grid solar Tamil Nadu, off-grid solar system for home, solar,
+rural solar solutions tamilnadu, off-grid solar panel installation, energy
+independence solar, Nigaran off-grid solar"
+        />
+      </Head>
+
       {/* Hero Section */}
       <section className="relative lg:h-[80vh] flex items-center">
         <div className="absolute inset-0 z-0">

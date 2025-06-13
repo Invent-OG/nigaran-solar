@@ -39,19 +39,16 @@ export default function SolarProPage() {
     <div className="min-h-screen pt-20">
       {/* Meta Information */}
       <Head>
-        <title>
-          Become a Solar Pro | Partner with Nigaran Solar | Solar Installer
-          Program
-        </title>
+        <title>Become a Solar Pro | Partner with Nigaran Solar</title>
         <meta
           name="description"
-          content="Join Nigaran Solar Pro Program - Our exclusive referral program.
-Here you can earn rewards after every successful solar installation process that you refer."
+          content="Refer and earn with Nigaran Solar's Pro Program. Get rewards
+for every successful solar installation you refer. Join our exclusive network today!"
         />
         <meta
           name="keywords"
-          content="solar referral program, refer and earn solar, solar commission, earn
-money from solar referrals, solar affiliate program, Nigaran Solar Pro"
+          content="solar referral program, refer and earn solar, solar commission, earn money from
+solar referrals, solar affiliate program, Nigaran Solar Pro"
         />
       </Head>
       {/* Hero Section */}

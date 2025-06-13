@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Nigaran Solar – Trusted Solar Partner in Tamil Nadu </title>
+        <title>Nigaran Solar – Trusted Solar Partner in Tamil Nadu</title>
         <meta
           name="description"
           content="Nigaran Solar offers top solar panel solutions in Coimbatore &
@@ -22,7 +22,9 @@ consultation today!"
         />
         <meta
           name="keywords"
-          content="solar energy, solar panels, solar power systems, on-grid solar, off-grid solar, hybrid solar systems, residential solar, commercial solar, solar solutions Tamil Nadu, solar companies in TamilNadu"
+          content="solar energy, solar panel solutions in coimbatore, solar panels,
+solar power systems, residential solar, commercial solar, solar solutions Tamil
+Nadu, solar companies in TamilNadu"
         />
       </Head>
       <HeroSection />

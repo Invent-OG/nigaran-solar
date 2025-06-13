@@ -58,19 +58,18 @@ export default function CareersPage() {
     <div className="min-h-screen pt-20">
       {/* Meta Information */}
       <Head>
-        <title>
-          Join Our Team | Careers at Nigaran Solar | Solar Jobs in India
-        </title>
+        <title>Careers at Nigaran Solar | Solar Jobs in Tamilnadu</title>
         <meta
           name="description"
-          content="Explore exciting solar energy careers with Nigaran Solar. Join a leading solar company in India and make a difference in the clean energy revolution.
-  "
+          content="Explore exciting solar energy careers with Nigaran Solar. Join a
+leading solar company in Tamilnadu and make a difference in the clean energy
+revolution."
         />
         <meta
           name="keywords"
-          content="solar jobs, solar jobs vacancy in tamilnadu, solar company careers,
-renewable energy jobs, solar technician jobs, green energy careers,
-join solar company, Nigaran Solar careers"
+          content="solar jobs, solar jobs vacancy in tamilnadu, solar company
+careers, renewable energy jobs, solar technician jobs, green energy careers, join
+solar company, Nigaran Solar careers"
         />
       </Head>
 
