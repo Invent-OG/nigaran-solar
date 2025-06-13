@@ -11,12 +11,6 @@ import { usePathname } from "next/navigation";
 const inter = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
 
 export const metadata: Metadata = {
-  title:
-    "Leading Solar Energy Solutions in Coimbatore | Nigaran Solar Tamil Nadu",
-  description:
-    "Nigaran Solar offers top-quality solar panel solutions in Coimbatore and Tamil Nadu. We specialize in On-Grid, Off-Grid, and Hybrid Solar Systems for residential and commercial installations. Get your free solar consultation today!",
-  keywords:
-    "solar energy, solar panels, solar power systems, on-grid solar, off-grid solar, hybrid solar systems, residential solar, commercial solar, solar solutions Tamil Nadu, solar companies in TamilNadu",
   icons: {
     icon: "/favicon.png", // path to your PNG logo
   },

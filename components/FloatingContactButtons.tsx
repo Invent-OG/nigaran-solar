@@ -25,7 +25,7 @@ export default function FloatingContactButtons() {
 
       {/* Download PDF Button */}
       <a
-        href="https://drive.google.com/uc?export=download&id=1hb0g0RTYrj1sMfIeJJAkTQP8BOrldNdJ"
+        href="https://drive.google.com/uc?export=download&id=1glsHHAZvKwbCXD8OWnCLI10TdTrkhwEQ"
         target="_blank"
         rel="noopener noreferrer"
         className="p-4 text-white transition-transform transform bg-gray-700 rounded-full shadow-lg hover:bg-gray-800 hover:scale-105"
