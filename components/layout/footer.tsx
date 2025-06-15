@@ -22,15 +22,11 @@ const footerLinks = {
     { name: "Legal", href: "#" },
   ],
   company: [
-    { name: "About", href: "#" },
-    { name: "Careers", href: "#" },
-    { name: "News", href: "#" },
+    { name: "About", href: "/about" },
+    { name: "Careers", href: "/carrers" },
+    { name: "News", href: "/blog" },
   ],
-  resources: [
-    { name: "Blog", href: "#" },
-    { name: "Documentation", href: "#" },
-    { name: "Sustainability", href: "#" },
-  ],
+  resources: [{ name: "Blog", href: "/blog" }],
 };
 
 export default function Footer() {
@@ -53,7 +49,7 @@ export default function Footer() {
           alt="Solar Panels"
           width={500}
           height={100}
-          className="top-0 object-contain md:visible hidden left -z-10 opacity-40 lg:absolute"
+          className="top-0 hidden object-contain md:visible left -z-10 opacity-40 lg:absolute"
         /> */}
         <div className="flex flex-col w-full gap-4 md:w-2/3">
           <h2 className="text-2xl font-bold sm:text-3xl md:text-4xl">
@@ -126,13 +122,31 @@ export default function Footer() {
               Committed to a sustainable future.
             </p>
             <div className="flex space-x-4">
-              {[Facebook, Twitter, Instagram, Linkedin, Youtube].map(
-                (Icon, idx) => (
-                  <Link key={idx} href="#" aria-label="Social link">
-                    <Icon className="w-5 h-5 text-gray-400 transition-colors hover:text-white" />
-                  </Link>
-                )
-              )}
+              <Link
+                href="https://www.facebook.com/NigaranSolar"
+                aria-label="Facebook"
+              >
+                <Facebook className="w-5 h-5 text-gray-400 transition-colors hover:text-white" />
+              </Link>
+
+              <Link
+                href="https://www.instagram.com/nigaransolar/"
+                aria-label="Instagram"
+              >
+                <Instagram className="w-5 h-5 text-gray-400 transition-colors hover:text-white" />
+              </Link>
+              <Link
+                href="https://www.linkedin.com/company/nigaransolar/"
+                aria-label="LinkedIn"
+              >
+                <Linkedin className="w-5 h-5 text-gray-400 transition-colors hover:text-white" />
+              </Link>
+              <Link
+                href="https://www.youtube.com/@NigaranSolar"
+                aria-label="YouTube"
+              >
+                <Youtube className="w-5 h-5 text-gray-400 transition-colors hover:text-white" />
+              </Link>
             </div>
           </motion.div>
 
@@ -172,7 +186,7 @@ export default function Footer() {
                   onClick={() =>
                     window.open("/admin/login", "_blank", "noopener,noreferrer")
                   }
-                  className="text-gray-400 cursor-pointer transition-colors hover:text-white"
+                  className="text-gray-400 transition-colors cursor-pointer hover:text-white"
                 >
                   Admin Login
                 </div>
@@ -202,18 +216,10 @@ export default function Footer() {
         <motion.div className="pt-10 mt-10 text-center border-t border-white/10">
           <p className="text-sm text-gray-400">
             &copy; {new Date().getFullYear()} Nigaran Solar. All rights
-            reserved.
+            reserved. Built by Invent <span className="text-blue-500">O</span>G.
           </p>
         </motion.div>
       </div>
-
-      {/* <Image
-        src={"/Solar House.png"}
-        alt={"Solar House"}
-        width={300}
-        height={300}
-        className="absolute object-cover opacity-50 -right-20 -bottom-10 "
-      /> */}
     </footer>
   );
 }

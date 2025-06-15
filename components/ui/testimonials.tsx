@@ -8,7 +8,44 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
+const testimonialData = [
+  {
+    name: "Arun Kumar",
+    position: "Project Manager",
+    image: "/about/teams/1.png",
+  },
+  {
+    name: "Sneha Reddy",
+    position: "Operations Head",
+    image: "/about/teams/2.png",
+  },
+  {
+    name: "Rahul Sharma",
+    position: "CTO",
+    image: "/about/teams/3.png",
+  },
+  {
+    name: "Priya Menon",
+    position: "Design Lead",
+    image: "/about/teams/4.png",
+  },
+  {
+    name: "Vikram Patel",
+    position: "Business Analyst",
+    image: "/about/teams/5.png",
+  },
+  {
+    name: "Anjali Desai",
+    position: "Marketing Manager",
+    image: "/about/teams/6.png",
+  },
+  {
+    name: "Karthik Nair",
+    position: "Technical Support",
+    image: "/about/teams/7.png",
+  },
+];
 
 function Testimonials() {
   const [api, setApi] = useState<CarouselApi>();
@@ -35,27 +72,23 @@ function Testimonials() {
       <div className="container mx-auto">
         <Carousel setApi={setApi} className="w-full">
           <CarouselContent>
-            {Array.from({ length: 15 }).map((_, index) => (
-              <CarouselItem className="lg:basis-1/2" key={index}>
-                <div className="flex items-center justify-between h-full select-none rounded-xl bg-muted lg:col-span-2 aspect-video">
+            {testimonialData.map((testimonial, index) => (
+              <CarouselItem className="lg:basis-1/5" key={index}>
+                <div className="flex flex-col items-center justify-between h-full select-none rounded-xl">
                   <Image
-                    src={`https://randomuser.me/api/portraits/men/${index}.jpg`}
-                    alt="User"
-                    width={500}
-                    height={500}
-                    className="object-cover w-1/2 h-full"
+                    src={testimonial.image}
+                    alt={testimonial.name}
+                    width={250}
+                    height={250}
+                    className="object-cover h-full "
                   />
-
-                  <div className="flex flex-col justify-center w-1/2 h-full p-5 bg-black gap -4">
-                    <div className="flex flex-col">
-                      <h3 className="text-xl tracking-tight text-white">
-                        Best decision
-                      </h3>
-                      <p className="max-w-xs text-base text-muted-foreground">
-                        Our goal was to streamline SMB trade, making it easier
-                        and faster than ever and we did it together.
-                      </p>
-                    </div>
+                  <div className="flex flex-col items-center w-full text-center">
+                    <h3 className="text-xl font-semibold text-black">
+                      {testimonial.name}
+                    </h3>
+                    <span className="text-sm text-muted-foreground">
+                      {testimonial.position}
+                    </span>
                   </div>
                 </div>
               </CarouselItem>

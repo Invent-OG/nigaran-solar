@@ -220,7 +220,6 @@ solar company, Nigaran Solar careers"
                       onClick={() =>
                         router.push(`/careers/apply/${position.id}`)
                       }
-                      // onClick={() => router.push(`/careers/apply`)}
                     >
                       Apply Now
                       <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />

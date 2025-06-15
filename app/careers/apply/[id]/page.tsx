@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Share2Icon } from "lucide-react";
 import { toast } from "sonner"; // ✅ Sonner toast
 import { supabase } from "@/lib/supabase/client";
 import { useCareer } from "@/lib/queries/careers";
@@ -177,10 +177,38 @@ export default function CareerApplicationPage() {
   return (
     <div className="min-h-screen pt-20 py-[80%] lg:py-32">
       <div className="container py-8">
-        <Button variant="ghost" onClick={() => router.back()} className="mb-8">
-          <ArrowLeft className="w-4 h-4 mr-2" />
-          Back to Careers
-        </Button>
+        <div className="flex flex-col items-start justify-between mb-8 space-y-4 lg:flex-row lg:items-center">
+          <Button
+            variant="ghost"
+            onClick={() => router.push("/careers")}
+            className="mb-8"
+          >
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Back to Careers
+          </Button>
+          <Button
+            variant="outline"
+            className="flex items-center gap-2 space-x-2"
+            onClick={async () => {
+              if (navigator.share) {
+                try {
+                  await navigator.share({
+                    title: document.title,
+                    url: window.location.href,
+                  });
+                } catch (error) {
+                  console.error("Error sharing:", error);
+                }
+              } else {
+                await navigator.clipboard.writeText(window.location.href);
+                toast.success("Link copied to clipboard!");
+              }
+            }}
+          >
+            <Share2Icon />
+            Share this page
+          </Button>
+        </div>
 
         <motion.div
           initial={{ opacity: 0, y: 100 }}
