@@ -35,9 +35,9 @@ import {
 import Head from "next/head";
 
 const images = [
-  "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg",
-  "https://images.pexels.com/photos/1181622/pexels-photo-1181622.jpeg",
-  "https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg",
+  "carrers/careers 2.webp",
+  "carrers/careers 3.webp",
+  "carrers/careers 4.webp",
 ];
 
 export default function CareersPage() {
@@ -85,7 +85,9 @@ solar company, Nigaran Solar careers"
           >
             {images.map((src, index) => (
               <SwiperSlide key={index}>
-                <img
+                <Image
+                  height={600}
+                  width={1200}
                   src={src}
                   alt={`Slide ${index + 1}`}
                   className="object-cover w-full h-full"
@@ -258,7 +260,7 @@ solar company, Nigaran Solar careers"
               <div className="absolute z-0 w-20 h-20 rounded-full -left-5 -top-5 bg-primary/20"></div>
               <div className="relative z-10">
                 <Image
-                  src="https://images.pexels.com/photos/3184338/pexels-photo-3184338.jpeg"
+                  src="/carrers/Careers.webp"
                   alt="Team working together"
                   width={600}
                   height={400}
@@ -493,7 +495,7 @@ solar company, Nigaran Solar careers"
               <div className="absolute z-0 w-20 h-20 rounded-full -right-5 -top-5 bg-primary/20"></div>
               <div className="relative z-10 h-full">
                 <Image
-                  src="https://images.pexels.com/photos/3184306/pexels-photo-3184306.jpeg"
+                  src="/carrers/Career path & growth.webp"
                   alt="Career growth"
                   width={600}
                   height={400}
