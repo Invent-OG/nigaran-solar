@@ -43,13 +43,19 @@ export default function CareerApplicationPage() {
     career: {
       id: string;
       title: string;
-      // add other fields as needed
+      type: "Full-Time" | "Part-Time" | "Internship";
+      location: string;
+      description: string;
+      requirements: string;
+      salary?: string;
+      applyUrl?: string;
+      createdAt: string;
     };
   };
 
   const { data: careerData, isLoading: careerLoading } = useCareer(
     params.id as string
-  ) as { data: CareerData | undefined; isLoading: boolean };
+  ) as { data: CareerData; isLoading: boolean };
 
   const form = useForm<ApplicationFormData>({
     resolver: zodResolver(applicationSchema),
@@ -191,6 +197,20 @@ export default function CareerApplicationPage() {
               provide accurate contact information.
             </p>
           </div>
+
+          <h2 className="mb-4 text-xl font-semibold">
+            {career?.title} - {career?.type}
+          </h2>
+          <p className="mb-2 text-muted-foreground">
+            <strong>Location:</strong> {career?.location}
+          </p>
+          <p className="mb-4 text-muted-foreground">
+            <strong>Salary:</strong> {career?.salary || "Not specified"}
+          </p>
+          <h3 className="mb-2 text-lg font-semibold">Job Description</h3>
+          <p className="mb-4">{career?.description}</p>
+          <h3 className="mb-2 text-lg font-semibold">Requirements</h3>
+          <p className="mb-4">{career?.requirements}</p>
 
           <div className="p-6 rounded-lg shadow-lg bg-card">
             <Form {...form}>
