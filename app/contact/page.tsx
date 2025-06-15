@@ -14,9 +14,13 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import Head from "next/head";
+import LeadForm from "@/components/forms/lead-form";
+import { HomeIcon, Users2, Building2 } from "lucide-react";
 
 export default function ContactPage() {
-  const [lookingFor, setLookingFor] = useState("");
+  const [formType, setFormType] = useState<
+    "residential" | "housing_society" | "commercial"
+  >("residential");
 
   const fadeInUp = (delay = 0) => ({
     initial: { opacity: 0, y: 20 },
@@ -85,8 +89,69 @@ installation Tamil Nadu"
               </div>
             </motion.div>
 
+            {/* Form Section */}
+            <div className="w-full text-white lg:max-w-xl">
+              {/* Buttons */}
+              <div className="flex flex-row gap-3 mb-6 sm:gap-4">
+                <div
+                  onClick={() => setFormType("residential")}
+                  className={`cursor-pointer py-3 lg:px-4  w-full flex items-center justify-center gap-2 rounded-xl text-xs lg:text-sm sm:text-base transition ${
+                    formType === "residential"
+                      ? "bg-primary  font-semibold shadow-lg"
+                      : "bg-white/20 shadow-lg text-black  hover:bg-white/30"
+                  }`}
+                >
+                  <HomeIcon size={16} className="hidden lg:flex" /> Residential
+                </div>
+                <div
+                  onClick={() => setFormType("housing_society")}
+                  className={`cursor-pointer py-3 lg:px-4  w-full flex items-center justify-center gap-2 rounded-xl text-xs lg:text-sm sm:text-base transition ${
+                    formType === "housing_society"
+                      ? "bg-primary  font-semibold shadow-lg"
+                      : "bg-white/20 shadow-lg text-black  hover:bg-white/30"
+                  }`}
+                >
+                  <Users2 size={16} className="hidden lg:flex" /> Housing
+                  Society
+                </div>
+                <div
+                  onClick={() => setFormType("commercial")}
+                  className={`cursor-pointer py-3 lg:px-4  w-full flex items-center justify-center gap-2 rounded-xl text-xs lg:text-sm sm:text-base transition ${
+                    formType === "commercial"
+                      ? "bg-primary  font-semibold shadow-lg"
+                      : "bg-white/20 shadow-lg text-black  hover:bg-white/30"
+                  }`}
+                >
+                  <Building2 size={16} className="hidden lg:flex" /> Commercial
+                </div>
+              </div>
+
+              {/* Dynamic Form */}
+              {formType === "residential" && (
+                <LeadForm
+                  type="residential"
+                  title="Residential Solar Solutions"
+                  description="Optimize your home's energy with our customized residential solar plans."
+                />
+              )}
+              {formType === "housing_society" && (
+                <LeadForm
+                  type="housing_society"
+                  title="Housing Society Solutions"
+                  description="Affordable solar solutions designed for housing societies and communities."
+                />
+              )}
+              {formType === "commercial" && (
+                <LeadForm
+                  type="commercial"
+                  title="Commercial Solar Plans"
+                  description="Efficient solar power options tailored for your commercial needs."
+                />
+              )}
+            </div>
+
             {/* Form */}
-            <motion.div
+            {/* <motion.div
               {...fadeInUp(0.3)}
               className="p-6 rounded-lg shadow-lg bg-card"
             >
@@ -181,7 +246,7 @@ installation Tamil Nadu"
                   Submit
                 </Button>
               </form>
-            </motion.div>
+            </motion.div> */}
           </div>
         </div>
       </section>
