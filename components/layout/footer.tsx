@@ -216,7 +216,7 @@ export default function Footer() {
         <motion.div className="pt-10 mt-10 text-center border-t border-white/10">
           <p className="text-sm text-gray-400">
             &copy; {new Date().getFullYear()} Nigaran Solar. All rights
-            reserved. Built by Invent <span className="text-blue-500">O</span>G.
+            reserved.
           </p>
         </motion.div>
       </div>
