@@ -9,10 +9,18 @@ import WhoWeAre from "@/components/sections/who-we-are";
 import FAQ from "@/components/sections/faq-section2";
 import Head from "next/head";
 
+export const metadata = {
+  title: "Nigaran Solar – Trusted Solar Partner in Tamil Nadu",
+  description:
+    "Nigaran Solar offers top solar panel solutions in Coimbatore & Tamil Nadu for homes, businesses & housing societies. Book your free consultation today!",
+  keywords:
+    "solar energy, solar panel solutions in coimbatore, solar panels, solar power systems, residential solar, commercial solar, solar solutions Tamil Nadu, solar companies in TamilNadu",
+};
+
 export default function Home() {
   return (
     <>
-      <Head>
+      {/* <Head>
         <title>Nigaran Solar – Trusted Solar Partner in Tamil Nadu</title>
         <meta
           name="description"
@@ -26,7 +34,7 @@ consultation today!"
 solar power systems, residential solar, commercial solar, solar solutions Tamil
 Nadu, solar companies in TamilNadu"
         />
-      </Head>
+      </Head> */}
       <HeroSection />
       <LogosSlider />
       <StatsSection />

@@ -29,6 +29,14 @@ import { CTASection } from "@/components/blocks/cta-with-rectangle";
 import { RiCustomerService2Line } from "react-icons/ri";
 import { Testimonials } from "@/components/ui/testimonials";
 
+export const metadata = {
+  title: "About Nigaran Solar | Leading Solar Company in Tamilnadu",
+  description:
+    "Nigaran Solar offers affordable, efficient solar systems for homes and businesses across Tamil Nadu. Trusted provider of sustainable energy in Coimbatore.",
+  keywords:
+    "solar company Coimbatore, solar power systems, trusted solar partner, solar solutions Tamil Nadu, solar energy provider, solar panel installation Coimbatore",
+};
+
 export default function AboutPage() {
   const testimonials = [
     {
@@ -70,7 +78,7 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen pt-20">
       {/* Meta Information */}
-      <Head>
+      {/* <Head>
         <title>About Nigaran Solar | Leading Solar Company in Tamilnadu</title>
         <meta
           name="description"
@@ -84,7 +92,7 @@ energy in Coimbatore."
 partner, solar solutions Tamil Nadu, solar energy provider, solar panel installation
 Coimbatore"
         />
-      </Head>
+      </Head> */}
 
       {/* Hero Section */}
       <section className="relative h-[60vh] flex items-center">
