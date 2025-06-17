@@ -15,7 +15,8 @@ export function GoogleReviewButton() {
         alt="Google"
         height={100}
         width={100}
-        className="w-full h-20"
+        className="w-full h-12 lg:h-20 object-contain transition-transform duration-300 ease-in-out hover:scale-110"
+        loading="lazy"
       />
     </button>
   );

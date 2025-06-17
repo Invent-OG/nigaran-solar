@@ -7,7 +7,6 @@ import BlogSection from "@/components/sections/blog-section";
 import { LogosSlider } from "@/components/sections/logos-slider";
 import WhoWeAre from "@/components/sections/who-we-are";
 import FAQ from "@/components/sections/faq-section2";
-import Head from "next/head";
 
 export const metadata = {
   title: "Nigaran Solar – Trusted Solar Partner in Tamil Nadu",
@@ -20,21 +19,6 @@ export const metadata = {
 export default function Home() {
   return (
     <>
-      {/* <Head>
-        <title>Nigaran Solar – Trusted Solar Partner in Tamil Nadu</title>
-        <meta
-          name="description"
-          content="Nigaran Solar offers top solar panel solutions in Coimbatore &
-Tamil Nadu for homes, businesses & housing societies. Book your free
-consultation today!"
-        />
-        <meta
-          name="keywords"
-          content="solar energy, solar panel solutions in coimbatore, solar panels,
-solar power systems, residential solar, commercial solar, solar solutions Tamil
-Nadu, solar companies in TamilNadu"
-        />
-      </Head> */}
       <HeroSection />
       <LogosSlider />
       <StatsSection />

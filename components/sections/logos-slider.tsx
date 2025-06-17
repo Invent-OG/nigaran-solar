@@ -59,10 +59,10 @@ export function LogosSlider() {
       </div>
 
       {/* Left smooth blur edge */}
-      <div className="pointer-events-none absolute top-0 left-0 h-full w-[50px] lg:w-[200px] bg-gradient-to-r from-white via-white/60 via-70% to-transparent backdrop-blur-sm z-20" />
+      {/* <div className="pointer-events-none absolute top-0 left-0 h-full w-[50px] lg:w-[200px] bg-gradient-to-r from-white via-white/60 via-70% to-transparent backdrop-blur-sm z-20" /> */}
 
       {/* Right smooth blur edge */}
-      <div className="pointer-events-none absolute top-0 right-0 h-full w-[50px] lg:w-[200px] bg-gradient-to-l from-white via-white/60 via-70% to-transparent backdrop-blur-sm z-20" />
+      {/* <div className="pointer-events-none absolute top-0 right-0 h-full w-[50px] lg:w-[200px] bg-gradient-to-l from-white via-white/60 via-70% to-transparent backdrop-blur-sm z-20" /> */}
     </div>
   );
 }
