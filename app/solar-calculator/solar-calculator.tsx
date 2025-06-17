@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -123,8 +123,10 @@ const defaultCalculatorValues = [
 ];
 
 const formSchema = z.object({
-  monthlyBill: z.string().min(1, "Please enter your monthly bill"),
-  roofArea: z.string().min(1, "Please enter your roof area"),
+  monthlyBill: z.coerce
+    .number()
+    .min(1000, "Monthly bill must be at least ₹1000"),
+  roofArea: z.coerce.number().min(1, "Please enter your roof area"),
   location: z.string().min(1, "Please select your location"),
 });
 
@@ -135,34 +137,32 @@ const heroImage =
 export default function SolarCalculatorPage() {
   const [showResults, setShowResults] = useState(false);
   const [calculationResults, setCalculationResults] = useState<any>(null);
+  const targetRef = useRef<HTMLElement | null>(null);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      monthlyBill: "",
-      roofArea: "",
+      monthlyBill: 0,
+      roofArea: 0,
       location: "tamil-nadu",
     },
   });
 
   const calculateSolarSystem = (values: z.infer<typeof formSchema>) => {
-    const monthlyBill = parseInt(values.monthlyBill);
-    const roofArea = parseInt(values.roofArea);
+    const { monthlyBill, roofArea } = values;
 
-    // Find the appropriate system size based on monthly bill
     const biMonthlyBill = monthlyBill * 2;
+
     const matchingSystem =
       defaultCalculatorValues.find(
         (system) =>
-          biMonthlyBill >= system.minBill && biMonthlyBill <= system.maxBill
+          monthlyBill >= system.minBill && monthlyBill <= system.maxBill
       ) || defaultCalculatorValues[defaultCalculatorValues.length - 1];
 
-    // Calculate annual savings and payback period
-    const annualSavings = monthlyBill * 12;
-    const paybackPeriod = matchingSystem.costAfter / (biMonthlyBill / 2);
+    const annualSavings = monthlyBill * 6;
+    const paybackPeriod = matchingSystem.costAfter / annualSavings;
 
-    // Calculate CO2 reduction (rough estimate: 0.82 kg CO2 per kWh)
-    const monthlyConsumption = monthlyBill / 8; // Assuming 8 Rs/kWh
+    const monthlyConsumption = monthlyBill / 8;
     const co2Reduction = Math.round(monthlyConsumption * 12 * 0.82);
 
     return {
@@ -170,9 +170,9 @@ export default function SolarCalculatorPage() {
       areaNeeded: matchingSystem.area,
       systemCost: matchingSystem.costBefore,
       subsidizedCost: matchingSystem.costAfter,
-      annualSavings: annualSavings,
+      annualSavings,
       paybackPeriod: Math.round(paybackPeriod * 10) / 10,
-      co2Reduction: co2Reduction,
+      co2Reduction,
       roofAreaSufficient: roofArea >= matchingSystem.area,
     };
   };
@@ -181,7 +181,17 @@ export default function SolarCalculatorPage() {
     const results = calculateSolarSystem(values);
     setCalculationResults(results);
     setShowResults(true);
+
+    if (targetRef.current) {
+      targetRef.current.scrollIntoView({ behavior: "smooth" });
+    }
   };
+
+  useEffect(() => {
+    if (showResults && targetRef.current) {
+      targetRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [showResults]);
 
   return (
     <div className="min-h-screen pt-20">
@@ -311,7 +321,7 @@ export default function SolarCalculatorPage() {
 
       {/* Results Section */}
       {showResults && calculationResults && (
-        <section className="py-16 bg-background">
+        <section ref={targetRef} className="py-16 bg-background">
           <div className="container">
             <motion.div
               initial={{ opacity: 0, y: 50 }}
