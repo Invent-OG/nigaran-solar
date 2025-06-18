@@ -27,9 +27,9 @@ import "swiper/css/pagination";
 import { ShootingStars } from "@/components/ui/shooting-stars";
 
 const images = [
-  "https://images.pexels.com/photos/356036/pexels-photo-356036.jpeg",
-  "https://images.pexels.com/photos/159397/solar-panel-array-power-sun-electricity-159397.jpeg",
-  "https://images.pexels.com/photos/9875364/pexels-photo-9875364.jpeg",
+  "/Off grid solar page/benefits of off grid.webp",
+  "/Off grid solar page/Farms & agriculture pumps.webp",
+  "/Off grid solar page/areas with unreliable electricity.webp",
 ];
 
 export default function OffGridSolarPage() {
@@ -130,19 +130,19 @@ export default function OffGridSolarPage() {
 
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
             <motion.div
-              initial={{ opacity: 0, y: 50 }}
+              className=" bg-white shadow-lg rounded-xl hover:shadow-xl group"
+              initial={{ opacity: 0, y: 100 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="overflow-hidden transition-all bg-white shadow-lg rounded-xl hover:shadow-xl group"
+              transition={{ duration: 0.6 }}
             >
               <div className="relative h-48 overflow-hidden">
                 <Image
-                  src="https://images.pexels.com/photos/235725/pexels-photo-235725.jpeg"
+                  src="/Off grid solar page/Farms & agriculture pumps.webp"
                   alt="Farm"
                   height={100}
                   width={100}
                   loading="lazy"
-                  className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
+                  className="object-cover w-full rounded-xl h-full transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 flex items-end p-6 bg-gradient-to-t from-black/60 to-transparent">
                   <Home className="w-10 h-10 text-white" />
@@ -160,19 +160,19 @@ export default function OffGridSolarPage() {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, y: 50 }}
+              className=" bg-white shadow-lg rounded-xl hover:shadow-xl group"
+              initial={{ opacity: 0, y: 100 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="overflow-hidden transition-all bg-white shadow-lg rounded-xl hover:shadow-xl group"
+              transition={{ duration: 0.6 }}
             >
               <div className="relative h-48 overflow-hidden">
                 <Image
-                  src="https://images.pexels.com/photos/2462015/pexels-photo-2462015.jpeg"
+                  src="/Off grid solar page/Rural homes.webp"
                   alt="Rural Home"
                   height={100}
                   width={100}
                   loading="lazy"
-                  className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
+                  className="object-cover w-full rounded-xl h-full transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 flex items-end p-6 bg-gradient-to-t from-black/60 to-transparent">
                   <Building className="w-10 h-10 text-white" />
@@ -190,19 +190,19 @@ export default function OffGridSolarPage() {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, y: 50 }}
+              className=" bg-white shadow-lg rounded-xl hover:shadow-xl group"
+              initial={{ opacity: 0, y: 100 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="w-full h-full overflow-hidden transition-all bg-white shadow-lg rounded-xl hover:shadow-xl group"
+              transition={{ duration: 0.6 }}
             >
               <div className="relative h-48 overflow-hidden">
                 <Image
                   loading="lazy"
-                  src="https://images.pexels.com/photos/2760241/pexels-photo-2760241.jpeg"
+                  src="/Off grid solar page/Construction sites.webp"
                   alt="Construction Site"
                   height={100}
                   width={100}
-                  className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
+                  className="object-cover w-full rounded-xl h-full transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 flex items-end p-6 bg-gradient-to-t from-black/60 to-transparent">
                   <Wrench className="w-10 h-10 text-white" />
@@ -220,19 +220,19 @@ export default function OffGridSolarPage() {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, y: 50 }}
+              className=" bg-white shadow-lg rounded-xl hover:shadow-xl group"
+              initial={{ opacity: 0, y: 100 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="overflow-hidden transition-all bg-white shadow-lg rounded-xl hover:shadow-xl group"
+              transition={{ duration: 0.6 }}
             >
               <div className="relative h-48 overflow-hidden">
                 <Image
-                  src="https://images.pexels.com/photos/1797393/pexels-photo-1797393.jpeg"
+                  src="/Off grid solar page/areas with unreliable electricity.webp"
                   alt="Remote Area"
                   loading="lazy"
                   height={100}
                   width={100}
-                  className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
+                  className="object-cover w-full rounded-xl h-full transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 flex items-end p-6 bg-gradient-to-t from-black/60 to-transparent">
                   <MapPin className="w-10 h-10 text-white" />
@@ -253,28 +253,28 @@ export default function OffGridSolarPage() {
       </section>
 
       {/* Need Section */}
-      <section className="relative flex flex-col items-center lg:flex-row ">
+      <section className="relative flex flex-col-reverse lg:flex-row items-center">
         {/* Left Side Image */}
-        <div className="w-full h-full lg:w-1/2">
+        <div className="w-full lg:w-1/2 h-[40vh] sm:h-[50vh] lg:h-[70vh]">
           <Image
             loading="lazy"
             height={100}
             width={100}
-            src="https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=3132&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            src="/Off grid solar page/benefits of off grid.webp"
             alt="Off-Grid Solar Panels"
-            className="shadow-lg object-cover w-full h-[70vh]"
+            className="w-full h-full object-cover shadow-lg"
           />
         </div>
 
         {/* Right Side Content */}
-        <div className="w-full flex flex-col p-[5%] lg:w-1/2 items-center bg-black/90 justify-center lg:h-[70vh]">
-          {/* Background with stars */}
-          <div className="absolute inset-0">
+        <div className="w-full lg:w-1/2 relative bg-black/90 px-6 py-12 sm:px-10 lg:px-[5%] flex flex-col items-center justify-center lg:min-h-[70vh]">
+          {/* Background Effects */}
+          <div className="absolute inset-0 z-0">
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.15)_0%,rgba(0,0,0,0)_80%)]" />
             <div className="absolute inset-0 stars" />
           </div>
 
-          {/* Multiple shooting star layers with different colors and speeds */}
+          {/* Shooting Stars */}
           <ShootingStars
             starColor="#9E00FF"
             trailColor="#2EB9DF"
@@ -292,39 +292,38 @@ export default function OffGridSolarPage() {
             maxDelay={4000}
           />
 
+          {/* Twinkling Background */}
           <style jsx>{`
             .stars {
               background-image: radial-gradient(
                   2px 2px at 20px 30px,
                   #eee,
-                  rgba(0, 0, 0, 0)
+                  transparent
                 ),
-                radial-gradient(2px 2px at 40px 70px, #fff, rgba(0, 0, 0, 0)),
-                radial-gradient(2px 2px at 50px 160px, #ddd, rgba(0, 0, 0, 0)),
-                radial-gradient(2px 2px at 90px 40px, #fff, rgba(0, 0, 0, 0)),
-                radial-gradient(2px 2px at 130px 80px, #fff, rgba(0, 0, 0, 0)),
-                radial-gradient(2px 2px at 160px 120px, #ddd, rgba(0, 0, 0, 0));
+                radial-gradient(2px 2px at 40px 70px, #fff, transparent),
+                radial-gradient(2px 2px at 50px 160px, #ddd, transparent),
+                radial-gradient(2px 2px at 90px 40px, #fff, transparent),
+                radial-gradient(2px 2px at 130px 80px, #fff, transparent),
+                radial-gradient(2px 2px at 160px 120px, #ddd, transparent);
               background-repeat: repeat;
               background-size: 200px 200px;
               animation: twinkle 5s ease-in-out infinite;
               opacity: 0.5;
             }
-
             @keyframes twinkle {
-              0% {
+              0%,
+              100% {
                 opacity: 0.5;
               }
               50% {
                 opacity: 0.8;
               }
-              100% {
-                opacity: 0.5;
-              }
             }
           `}</style>
 
+          {/* Content */}
           <motion.div
-            className="flex flex-col items-center gap-4 text-center text-white"
+            className="relative z-10 flex flex-col items-center gap-4 text-center text-white"
             initial={{ opacity: 0, y: 100 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -332,13 +331,14 @@ export default function OffGridSolarPage() {
             <Badge variant="outline" className="text-white">
               Need
             </Badge>
-            <h2 className="max-w-2xl text-4xl font-extrabold md:text-5xl">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold max-w-2xl">
               Why Off-Grid Solar?
             </h2>
-            <div className="w-20 h-1 mx-auto mb-6 bg-primary"></div>
+            <div className="w-20 h-1 bg-primary my-4"></div>
           </motion.div>
 
-          <ul className="mt-6 space-y-6 text-lg text-white/80">
+          {/* Bullet Points */}
+          <ul className="relative z-10 mt-6 space-y-6 text-base sm:text-lg text-white/80">
             <li className="flex items-start gap-4">
               <MapPin className="w-6 h-6 mt-1 text-primary" />
               <span>
@@ -382,10 +382,10 @@ export default function OffGridSolarPage() {
 
           <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
             <motion.div
-              initial={{ opacity: 0, y: 50 }}
+              initial={{ opacity: 0, y: 100 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="p-8 transition-all bg-white border-l-4 rounded-lg shadow-lg hover:shadow-xl border-primary"
+              transition={{ duration: 0.6 }}
+              className="p-8  bg-white border-l-4 rounded-lg shadow-lg hover:shadow-xl border-primary"
             >
               <h3 className="flex items-center gap-3 mb-4 text-2xl font-semibold">
                 <MapPin className="w-6 h-6 text-primary" />
@@ -401,7 +401,7 @@ export default function OffGridSolarPage() {
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="p-8 transition-all bg-white border-l-4 rounded-lg shadow-lg hover:shadow-xl border-primary"
+              className="p-8  bg-white border-l-4 rounded-lg shadow-lg hover:shadow-xl border-primary"
             >
               <h3 className="flex items-center gap-3 mb-4 text-2xl font-semibold">
                 <Battery className="w-6 h-6 text-primary" />
@@ -417,7 +417,7 @@ export default function OffGridSolarPage() {
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="p-8 transition-all bg-white border-l-4 rounded-lg shadow-lg hover:shadow-xl border-primary"
+              className="p-8  bg-white border-l-4 rounded-lg shadow-lg hover:shadow-xl border-primary"
             >
               <h3 className="flex items-center gap-3 mb-4 text-2xl font-semibold">
                 <Wifi className="w-6 h-6 text-primary" />
@@ -436,8 +436,7 @@ export default function OffGridSolarPage() {
       <section
         className="relative py-16 text-lg bg-center bg-cover"
         style={{
-          backgroundImage:
-            "url('https://images.pexels.com/photos/4254160/pexels-photo-4254160.jpeg')",
+          backgroundImage: "url('/Off grid solar page/benefits off grid.webp')",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -450,10 +449,10 @@ export default function OffGridSolarPage() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <Badge variant="outline" className="text-white">
+            <Badge variant="default" className="text-white">
               Advantages
             </Badge>
-            <h2 className="max-w-2xl text-4xl font-extrabold text-white md:text-5xl">
+            <h2 className="max-w-2xl text-4xl font-extrabold text-black md:text-5xl">
               Benefits of Off-Grid Solar
             </h2>
             <div className="w-20 h-1 mx-auto mb-6 bg-white"></div>
@@ -491,7 +490,7 @@ export default function OffGridSolarPage() {
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="flex gap-6 p-6 transition-all bg-white rounded-lg shadow-md hover:shadow-lg"
+                className="flex gap-6 p-6  bg-white rounded-lg shadow-md hover:shadow-lg"
               >
                 <div className="flex-shrink-0">
                   <div className="p-3 rounded-full bg-primary/20 text-primary">
@@ -558,7 +557,7 @@ export default function OffGridSolarPage() {
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="p-6 text-center transition-all bg-white rounded-lg shadow-md hover:shadow-lg"
+                className="p-6 text-center  bg-white rounded-lg shadow-md hover:shadow-lg"
               >
                 <div className="flex items-center justify-center w-16 h-16 mx-auto mb-4 rounded-full bg-primary/10 text-primary">
                   {component.icon}
@@ -605,7 +604,7 @@ export default function OffGridSolarPage() {
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="p-8 transition-all bg-white rounded-lg shadow-lg hover:shadow-xl"
+              className="p-8  bg-white rounded-lg shadow-lg hover:shadow-xl"
             >
               <div className="flex items-center gap-4 mb-4">
                 <div className="p-3 rounded-full bg-primary/20">
@@ -625,7 +624,7 @@ export default function OffGridSolarPage() {
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="p-8 transition-all bg-white rounded-lg shadow-lg hover:shadow-xl"
+              className="p-8  bg-white rounded-lg shadow-lg hover:shadow-xl"
             >
               <div className="flex items-center gap-4 mb-4">
                 <div className="p-3 rounded-full bg-primary/20">
@@ -643,7 +642,7 @@ export default function OffGridSolarPage() {
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="p-8 transition-all bg-white rounded-lg shadow-lg hover:shadow-xl"
+              className="p-8  bg-white rounded-lg shadow-lg hover:shadow-xl"
             >
               <div className="flex items-center gap-4 mb-4">
                 <div className="p-3 rounded-full bg-primary/20">

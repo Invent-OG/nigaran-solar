@@ -45,8 +45,7 @@ const onGridContent = {
           "Perfect for urban residences with reliable grid connection, allowing you to reduce bills while staying connected to the utility grid.",
         icon: "Home",
         imageAlt: "City Home",
-        imageSrc:
-          "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg",
+        imageSrc: "/On grid solar page/home owners.webp",
       },
       {
         title: "Commercial Offices",
@@ -54,8 +53,7 @@ const onGridContent = {
           "Ideal for businesses with steady electricity access looking to reduce operational costs and enhance sustainability credentials.",
         icon: "Building",
         imageAlt: "Commercial Office",
-        imageSrc:
-          "https://images.pexels.com/photos/1098460/pexels-photo-1098460.jpeg",
+        imageSrc: "/On grid solar page/commercial offices.webp",
       },
       {
         title: "Schools and Colleges",
@@ -63,8 +61,7 @@ const onGridContent = {
           "Educational institutions aiming to lower their carbon footprint while creating learning opportunities about renewable energy.",
         icon: "School",
         imageAlt: "School",
-        imageSrc:
-          "https://images.pexels.com/photos/256520/pexels-photo-256520.jpeg",
+        imageSrc: "/On grid solar page/universities.webp",
       },
     ],
   },
@@ -164,9 +161,9 @@ const onGridContent = {
 };
 
 const images = [
-  "https://images.pexels.com/photos/9875364/pexels-photo-9875364.jpeg",
-  "https://images.pexels.com/photos/2800832/pexels-photo-2800832.jpeg",
-  "https://images.pexels.com/photos/4215110/pexels-photo-4215110.jpeg",
+  // "/On grid solar page/on grid solar.webp",
+  "/On grid solar page/home owners.webp",
+  "/On grid solar page/benefits.webp",
 ];
 
 export default function OnGridSolarPage() {
@@ -269,7 +266,7 @@ export default function OnGridSolarPage() {
                   initial={{ opacity: 0, y: 100 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: idx * 0.2 }}
-                  className="overflow-hidden transition-all bg-white shadow-lg rounded-xl hover:shadow-xl group"
+                  className="overflow-hidden  bg-white shadow-lg rounded-xl hover:shadow-xl group"
                 >
                   <div className="relative h-48 overflow-hidden">
                     <Image
@@ -296,27 +293,27 @@ export default function OnGridSolarPage() {
       </section>
 
       {/* Need Section */}
-      <section className="relative flex flex-col items-center lg:flex-row ">
+      <section className="relative flex flex-col-reverse lg:flex-row items-center">
         {/* Left Side Image */}
-        <div className="w-full h-full lg:w-1/2">
+        <div className="w-full lg:w-1/2 h-[40vh] sm:h-[50vh] lg:h-[70vh]">
           <Image
-            src="https://images.unsplash.com/photo-1613665813446-82a78c468a1d?q=80&w=2958&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            src="/On grid solar page/commercial offices.webp"
             alt="On-Grid Solar Panels"
             height={100}
             width={100}
-            className="shadow-lg object-cover w-full h-[70vh]"
+            className="w-full h-full object-cover shadow-lg"
           />
         </div>
 
         {/* Right Side Content */}
-        <div className="w-full flex flex-col p-[5%] lg:w-1/2 items-center bg-black/90 justify-center lg:h-[70vh]">
-          {/* Background with stars */}
-          <div className="absolute inset-0">
+        <div className="w-full lg:w-1/2 relative bg-black/90 px-6 py-12 sm:px-10 lg:px-[5%] flex flex-col items-center justify-center lg:min-h-[70vh]">
+          {/* Background Effects */}
+          <div className="absolute inset-0 z-0">
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.15)_0%,rgba(0,0,0,0)_80%)]" />
             <div className="absolute inset-0 stars" />
           </div>
 
-          {/* Multiple shooting star layers with different colors and speeds */}
+          {/* Shooting Stars */}
           <ShootingStars
             starColor="#9E00FF"
             trailColor="#2EB9DF"
@@ -334,39 +331,38 @@ export default function OnGridSolarPage() {
             maxDelay={4000}
           />
 
+          {/* Twinkling Background Style */}
           <style jsx>{`
             .stars {
               background-image: radial-gradient(
                   2px 2px at 20px 30px,
                   #eee,
-                  rgba(0, 0, 0, 0)
+                  transparent
                 ),
-                radial-gradient(2px 2px at 40px 70px, #fff, rgba(0, 0, 0, 0)),
-                radial-gradient(2px 2px at 50px 160px, #ddd, rgba(0, 0, 0, 0)),
-                radial-gradient(2px 2px at 90px 40px, #fff, rgba(0, 0, 0, 0)),
-                radial-gradient(2px 2px at 130px 80px, #fff, rgba(0, 0, 0, 0)),
-                radial-gradient(2px 2px at 160px 120px, #ddd, rgba(0, 0, 0, 0));
+                radial-gradient(2px 2px at 40px 70px, #fff, transparent),
+                radial-gradient(2px 2px at 50px 160px, #ddd, transparent),
+                radial-gradient(2px 2px at 90px 40px, #fff, transparent),
+                radial-gradient(2px 2px at 130px 80px, #fff, transparent),
+                radial-gradient(2px 2px at 160px 120px, #ddd, transparent);
               background-repeat: repeat;
               background-size: 200px 200px;
               animation: twinkle 5s ease-in-out infinite;
               opacity: 0.5;
             }
-
             @keyframes twinkle {
-              0% {
+              0%,
+              100% {
                 opacity: 0.5;
               }
               50% {
                 opacity: 0.8;
               }
-              100% {
-                opacity: 0.5;
-              }
             }
           `}</style>
 
+          {/* Content */}
           <motion.div
-            className="flex flex-col items-center gap-4 text-center text-white"
+            className="relative z-10 flex flex-col items-center gap-4 text-center text-white"
             initial={{ opacity: 0, y: 100 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -374,13 +370,14 @@ export default function OnGridSolarPage() {
             <Badge variant="outline" className="text-white">
               {onGridContent.need.badge}
             </Badge>
-            <h2 className="max-w-2xl text-4xl font-extrabold md:text-5xl">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold max-w-2xl">
               {onGridContent.need.heading}
             </h2>
-            <div className="w-20 h-1 mx-auto mb-6 bg-primary"></div>
+            <div className="w-20 h-1 bg-primary my-4"></div>
           </motion.div>
 
-          <ul className="mt-6 space-y-6 text-lg text-white/80">
+          {/* Bullet Points */}
+          <ul className="relative z-10 mt-6 space-y-6 text-base sm:text-lg text-white/80">
             {onGridContent.need.items.map((item, idx) => {
               const Icon = { Lightbulb, IndianRupee, ShieldCheck }[item.icon];
               return (
@@ -418,7 +415,7 @@ export default function OnGridSolarPage() {
                   initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: idx * 0.1 }}
-                  className="p-8 transition-all bg-white border-l-4 rounded-lg shadow-lg hover:shadow-xl border-primary"
+                  className="p-8  bg-white border-l-4 rounded-lg shadow-lg hover:shadow-xl border-primary"
                 >
                   <h3 className="flex items-center gap-3 mb-4 text-2xl font-semibold">
                     {Icon && <Icon className="w-6 h-6 text-primary" />}
@@ -436,8 +433,7 @@ export default function OnGridSolarPage() {
       <section
         className="relative py-16 text-lg bg-center bg-cover"
         style={{
-          backgroundImage:
-            "url('https://images.pexels.com/photos/4254160/pexels-photo-4254160.jpeg')",
+          backgroundImage: "url('/On grid solar page/benefits.webp')",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -449,14 +445,14 @@ export default function OnGridSolarPage() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <Badge variant="outline" className="text-white">
+            <Badge variant="default" className="text-white">
               {" "}
               {onGridContent.benefits.badge}
             </Badge>
             <h2 className="max-w-2xl text-4xl font-extrabold text-white md:text-5xl">
               {onGridContent.benefits.heading}
             </h2>
-            <div className="w-20 h-1 mx-auto mb-6 bg-white"></div>
+            <div className="w-20 h-1 mx-auto mb-6 bg-primary"></div>
           </motion.div>
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
             {onGridContent.benefits.items.map((benefit, index) => {
@@ -467,7 +463,7 @@ export default function OnGridSolarPage() {
                   initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="p-6 text-center transition-all bg-white rounded-lg shadow-md hover:shadow-lg"
+                  className="p-6 text-center  bg-white rounded-lg shadow-md hover:shadow-lg"
                 >
                   <div className="flex items-center justify-center w-16 h-16 mx-auto mb-4 rounded-full bg-primary/10 text-primary">
                     {Icon && <Icon className="w-10 h-10" />}

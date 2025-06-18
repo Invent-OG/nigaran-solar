@@ -26,7 +26,7 @@ const WhoWeAre = () => {
             transition={{ duration: 0.6 }}
           >
             <Image
-              src="https://images.unsplash.com/photo-1660330589257-813305a4a383?q=80&w=3432&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              src="/Home page/who we are.webp"
               alt="Solar Panels"
               width={500}
               height={500}

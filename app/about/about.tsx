@@ -2,23 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import {
-  ArrowRight,
-  Users,
-  Target,
-  Shield,
-  Award,
-  Rocket,
-  Leaf,
-  Zap,
-  ShieldCheck,
-  BadgeCheck,
-  Home,
-  PiggyBank,
-} from "lucide-react";
-import Head from "next/head";
-import { Spotlight } from "@/components/ui/spotlight";
+import { Users, Target, Rocket, ShieldCheck, BadgeCheck } from "lucide-react";
 import {
   FlipCard,
   FlipCardBack,
@@ -27,65 +11,57 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { CTASection } from "@/components/blocks/cta-with-rectangle";
 import { RiCustomerService2Line } from "react-icons/ri";
-import { Testimonials } from "@/components/ui/testimonials";
 
 export default function AboutPage() {
-  const testimonials = [
+  const TeamsData = [
     {
-      quote:
-        "The attention to detail and innovative features have completely transformed our workflow. This is exactly what we've been looking for.",
-      name: "Sarah Chen",
-      designation: "Product Manager at TechFlow",
-      src: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=3560&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      name: "Felix Bernard",
+      position: "Business Head",
+      image: "/about/teams/1.png",
     },
     {
-      quote:
-        "Implementation was seamless and the results exceeded our expectations. The platform's flexibility is remarkable.",
-      name: "Michael Rodriguez",
-      designation: "CTO at InnovateSphere",
-      src: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      name: "Cathelene",
+      position: "Operations Head",
+      image: "/about/teams/2.png",
     },
     {
-      quote:
-        "This solution has significantly improved our team's productivity. The intuitive interface makes complex tasks simple.",
-      name: "Emily Watson",
-      designation: "Operations Director at CloudScale",
-      src: "https://images.unsplash.com/photo-1623582854588-d60de57fa33f?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      name: "Lourduraj",
+      position: "Technical Head",
+      image: "/about/teams/2.png",
     },
     {
-      quote:
-        "Outstanding support and robust features. It's rare to find a product that delivers on all its promises.",
-      name: "James Kim",
-      designation: "Engineering Lead at DataPro",
-      src: "https://images.unsplash.com/photo-1636041293178-808a6762ab39?q=80&w=3464&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      name: "Boobala Krishnan",
+      position: "Business Development Manager",
+      image: "/about/teams/6.png",
     },
     {
-      quote:
-        "The scalability and performance have been game-changing for our organization. Highly recommend to any growing business.",
-      name: "Lisa Thompson",
-      designation: "VP of Technology at FutureNet",
-      src: "https://images.unsplash.com/photo-1624561172888-ac93c696e10c?q=80&w=2592&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      name: "Jerome",
+      position: "Operations Manager",
+      image: "/about/teams/7.png",
+    },
+    {
+      name: "Srimathi",
+      position: "Client Relationship Manager",
+      image: "/about/teams/3.png",
+    },
+    {
+      name: "Vindhiya",
+      position: "Accounts and Operations.",
+      image: "/about/teams/4.png",
+    },
+    {
+      name: "Akashveer",
+      position: "Site Survey Engineer",
+      image: "/about/teams/5.png",
+    },
+    {
+      name: "Aushinraj",
+      position: "Project Manager",
+      image: "/about/teams/5.png",
     },
   ];
   return (
     <div className="min-h-screen pt-20">
-      {/* Meta Information */}
-      {/* <Head>
-        <title>About Nigaran Solar | Leading Solar Company in Tamilnadu</title>
-        <meta
-          name="description"
-          content="Nigaran Solar offers affordable, efficient solar systems for
-homes and businesses across Tamil Nadu. Trusted provider of sustainable
-energy in Coimbatore."
-        />
-        <meta
-          name="keywords"
-          content="solar company Coimbatore, solar power systems, trusted solar
-partner, solar solutions Tamil Nadu, solar energy provider, solar panel installation
-Coimbatore"
-        />
-      </Head> */}
-
       {/* Hero Section */}
       <section className="relative h-[60vh] flex items-center">
         <div className="absolute inset-0 z-0">
@@ -133,7 +109,7 @@ Coimbatore"
           <FlipCard className="h-96 lg:w-2/6">
             <FlipCardFront className="rounded-xl">
               <Image
-                src="https://images.unsplash.com/photo-1674056982333-5a2f304e4906?q=80&w=2813&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                src="/about/vision (2).webp"
                 alt="nike air jordan"
                 fill
                 className="object-cover size-full"
@@ -167,7 +143,7 @@ Coimbatore"
           <FlipCard flipDirection="vertical" className="h-96 lg:w-2/6">
             <FlipCardFront className="rounded-xl">
               <Image
-                src="https://images.unsplash.com/photo-1618558287205-05960522136a?q=80&w=3904&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                src="/about/mission (2).webp"
                 alt="nike air jordan"
                 fill
                 className="object-cover size-full"
@@ -232,23 +208,31 @@ Coimbatore"
 
           <div className="grid gap-6 md:grid-cols-3">
             {/* Card 1 */}
-            <div className="relative flex flex-col justify-between overflow-hidden text-center transition-shadow duration-300 bg-white rounded-lg shadow-lg group hover:shadow-xl">
-              <Image
-                src="https://images.pexels.com/photos/1108101/pexels-photo-1108101.jpeg"
-                alt="Lower Bills"
-                width={600}
-                height={400}
-                className="object-cover w-full h-full"
-                priority
-              />
-              <div className="absolute right-[40%]  top-[35%] shadow-lg p-6 rounded-full bg-primary">
-                <Users className="w-8 h-8 text-white" />
+
+            <div className="relative flex flex-col overflow-hidden text-center bg-white rounded-lg shadow-lg transition-shadow duration-300 group hover:shadow-xl h-[600px] md:h-[700px]">
+              {/* Top Image */}
+              <div className="h-1/2 w-full">
+                <Image
+                  src="/about/expert team.webp"
+                  alt="Lower Bills"
+                  width={600}
+                  height={400}
+                  className="object-cover w-full h-full"
+                  priority
+                />
               </div>
-              <div className="flex flex-col items-center justify-center w-full h-full p-10 text-center border ">
-                <h4 className="mb-2 text-xl font-semibold text-foreground">
+
+              {/* Center Icon */}
+              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 shadow-lg p-4 md:p-6 rounded-full bg-primary">
+                <Users className="w-6 h-6 text-white md:w-8 md:h-8" />
+              </div>
+
+              {/* Bottom Content */}
+              <div className="h-1/2 flex flex-col justify-center items-center px-4 py-6 md:px-10 text-center z-0">
+                <h4 className="mb-2 text-lg font-semibold text-foreground md:text-xl">
                   Expert Team with Years of Experience
                 </h4>
-                <p className="text-muted-foreground">
+                <p className="text-sm text-muted-foreground md:text-base">
                   Our team brings extensive experience in the solar power
                   industry, combining technical expertise with deep knowledge of
                   the latest renewable energy technologies. From consultation to
@@ -259,23 +243,30 @@ Coimbatore"
             </div>
 
             {/* Card 2 */}
-            <div className="relative flex flex-col justify-between overflow-hidden text-center transition-shadow duration-300 bg-white rounded-lg shadow-lg group hover:shadow-xl">
-              <Image
-                src="https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg"
-                alt="Property Value"
-                width={600}
-                height={400}
-                className="object-cover w-full h-full"
-                priority
-              />
-              <div className="absolute right-[40%]  top-[35%] shadow-lg p-6 rounded-full bg-primary">
-                <ShieldCheck className="w-8 h-8 text-white" />
+            <div className="relative flex flex-col overflow-hidden text-center bg-white rounded-lg shadow-lg transition-shadow duration-300 group hover:shadow-xl h-[600px] md:h-[700px]">
+              {/* Image Section */}
+              <div className="h-1/2 w-full">
+                <Image
+                  src="/about/high quality.webp"
+                  alt="High Quality"
+                  width={600}
+                  height={400}
+                  className="object-cover w-full h-full"
+                  priority
+                />
               </div>
-              <div className="flex flex-col items-center justify-center w-full h-full p-10 text-center border ">
-                <h4 className="text-xl font-semibold text-foreground">
-                  High-Quality & Durable Solar Products{" "}
+
+              {/* Centered Icon */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 shadow-lg p-4 md:p-6 rounded-full bg-primary">
+                <ShieldCheck className="w-6 h-6 text-white md:w-8 md:h-8" />
+              </div>
+
+              {/* Text Content */}
+              <div className="h-1/2 flex flex-col justify-center items-center px-4 py-6 md:px-10 text-center z-0">
+                <h4 className="mb-2 text-lg font-semibold text-foreground md:text-xl">
+                  High-Quality & Durable Solar Products
                 </h4>
-                <p className="text-muted-foreground">
+                <p className="text-sm text-muted-foreground md:text-base">
                   We use only premium-grade solar panels, inverters, and
                   components from trusted global manufacturers. Our systems are
                   built to withstand harsh weather conditions while delivering
@@ -285,24 +276,30 @@ Coimbatore"
             </div>
 
             {/* Card 3 */}
-            <div className="relative flex flex-col justify-between overflow-hidden text-center transition-shadow duration-300 bg-white rounded-lg shadow-lg group hover:shadow-xl">
-              <Image
-                src="https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg"
-                alt="Community Engagement"
-                width={600}
-                height={400}
-                className="object-cover w-full h-full"
-                priority
-              />
-
-              <div className="absolute right-[40%]  top-[35%] shadow-lg p-6 rounded-full bg-primary">
-                <RiCustomerService2Line className="w-8 h-8 text-white" />
+            <div className="relative flex flex-col overflow-hidden text-center bg-white rounded-lg shadow-lg transition-shadow duration-300 group hover:shadow-xl h-[600px] md:h-[700px]">
+              {/* Top Image */}
+              <div className="h-1/2 w-full">
+                <Image
+                  src="/about/customer support-16.webp"
+                  alt="Community Engagement"
+                  width={600}
+                  height={400}
+                  className="object-cover w-full h-full"
+                  priority
+                />
               </div>
-              <div className="flex flex-col items-center justify-center w-full h-full p-10 text-center border ">
-                <h4 className="mb-2 text-xl font-semibold text-foreground">
+
+              {/* Center Icon */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 shadow-lg p-4 md:p-6 rounded-full bg-primary">
+                <RiCustomerService2Line className="w-6 h-6 text-white md:w-8 md:h-8" />
+              </div>
+
+              {/* Bottom Content */}
+              <div className="h-1/2 flex flex-col justify-center items-center px-4 py-6 md:px-10 text-center z-0">
+                <h4 className="mb-2 text-lg font-semibold text-foreground md:text-xl">
                   Excellent Customer Support
                 </h4>
-                <p className="text-muted-foreground">
+                <p className="text-sm text-muted-foreground md:text-base">
                   We believe that great service doesn’t end after installation.
                   Our friendly and responsive support team is always available
                   to assist you — whether you have questions, need maintenance,
@@ -312,24 +309,30 @@ Coimbatore"
             </div>
 
             {/* Card 4 */}
-            <div className="relative flex flex-col justify-between overflow-hidden text-center transition-shadow duration-300 bg-white rounded-lg shadow-lg group hover:shadow-xl">
-              <Image
-                src="https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg"
-                alt="Community Engagement"
-                width={600}
-                height={400}
-                className="object-cover w-full h-full"
-                priority
-              />
-
-              <div className="absolute right-[40%]  top-[35%] shadow-lg p-6 rounded-full bg-primary">
-                <BadgeCheck className="w-8 h-8 text-white" />
+            <div className="relative flex flex-col overflow-hidden text-center bg-white rounded-lg shadow-lg transition-shadow duration-300 group hover:shadow-xl h-[600px] md:h-[700px]">
+              {/* Top Image */}
+              <div className="h-1/2 w-full">
+                <Image
+                  src="/about/guarenteed performence.webp"
+                  alt="Guaranteed Performance"
+                  width={600}
+                  height={400}
+                  className="object-cover w-full h-full"
+                  priority
+                />
               </div>
-              <div className="flex flex-col items-center justify-center w-full h-full p-10 text-center border ">
-                <h4 className="mb-2 text-xl font-semibold text-foreground">
-                  Guaranteed Performance & Comprehensive Warranty{" "}
+
+              {/* Center Icon */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 shadow-lg p-4 md:p-6 rounded-full bg-primary">
+                <BadgeCheck className="w-6 h-6 text-white md:w-8 md:h-8" />
+              </div>
+
+              {/* Bottom Content */}
+              <div className="h-1/2 flex flex-col justify-center items-center px-4 py-6 md:px-10 text-center z-0">
+                <h4 className="mb-2 text-lg font-semibold text-foreground md:text-xl">
+                  Guaranteed Performance & Comprehensive Warranty
                 </h4>
-                <p className="text-muted-foreground">
+                <p className="text-sm text-muted-foreground md:text-base">
                   With Nigaran Solar, your investment is protected. Our systems
                   come with a performance guarantee and comprehensive
                   manufacturer warranties, giving you peace of mind and
@@ -359,8 +362,28 @@ Coimbatore"
           <div className="w-20 h-1 mx-auto mb-6 bg-primary"></div>
         </motion.div>
 
-        <div className="block">
-          <Testimonials />
+        {
+          // Team Members
+        }
+        <div className="grid grid-cols-1  md:grid-cols-3 lg:grid-cols-4 container">
+          {TeamsData.map((member, index) => (
+            <div
+              key={index}
+              className="flex flex-col items-center pb-10 bg-white  transition-shadow duration-300 "
+            >
+              <Image
+                src={member.image}
+                alt={member.name}
+                width={300}
+                height={300}
+                className="object-cover   rounded-full"
+              />
+              <h3 className="text-lg font-semibold text-foreground">
+                {member.name}
+              </h3>
+              <p className="text-sm text-muted-foreground">{member.position}</p>
+            </div>
+          ))}
         </div>
       </div>
 
@@ -391,7 +414,7 @@ Coimbatore"
               commercial, and industrial clients.
             </p>
           </div>
-          <CTASection
+          {/* <CTASection
             badge={{
               text: "Get started",
             }}
@@ -404,7 +427,7 @@ property value, and help protect the environment."
               href: "/residential",
               variant: "default",
             }}
-          />
+          /> */}
         </div>
       </section>
     </div>

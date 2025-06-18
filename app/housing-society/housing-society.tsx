@@ -24,9 +24,9 @@ import "swiper/css/pagination";
 import Head from "next/head";
 
 const images = [
-  "https://images.pexels.com/photos/2800832/pexels-photo-2800832.jpeg",
-  "https://images.pexels.com/photos/3560366/pexels-photo-3560366.jpeg",
-  "https://images.pexels.com/photos/4215110/pexels-photo-4215110.jpeg",
+  "/Housing society page/housing society.webp",
+  "/Housing society page/housing (2).webp",
+  "/Housing society page/housing (3).webp",
 ];
 
 export default function HousingSocietyPage() {
@@ -150,77 +150,83 @@ export default function HousingSocietyPage() {
               Benefits of Solar for Housing Societies:
             </h3>
 
-            <div className="grid gap-6 md:grid-cols-3">
-              {/* Card 1 */}
-              <div className="relative flex flex-col justify-between overflow-hidden text-center transition-shadow duration-300 bg-white rounded-lg shadow-lg group hover:shadow-xl">
-                <Image
-                  src="https://images.pexels.com/photos/1108101/pexels-photo-1108101.jpeg"
-                  alt="Lower Bills"
-                  width={600}
-                  height={400}
-                  className="object-cover w-full transition-all duration-500 h-1/2 group-hover:scale-105"
-                  placeholder="blur"
-                  blurDataURL="/placeholder.png"
-                />
-                <div className="absolute right-[40%]  top-[40%] shadow-lg p-6 rounded-full bg-primary">
-                  <PiggyBank className="w-8 h-8 text-white" />
+            {/* Card Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
+              {/* Card 1 - Lower Collective Bills */}
+              <div className="relative flex flex-col overflow-hidden text-center bg-white rounded-lg shadow-lg transition-shadow duration-300 group hover:shadow-xl h-[600px] md:h-[700px]">
+                <div className="h-1/2 w-full">
+                  <Image
+                    src="/Housing society page/Lower bills.webp"
+                    alt="Lower Bills"
+                    width={600}
+                    height={400}
+                    className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500"
+                    placeholder="blur"
+                    blurDataURL="/placeholder.png"
+                  />
                 </div>
-                <div className="flex flex-col items-center justify-center w-full h-full p-10 text-center border ">
-                  <h4 className="mb-2 text-xl font-semibold text-foreground">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 shadow-lg p-4 md:p-6 rounded-full bg-primary">
+                  <PiggyBank className="w-6 h-6 text-white md:w-8 md:h-8" />
+                </div>
+                <div className="h-1/2 flex flex-col justify-center items-center px-4 py-6 md:px-10 text-center z-0">
+                  <h4 className="mb-2 text-lg font-semibold text-foreground md:text-xl">
                     Lower Collective Bills
                   </h4>
-                  <p className="text-muted-foreground">
+                  <p className="text-sm text-muted-foreground md:text-base">
                     Reduce the energy costs for shared spaces like lifts,
                     corridors, and parking areas.
                   </p>
                 </div>
               </div>
 
-              {/* Card 2 */}
-              <div className="relative flex flex-col justify-between overflow-hidden text-center transition-shadow duration-300 bg-white rounded-lg shadow-lg group hover:shadow-xl">
-                <Image
-                  src="https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg"
-                  alt="Property Value"
-                  width={600}
-                  height={400}
-                  className="object-cover w-full transition-all duration-500 h-1/2 group-hover:scale-105"
-                  placeholder="blur"
-                  blurDataURL="/placeholder.png"
-                />
-                <div className="absolute right-[40%]  top-[40%] shadow-lg p-6 rounded-full bg-primary">
-                  <Home className="w-8 h-8 text-white" />
+              {/* Card 2 - Increased Property Value */}
+              <div className="relative flex flex-col overflow-hidden text-center bg-white rounded-lg shadow-lg transition-shadow duration-300 group hover:shadow-xl h-[600px] md:h-[700px]">
+                <div className="h-1/2 w-full">
+                  <Image
+                    src="/Housing society page/increased property value.webp"
+                    alt="Property Value"
+                    width={600}
+                    height={400}
+                    className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500"
+                    placeholder="blur"
+                    blurDataURL="/placeholder.png"
+                  />
                 </div>
-                <div className="flex flex-col items-center justify-center w-full h-full p-10 text-center border ">
-                  <h4 className="text-xl font-semibold text-foreground">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 shadow-lg p-4 md:p-6 rounded-full bg-primary">
+                  <Home className="w-6 h-6 text-white md:w-8 md:h-8" />
+                </div>
+                <div className="h-1/2 flex flex-col justify-center items-center px-4 py-6 md:px-10 text-center z-0">
+                  <h4 className="mb-2 text-lg font-semibold text-foreground md:text-xl">
                     Increased Property Value
                   </h4>
-                  <p className="text-muted-foreground">
+                  <p className="text-sm text-muted-foreground md:text-base">
                     Enhance the value of properties within the society with an
                     eco-friendly reputation.
                   </p>
                 </div>
               </div>
 
-              {/* Card 3 */}
-              <div className="relative flex flex-col justify-between overflow-hidden text-center transition-shadow duration-300 bg-white rounded-lg shadow-lg group hover:shadow-xl">
-                <Image
-                  src="https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg"
-                  alt="Community Engagement"
-                  width={600}
-                  height={400}
-                  className="object-cover w-full transition-all duration-500 h-1/2 group-hover:scale-105"
-                  placeholder="blur"
-                  blurDataURL="/placeholder.png"
-                />
-
-                <div className="absolute right-[40%]  top-[40%] shadow-lg p-6 rounded-full bg-primary">
-                  <Users className="w-8 h-8 text-white" />
+              {/* Card 3 - Community Engagement */}
+              <div className="relative flex flex-col overflow-hidden text-center bg-white rounded-lg shadow-lg transition-shadow duration-300 group hover:shadow-xl h-[600px] md:h-[700px]">
+                <div className="h-1/2 w-full">
+                  <Image
+                    src="/Housing society page/community engagement.webp"
+                    alt="Community Engagement"
+                    width={600}
+                    height={400}
+                    className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500"
+                    placeholder="blur"
+                    blurDataURL="/placeholder.png"
+                  />
                 </div>
-                <div className="flex flex-col items-center justify-center w-full h-full p-10 text-center border ">
-                  <h4 className="mb-2 text-xl font-semibold text-foreground">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 shadow-lg p-4 md:p-6 rounded-full bg-primary">
+                  <Users className="w-6 h-6 text-white md:w-8 md:h-8" />
+                </div>
+                <div className="h-1/2 flex flex-col justify-center items-center px-4 py-6 md:px-10 text-center z-0">
+                  <h4 className="mb-2 text-lg font-semibold text-foreground md:text-xl">
                     Community Engagement
                   </h4>
-                  <p className="text-muted-foreground">
+                  <p className="text-sm text-muted-foreground md:text-base">
                     Solar adoption fosters a sense of collective responsibility
                     towards sustainability.
                   </p>
@@ -234,8 +240,7 @@ export default function HousingSocietyPage() {
       <section
         className="relative py-16 text-lg bg-background"
         style={{
-          backgroundImage:
-            "url('https://images.pexels.com/photos/4254160/pexels-photo-4254160.jpeg')",
+          backgroundImage: "url('/Housing society page/housing (2).webp')",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}

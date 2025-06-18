@@ -20,9 +20,9 @@ import "swiper/css";
 import "swiper/css/pagination";
 
 const images = [
-  "https://images.pexels.com/photos/2800832/pexels-photo-2800832.jpeg",
-  "https://images.pexels.com/photos/3560366/pexels-photo-3560366.jpeg",
-  "https://images.pexels.com/photos/4215110/pexels-photo-4215110.jpeg",
+  "/Commercial solar/commercial.webp",
+  "/Commercial solar/commercial2.webp",
+  "/Commercial solar/commercial3.webp",
 ];
 
 export default function CommercialPage() {
@@ -144,28 +144,27 @@ export default function CommercialPage() {
       </section>
 
       {/* Why Choose Nigaran Solar */}
-      <section className="relative flex flex-col items-center lg:flex-row ">
+      <section className="relative flex flex-col-reverse lg:flex-row items-center">
         {/* Left Side Image */}
-        <div className="w-full h-full lg:w-1/2">
+        <div className="w-full lg:w-1/2 h-[40vh] sm:h-[50vh] lg:h-[70vh]">
           <Image
-            src="https://www.soleosenergy.com/wp-content/uploads/2024/09/Solar-installation_web.jpg1_.webp"
+            src="/Commercial solar/commercial solar.webp"
             alt="Commercial Solar Panels"
             width={1920}
             height={1080}
-            className="shadow-lg object-cover w-full h-[70vh]"
+            className="w-full h-full object-cover shadow-lg"
             priority
           />
         </div>
-
         {/* Right Side Content */}
-        <div className="w-full flex flex-col p-[5%]  lg:w-1/2 items-center bg-black/90 justify-center lg:h-[70vh] ">
-          {/* Background with stars */}
-          <div className="absolute inset-0">
+        <div className="w-full lg:w-1/2 relative bg-black/90 px-6 py-12 sm:px-10 lg:px-[5%] flex flex-col items-center justify-center lg:min-h-[70vh]">
+          {/* Background Effects */}
+          <div className="absolute inset-0 z-0">
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.15)_0%,rgba(0,0,0,0)_80%)]" />
             <div className="absolute inset-0 stars" />
           </div>
 
-          {/* Multiple shooting star layers with different colors and speeds */}
+          {/* Shooting Stars */}
           <ShootingStars
             starColor="#9E00FF"
             trailColor="#2EB9DF"
@@ -191,38 +190,38 @@ export default function CommercialPage() {
             maxDelay={3500}
           />
 
+          {/* Twinkling Background CSS */}
           <style jsx>{`
             .stars {
               background-image: radial-gradient(
                   2px 2px at 20px 30px,
                   #eee,
-                  rgba(0, 0, 0, 0)
+                  transparent
                 ),
-                radial-gradient(2px 2px at 40px 70px, #fff, rgba(0, 0, 0, 0)),
-                radial-gradient(2px 2px at 50px 160px, #ddd, rgba(0, 0, 0, 0)),
-                radial-gradient(2px 2px at 90px 40px, #fff, rgba(0, 0, 0, 0)),
-                radial-gradient(2px 2px at 130px 80px, #fff, rgba(0, 0, 0, 0)),
-                radial-gradient(2px 2px at 160px 120px, #ddd, rgba(0, 0, 0, 0));
+                radial-gradient(2px 2px at 40px 70px, #fff, transparent),
+                radial-gradient(2px 2px at 50px 160px, #ddd, transparent),
+                radial-gradient(2px 2px at 90px 40px, #fff, transparent),
+                radial-gradient(2px 2px at 130px 80px, #fff, transparent),
+                radial-gradient(2px 2px at 160px 120px, #ddd, transparent);
               background-repeat: repeat;
               background-size: 200px 200px;
               animation: twinkle 5s ease-in-out infinite;
               opacity: 0.5;
             }
-
             @keyframes twinkle {
-              0% {
+              0%,
+              100% {
                 opacity: 0.5;
               }
               50% {
                 opacity: 0.8;
               }
-              100% {
-                opacity: 0.5;
-              }
             }
           `}</style>
+
+          {/* Content */}
           <motion.div
-            className="flex flex-col items-center gap-4 text-center text-white"
+            className="relative z-10 flex flex-col items-center gap-4 text-center text-white"
             initial={{ opacity: 0, y: 100 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -230,15 +229,16 @@ export default function CommercialPage() {
             <Badge variant="outline" className="text-white">
               Why Choose
             </Badge>
-            <h2 className="max-w-2xl text-4xl font-extrabold md:text-5xl">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold max-w-2xl">
               Why Choose Nigaran Solar for Commercial Solar?
             </h2>
-            <div className="w-20 h-1 mx-auto mb-6 bg-primary"></div>
+            <div className="w-20 h-1 bg-primary my-4"></div>
           </motion.div>
 
-          <ul className="mt-6 space-y-6 text-lg text-muted-foreground">
+          {/* Feature List */}
+          <ul className="relative z-10 mt-6 space-y-6 text-base sm:text-lg text-muted-foreground">
             <li className="flex items-start gap-4">
-              <HiCurrencyDollar className="w-10 h-10 text-primary" />
+              <HiCurrencyDollar className="w-8 h-8 text-primary" />
               <span>
                 <strong className="text-white">Cost Savings:</strong> Nigaran
                 Solar helps businesses reduce electricity bills and achieve
@@ -246,7 +246,7 @@ export default function CommercialPage() {
               </span>
             </li>
             <li className="flex items-start gap-4">
-              <HiSupport className="w-10 h-10 text-primary" />
+              <HiSupport className="w-8 h-8 text-primary" />
               <span>
                 <strong className="text-white">
                   Expert Installation & Support:
@@ -256,7 +256,7 @@ export default function CommercialPage() {
               </span>
             </li>
             <li className="flex items-start gap-4">
-              <HiFastForward className="w-10 h-10 text-primary" />
+              <HiFastForward className="w-8 h-8 text-primary" />
               <span>
                 <strong className="text-white">
                   Sustainability & Brand Image:
@@ -266,7 +266,7 @@ export default function CommercialPage() {
               </span>
             </li>
             <li className="flex items-start gap-4">
-              <HiBadgeCheck className="w-10 h-10 text-primary" />
+              <HiBadgeCheck className="w-8 h-8 text-primary" />
               <span>
                 <strong className="text-white">Government Incentives:</strong>{" "}
                 Maximize solar incentives and tax savings to reduce the initial

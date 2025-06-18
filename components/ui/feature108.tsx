@@ -48,8 +48,7 @@ const Feature108 = ({
         description:
           "Go solar with Nigaran Solar and enjoy a steady reduction in your electricity bills. We offer affordable solar panel solutions for homes across Tamil Nadu. Whether you need a solar rooftop installation or a custom solar installation, we provide high-quality panels that ensure maximum energy efficiency.",
         buttonText: "Learn More",
-        imageSrc:
-          "https://images.pexels.com/photos/356049/pexels-photo-356049.jpeg",
+        imageSrc: "/Home page/Residential solar.webp",
         imageAlt: "On-grid solar system installation",
         link: "/residential",
       },
@@ -64,8 +63,7 @@ const Feature108 = ({
         description:
           "At Nigaran Solar, we provide solar power systems tailored specifically for businesses. Whether you're running a manufacturing unit, a retail store, or any other commercial establishment, we offer customized solar solutions to reduce energy bills, improve sustainability, and increase operational efficiency.",
         buttonText: "Learn More",
-        imageSrc:
-          "https://images.pexels.com/photos/2800832/pexels-photo-2800832.jpeg",
+        imageSrc: "/Home page/commercial1.webp",
         imageAlt: "Off-grid solar installation",
         link: "/commercial",
       },
@@ -80,8 +78,7 @@ const Feature108 = ({
         description:
           "Housing societies can drastically cut shared electricity costs by installing a community solar system. Nigaran Solar specializes in providing customized solar for housing societies, helping communities generate clean energy for common utilities like lifts, pumps, and corridor lighting.",
         buttonText: "See Details",
-        imageSrc:
-          "https://images.pexels.com/photos/414837/pexels-photo-414837.jpeg",
+        imageSrc: "/Home page/housing.webp",
         imageAlt: "Hybrid solar system",
         link: "/housing-society",
       },
