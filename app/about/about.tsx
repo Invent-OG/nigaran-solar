@@ -27,7 +27,7 @@ export default function AboutPage() {
     {
       name: "Lourduraj",
       position: "Technical Head",
-      image: "/about/teams/2.png",
+      image: "/about/teams/Empty.png",
     },
     {
       name: "Boobala Krishnan",
@@ -52,7 +52,7 @@ export default function AboutPage() {
     {
       name: "Akashveer",
       position: "Site Survey Engineer",
-      image: "/about/teams/5.png",
+      image: "/about/teams/Empty.png",
     },
     {
       name: "Aushinraj",
@@ -376,7 +376,7 @@ export default function AboutPage() {
                 alt={member.name}
                 width={300}
                 height={300}
-                className="object-cover   rounded-full"
+                className="object-cover   "
               />
               <h3 className="text-lg font-semibold text-foreground">
                 {member.name}

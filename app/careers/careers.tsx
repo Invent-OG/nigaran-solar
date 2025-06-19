@@ -35,9 +35,9 @@ import {
 import Head from "next/head";
 
 const images = [
-  "carrers/careers 2.webp",
-  "carrers/careers 3.webp",
-  "carrers/careers 4.webp",
+  "/careers/careers 2.webp",
+  "/careers/careers 3.webp",
+  "/careers/careers 4.webp",
 ];
 
 export default function CareersPage() {
@@ -243,7 +243,7 @@ export default function CareersPage() {
               <div className="absolute z-0 w-20 h-20 rounded-full -left-5 -top-5 bg-primary/20"></div>
               <div className="relative z-10">
                 <Image
-                  src="/carrers/Careers.webp"
+                  src="/careers/join our team.webp"
                   alt="Team working together"
                   width={600}
                   height={400}
@@ -478,7 +478,7 @@ export default function CareersPage() {
               <div className="absolute z-0 w-20 h-20 rounded-full -right-5 -top-5 bg-primary/20"></div>
               <div className="relative z-10 h-full">
                 <Image
-                  src="/carrers/Career path & growth.webp"
+                  src="/careers/Career path & growth.webp"
                   alt="Career growth"
                   width={600}
                   height={400}

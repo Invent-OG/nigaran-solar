@@ -43,9 +43,9 @@ import "swiper/css/pagination";
 import Head from "next/head";
 
 const images = [
-  "https://images.pexels.com/photos/2800832/pexels-photo-2800832.jpeg",
-  "https://images.pexels.com/photos/3560366/pexels-photo-3560366.jpeg",
-  "https://images.pexels.com/photos/4215110/pexels-photo-4215110.jpeg",
+  "/Residential solar page/DJI_0942.webp",
+  "/Residential solar page/DJI_0931.webp",
+  "/Residential solar page/DJI_0452.webp",
 ];
 
 type TestimonialDetails = {
@@ -130,14 +130,14 @@ export default function ResidentialPage() {
           </div>
           <div className="grid grid-cols-2 gap-4">
             <Image
-              src="https://assets.aceternity.com/pro/hero-sections.png"
+              src="/Residential solar page/site survey.webp"
               alt="hero template"
               width={500}
               height={500}
               className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
             />
             <Image
-              src="https://assets.aceternity.com/features-section.png"
+              src="/Residential solar page/site survey2.webp"
               alt="feature template"
               width={500}
               height={500}
@@ -158,14 +158,14 @@ export default function ResidentialPage() {
 
           <div className="grid grid-cols-2 gap-4">
             <Image
-              src="https://assets.aceternity.com/pro/hero-sections.png"
+              src="/Residential solar page/design and developement.webp"
               alt="hero template"
               width={500}
               height={500}
               className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
             />
             <Image
-              src="https://assets.aceternity.com/features-section.png"
+              src="/Residential solar page/design and developement-12.webp"
               alt="feature template"
               width={500}
               height={500}
@@ -186,14 +186,14 @@ export default function ResidentialPage() {
 
           <div className="grid grid-cols-2 gap-4">
             <Image
-              src="https://assets.aceternity.com/pro/hero-sections.png"
+              src="/Residential solar page/Procurement & Installation.webp"
               alt="hero template"
               width={500}
               height={500}
               className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
             />
             <Image
-              src="https://assets.aceternity.com/features-section.png"
+              src="/Residential solar page/Procurement & Installation (2).webp"
               alt="feature template"
               width={500}
               height={500}
@@ -214,14 +214,14 @@ export default function ResidentialPage() {
 
           <div className="grid grid-cols-2 gap-4">
             <Image
-              src="https://assets.aceternity.com/pro/hero-sections.png"
+              src="/Residential solar page/DJI_0451.webp"
               alt="hero template"
               width={500}
               height={500}
               className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
             />
             <Image
-              src="https://assets.aceternity.com/features-section.png"
+              src="/Residential solar page/DJI_0303.webp"
               alt="feature template"
               width={500}
               height={500}
@@ -338,7 +338,7 @@ export default function ResidentialPage() {
         {/* Left Side Image */}
         <div className="w-full h-full lg:w-1/2">
           <Image
-            src="https://www.soleosenergy.com/wp-content/uploads/2024/09/Solar-installation_web.jpg1_.webp"
+            src="/Residential solar page/DJI_0173.webp"
             alt="Commercial Solar Panels"
             width={1200}
             height={800}

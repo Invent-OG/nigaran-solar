@@ -1,19 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import Head from "next/head";
+import { motion } from "framer-motion";
 import LeadForm from "@/components/forms/lead-form";
 import { HomeIcon, Users2, Building2 } from "lucide-react";
 

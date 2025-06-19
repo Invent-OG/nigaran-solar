@@ -29,9 +29,9 @@ import Head from "next/head";
 import { Label } from "@radix-ui/react-label";
 
 const images = [
-  "https://images.pexels.com/photos/2800832/pexels-photo-2800832.jpeg",
-  "https://images.pexels.com/photos/3560366/pexels-photo-3560366.jpeg",
-  "https://images.pexels.com/photos/4215110/pexels-photo-4215110.jpeg",
+  "/Solar pro/solar pro.webp",
+  "/Solar pro/solar pro 3.webp",
+  "/Solar pro/solar pro 2.webp",
 ];
 
 export default function SolarProPage() {
@@ -191,7 +191,7 @@ export default function SolarProPage() {
         {/* Left Side Image */}
         <div className="w-full h-full lg:w-1/2">
           <Image
-            src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            src="/Solar pro/who can join solar pro.webp"
             alt="Solar Pro Network"
             className="shadow-lg object-cover w-full h-[70vh]"
             width={1200}

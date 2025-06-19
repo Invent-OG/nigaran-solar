@@ -131,8 +131,7 @@ const formSchema = z.object({
 });
 
 // Hero background image - static instead of slider for better performance
-const heroImage =
-  "https://images.pexels.com/photos/356036/pexels-photo-356036.jpeg";
+const heroImage = "/Solar calculator/solar calculator (2).webp";
 
 export default function SolarCalculatorPage() {
   const [showResults, setShowResults] = useState(false);
@@ -245,9 +244,7 @@ export default function SolarCalculatorPage() {
                   name="monthlyBill"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="">
-                        Monthly Electricity Bill (₹)
-                      </FormLabel>
+                      <FormLabel className="">Bi-Monthly (₹)</FormLabel>
                       <FormControl>
                         <Input
                           type="number"

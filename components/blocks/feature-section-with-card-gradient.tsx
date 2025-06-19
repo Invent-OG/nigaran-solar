@@ -107,7 +107,7 @@ const grid = [
       "Solar energy is renewable and reduces the household's carbon footprint.",
   },
   {
-    title: "Energy Independence",
+    title: "Grid Cost Protection",
     description:
       "Homeowners rely less on the grid and avoid rising electricity costs.",
   },
@@ -178,16 +178,25 @@ export function GridPattern({ width, height, x, y, squares, ...props }: any) {
       />
       {squares && (
         <svg x={x} y={y} className="overflow-visible">
-          {squares.map(([x, y]: any) => (
-            <rect
-              strokeWidth="0"
-              key={`${x}-${y}`}
-              width={width + 1}
-              height={height + 1}
-              x={x * width}
-              y={y * height}
-            />
-          ))}
+          {(
+            [
+              ...new Set(
+                squares.map(([x, y]: [number, number]) => `${x}-${y}`)
+              ),
+            ] as string[]
+          ).map((key) => {
+            const [x, y] = key.split("-").map(Number);
+            return (
+              <rect
+                strokeWidth="0"
+                key={key}
+                width={width + 1}
+                height={height + 1}
+                x={x * width}
+                y={y * height}
+              />
+            );
+          })}
         </svg>
       )}
     </svg>
