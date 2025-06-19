@@ -39,7 +39,7 @@ export function VideoLoaderProvider({
     if (typeof window !== "undefined" && localStorage.getItem("videoLoaded")) {
       setTriggerExit(true);
     } else {
-      const timeout = setTimeout(() => setLoading(false), 500); // force hide after 5s
+      const timeout = setTimeout(() => setLoading(false), 1500); // force hide after 5s
       return () => clearTimeout(timeout);
     }
   }, []);
