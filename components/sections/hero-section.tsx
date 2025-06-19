@@ -9,13 +9,19 @@ import { ArrowRight, Sun, Battery, Shield } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { RotatingText } from "../ui/rotating-text";
 import { GoogleReviewButton } from "../GoogleReviewButton";
+import { useVideoLoader } from "../VideoLoaderProvider";
 
-export default function HeroSection() {
+type HeroSectionProps = {
+  onVideoLoad?: () => void;
+};
+
+export default function HeroSection({ onVideoLoad }: HeroSectionProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const textRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
+  const { handleVideoLoad } = useVideoLoader();
 
   return (
     <section
@@ -28,6 +34,7 @@ export default function HeroSection() {
           loop
           muted
           playsInline
+          onCanPlayThrough={handleVideoLoad}
           className="object-cover w-full h-full"
           preload="auto" // or "metadata" for lighter load
         >

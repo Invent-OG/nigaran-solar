@@ -10,6 +10,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Metadata } from "next/types";
 import Script from "next/script";
+import { VideoLoaderProvider } from "@/components/VideoLoaderProvider";
 
 const inter = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
 
@@ -18,15 +19,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setLoading(false);
-    }, 1000); // Simulate a 1s loading delay
-    return () => clearTimeout(timeout);
-  }, []);
-
   return (
     <html lang="en">
       <head>
@@ -48,23 +40,9 @@ export default function RootLayout({
             style={{ display: "none", visibility: "hidden" }}
           ></iframe>
         </noscript>
-        {loading ? (
-          <div className="flex items-center flex-col justify-center min-h-screen">
-            {/* Loading Spinner */}
-            <div className="flex  items-center justify-center">
-              <Image
-                src="/nigaran-logo.png" // Path to your logo image
-                alt="Logo"
-                width={100} // Adjust width as needed
-                height={100} // Adjust height as needed
-                className=""
-              />
-              <div className="text-2xl font-bold ">Nigaran Solar</div>
-            </div>
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary" />
-          </div>
-        ) : (
-          <>
+
+        <>
+          <VideoLoaderProvider>
             <Providers>
               <LenisProvider />
               <Header />
@@ -72,8 +50,8 @@ export default function RootLayout({
               <Footer />
             </Providers>
             <FloatingContactButtons />
-          </>
-        )}
+          </VideoLoaderProvider>
+        </>
       </body>
     </html>
   );
