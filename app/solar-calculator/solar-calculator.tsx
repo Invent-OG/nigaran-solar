@@ -217,7 +217,7 @@ export default function SolarCalculatorPage() {
             className="lg:max-w-[60%] text-white"
           >
             <h1 className="mb-6 text-4xl font-bold md:text-5xl">
-              Calculate Your Solar Savings Instantly
+              Residential Solar Calculator{" "}
             </h1>
             <p className="mb-8 text-lg md:text-xl text-white/90">
               Try our free solar calculator to estimate your monthly savings,

@@ -27,7 +27,7 @@ export default function BlogPost({ params }: { params: { id: string } }) {
   const blog = data.blog;
 
   return (
-    <div className="min-h-screen pt-20">
+    <div className="min-h-screen pt-20 lg:pb-56 pb-[80%]">
       <div className="container py-8">
         <Button variant="ghost" onClick={() => router.back()} className="mb-8">
           <ArrowLeft className="h-4 w-4 mr-2" />

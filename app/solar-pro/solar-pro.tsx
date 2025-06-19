@@ -38,7 +38,7 @@ export default function SolarProPage() {
   return (
     <div className="min-h-screen pt-20">
       {/* Hero Section */}
-      <section className="relative lg:h-[80vh] flex items-center">
+      <section className="relative lg:h-[100vh] flex items-center">
         <div className="absolute inset-0 z-0">
           <Swiper
             modules={[Autoplay, Pagination]}
