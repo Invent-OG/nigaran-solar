@@ -12,7 +12,7 @@ import {
   Presentation as PresentationChart,
 } from "lucide-react";
 import { useBlogs } from "@/lib/queries/blogs";
-import Head from "next/head";
+import { Badge } from "@/components/ui/badge";
 
 export default function BlogPage() {
   const { data, isLoading, error } = useBlogs();

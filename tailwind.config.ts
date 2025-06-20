@@ -204,7 +204,26 @@ const config: Config = {
   		},
   		boxShadow: {
   			glow: '0 -16px 128px 0 hsla(var(--brand-foreground) / 0.5) inset, 0 -16px 32px 0 hsla(var(--brand) / 0.5) inset'
-  		}
+  		},
+      typography: {
+        DEFAULT: {
+          css: {
+            maxWidth: '100%',
+            img: {
+              marginTop: '1em',
+              marginBottom: '1em',
+              borderRadius: '0.5rem',
+            },
+            a: {
+              color: 'hsl(var(--primary))',
+              textDecoration: 'underline',
+              '&:hover': {
+                color: 'hsl(var(--primary) / 0.8)',
+              },
+            },
+          },
+        },
+      },
   	}
   },
   plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],

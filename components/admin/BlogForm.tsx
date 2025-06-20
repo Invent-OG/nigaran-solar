@@ -14,9 +14,9 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { useCreateBlog, useUpdateBlog } from "@/lib/queries/blogs";
-import { toast } from "sonner"; // ✅ Replaced custom useToast with Sonner
+import { toast } from "sonner";
+import RichTextEditor from "./RichTextEditor";
 
 const blogSchema = z.object({
   title: z.string().min(2, "Title must be at least 2 characters"),
@@ -118,10 +118,9 @@ export default function BlogForm({ onClose, initialData }: BlogFormProps) {
               <FormItem>
                 <FormLabel>Excerpt</FormLabel>
                 <FormControl>
-                  <Textarea
+                  <Input
                     {...field}
                     placeholder="Enter blog excerpt"
-                    className="h-20"
                   />
                 </FormControl>
                 <FormMessage />
@@ -136,10 +135,9 @@ export default function BlogForm({ onClose, initialData }: BlogFormProps) {
               <FormItem>
                 <FormLabel>Content</FormLabel>
                 <FormControl>
-                  <Textarea
-                    {...field}
-                    placeholder="Enter blog content"
-                    className="h-40"
+                  <RichTextEditor 
+                    content={field.value} 
+                    onChange={field.onChange} 
                   />
                 </FormControl>
                 <FormMessage />

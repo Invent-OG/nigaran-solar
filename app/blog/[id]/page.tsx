@@ -63,7 +63,7 @@ export default function BlogPost({ params }: { params: { id: string } }) {
             <div
               className="prose prose-lg max-w-none"
               dangerouslySetInnerHTML={{ __html: blog.content }}
-            />{" "}
+            />
           </div>
         </motion.div>
       </div>
