@@ -42,7 +42,7 @@ export default function CommercialPage() {
               <SwiperSlide key={index}>
                 <Image
                   src={src}
-                  alt={`Slide ${index + 1}`}
+                  alt={`Commercial solar installation by Nigaran Solar - Slide ${index + 1}`}
                   fill
                   sizes="100vw"
                   className="object-cover w-full h-full"
@@ -108,7 +108,7 @@ export default function CommercialPage() {
           <p>
             Energy costs are a major expense for many organizations, but Nigaran
             Solar offers scalable commercial solar panels that transform
-            sunlight into long-term savings. Whether it’s a warehouse, factory,
+            sunlight into long-term savings. Whether it's a warehouse, factory,
             or office complex, our solar for business solutions are engineered
             for performance and durability.
           </p>
@@ -149,7 +149,7 @@ export default function CommercialPage() {
         <div className="w-full lg:w-1/2 h-[40vh] sm:h-[50vh] lg:h-[70vh]">
           <Image
             src="/Commercial solar/commercial solar.webp"
-            alt="Commercial Solar Panels"
+            alt="Large commercial solar installation on business rooftop"
             width={1920}
             height={1080}
             className="w-full h-full object-cover shadow-lg"
@@ -261,7 +261,7 @@ export default function CommercialPage() {
                 <strong className="text-white">
                   Sustainability & Brand Image:
                 </strong>{" "}
-                Adopt sustainable energy to boost your business’s eco-friendly
+                Adopt sustainable energy to boost your business's eco-friendly
                 image and appeal to green-conscious customers.
               </span>
             </li>
@@ -332,7 +332,7 @@ export default function CommercialPage() {
         <div className="absolute inset-0 z-0">
           <Image
             src="/pattern-bg.png"
-            alt="Residential Solar Installation"
+            alt="Decorative pattern background"
             fill
             className="object-cover"
           />

@@ -183,7 +183,7 @@ export default function OnGridSolarPage() {
               <SwiperSlide key={index}>
                 <Image
                   src={src}
-                  alt={`Slide ${index + 1}`}
+                  alt={`On-grid solar installation by Nigaran Solar - Slide ${index + 1}`}
                   height={100}
                   width={100}
                   priority
@@ -298,7 +298,7 @@ export default function OnGridSolarPage() {
         <div className="w-full lg:w-1/2 h-[40vh] sm:h-[50vh] lg:h-[70vh]">
           <Image
             src="/On grid solar page/commercial offices.webp"
-            alt="On-Grid Solar Panels"
+            alt="Commercial building with on-grid solar installation"
             height={100}
             width={100}
             className="w-full h-full object-cover shadow-lg"

@@ -131,14 +131,14 @@ export default function ResidentialPage() {
           <div className="grid grid-cols-2 gap-4">
             <Image
               src="/Residential solar page/site survey.webp"
-              alt="hero template"
+              alt="Solar technician conducting a site survey on a rooftop"
               width={500}
               height={500}
               className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
             />
             <Image
               src="/Residential solar page/site survey2.webp"
-              alt="feature template"
+              alt="Engineer analyzing roof structure for solar panel installation"
               width={500}
               height={500}
               className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
@@ -159,14 +159,14 @@ export default function ResidentialPage() {
           <div className="grid grid-cols-2 gap-4">
             <Image
               src="/Residential solar page/design and developement.webp"
-              alt="hero template"
+              alt="Solar system design process with 3D modeling software"
               width={500}
               height={500}
               className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
             />
             <Image
               src="/Residential solar page/design and developement-12.webp"
-              alt="feature template"
+              alt="Engineers reviewing solar panel layout designs"
               width={500}
               height={500}
               className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
@@ -187,14 +187,14 @@ export default function ResidentialPage() {
           <div className="grid grid-cols-2 gap-4">
             <Image
               src="/Residential solar page/Procurement & Installation.webp"
-              alt="hero template"
+              alt="Solar panels being installed on a residential rooftop"
               width={500}
               height={500}
               className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
             />
             <Image
               src="/Residential solar page/Procurement & Installation (2).webp"
-              alt="feature template"
+              alt="Technicians mounting solar panels on roof mounting structure"
               width={500}
               height={500}
               className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
@@ -215,14 +215,14 @@ export default function ResidentialPage() {
           <div className="grid grid-cols-2 gap-4">
             <Image
               src="/Residential solar page/DJI_0451.webp"
-              alt="hero template"
+              alt="Aerial view of completed solar installation on residential property"
               width={500}
               height={500}
               className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
             />
             <Image
               src="/Residential solar page/DJI_0303.webp"
-              alt="feature template"
+              alt="Technician connecting solar system to electrical grid"
               width={500}
               height={500}
               className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
@@ -267,7 +267,7 @@ export default function ResidentialPage() {
               <SwiperSlide key={index}>
                 <Image
                   src={src}
-                  alt={`Slide ${index + 1}`}
+                  alt={`Residential solar installation by Nigaran Solar - Slide ${index + 1}`}
                   fill
                   className="object-cover w-full h-full"
                   priority={index === 0}
@@ -339,7 +339,7 @@ export default function ResidentialPage() {
         <div className="w-full h-full lg:w-1/2">
           <Image
             src="/Residential solar page/DJI_0173.webp"
-            alt="Commercial Solar Panels"
+            alt="Aerial view of residential solar panel installation"
             width={1200}
             height={800}
             className="shadow-lg object-cover w-full h-[70vh]"
@@ -488,7 +488,7 @@ export default function ResidentialPage() {
         <div className="absolute inset-0 z-0 p-0 m-0">
           <Image
             src="/pattern-bg.png"
-            alt="Residential Solar Installation"
+            alt="Decorative pattern background"
             fill
             className="object-cover"
           />

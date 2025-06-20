@@ -67,7 +67,7 @@ export default function AboutPage() {
         <div className="absolute inset-0 z-0">
           <Image
             src="https://images.pexels.com/photos/2800832/pexels-photo-2800832.jpeg"
-            alt="About Nigaran Solar"
+            alt="Solar panels on a rooftop with blue sky background - About Nigaran Solar"
             fill
             className="object-cover"
           />
@@ -110,7 +110,7 @@ export default function AboutPage() {
             <FlipCardFront className="rounded-xl">
               <Image
                 src="/about/vision (2).webp"
-                alt="nike air jordan"
+                alt="Vision illustration - A person looking towards a bright future with solar panels"
                 fill
                 className="object-cover size-full"
                 priority
@@ -144,7 +144,7 @@ export default function AboutPage() {
             <FlipCardFront className="rounded-xl">
               <Image
                 src="/about/mission (2).webp"
-                alt="nike air jordan"
+                alt="Mission illustration - Solar panels with a clear goal and purpose"
                 fill
                 className="object-cover size-full"
                 priority
@@ -181,12 +181,12 @@ export default function AboutPage() {
           commercial clients. Our goal is to help our customers reduce energy
           costs and contribute to environmental conservation by offering
           renewable energy solutions. With years of expertise in solar panel
-          technology and installations, we’re your trusted solar partner in
+          technology and installations, we're your trusted solar partner in
           Tamilnadu, providing unmatched service and consultation. We offer a
           full range of solar services, including solar power systems for homes,
           commercial establishments, and industries. Whether you&apos;re looking
           for a residential solar installation or a large-scale solar rooftop
-          installation, we’ve got you covered.
+          installation, we've got you covered.
         </p>
       </div>
 
@@ -214,7 +214,7 @@ export default function AboutPage() {
               <div className="h-1/2 w-full">
                 <Image
                   src="/about/expert team.webp"
-                  alt="Lower Bills"
+                  alt="Expert team of solar professionals at Nigaran Solar"
                   width={600}
                   height={400}
                   className="object-cover w-full h-full"
@@ -236,7 +236,7 @@ export default function AboutPage() {
                   Our team brings extensive experience in the solar power
                   industry, combining technical expertise with deep knowledge of
                   the latest renewable energy technologies. From consultation to
-                  installation, you’ll work with seasoned professionals who
+                  installation, you'll work with seasoned professionals who
                   ensure every project is completed to the highest standards.
                 </p>
               </div>
@@ -248,7 +248,7 @@ export default function AboutPage() {
               <div className="h-1/2 w-full">
                 <Image
                   src="/about/high quality.webp"
-                  alt="High Quality"
+                  alt="High quality solar panels and equipment from Nigaran Solar"
                   width={600}
                   height={400}
                   className="object-cover w-full h-full"
@@ -281,7 +281,7 @@ export default function AboutPage() {
               <div className="h-1/2 w-full">
                 <Image
                   src="/about/customer support-16.webp"
-                  alt="Community Engagement"
+                  alt="Customer support team at Nigaran Solar providing excellent service"
                   width={600}
                   height={400}
                   className="object-cover w-full h-full"
@@ -300,7 +300,7 @@ export default function AboutPage() {
                   Excellent Customer Support
                 </h4>
                 <p className="text-sm text-muted-foreground md:text-base">
-                  We believe that great service doesn’t end after installation.
+                  We believe that great service doesn't end after installation.
                   Our friendly and responsive support team is always available
                   to assist you — whether you have questions, need maintenance,
                   or want to expand your solar system in the future.
@@ -314,7 +314,7 @@ export default function AboutPage() {
               <div className="h-1/2 w-full">
                 <Image
                   src="/about/guarenteed performence.webp"
-                  alt="Guaranteed Performance"
+                  alt="Guaranteed performance metrics for Nigaran Solar systems"
                   width={600}
                   height={400}
                   className="object-cover w-full h-full"
@@ -373,7 +373,7 @@ export default function AboutPage() {
             >
               <Image
                 src={member.image}
-                alt={member.name}
+                alt={`${member.name} - ${member.position} at Nigaran Solar`}
                 width={300}
                 height={300}
                 className="object-cover   "

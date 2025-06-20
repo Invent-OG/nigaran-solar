@@ -91,7 +91,7 @@ export default function SolarProPage() {
               <SwiperSlide key={index}>
                 <Image
                   src={src}
-                  alt={`Slide ${index + 1}`}
+                  alt={`Solar Pro program by Nigaran Solar - Slide ${index + 1}`}
                   className="object-cover w-full h-full"
                   width={1920}
                   height={1080}
@@ -306,7 +306,7 @@ export default function SolarProPage() {
         <div className="w-full h-full lg:w-1/2">
           <Image
             src="/Solar pro/who can join solar pro.webp"
-            alt="Solar Pro Network"
+            alt="Diverse professionals who can join the Solar Pro network"
             className="shadow-lg object-cover w-full h-[70vh]"
             width={1200}
             height={600}
@@ -577,7 +577,7 @@ export default function SolarProPage() {
             >
               <Image
                 src="https://images.pexels.com/photos/9875441/pexels-photo-9875441.jpeg"
-                alt="Solar Pro Network"
+                alt="People networking and discussing solar energy solutions"
                 width={600}
                 height={400}
                 className="object-cover w-full h-full rounded-lg"

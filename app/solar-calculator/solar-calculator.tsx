@@ -200,7 +200,7 @@ export default function SolarCalculatorPage() {
           <div className="relative w-full h-full">
             <Image
               src={heroImage}
-              alt="Solar panels"
+              alt="Solar calculator interface with solar panels in the background"
               fill
               className="object-cover w-full h-full"
               priority
@@ -494,7 +494,7 @@ export default function SolarCalculatorPage() {
               <div className="relative overflow-hidden rounded-lg">
                 <Image
                   src="https://images.pexels.com/photos/3943716/pexels-photo-3943716.jpeg"
-                  alt="Solar Calculator"
+                  alt="Person using calculator to estimate solar savings"
                   width={600}
                   height={400}
                   className="object-cover w-full h-full"

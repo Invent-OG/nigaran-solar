@@ -49,7 +49,7 @@ export default function OffGridSolarPage() {
               <SwiperSlide key={index}>
                 <Image
                   src={src}
-                  alt={`Slide ${index + 1}`}
+                  alt={`Off-grid solar installation by Nigaran Solar - Slide ${index + 1}`}
                   height={100}
                   width={100}
                   loading="lazy"
@@ -138,7 +138,7 @@ export default function OffGridSolarPage() {
               <div className="relative h-48 overflow-hidden">
                 <Image
                   src="/Off grid solar page/Farms & agriculture pumps.webp"
-                  alt="Farm"
+                  alt="Farm with solar-powered agricultural pumps"
                   height={100}
                   width={100}
                   loading="lazy"
@@ -168,7 +168,7 @@ export default function OffGridSolarPage() {
               <div className="relative h-48 overflow-hidden">
                 <Image
                   src="/Off grid solar page/Rural homes.webp"
-                  alt="Rural Home"
+                  alt="Rural home with off-grid solar installation"
                   height={100}
                   width={100}
                   loading="lazy"
@@ -199,7 +199,7 @@ export default function OffGridSolarPage() {
                 <Image
                   loading="lazy"
                   src="/Off grid solar page/Construction sites.webp"
-                  alt="Construction Site"
+                  alt="Construction site powered by off-grid solar system"
                   height={100}
                   width={100}
                   className="object-cover w-full rounded-xl h-full transition-transform duration-500 group-hover:scale-110"
@@ -228,7 +228,7 @@ export default function OffGridSolarPage() {
               <div className="relative h-48 overflow-hidden">
                 <Image
                   src="/Off grid solar page/areas with unreliable electricity.webp"
-                  alt="Remote Area"
+                  alt="Area with unreliable electricity using off-grid solar power"
                   loading="lazy"
                   height={100}
                   width={100}
@@ -261,7 +261,7 @@ export default function OffGridSolarPage() {
             height={100}
             width={100}
             src="/Off grid solar page/benefits of off grid.webp"
-            alt="Off-Grid Solar Panels"
+            alt="Benefits of off-grid solar power systems"
             className="w-full h-full object-cover shadow-lg"
           />
         </div>
@@ -577,7 +577,7 @@ export default function OffGridSolarPage() {
         <div className="absolute inset-0 z-0">
           <Image
             src="/pattern-bg.png"
-            alt="Residential Solar Installation"
+            alt="Decorative pattern background"
             fill
             className="object-cover"
           />

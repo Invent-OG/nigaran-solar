@@ -19,7 +19,7 @@ export default function SubsidyPage() {
         <div className="absolute inset-0 z-0">
           <Image
             src="https://images.pexels.com/photos/414837/pexels-photo-414837.jpeg"
-            alt="Solar Subsidy"
+            alt="Solar panels with government subsidy information"
             fill
             className="object-cover"
           />

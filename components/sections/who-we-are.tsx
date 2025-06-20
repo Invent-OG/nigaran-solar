@@ -27,7 +27,7 @@ const WhoWeAre = () => {
           >
             <Image
               src="/Home page/who we are.webp"
-              alt="Solar Panels"
+              alt="Nigaran Solar team members working on a solar installation project"
               width={500}
               height={500}
               loading="lazy"
@@ -43,7 +43,7 @@ const WhoWeAre = () => {
             <div className="absolute bottom-0 z-0 opacity-50 animate-rotateLoop -left-24 md:-bottom-16">
               <Image
                 src="/circle.png"
-                alt="Rotating Circle"
+                alt="Decorative rotating circle background element"
                 width={200}
                 height={200}
                 loading="lazy"
@@ -53,7 +53,7 @@ const WhoWeAre = () => {
             {/* Overlapping Image */}
             <Image
               src="https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=3132&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              alt="Solar Panels Small"
+              alt="Close-up of solar panels capturing sunlight"
               width={250}
               loading="lazy"
               height={250}

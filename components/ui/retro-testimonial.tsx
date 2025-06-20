@@ -286,7 +286,7 @@ const TestimonialCard = ({
               <Image
                 className="block w-full h-full object-center object-cover"
                 src={backgroundImage}
-                alt="Background layer"
+                alt="Testimonial background texture"
                 layout="fill"
                 objectFit="cover"
               />
@@ -340,7 +340,7 @@ const ProfileImage = ({ src, alt, ...rest }: ImageProps) => {
         loading="lazy"
         decoding="async"
         blurDataURL={typeof src === "string" ? src : undefined}
-        alt={alt || "Profile image"}
+        alt={alt || "Customer profile image"}
         {...rest}
       />
     </div>

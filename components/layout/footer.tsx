@@ -90,7 +90,7 @@ export default function Footer() {
         <div className="w-full md:w-auto">
           <Image
             src="/contact-us.png"
-            alt="Solar Panels"
+            alt="Contact us illustration with customer service representative"
             width={450}
             height={450}
             className="top-0 right-0 z-10 object-cover lg:absolute"
@@ -111,7 +111,7 @@ export default function Footer() {
             <div className="flex items-center gap-2">
               <Image
                 src="/nigaran-logo.png"
-                alt="Nigaran Logo"
+                alt="Nigaran Solar company logo"
                 width={50}
                 height={50}
               />

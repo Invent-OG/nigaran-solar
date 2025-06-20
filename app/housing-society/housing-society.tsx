@@ -46,7 +46,7 @@ export default function HousingSocietyPage() {
               <SwiperSlide key={index}>
                 <Image
                   src={src}
-                  alt={`Slide ${index + 1}`}
+                  alt={`Housing society solar installation by Nigaran Solar - Slide ${index + 1}`}
                   fill
                   className="object-cover"
                   priority
@@ -157,7 +157,7 @@ export default function HousingSocietyPage() {
                 <div className="h-1/2 w-full">
                   <Image
                     src="/Housing society page/Lower bills.webp"
-                    alt="Lower Bills"
+                    alt="Reduced electricity bills for housing society"
                     width={600}
                     height={400}
                     className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500"
@@ -184,7 +184,7 @@ export default function HousingSocietyPage() {
                 <div className="h-1/2 w-full">
                   <Image
                     src="/Housing society page/increased property value.webp"
-                    alt="Property Value"
+                    alt="Housing society with increased property value due to solar installation"
                     width={600}
                     height={400}
                     className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500"
@@ -211,7 +211,7 @@ export default function HousingSocietyPage() {
                 <div className="h-1/2 w-full">
                   <Image
                     src="/Housing society page/community engagement.webp"
-                    alt="Community Engagement"
+                    alt="Community members engaged in solar energy project"
                     width={600}
                     height={400}
                     className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500"
@@ -343,7 +343,7 @@ export default function HousingSocietyPage() {
         <div className="absolute inset-0 z-0">
           <Image
             src="/pattern-bg.png"
-            alt="Residential Solar Installation"
+            alt="Decorative pattern background"
             fill
             className="object-cover"
           />

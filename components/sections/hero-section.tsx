@@ -37,6 +37,7 @@ export default function HeroSection({ onVideoLoad }: HeroSectionProps) {
           onCanPlayThrough={handleVideoLoad}
           className="object-cover w-full h-full"
           preload="auto" // or "metadata" for lighter load
+          aria-label="Background video showing solar panels and renewable energy installations"
         >
           <source src="/videos/hero-video.mp4" type="video/mp4" />
           Your browser does not support the video tag.
