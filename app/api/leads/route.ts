@@ -26,10 +26,10 @@ export async function POST(req: Request) {
     const [lead] = await db.insert(leads).values(data).returning();
 
     // Send thank you email
-    await sendLeadThankYouEmail(
-      data.whatsappNumber + "@whatsapp.com",
-      data.name
-    );
+    // await sendLeadThankYouEmail(
+    //   data.whatsappNumber + "@whatsapp.com",
+    //   data.name
+    // );
 
     return NextResponse.json({ success: true, lead });
   } catch (error) {

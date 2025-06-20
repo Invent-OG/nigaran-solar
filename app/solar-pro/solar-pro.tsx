@@ -27,6 +27,14 @@ import "swiper/css/pagination";
 import { ShootingStars } from "@/components/ui/shooting-stars";
 import Head from "next/head";
 import { Label } from "@radix-ui/react-label";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
+import {
+  solarProLeadSchema,
+  SolarProLeadSchema,
+} from "@/schema/solarProLeadSchema";
 
 const images = [
   "/Solar pro/solar pro.webp",
@@ -35,6 +43,38 @@ const images = [
 ];
 
 export default function SolarProPage() {
+  const [serverError, setServerError] = useState("");
+  const [success, setSuccess] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    reset,
+  } = useForm<SolarProLeadSchema>({
+    resolver: zodResolver(solarProLeadSchema),
+  });
+
+  const onSubmit = async (data: SolarProLeadSchema) => {
+    setServerError("");
+    setSuccess(false);
+    try {
+      const res = await fetch("/api/leads/solar-pro-email", {
+        method: "POST",
+        body: JSON.stringify(data),
+      });
+
+      const result = await res.json();
+      if (!result.success) {
+        setServerError("Something went wrong. Please try again.");
+      } else {
+        setSuccess(true);
+        reset();
+      }
+    } catch (err) {
+      setServerError("Server error. Please try again later.");
+    }
+  };
   return (
     <div className="min-h-screen pt-20">
       {/* Hero Section */}
@@ -88,7 +128,7 @@ export default function SolarProPage() {
             <h3 className="mb-4 text-2xl font-bold text-center ">
               Join Our Network
             </h3>
-            <form className="space-y-2 ">
+            {/* <form className="space-y-2 ">
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <div className="flex flex-col gap-2">
                   <Label className="">First Name</Label>
@@ -122,6 +162,80 @@ export default function SolarProPage() {
               <Button className="w-full">
                 Submit Application
                 <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
+            </form> */}
+
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                <div className="flex flex-col gap-2">
+                  <Label>First Name</Label>
+                  <Input placeholder="First Name" {...register("firstName")} />
+                  {errors.firstName && (
+                    <p className="text-sm text-red-500">
+                      {errors.firstName.message}
+                    </p>
+                  )}
+                </div>
+                <div className="flex flex-col gap-2">
+                  <Label>Last Name</Label>
+                  <Input placeholder="Last Name" {...register("lastName")} />
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <Label>Email Address</Label>
+                <Input
+                  type="email"
+                  placeholder="Email Address"
+                  {...register("email")}
+                />
+                {errors.email && (
+                  <p className="text-sm text-red-500">{errors.email.message}</p>
+                )}
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <Label>Phone Number</Label>
+                <Input
+                  type="tel"
+                  placeholder="Phone Number"
+                  {...register("phone")}
+                />
+                {errors.phone && (
+                  <p className="text-sm text-red-500">{errors.phone.message}</p>
+                )}
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <Label>Location</Label>
+                <Input placeholder="Location" {...register("location")} />
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <Label>Profession</Label>
+                <Input placeholder="Profession" {...register("profession")} />
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <Label>Why Join</Label>
+                <Textarea
+                  placeholder="Why do you want to join?"
+                  {...register("whyJoin")}
+                />
+              </div>
+
+              {serverError && (
+                <p className="text-sm text-red-500">{serverError}</p>
+              )}
+              {success && (
+                <p className="text-sm text-green-600">
+                  Your application has been submitted.
+                </p>
+              )}
+
+              <Button className="w-full" disabled={isSubmitting}>
+                {isSubmitting ? "Submitting..." : "Submit Application"}
+                {!isSubmitting && <ArrowRight className="w-4 h-4 ml-2" />}
               </Button>
             </form>
           </motion.div>
