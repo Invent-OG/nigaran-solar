@@ -1,5 +1,3 @@
-"use client";
-
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -20,6 +18,7 @@ import {
   useUpdateTestimonial,
 } from "@/lib/queries/testimonials";
 import { toast } from "sonner";
+import ImageUpload from "./ImageUpload";
 
 const testimonialSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -30,7 +29,7 @@ const testimonialSchema = z.object({
     .url("Please enter a valid YouTube URL")
     .optional()
     .or(z.literal("")),
-  imageUrl: z.string().url("Please enter a valid image URL"),
+  imageUrl: z.string().min(1, "Profile image is required"),
 });
 
 type TestimonialFormData = z.infer<typeof testimonialSchema>;
@@ -150,9 +149,13 @@ export default function TestimonialForm({
             name="imageUrl"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Profile Image URL</FormLabel>
+                <FormLabel>Profile Image</FormLabel>
                 <FormControl>
-                  <Input {...field} placeholder="Enter profile image URL" />
+                  <ImageUpload
+                    value={field.value}
+                    onChange={field.onChange}
+                    bucket="testimonials"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>

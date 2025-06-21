@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -14,26 +14,58 @@ import {
 } from "@/components/ui/card";
 import { Lock } from "lucide-react";
 import { useLogin } from "@/lib/queries/auth";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import Image from "next/image";
+
+const loginSchema = z.object({
+  email: z.string().email("Please enter a valid email"),
+  password: z.string().min(6, "Password must be at least 6 characters"),
+});
+
+type LoginFormData = z.infer<typeof loginSchema>;
 
 export default function AdminLoginPage() {
   const router = useRouter();
   const loginMutation = useLogin();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const form = useForm<LoginFormData>({
+    resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+
+  useEffect(() => {
+    // Check if already authenticated
+    const isAuthenticated = sessionStorage.getItem("isAuthenticated") === "true";
+    if (isAuthenticated) {
+      router.push("/admin/leads");
+    }
+  }, [router]);
+
+  const handleSubmit = async (data: LoginFormData) => {
     setError("");
 
     try {
-      const response = await loginMutation.mutateAsync({ email, password });
+      const response = await loginMutation.mutateAsync(data);
       if (response.success) {
         sessionStorage.setItem("isAuthenticated", "true");
         router.push("/admin/leads");
       }
     } catch (error) {
-      setError("Invalid credentials");
+      setError("Invalid email or password");
     }
   };
 
@@ -43,12 +75,17 @@ export default function AdminLoginPage() {
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="w-full max-w-md"
+        className="w-full max-w-md px-4"
       >
         <Card>
           <CardHeader className="space-y-1 flex flex-col items-center">
-            <div className="h-12 w-12 rounded-full bg-primary flex items-center justify-center mb-4">
-              <Lock className="h-6 w-6 text-primary-foreground" />
+            <div className="mb-4 flex items-center justify-center">
+              <Image
+                src="/nigaran-logo.png"
+                alt="Nigaran Solar Logo"
+                width={80}
+                height={80}
+              />
             </div>
             <CardTitle className="text-2xl">Admin Login</CardTitle>
             <CardDescription>
@@ -56,41 +93,59 @@ export default function AdminLoginPage() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              {error && (
-                <div className="p-3 rounded bg-destructive/10 text-destructive text-sm">
-                  {error}
-                </div>
-              )}
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
+                {error && (
+                  <div className="p-3 rounded bg-destructive/10 text-destructive text-sm">
+                    {error}
+                  </div>
+                )}
 
-              <div className="space-y-2">
-                <label className="text-sm font-medium">Email</label>
-                <Input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Email</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="email"
+                          placeholder="admin@example.com"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
                 />
-              </div>
 
-              <div className="space-y-2">
-                <label className="text-sm font-medium">Password</label>
-                <Input
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
+                <FormField
+                  control={form.control}
+                  name="password"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Password</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="password"
+                          placeholder="••••••••"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
                 />
-              </div>
 
-              <Button
-                type="submit"
-                className="w-full"
-                disabled={loginMutation.isPending}
-              >
-                {loginMutation.isPending ? "Logging in..." : "Login"}
-              </Button>
-            </form>
+                <Button
+                  type="submit"
+                  className="w-full"
+                  disabled={loginMutation.isPending}
+                >
+                  {loginMutation.isPending ? "Logging in..." : "Login"}
+                </Button>
+              </form>
+            </Form>
           </CardContent>
         </Card>
       </motion.div>

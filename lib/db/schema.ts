@@ -53,3 +53,12 @@ export const jobApplications = pgTable('job_applications', {
   careerId: uuid('career_id').references(() => careers.id).notNull(),
   createdAt: timestamp('created_at').defaultNow().notNull()
 });
+
+export const users = pgTable('users', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  name: text('name').notNull(),
+  email: text('email').notNull().unique(),
+  password: text('password').notNull(),
+  role: text('role', { enum: ['admin', 'editor'] }).notNull().default('admin'),
+  createdAt: timestamp('created_at').defaultNow().notNull()
+});

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -15,7 +15,10 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { toast } from "sonner"; // ✅ using Sonner's toast now
+import { toast } from "sonner";
+import { useChangePassword, useCurrentUser } from "@/lib/queries/auth";
+import AdminHeader from "@/components/admin/AdminHeader";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const passwordSchema = z
   .object({
@@ -36,6 +39,8 @@ type PasswordFormData = z.infer<typeof passwordSchema>;
 
 export default function SettingsPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { data: currentUser } = useCurrentUser();
+  const changePasswordMutation = useChangePassword(currentUser?.id || "");
 
   const form = useForm<PasswordFormData>({
     resolver: zodResolver(passwordSchema),
@@ -47,78 +52,124 @@ export default function SettingsPage() {
   });
 
   const onSubmit = async (data: PasswordFormData) => {
+    if (!currentUser?.id) {
+      toast.error("User information not found");
+      return;
+    }
+
     setIsSubmitting(true);
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      toast.success("Password updated successfully"); // ✅ Success toast
+      await changePasswordMutation.mutateAsync({
+        currentPassword: data.currentPassword,
+        newPassword: data.newPassword,
+      });
+      
+      toast.success("Password updated successfully");
       form.reset();
-    } catch (error) {
-      toast.error("Failed to update password"); // ✅ Error toast
+    } catch (error: any) {
+      toast.error(error.message || "Failed to update password");
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <div className="container max-w-md py-8">
-      <Card>
-        <CardHeader>
-          <CardTitle>Change Password</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-              <FormField
-                control={form.control}
-                name="currentPassword"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Current Password</FormLabel>
-                    <FormControl>
-                      <Input type="password" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+    <div>
+      <AdminHeader title="Settings" />
+      
+      <Tabs defaultValue="password" className="w-full">
+        <TabsList className="mb-6">
+          <TabsTrigger value="password">Change Password</TabsTrigger>
+          <TabsTrigger value="profile">Profile</TabsTrigger>
+        </TabsList>
+        
+        <TabsContent value="password">
+          <div className="max-w-md mx-auto">
+            <Card>
+              <CardHeader>
+                <CardTitle>Change Password</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <Form {...form}>
+                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                    <FormField
+                      control={form.control}
+                      name="currentPassword"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Current Password</FormLabel>
+                          <FormControl>
+                            <Input type="password" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
 
-              <FormField
-                control={form.control}
-                name="newPassword"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>New Password</FormLabel>
-                    <FormControl>
-                      <Input type="password" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                    <FormField
+                      control={form.control}
+                      name="newPassword"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>New Password</FormLabel>
+                          <FormControl>
+                            <Input type="password" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
 
-              <FormField
-                control={form.control}
-                name="confirmPassword"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Confirm New Password</FormLabel>
-                    <FormControl>
-                      <Input type="password" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                    <FormField
+                      control={form.control}
+                      name="confirmPassword"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Confirm New Password</FormLabel>
+                          <FormControl>
+                            <Input type="password" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
 
-              <Button type="submit" className="w-full" disabled={isSubmitting}>
-                {isSubmitting ? "Updating..." : "Update Password"}
-              </Button>
-            </form>
-          </Form>
-        </CardContent>
-      </Card>
+                    <Button type="submit" className="w-full" disabled={isSubmitting}>
+                      {isSubmitting ? "Updating..." : "Update Password"}
+                    </Button>
+                  </form>
+                </Form>
+              </CardContent>
+            </Card>
+          </div>
+        </TabsContent>
+        
+        <TabsContent value="profile">
+          <div className="max-w-md mx-auto">
+            <Card>
+              <CardHeader>
+                <CardTitle>Profile Information</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  <div>
+                    <p className="text-sm font-medium mb-1">Name</p>
+                    <p className="text-lg">{currentUser?.name || "Admin"}</p>
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium mb-1">Email</p>
+                    <p className="text-lg">{currentUser?.email || "admin@example.com"}</p>
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium mb-1">Role</p>
+                    <p className="text-lg capitalize">{currentUser?.role || "admin"}</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </TabsContent>
+      </Tabs>
     </div>
   );
 }

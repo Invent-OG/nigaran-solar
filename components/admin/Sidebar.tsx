@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import { motion } from "framer-motion";
 import {
   Users,
   MessageSquare,
@@ -15,29 +15,55 @@ import {
   X,
   Settings,
 } from "lucide-react";
-import Image from "next/image";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
-const navItems = [
-  { label: "Leads", href: "/admin/leads", icon: <Users className="h-5 w-5" /> },
+import type { LucideIcon } from "lucide-react";
+
+interface NavSubItem {
+  label: string;
+  href: string;
+  icon?: LucideIcon;
+}
+
+interface NavItem {
+  label: string;
+  href: string;
+  icon?: LucideIcon;
+  submenu?: NavSubItem[];
+}
+
+// Add icons to submenu items
+const navItems: NavItem[] = [
+  { 
+    label: "Dashboard", 
+    href: "/admin", 
+    icon: Users 
+  },
+  {
+    label: "Leads",
+    href: "/admin/leads",
+    icon: Users,
+  },
   {
     label: "Testimonials",
     href: "/admin/testimonials",
-    icon: <MessageSquare className="h-5 w-5" />,
+    icon: MessageSquare,
   },
   {
     label: "Careers",
     href: "/admin/careers",
-    icon: <Briefcase className="h-5 w-5" />,
+    icon: Briefcase,
   },
   {
     label: "Blog",
     href: "/admin/blog",
-    icon: <BookOpen className="h-5 w-5" />,
+    icon: BookOpen,
   },
   {
     label: "Settings",
     href: "/admin/settings",
-    icon: <Settings className="h-5 w-5" />,
+    icon: Settings,
   },
 ];
 
@@ -45,9 +71,46 @@ export default function Sidebar() {
   const pathname = usePathname();
   const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [expandedSubmenus, setExpandedSubmenus] = useState<
+    Record<string, boolean>
+  >({});
+  const [userName, setUserName] = useState<string>("");
+
+  useEffect(() => {
+    // Get user info from session storage
+    const userInfo = sessionStorage.getItem('userInfo');
+    if (userInfo) {
+      try {
+        const parsedInfo = JSON.parse(userInfo);
+        setUserName(parsedInfo.name || "Admin");
+      } catch (e) {
+        setUserName("Admin");
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMobileMenuOpen]);
+
+  const toggleSubmenu = (label: string) => {
+    setExpandedSubmenus((prev) => ({
+      ...prev,
+      [label]: !prev[label],
+    }));
+  };
 
   const handleLogout = () => {
     sessionStorage.removeItem('isAuthenticated');
+    sessionStorage.removeItem('userInfo');
     router.push("/admin/login");
   };
 
@@ -80,8 +143,11 @@ export default function Sidebar() {
       >
         <div className="p-6">
           <div className="flex items-center gap-2 mb-8">
-            <Image src={"/nigaran-logo.png"} alt={""} width={50} height={50} />
-            <span className="font-semibold">Admin Panel</span>
+            <Image src={"/nigaran-logo.png"} alt={"Nigaran Solar Logo"} width={50} height={50} />
+            <div className="flex flex-col">
+              <span className="font-semibold">Admin Panel</span>
+              <span className="text-xs text-muted-foreground">Welcome, {userName}</span>
+            </div>
           </div>
 
           <nav className="space-y-2">
@@ -94,8 +160,8 @@ export default function Sidebar() {
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 <Link href={item.href}>
-                  {item.icon}
-                  <span className="ml-2">{item.label}</span>
+                  {item.icon && <item.icon className="h-5 w-5 mr-2" />}
+                  <span>{item.label}</span>
                 </Link>
               </Button>
             ))}
@@ -105,8 +171,8 @@ export default function Sidebar() {
               className="w-full justify-start text-destructive hover:text-destructive"
               onClick={handleLogout}
             >
-              <LogOut className="h-5 w-5" />
-              <span className="ml-2">Logout</span>
+              <LogOut className="h-5 w-5 mr-2" />
+              <span>Logout</span>
             </Button>
           </nav>
         </div>

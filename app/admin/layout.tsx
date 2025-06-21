@@ -25,7 +25,11 @@ export default function AdminLayout({
 
   // Avoid rendering layout until we've confirmed auth status
   if (isAuthenticated === null && !isLoginPage) {
-    return null; // Or a loader if desired
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
+      </div>
+    );
   }
 
   return (
@@ -38,7 +42,7 @@ export default function AdminLayout({
       `}</style>
       {!isLoginPage && isAuthenticated && <Sidebar />}
       <main
-        className={!isLoginPage && isAuthenticated ? "ml-0 lg:ml-64 p-8" : ""}
+        className={!isLoginPage && isAuthenticated ? "ml-0 lg:ml-64 p-4 md:p-8" : ""}
       >
         {children}
       </main>
