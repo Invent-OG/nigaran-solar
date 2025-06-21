@@ -2,45 +2,21 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import {
-  ArrowRight,
-  Sun,
-  Battery,
-  PiggyBank,
-  Leaf,
-  Home,
-  Zap,
-  Wrench,
-  ShieldCheck,
-  CheckCircle,
-} from "lucide-react";
 import LeadForm from "@/components/forms/lead-form";
-import { Feature } from "@/components/ui/feature";
-import { Features } from "@/components/blocks/features-8";
 import { Timeline } from "@/components/ui/timeline";
-import { TimelineDemo } from "@/components/blocks/timeline";
 import { FeaturesSectionWithCardGradient } from "@/components/blocks/feature-section-with-card-gradient";
 import { AnimatedGridPattern } from "@/components/ui/animated-grid-pattern";
 import { cn } from "@/lib/utils";
 import { Carousel, TestimonialCard } from "@/components/ui/retro-testimonial";
 import { iTestimonial } from "@/components/ui/retro-testimonial";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
 import { GlowEffect } from "@/components/ui/glow-effect";
 import { ShootingStars } from "@/components/ui/shooting-stars";
-import {
-  HiCurrencyDollar,
-  HiSupport,
-  HiFastForward,
-  HiBadgeCheck,
-} from "react-icons/hi";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
-import Head from "next/head";
 
 const images = [
   "/Residential solar page/DJI_0942.webp",
@@ -267,7 +243,9 @@ export default function ResidentialPage() {
               <SwiperSlide key={index}>
                 <Image
                   src={src}
-                  alt={`Residential solar installation by Nigaran Solar - Slide ${index + 1}`}
+                  alt={`Residential solar installation by Nigaran Solar - Slide ${
+                    index + 1
+                  }`}
                   fill
                   className="object-cover w-full h-full"
                   priority={index === 0}
