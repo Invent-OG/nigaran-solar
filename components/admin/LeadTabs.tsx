@@ -48,7 +48,7 @@ export default function LeadTabs() {
     searchTerm,
     selectedDate ? format(selectedDate, "yyyy-MM-dd") : undefined
   );
-  
+
   const deleteMutation = useDeleteLead();
 
   const handleDelete = async (id: string) => {
@@ -165,7 +165,7 @@ export default function LeadTabs() {
   const totalPages = data?.totalPages ?? 1;
 
   const filterLeadsByType = (type: string) => {
-    return leads.filter(lead => lead.type === type);
+    return leads.filter((lead) => lead.type === type);
   };
 
   const handleExport = (type: string) => {
@@ -194,7 +194,7 @@ export default function LeadTabs() {
 
   const LeadTable = ({ type }: { type: string }) => {
     const filteredLeads = filterLeadsByType(type);
-    
+
     return (
       <div>
         <div className="flex justify-between items-center mb-4">
@@ -213,30 +213,26 @@ export default function LeadTabs() {
           <div className="flex gap-4 items-center">
             <Popover>
               <PopoverTrigger asChild>
-                <Button
-                  variant="outline"
-                  className="flex items-center gap-2"
-                >
+                <Button variant="outline" className="flex items-center gap-2">
                   <Calendar className="h-4 w-4" />
-                  {selectedDate ? format(selectedDate, "PPP") : "Filter by date"}
+                  {selectedDate
+                    ? format(selectedDate, "PPP")
+                    : "Filter by date"}
                 </Button>
               </PopoverTrigger>
               <PopoverContent className="w-auto p-0">
                 <div className="p-2 flex justify-between items-center border-b">
                   <span className="text-sm font-medium">Select date</span>
                   {selectedDate && (
-                    <Button 
-                      variant="ghost" 
-                      size="sm" 
-                      onClick={handleDateReset}
-                    >
+                    <Button variant="ghost" size="sm" onClick={handleDateReset}>
                       Reset
                     </Button>
                   )}
                 </div>
                 <CalendarComponent
                   mode="single"
-                  selected={selectedDate}
+                  required={true}
+                  selected={selectedDate!}
                   onSelect={setSelectedDate}
                   initialFocus
                 />
@@ -346,7 +342,11 @@ export default function LeadTabs() {
   };
 
   return (
-    <Tabs value={activeTab} onValueChange={handleTabChange} className="space-y-4">
+    <Tabs
+      value={activeTab}
+      onValueChange={handleTabChange}
+      className="space-y-4"
+    >
       <TabsList>
         <TabsTrigger value="residential">Residential</TabsTrigger>
         <TabsTrigger value="housing_society">Housing Society</TabsTrigger>

@@ -37,7 +37,7 @@ export default function BlogPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(9);
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
   const [selectedCategory, setSelectedCategory] = useState<string>("");
 
   const { data, isLoading, error } = useBlogs(
@@ -51,16 +51,16 @@ export default function BlogPage() {
   const totalPages = data?.totalPages || 1;
 
   const handleDateReset = () => {
-    setSelectedDate(null);
+    setSelectedDate(undefined);
   };
 
   const handleCategoryChange = (value: string) => {
-    setSelectedCategory(value);
+    setSelectedCategory(value === "all" ? "" : value);
     setCurrentPage(1);
   };
 
   // Get unique categories for filter
-  const categories = [...new Set(blogs.map(blog => blog.category))];
+  const categories = [...new Set(blogs.map((blog) => blog.category))];
 
   return (
     <div className="min-h-screen pt-20">
@@ -136,9 +136,9 @@ export default function BlogPage() {
                 className="pl-10"
               />
             </div>
-            
+
             <div className="flex gap-4 items-center w-full md:w-auto">
-              <Select
+              {/* <Select
                 value={selectedCategory}
                 onValueChange={handleCategoryChange}
               >
@@ -153,25 +153,41 @@ export default function BlogPage() {
                     </SelectItem>
                   ))}
                 </SelectContent>
+              </Select> */}
+
+              <Select
+                value={selectedCategory || "all"}
+                onValueChange={handleCategoryChange}
+              >
+                <SelectTrigger className="w-[180px]">
+                  <SelectValue placeholder="All Categories" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Categories</SelectItem>
+                  {categories.map((category) => (
+                    <SelectItem key={category} value={category}>
+                      {category}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
               </Select>
-              
+
               <Popover>
                 <PopoverTrigger asChild>
-                  <Button
-                    variant="outline"
-                    className="flex items-center gap-2"
-                  >
+                  <Button variant="outline" className="flex items-center gap-2">
                     <Calendar className="h-4 w-4" />
-                    {selectedDate ? format(selectedDate, "PPP") : "Filter by date"}
+                    {selectedDate
+                      ? format(selectedDate, "PPP")
+                      : "Filter by date"}
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-auto p-0">
                   <div className="p-2 flex justify-between items-center border-b">
                     <span className="text-sm font-medium">Select date</span>
                     {selectedDate && (
-                      <Button 
-                        variant="ghost" 
-                        size="sm" 
+                      <Button
+                        variant="ghost"
+                        size="sm"
                         onClick={handleDateReset}
                       >
                         Reset
@@ -180,6 +196,7 @@ export default function BlogPage() {
                   </div>
                   <CalendarComponent
                     mode="single"
+                    required={true}
                     selected={selectedDate}
                     onSelect={setSelectedDate}
                     initialFocus
@@ -224,8 +241,12 @@ export default function BlogPage() {
                           {new Date(blog.createdAt).toLocaleDateString()}
                         </span>
                       </div>
-                      <h3 className="mb-2 text-xl font-semibold">{blog.title}</h3>
-                      <p className="mb-4 text-muted-foreground">{blog.excerpt}</p>
+                      <h3 className="mb-2 text-xl font-semibold">
+                        {blog.title}
+                      </h3>
+                      <p className="mb-4 text-muted-foreground">
+                        {blog.excerpt}
+                      </p>
                       <Link href={`/blog/${blog.id}`}>
                         <Button
                           variant="link"

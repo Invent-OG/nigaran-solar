@@ -45,15 +45,14 @@ export default function BlogTable({ searchTerm }: BlogTableProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
-  const [selectedCategory, setSelectedCategory] = useState<string>("");
-
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const { data, isLoading } = useBlogs(
     currentPage,
     itemsPerPage,
     searchTerm,
-    selectedCategory || undefined
+    selectedCategory !== "all" ? selectedCategory : undefined
   );
-  
+
   const deleteBlogMutation = useDeleteBlog();
 
   const blogs = data?.blogs || [];
@@ -130,7 +129,7 @@ export default function BlogTable({ searchTerm }: BlogTableProps) {
   }
 
   // Get unique categories for filter
-  const categories = [...new Set(blogs.map(blog => blog.category))];
+  const categories = [...new Set(blogs.map((blog) => blog.category))];
 
   return (
     <div>
@@ -159,17 +158,14 @@ export default function BlogTable({ searchTerm }: BlogTableProps) {
             className="pl-10"
           />
         </div>
-        
+
         <div className="flex gap-4 items-center">
-          <Select
-            value={selectedCategory}
-            onValueChange={handleCategoryChange}
-          >
+          <Select value={selectedCategory} onValueChange={handleCategoryChange}>
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Filter by category" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">All Categories</SelectItem>
+              <SelectItem value="all">All Categories</SelectItem>
               {categories.map((category) => (
                 <SelectItem key={category} value={category}>
                   {category}
@@ -177,13 +173,10 @@ export default function BlogTable({ searchTerm }: BlogTableProps) {
               ))}
             </SelectContent>
           </Select>
-          
+
           <Popover>
             <PopoverTrigger asChild>
-              <Button
-                variant="outline"
-                className="flex items-center gap-2"
-              >
+              <Button variant="outline" className="flex items-center gap-2">
                 <Calendar className="h-4 w-4" />
                 {selectedDate ? format(selectedDate, "PPP") : "Filter by date"}
               </Button>
@@ -192,18 +185,15 @@ export default function BlogTable({ searchTerm }: BlogTableProps) {
               <div className="p-2 flex justify-between items-center border-b">
                 <span className="text-sm font-medium">Select date</span>
                 {selectedDate && (
-                  <Button 
-                    variant="ghost" 
-                    size="sm" 
-                    onClick={handleDateReset}
-                  >
+                  <Button variant="ghost" size="sm" onClick={handleDateReset}>
                     Reset
                   </Button>
                 )}
               </div>
               <CalendarComponent
                 mode="single"
-                selected={selectedDate}
+                required={true}
+                selected={selectedDate!}
                 onSelect={setSelectedDate}
                 initialFocus
               />
@@ -219,8 +209,7 @@ export default function BlogTable({ searchTerm }: BlogTableProps) {
               <TableHead>
                 <Checkbox
                   checked={
-                    selectedBlogs.length === blogs.length &&
-                    blogs.length > 0
+                    selectedBlogs.length === blogs.length && blogs.length > 0
                   }
                   onCheckedChange={handleSelectAll}
                 />
