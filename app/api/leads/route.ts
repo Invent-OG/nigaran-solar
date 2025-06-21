@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { db } from "@/lib/db";
 import { leads } from "@/lib/db/schema";
-import { eq, count } from "drizzle-orm";
+import { eq, count, like, and, sql } from "drizzle-orm";
 import { sendLeadThankYouEmail } from "@/lib/email";
 
 const leadSchema = z.object({
@@ -46,11 +46,74 @@ export async function POST(req: Request) {
   }
 }
 
-export async function GET() {
+export async function GET(req: Request) {
   try {
-    const allLeads = await db.select().from(leads).orderBy(leads.createdAt);
-    return NextResponse.json({ success: true, leads: allLeads });
+    const { searchParams } = new URL(req.url);
+    const page = parseInt(searchParams.get("page") || "1");
+    const limit = parseInt(searchParams.get("limit") || "10");
+    const search = searchParams.get("search") || "";
+    const date = searchParams.get("date");
+    const type = searchParams.get("type");
+    
+    const offset = (page - 1) * limit;
+    
+    // Build where conditions
+    let whereConditions = [];
+    
+    if (search) {
+      whereConditions.push(
+        sql`(${leads.name} ILIKE ${`%${search}%`} OR 
+             ${leads.whatsappNumber} ILIKE ${`%${search}%`} OR 
+             ${leads.city} ILIKE ${`%${search}%`})`
+      );
+    }
+    
+    if (date) {
+      const dateObj = new Date(date);
+      const nextDay = new Date(dateObj);
+      nextDay.setDate(nextDay.getDate() + 1);
+      
+      whereConditions.push(
+        sql`${leads.createdAt} >= ${dateObj.toISOString()} AND 
+            ${leads.createdAt} < ${nextDay.toISOString()}`
+      );
+    }
+    
+    if (type) {
+      whereConditions.push(eq(leads.type, type as any));
+    }
+    
+    // Combine conditions
+    const whereClause = whereConditions.length > 0 
+      ? and(...whereConditions) 
+      : undefined;
+    
+    // Get total count
+    const [{ value: totalCount }] = await db
+      .select({ value: count() })
+      .from(leads)
+      .where(whereClause || sql`1=1`);
+    
+    // Get paginated leads
+    const allLeads = await db
+      .select()
+      .from(leads)
+      .where(whereClause || sql`1=1`)
+      .orderBy(leads.createdAt)
+      .limit(limit)
+      .offset(offset);
+    
+    const totalPages = Math.ceil(totalCount / limit);
+    
+    return NextResponse.json({ 
+      success: true, 
+      leads: allLeads,
+      totalCount,
+      totalPages,
+      currentPage: page
+    });
   } catch (error) {
+    console.error("Error fetching leads:", error);
     return NextResponse.json(
       { success: false, error: "Internal server error" },
       { status: 500 }

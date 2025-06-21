@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Table,
@@ -12,12 +12,12 @@ import {
 } from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Search, Download } from "lucide-react";
+import { Search, Download, Calendar } from "lucide-react";
 import { Pagination } from "@/components/ui/pagination";
 import { DeleteConfirmation } from "./DeleteConfirmation";
 import { useLeads, useDeleteLead } from "@/lib/queries/leads";
 import { toast } from "sonner";
-import { Calendar } from "@/components/ui/calendar";
+import { Calendar as CalendarComponent } from "@/components/ui/calendar";
 import {
   Popover,
   PopoverContent,
@@ -28,20 +28,28 @@ import {
   SelectTrigger,
   SelectContent,
   SelectItem,
+  SelectValue,
 } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Skeleton } from "../ui/skeleton";
+import { format } from "date-fns";
 
 export default function LeadTabs() {
-  const { data, isLoading, error } = useLeads();
-  const deleteMutation = useDeleteLead();
-
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [startDate, setStartDate] = useState<Date | null>(null);
-  const [endDate, setEndDate] = useState<Date | null>(null);
-  const [itemsPerPage, setItemsPerPage] = useState(5);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  const [activeTab, setActiveTab] = useState<string>("residential");
+
+  const { data, isLoading, error } = useLeads(
+    currentPage,
+    itemsPerPage,
+    searchTerm,
+    selectedDate ? format(selectedDate, "yyyy-MM-dd") : undefined
+  );
+  
+  const deleteMutation = useDeleteLead();
 
   const handleDelete = async (id: string) => {
     try {
@@ -77,6 +85,21 @@ export default function LeadTabs() {
     } catch {
       toast.error("Failed to delete selected leads");
     }
+  };
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    setSelectedIds([]);
+  };
+
+  const handleTabChange = (value: string) => {
+    setActiveTab(value);
+    setCurrentPage(1);
+    setSelectedIds([]);
+  };
+
+  const handleDateReset = () => {
+    setSelectedDate(null);
   };
 
   if (isLoading) {
@@ -139,21 +162,10 @@ export default function LeadTabs() {
   }
 
   const leads = data?.leads ?? [];
+  const totalPages = data?.totalPages ?? 1;
 
   const filterLeadsByType = (type: string) => {
-    return leads.filter((lead) => {
-      const leadDate = new Date(lead.createdAt);
-      const matchesType = lead.type === type;
-      const matchesSearch =
-        searchTerm === "" ||
-        lead.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        lead.whatsappNumber.includes(searchTerm) ||
-        lead.city.toLowerCase().includes(searchTerm.toLowerCase());
-      const matchesSelectedDate =
-        !startDate || leadDate.toDateString() === startDate.toDateString();
-
-      return matchesType && matchesSearch && matchesSelectedDate;
-    });
+    return leads.filter(lead => lead.type === type);
   };
 
   const handleExport = (type: string) => {
@@ -181,17 +193,8 @@ export default function LeadTabs() {
   };
 
   const LeadTable = ({ type }: { type: string }) => {
-    // Sort leads by most recent first
-    const filteredLeads = [...filterLeadsByType(type)].sort(
-      (a, b) =>
-        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-    );
-    const totalPages = Math.ceil(filteredLeads.length / itemsPerPage);
-    const paginatedLeads = filteredLeads.slice(
-      (currentPage - 1) * itemsPerPage,
-      currentPage * itemsPerPage
-    );
-
+    const filteredLeads = filterLeadsByType(type);
+    
     return (
       <div>
         <div className="flex justify-between items-center mb-4">
@@ -207,22 +210,35 @@ export default function LeadTabs() {
               className="pl-10"
             />
           </div>
-          <div className="flex gap-4  items-center">
+          <div className="flex gap-4 items-center">
             <Popover>
               <PopoverTrigger asChild>
                 <Button
                   variant="outline"
-                  className="w-[200px] justify-start text-left font-normal"
+                  className="flex items-center gap-2"
                 >
-                  {startDate ? startDate.toLocaleDateString() : "Pick a date"}
+                  <Calendar className="h-4 w-4" />
+                  {selectedDate ? format(selectedDate, "PPP") : "Filter by date"}
                 </Button>
               </PopoverTrigger>
               <PopoverContent className="w-auto p-0">
-                <Calendar
-                  selected={startDate ?? undefined}
-                  onSelect={setStartDate}
+                <div className="p-2 flex justify-between items-center border-b">
+                  <span className="text-sm font-medium">Select date</span>
+                  {selectedDate && (
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      onClick={handleDateReset}
+                    >
+                      Reset
+                    </Button>
+                  )}
+                </div>
+                <CalendarComponent
                   mode="single"
-                  required={true}
+                  selected={selectedDate}
+                  onSelect={setSelectedDate}
+                  initialFocus
                 />
               </PopoverContent>
             </Popover>
@@ -247,10 +263,10 @@ export default function LeadTabs() {
                 <TableHead>
                   <Checkbox
                     checked={
-                      selectedIds.length === paginatedLeads.length &&
-                      paginatedLeads.length > 0
+                      selectedIds.length === filteredLeads.length &&
+                      filteredLeads.length > 0
                     }
-                    onCheckedChange={() => handleSelectAll(paginatedLeads)}
+                    onCheckedChange={() => handleSelectAll(filteredLeads)}
                   />
                 </TableHead>
                 <TableHead>Name</TableHead>
@@ -262,14 +278,14 @@ export default function LeadTabs() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {paginatedLeads.length === 0 ? (
+              {filteredLeads.length === 0 ? (
                 <TableRow>
                   <TableCell colSpan={7} className="text-center py-6">
                     No leads found.
                   </TableCell>
                 </TableRow>
               ) : (
-                paginatedLeads.map((lead) => (
+                filteredLeads.map((lead) => (
                   <TableRow key={lead.id}>
                     <TableCell>
                       <Checkbox
@@ -279,7 +295,7 @@ export default function LeadTabs() {
                     </TableCell>
                     <TableCell>{lead.name}</TableCell>
                     <TableCell>{lead.whatsappNumber}</TableCell>
-                    <TableCell>₹{lead.electricityBill}</TableCell>
+                    <TableCell>{lead.electricityBill}</TableCell>
                     <TableCell>{lead.city}</TableCell>
                     <TableCell>
                       {new Date(lead.createdAt).toLocaleDateString()}
@@ -303,17 +319,20 @@ export default function LeadTabs() {
             <Pagination
               currentPage={currentPage}
               totalPages={totalPages}
-              onPageChange={setCurrentPage}
+              onPageChange={handlePageChange}
             />
             <Select
               value={itemsPerPage.toString()}
-              onValueChange={(value) => setItemsPerPage(Number(value))}
+              onValueChange={(value) => {
+                setItemsPerPage(Number(value));
+                setCurrentPage(1);
+              }}
             >
               <SelectTrigger className="w-[120px]">
                 {itemsPerPage} / page
               </SelectTrigger>
               <SelectContent>
-                {[5, 8, 10].map((num) => (
+                {[5, 10, 20, 50].map((num) => (
                   <SelectItem key={num} value={num.toString()}>
                     {num}
                   </SelectItem>
@@ -327,7 +346,7 @@ export default function LeadTabs() {
   };
 
   return (
-    <Tabs defaultValue="residential" className="space-y-4">
+    <Tabs value={activeTab} onValueChange={handleTabChange} className="space-y-4">
       <TabsList>
         <TabsTrigger value="residential">Residential</TabsTrigger>
         <TabsTrigger value="housing_society">Housing Society</TabsTrigger>

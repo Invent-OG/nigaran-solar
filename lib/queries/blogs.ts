@@ -12,8 +12,21 @@ export interface Blog {
 }
 
 // API Functions
-const fetchBlogs = async (): Promise<{ blogs: Blog[] }> => {
-  const response = await fetch('/api/blogs');
+const fetchBlogs = async (
+  page: number = 1,
+  limit: number = 10,
+  search: string = "",
+  category?: string
+): Promise<{ blogs: Blog[]; totalCount: number; totalPages: number }> => {
+  const params = new URLSearchParams({
+    page: page.toString(),
+    limit: limit.toString(),
+  });
+  
+  if (search) params.append("search", search);
+  if (category) params.append("category", category);
+  
+  const response = await fetch(`/api/blogs?${params.toString()}`);
   if (!response.ok) throw new Error('Failed to fetch blogs');
   return response.json();
 };
@@ -52,10 +65,15 @@ const deleteBlog = async (id: string): Promise<void> => {
 };
 
 // Hooks
-export function useBlogs() {
+export function useBlogs(
+  page: number = 1,
+  limit: number = 10,
+  search: string = "",
+  category?: string
+) {
   return useQuery({
-    queryKey: ['blogs'],
-    queryFn: fetchBlogs,
+    queryKey: ['blogs', page, limit, search, category],
+    queryFn: () => fetchBlogs(page, limit, search, category),
   });
 }
 

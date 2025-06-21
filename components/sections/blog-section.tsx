@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -8,6 +8,7 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useBlogs } from "@/lib/queries/blogs";
 import { Badge } from "../ui/badge";
+import { Pagination } from "@/components/ui/pagination";
 
 interface BlogCardProps {
   id: string;
@@ -55,8 +56,10 @@ const BlogCard = ({ id, title, excerpt, imageUrl, index }: BlogCardProps) => {
 
 export default function BlogSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(3);
 
-  const { data, isLoading, error } = useBlogs();
+  const { data, isLoading, error } = useBlogs(currentPage, itemsPerPage);
 
   if (isLoading) {
     return <div className="py-16 text-center">Loading blog posts...</div>;
@@ -71,6 +74,7 @@ export default function BlogSection() {
   }
 
   const blogs = data?.blogs || [];
+  const totalPages = data?.totalPages || 1;
 
   if (!blogs.length) {
     return null;
@@ -102,7 +106,7 @@ export default function BlogSection() {
         </motion.div>
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {blogs.slice(0, 3).map((post, index) => (
+          {blogs.map((post, index) => (
             <motion.div
               key={post.id}
               initial={{ opacity: 0, y: 100 }}
@@ -120,6 +124,16 @@ export default function BlogSection() {
             </motion.div>
           ))}
         </div>
+
+        {totalPages > 1 && (
+          <div className="flex justify-center mt-8">
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={setCurrentPage}
+            />
+          </div>
+        )}
 
         <div className="mt-12 text-center">
           <Link href="/blog">

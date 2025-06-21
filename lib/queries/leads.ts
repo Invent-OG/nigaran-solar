@@ -13,8 +13,21 @@ export interface Lead {
 }
 
 // API Functions
-const fetchLeads = async (): Promise<{ leads: Lead[] }> => {
-  const response = await fetch("/api/leads");
+const fetchLeads = async (
+  page: number = 1,
+  limit: number = 10,
+  search: string = "",
+  date?: string
+): Promise<{ leads: Lead[]; totalCount: number; totalPages: number }> => {
+  const params = new URLSearchParams({
+    page: page.toString(),
+    limit: limit.toString(),
+  });
+  
+  if (search) params.append("search", search);
+  if (date) params.append("date", date);
+  
+  const response = await fetch(`/api/leads?${params.toString()}`);
   if (!response.ok) throw new Error("Failed to fetch leads");
   return response.json();
 };
@@ -56,11 +69,16 @@ const deleteLead = async (id: string): Promise<void> => {
 };
 
 // Hooks
-export function useLeads() {
+export function useLeads(
+  page: number = 1,
+  limit: number = 10,
+  search: string = "",
+  date?: string
+) {
   return useQuery({
-    queryKey: ["leads"],
-    queryFn: fetchLeads,
-    refetchInterval: 2000, // Refetch every minute
+    queryKey: ["leads", page, limit, search, date],
+    queryFn: () => fetchLeads(page, limit, search, date),
+    refetchInterval: 60000, // Refetch every minute
   });
 }
 
