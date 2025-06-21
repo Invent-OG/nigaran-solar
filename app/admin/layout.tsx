@@ -42,7 +42,9 @@ export default function AdminLayout({
       `}</style>
       {!isLoginPage && isAuthenticated && <Sidebar />}
       <main
-        className={!isLoginPage && isAuthenticated ? "ml-0 lg:ml-64 p-4 md:p-8" : ""}
+        className={
+          !isLoginPage && isAuthenticated ? "ml-0 lg:ml-64 p-4 md:p-8" : ""
+        }
       >
         {children}
       </main>

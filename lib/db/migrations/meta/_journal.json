@@ -15,6 +15,13 @@
       "when": 1748946432979,
       "tag": "0001_colorful_sauron",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1750480703767,
+      "tag": "0002_magical_the_fallen",
+      "breakpoints": true
     }
   ]
 }

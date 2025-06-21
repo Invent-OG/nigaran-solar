@@ -35,11 +35,6 @@ interface NavItem {
 
 // Add icons to submenu items
 const navItems: NavItem[] = [
-  { 
-    label: "Dashboard", 
-    href: "/admin", 
-    icon: Users 
-  },
   {
     label: "Leads",
     href: "/admin/leads",
@@ -78,7 +73,7 @@ export default function Sidebar() {
 
   useEffect(() => {
     // Get user info from session storage
-    const userInfo = sessionStorage.getItem('userInfo');
+    const userInfo = sessionStorage.getItem("userInfo");
     if (userInfo) {
       try {
         const parsedInfo = JSON.parse(userInfo);
@@ -109,8 +104,8 @@ export default function Sidebar() {
   };
 
   const handleLogout = () => {
-    sessionStorage.removeItem('isAuthenticated');
-    sessionStorage.removeItem('userInfo');
+    sessionStorage.removeItem("isAuthenticated");
+    sessionStorage.removeItem("userInfo");
     router.push("/admin/login");
   };
 
@@ -143,10 +138,17 @@ export default function Sidebar() {
       >
         <div className="p-6">
           <div className="flex items-center gap-2 mb-8">
-            <Image src={"/nigaran-logo.png"} alt={"Nigaran Solar Logo"} width={50} height={50} />
+            <Image
+              src={"/nigaran-logo.png"}
+              alt={"Nigaran Solar Logo"}
+              width={50}
+              height={50}
+            />
             <div className="flex flex-col">
               <span className="font-semibold">Admin Panel</span>
-              <span className="text-xs text-muted-foreground">Welcome, {userName}</span>
+              <span className="text-xs text-muted-foreground">
+                Welcome, {userName}
+              </span>
             </div>
           </div>
 

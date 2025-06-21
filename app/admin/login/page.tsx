@@ -49,7 +49,8 @@ export default function AdminLoginPage() {
 
   useEffect(() => {
     // Check if already authenticated
-    const isAuthenticated = sessionStorage.getItem("isAuthenticated") === "true";
+    const isAuthenticated =
+      sessionStorage.getItem("isAuthenticated") === "true";
     if (isAuthenticated) {
       router.push("/admin/leads");
     }
@@ -94,7 +95,10 @@ export default function AdminLoginPage() {
           </CardHeader>
           <CardContent>
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
+              <form
+                onSubmit={form.handleSubmit(handleSubmit)}
+                className="space-y-4"
+              >
                 {error && (
                   <div className="p-3 rounded bg-destructive/10 text-destructive text-sm">
                     {error}

@@ -17,8 +17,20 @@ import { Pagination } from "@/components/ui/pagination";
 import { DeleteConfirmation } from "./DeleteConfirmation";
 import { useLeads, useDeleteLead } from "@/lib/queries/leads";
 import { toast } from "sonner";
-
-const ITEMS_PER_PAGE = 10;
+import { Calendar } from "@/components/ui/calendar";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import {
+  Select,
+  SelectTrigger,
+  SelectContent,
+  SelectItem,
+} from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Skeleton } from "../ui/skeleton";
 
 export default function LeadTabs() {
   const { data, isLoading, error } = useLeads();
@@ -26,6 +38,10 @@ export default function LeadTabs() {
 
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const [startDate, setStartDate] = useState<Date | null>(null);
+  const [endDate, setEndDate] = useState<Date | null>(null);
+  const [itemsPerPage, setItemsPerPage] = useState(5);
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
 
   const handleDelete = async (id: string) => {
     try {
@@ -40,8 +56,78 @@ export default function LeadTabs() {
     }
   };
 
+  const handleSelectAll = (leads: Array<{ id: string }>) => {
+    const allIds = leads.map((lead) => lead.id);
+    setSelectedIds((prev) => (prev.length === leads.length ? [] : allIds));
+  };
+
+  const handleSelectOne = (id: string) => {
+    setSelectedIds((prev) =>
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
+    );
+  };
+
+  const handleBulkDelete = async () => {
+    try {
+      await Promise.all(
+        selectedIds.map((id) => deleteMutation.mutateAsync(id))
+      );
+      toast.success("Selected leads deleted");
+      setSelectedIds([]);
+    } catch {
+      toast.error("Failed to delete selected leads");
+    }
+  };
+
   if (isLoading) {
-    return <div className="p-8 text-center">Loading leads...</div>;
+    return (
+      <div className="rounded-md border overflow-hidden">
+        <div className="p-4 border-b bg-muted">
+          <Skeleton className="h-6 w-1/3" />
+        </div>
+        <table className="w-full table-auto">
+          <thead>
+            <tr className="border-b">
+              <th className="p-4 text-left">
+                <Skeleton className="h-4 w-4" />
+              </th>
+              <th className="p-4 text-left">
+                <Skeleton className="h-4 w-24" />
+              </th>
+              <th className="p-4 text-left">
+                <Skeleton className="h-4 w-32" />
+              </th>
+              <th className="p-4 text-left">
+                <Skeleton className="h-4 w-20" />
+              </th>
+              <th className="p-4 text-left">
+                <Skeleton className="h-4 w-20" />
+              </th>
+              <th className="p-4 text-left">
+                <Skeleton className="h-4 w-24" />
+              </th>
+              <th className="p-4 text-right">
+                <Skeleton className="h-4 w-16" />
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {[...Array(5)].map((_, idx) => (
+              <tr key={idx} className="border-b">
+                {[...Array(7)].map((__, tdIdx) => (
+                  <td
+                    key={tdIdx}
+                    className={`p-4 ${tdIdx === 6 ? "text-right" : ""}`}
+                  >
+                    <Skeleton className="h-4 w-full" />
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    );
   }
 
   if (error) {
@@ -55,14 +141,19 @@ export default function LeadTabs() {
   const leads = data?.leads ?? [];
 
   const filterLeadsByType = (type: string) => {
-    return leads.filter(
-      (lead) =>
-        lead.type === type &&
-        (searchTerm === "" ||
-          lead.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          lead.whatsappNumber.includes(searchTerm) ||
-          lead.city.toLowerCase().includes(searchTerm.toLowerCase()))
-    );
+    return leads.filter((lead) => {
+      const leadDate = new Date(lead.createdAt);
+      const matchesType = lead.type === type;
+      const matchesSearch =
+        searchTerm === "" ||
+        lead.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        lead.whatsappNumber.includes(searchTerm) ||
+        lead.city.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesSelectedDate =
+        !startDate || leadDate.toDateString() === startDate.toDateString();
+
+      return matchesType && matchesSearch && matchesSelectedDate;
+    });
   };
 
   const handleExport = (type: string) => {
@@ -90,11 +181,15 @@ export default function LeadTabs() {
   };
 
   const LeadTable = ({ type }: { type: string }) => {
-    const filteredLeads = filterLeadsByType(type);
-    const totalPages = Math.ceil(filteredLeads.length / ITEMS_PER_PAGE);
+    // Sort leads by most recent first
+    const filteredLeads = [...filterLeadsByType(type)].sort(
+      (a, b) =>
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    );
+    const totalPages = Math.ceil(filteredLeads.length / itemsPerPage);
     const paginatedLeads = filteredLeads.slice(
-      (currentPage - 1) * ITEMS_PER_PAGE,
-      currentPage * ITEMS_PER_PAGE
+      (currentPage - 1) * itemsPerPage,
+      currentPage * itemsPerPage
     );
 
     return (
@@ -112,16 +207,52 @@ export default function LeadTabs() {
               className="pl-10"
             />
           </div>
-          <Button variant="outline" onClick={() => handleExport(type)}>
-            <Download className="h-4 w-4 mr-2" />
-            Export CSV
-          </Button>
+          <div className="flex gap-4  items-center">
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  variant="outline"
+                  className="w-[200px] justify-start text-left font-normal"
+                >
+                  {startDate ? startDate.toLocaleDateString() : "Pick a date"}
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0">
+                <Calendar
+                  selected={startDate ?? undefined}
+                  onSelect={setStartDate}
+                  mode="single"
+                  required={true}
+                />
+              </PopoverContent>
+            </Popover>
+
+            {selectedIds.length > 0 && (
+              <Button variant="destructive" onClick={handleBulkDelete}>
+                Delete Selected ({selectedIds.length})
+              </Button>
+            )}
+
+            <Button variant="outline" onClick={() => handleExport(type)}>
+              <Download className="h-4 w-4 mr-2" />
+              Export CSV
+            </Button>
+          </div>
         </div>
 
         <div className="rounded-md border">
           <Table>
             <TableHeader>
               <TableRow>
+                <TableHead>
+                  <Checkbox
+                    checked={
+                      selectedIds.length === paginatedLeads.length &&
+                      paginatedLeads.length > 0
+                    }
+                    onCheckedChange={() => handleSelectAll(paginatedLeads)}
+                  />
+                </TableHead>
                 <TableHead>Name</TableHead>
                 <TableHead>WhatsApp</TableHead>
                 <TableHead>Bill Amount</TableHead>
@@ -131,35 +262,64 @@ export default function LeadTabs() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {paginatedLeads.map((lead) => (
-                <TableRow key={lead.id}>
-                  <TableCell>{lead.name}</TableCell>
-                  <TableCell>{lead.whatsappNumber}</TableCell>
-                  <TableCell>₹{lead.electricityBill}</TableCell>
-                  <TableCell>{lead.city}</TableCell>
-                  <TableCell>
-                    {new Date(lead.createdAt).toLocaleDateString()}
-                  </TableCell>
-                  <TableCell className="text-right">
-                    <DeleteConfirmation
-                      onDelete={() => handleDelete(lead.id)}
-                      title="Delete Lead"
-                      description="Are you sure you want to delete this lead? This action cannot be undone."
-                    />
+              {paginatedLeads.length === 0 ? (
+                <TableRow>
+                  <TableCell colSpan={7} className="text-center py-6">
+                    No leads found.
                   </TableCell>
                 </TableRow>
-              ))}
+              ) : (
+                paginatedLeads.map((lead) => (
+                  <TableRow key={lead.id}>
+                    <TableCell>
+                      <Checkbox
+                        checked={selectedIds.includes(lead.id)}
+                        onCheckedChange={() => handleSelectOne(lead.id)}
+                      />
+                    </TableCell>
+                    <TableCell>{lead.name}</TableCell>
+                    <TableCell>{lead.whatsappNumber}</TableCell>
+                    <TableCell>₹{lead.electricityBill}</TableCell>
+                    <TableCell>{lead.city}</TableCell>
+                    <TableCell>
+                      {new Date(lead.createdAt).toLocaleDateString()}
+                    </TableCell>
+                    <TableCell className="text-right">
+                      <DeleteConfirmation
+                        onDelete={() => handleDelete(lead.id)}
+                        title="Delete Lead"
+                        description="Are you sure you want to delete this lead? This action cannot be undone."
+                      />
+                    </TableCell>
+                  </TableRow>
+                ))
+              )}
             </TableBody>
           </Table>
         </div>
 
         {totalPages > 1 && (
-          <div className="mt-4">
+          <div className="mt-4 flex items-center justify-between">
             <Pagination
               currentPage={currentPage}
               totalPages={totalPages}
               onPageChange={setCurrentPage}
             />
+            <Select
+              value={itemsPerPage.toString()}
+              onValueChange={(value) => setItemsPerPage(Number(value))}
+            >
+              <SelectTrigger className="w-[120px]">
+                {itemsPerPage} / page
+              </SelectTrigger>
+              <SelectContent>
+                {[5, 8, 10].map((num) => (
+                  <SelectItem key={num} value={num.toString()}>
+                    {num}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
         )}
       </div>

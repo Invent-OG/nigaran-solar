@@ -18,7 +18,7 @@ interface TestimonialGridProps {
   searchTerm: string;
 }
 
-const ITEMS_PER_PAGE = 9;
+const ITEMS_PER_PAGE = 10;
 
 export default function TestimonialGrid({ searchTerm }: TestimonialGridProps) {
   const [currentPage, setCurrentPage] = useState(1);
@@ -70,54 +70,55 @@ export default function TestimonialGrid({ searchTerm }: TestimonialGridProps) {
     <div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {paginatedTestimonials.map((testimonial) => (
-          <Card key={testimonial.id} className="relative">
-            <div className="p-6">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="relative h-16 w-16 rounded-full overflow-hidden">
-                  <Image
-                    src={testimonial.imageUrl}
-                    alt={testimonial.name}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div>
-                  <h3 className="font-semibold">{testimonial.name}</h3>
-                  <p className="text-sm text-muted-foreground">
-                    {testimonial.role}
-                  </p>
-                </div>
+          <Card
+            key={testimonial.id}
+            className="p-6 flex flex-col h-full justify-between"
+          >
+            <div className="flex items-center gap-4 mb-4">
+              <div className="relative h-16 w-16 rounded-full overflow-hidden">
+                <Image
+                  src={testimonial.imageUrl}
+                  alt={testimonial.name}
+                  fill
+                  className="object-cover"
+                />
               </div>
-              <p className="text-muted-foreground mb-4">
-                {testimonial.content}
-              </p>
-              <div className="flex justify-between items-center">
-                <div>
-                  {testimonial.youtubeUrl && (
-                    <a
-                      href={testimonial.youtubeUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-red-500 hover:text-red-600"
-                    >
-                      <Youtube className="h-5 w-5" />
-                    </a>
-                  )}
-                </div>
-                <div className="flex gap-2">
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => setEditingTestimonial(testimonial)}
+              <div>
+                <h3 className="font-semibold">{testimonial.name}</h3>
+                <p className="text-sm text-muted-foreground">
+                  {testimonial.role}
+                </p>
+              </div>
+            </div>
+            <p className="text-muted-foreground line-clamp-3 mb-4">
+              {testimonial.content}
+            </p>
+            <div className="flex justify-between items-center">
+              <div>
+                {testimonial.youtubeUrl && (
+                  <a
+                    href={testimonial.youtubeUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-red-500 hover:text-red-600"
                   >
-                    <Edit2 className="h-4 w-4" />
-                  </Button>
-                  <DeleteConfirmation
-                    onDelete={() => handleDelete(testimonial.id)}
-                    title="Delete Testimonial"
-                    description="Are you sure you want to delete this testimonial? This action cannot be undone."
-                  />
-                </div>
+                    <Youtube className="h-5 w-5" />
+                  </a>
+                )}
+              </div>
+              <div className="flex gap-2">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setEditingTestimonial(testimonial)}
+                >
+                  <Edit2 className="h-4 w-4" />
+                </Button>
+                <DeleteConfirmation
+                  onDelete={() => handleDelete(testimonial.id)}
+                  title="Delete Testimonial"
+                  description="Are you sure you want to delete this testimonial? This action cannot be undone."
+                />
               </div>
             </div>
           </Card>
