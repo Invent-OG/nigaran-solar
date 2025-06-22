@@ -69,7 +69,6 @@ export default function CareersPage() {
   const [appDebouncedSearch, setAppDebouncedSearch] = useState("");
   const [selectedAppIds, setSelectedAppIds] = useState<string[]>([]);
   const [isDeleting, setIsDeleting] = useState(false);
-
   const queryClient = useQueryClient();
 
   // Debounce search for careers
@@ -110,12 +109,10 @@ export default function CareersPage() {
         const response = await fetch(`/api/careers/${id}`, {
           method: "DELETE",
         });
-
         if (!response.ok) {
           const errorData = await response.json();
           throw new Error(errorData.error || "Failed to delete career");
         }
-
         return { success: true };
       } finally {
         setIsDeleting(false);
