@@ -54,12 +54,12 @@ export async function GET(req: Request) {
     const search = searchParams.get("search") || "";
     const date = searchParams.get("date");
     const type = searchParams.get("type");
-    
+
     const offset = (page - 1) * limit;
-    
+
     // Build where conditions
     let whereConditions = [];
-    
+
     if (search) {
       whereConditions.push(
         sql`(${leads.name} ILIKE ${`%${search}%`} OR 
@@ -67,50 +67,49 @@ export async function GET(req: Request) {
              ${leads.city} ILIKE ${`%${search}%`})`
       );
     }
-    
+
     if (date) {
       const dateObj = new Date(date);
       const nextDay = new Date(dateObj);
       nextDay.setDate(nextDay.getDate() + 1);
-      
+
       whereConditions.push(
         sql`${leads.createdAt} >= ${dateObj.toISOString()} AND 
             ${leads.createdAt} < ${nextDay.toISOString()}`
       );
     }
-    
+
     if (type) {
       whereConditions.push(eq(leads.type, type as any));
     }
-    
+
     // Combine conditions
-    const whereClause = whereConditions.length > 0 
-      ? and(...whereConditions) 
-      : undefined;
-    
+    const whereClause =
+      whereConditions.length > 0 ? and(...whereConditions) : undefined;
+
     // Get total count
     const [{ value: totalCount }] = await db
       .select({ value: count() })
       .from(leads)
       .where(whereClause || sql`1=1`);
-    
+
     // Get paginated leads
     const allLeads = await db
       .select()
       .from(leads)
       .where(whereClause || sql`1=1`)
-      .orderBy(leads.createdAt)
+      .orderBy(sql`${leads.createdAt} DESC`)
       .limit(limit)
       .offset(offset);
-    
+
     const totalPages = Math.ceil(totalCount / limit);
-    
-    return NextResponse.json({ 
-      success: true, 
+
+    return NextResponse.json({
+      success: true,
       leads: allLeads,
       totalCount,
       totalPages,
-      currentPage: page
+      currentPage: page,
     });
   } catch (error) {
     console.error("Error fetching leads:", error);

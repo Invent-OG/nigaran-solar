@@ -127,10 +127,7 @@ export default function BlogForm({ onClose, initialData }: BlogFormProps) {
                   <FormItem>
                     <FormLabel>Excerpt</FormLabel>
                     <FormControl>
-                      <Input
-                        {...field}
-                        placeholder="Enter blog excerpt"
-                      />
+                      <Input {...field} placeholder="Enter blog excerpt" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -144,9 +141,9 @@ export default function BlogForm({ onClose, initialData }: BlogFormProps) {
                   <FormItem>
                     <FormLabel>Content</FormLabel>
                     <FormControl>
-                      <RichTextEditor 
-                        content={field.value} 
-                        onChange={field.onChange} 
+                      <RichTextEditor
+                        content={field.value}
+                        onChange={field.onChange}
                       />
                     </FormControl>
                     <FormMessage />

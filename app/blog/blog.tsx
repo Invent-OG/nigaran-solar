@@ -18,13 +18,6 @@ import { useBlogs } from "@/lib/queries/blogs";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Pagination } from "@/components/ui/pagination";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Calendar as CalendarComponent } from "@/components/ui/calendar";
 import {
   Popover,
@@ -82,46 +75,6 @@ export default function BlogPage() {
             </p>
           </motion.div>
 
-          {/* Categories */}
-          <div className="grid grid-cols-1 gap-8 mb-16 md:grid-cols-2 lg:grid-cols-4">
-            {[
-              {
-                icon: <BookOpen className="w-8 h-8" />,
-                title: "Solar Basics",
-                description: "Learn the fundamentals of solar energy systems",
-              },
-              {
-                icon: <FileText className="w-8 h-8" />,
-                title: "Installation Tips",
-                description: "Expert guidance for optimal solar setup",
-              },
-              {
-                icon: <Government className="w-8 h-8" />,
-                title: "Government Schemes",
-                description: "Latest updates on solar policies and subsidies",
-              },
-              {
-                icon: <PresentationChart className="w-8 h-8" />,
-                title: "Case Studies",
-                description: "Real success stories from our customers",
-              },
-            ].map((category, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 100 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="p-6 text-center transition-shadow rounded-lg cursor-pointer bg-card hover:shadow-lg"
-              >
-                <div className="flex items-center justify-center w-16 h-16 mx-auto mb-4 rounded-full bg-primary/10 text-primary">
-                  {category.icon}
-                </div>
-                <h3 className="mb-2 text-xl font-semibold">{category.title}</h3>
-                <p className="text-muted-foreground">{category.description}</p>
-              </motion.div>
-            ))}
-          </div>
-
           {/* Search and Filters */}
           <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
             <div className="relative w-full md:w-64">
@@ -137,73 +90,50 @@ export default function BlogPage() {
               />
             </div>
 
-            <div className="flex gap-4 items-center w-full md:w-auto">
-              {/* <Select
-                value={selectedCategory}
-                onValueChange={handleCategoryChange}
-              >
-                <SelectTrigger className="w-[180px]">
-                  <SelectValue placeholder="All Categories" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="">All Categories</SelectItem>
-                  {categories.map((category) => (
-                    <SelectItem key={category} value={category}>
-                      {category}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select> */}
-
-              <Select
-                value={selectedCategory || "all"}
-                onValueChange={handleCategoryChange}
-              >
-                <SelectTrigger className="w-[180px]">
-                  <SelectValue placeholder="All Categories" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Categories</SelectItem>
-                  {categories.map((category) => (
-                    <SelectItem key={category} value={category}>
-                      {category}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button variant="outline" className="flex items-center gap-2">
-                    <Calendar className="h-4 w-4" />
-                    {selectedDate
-                      ? format(selectedDate, "PPP")
-                      : "Filter by date"}
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0">
-                  <div className="p-2 flex justify-between items-center border-b">
-                    <span className="text-sm font-medium">Select date</span>
-                    {selectedDate && (
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={handleDateReset}
-                      >
-                        Reset
-                      </Button>
-                    )}
-                  </div>
-                  <CalendarComponent
-                    mode="single"
-                    required={true}
-                    selected={selectedDate}
-                    onSelect={setSelectedDate}
-                    initialFocus
-                  />
-                </PopoverContent>
-              </Popover>
+            <div className="flex gap-4 flex-wrap">
+              {["all", ...categories].map((category) => (
+                <div
+                  key={category}
+                  onClick={() => handleCategoryChange(category)}
+                  className={`cursor-pointer px-4 py-2 rounded-lg border text-sm ${
+                    selectedCategory === category ||
+                    (category === "all" && selectedCategory === "")
+                      ? "bg-primary text-white"
+                      : "bg-muted text-muted-foreground"
+                  }`}
+                >
+                  {category === "all" ? "All Categories" : category}
+                </div>
+              ))}
             </div>
+
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button variant="outline" className="flex items-center gap-2">
+                  <Calendar className="h-4 w-4" />
+                  {selectedDate
+                    ? format(selectedDate, "PPP")
+                    : "Filter by date"}
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0">
+                <div className="p-2 flex justify-between items-center border-b">
+                  <span className="text-sm font-medium">Select date</span>
+                  {selectedDate && (
+                    <Button variant="ghost" size="sm" onClick={handleDateReset}>
+                      Reset
+                    </Button>
+                  )}
+                </div>
+                <CalendarComponent
+                  mode="single"
+                  required={true}
+                  selected={selectedDate}
+                  onSelect={setSelectedDate}
+                  initialFocus
+                />
+              </PopoverContent>
+            </Popover>
           </div>
 
           {/* Blog Posts */}
@@ -269,6 +199,44 @@ export default function BlogPage() {
                     onPageChange={setCurrentPage}
                   />
                 </div>
+              )}
+
+              {blogs.length > 0 && (
+                <>
+                  <h2 className="mt-16 mb-4 text-2xl font-bold">
+                    Featured Blogs
+                  </h2>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {blogs.slice(0, 3).map((blog) => (
+                      <div
+                        key={blog.id}
+                        className="bg-muted p-4 rounded-lg shadow-sm"
+                      >
+                        <h3 className="text-lg font-semibold">{blog.title}</h3>
+                        <p className="text-sm text-muted-foreground">
+                          {blog.excerpt}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+
+                  <h2 className="mt-12 mb-4 text-2xl font-bold">
+                    Suggestions for You
+                  </h2>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {blogs.slice(3, 6).map((blog) => (
+                      <div
+                        key={blog.id}
+                        className="bg-muted p-4 rounded-lg shadow-sm"
+                      >
+                        <h3 className="text-lg font-semibold">{blog.title}</h3>
+                        <p className="text-sm text-muted-foreground">
+                          {blog.excerpt}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </>
               )}
             </>
           )}

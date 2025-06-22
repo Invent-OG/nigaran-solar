@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Table,
@@ -35,7 +35,6 @@ import { Skeleton } from "../ui/skeleton";
 import { format } from "date-fns";
 
 export default function LeadTabs() {
-  const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [itemsPerPage, setItemsPerPage] = useState(10);
@@ -45,7 +44,7 @@ export default function LeadTabs() {
   const { data, isLoading, error } = useLeads(
     currentPage,
     itemsPerPage,
-    searchTerm,
+    undefined,
     selectedDate ? format(selectedDate, "yyyy-MM-dd") : undefined
   );
 
@@ -193,7 +192,23 @@ export default function LeadTabs() {
   };
 
   const LeadTable = ({ type }: { type: string }) => {
-    const filteredLeads = filterLeadsByType(type);
+    const [localSearchTerm, setLocalSearchTerm] = useState("");
+    const [searchTerm, setSearchTerm] = useState("");
+    const [localDebouncedSearch, setLocalDebouncedSearch] = useState("");
+
+    useEffect(() => {
+      const timeout = setTimeout(() => {
+        setSearchTerm(localSearchTerm);
+        setLocalDebouncedSearch(localSearchTerm);
+      }, 500);
+      return () => clearTimeout(timeout);
+    }, [localSearchTerm]);
+
+    const filteredLeads = leads
+      .filter((lead) => lead.type === type)
+      .filter((lead) =>
+        lead.name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
 
     return (
       <div>
@@ -202,11 +217,8 @@ export default function LeadTabs() {
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
             <Input
               placeholder="Search leads..."
-              value={searchTerm}
-              onChange={(e) => {
-                setSearchTerm(e.target.value);
-                setCurrentPage(1);
-              }}
+              value={localSearchTerm}
+              onChange={(e) => setLocalSearchTerm(e.target.value)}
               className="pl-10"
             />
           </div>
@@ -310,7 +322,7 @@ export default function LeadTabs() {
           </Table>
         </div>
 
-        {totalPages > 1 && (
+        {filteredLeads.length > 0 && totalPages > 1 && (
           <div className="mt-4 flex items-center justify-between">
             <Pagination
               currentPage={currentPage}
