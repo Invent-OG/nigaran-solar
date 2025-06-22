@@ -16,6 +16,7 @@ export const metadata = {
     "solar energy, solar panel solutions in coimbatore, solar panels, solar power systems, residential solar, commercial solar, solar solutions Tamil Nadu, solar companies in TamilNadu",
 };
 
+console.log("test");
 export default function Home() {
   return (
     <>
