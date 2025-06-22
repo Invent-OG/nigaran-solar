@@ -86,7 +86,10 @@ const deleteCareer = async (id: string): Promise<void> => {
   const response = await fetch(`/api/careers/${id}`, {
     method: "DELETE",
   });
-  if (!response.ok) throw new Error("Failed to delete career");
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.error || "Failed to delete career");
+  }
 };
 
 const fetchJobApplications = async (
@@ -127,7 +130,10 @@ const deleteJobApplication = async (id: string): Promise<void> => {
   const response = await fetch(`/api/job-applications?id=${id}`, {
     method: "DELETE",
   });
-  if (!response.ok) throw new Error("Failed to delete job application");
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.error || "Failed to delete job application");
+  }
 };
 
 // Hooks
@@ -146,7 +152,7 @@ export function useCareer(id: string) {
   return useQuery({
     queryKey: ["career", id],
     queryFn: () => fetchCareerById(id),
-    enabled: !!id,
+    enabled: !!id && id !== "new",
   });
 }
 
