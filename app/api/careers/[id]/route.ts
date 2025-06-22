@@ -52,9 +52,26 @@ export async function DELETE(
 ) {
   try {
     console.log("Deleting career with ID:", params.id);
+
+    // Check if career exists
+    const [career] = await db
+      .select()
+      .from(careers)
+      .where(eq(careers.id, params.id));
+
+    if (!career) {
+      return NextResponse.json(
+        { success: false, error: "Career not found" },
+        { status: 404 }
+      );
+    }
+
+    // Delete the career
     await db.delete(careers).where(eq(careers.id, params.id));
+
     return NextResponse.json({ success: true });
   } catch (error) {
+    console.error("DELETE /api/careers/[id] error:", error);
     return NextResponse.json(
       { success: false, error: "Internal server error" },
       { status: 500 }
@@ -71,23 +88,51 @@ export async function PATCH(
     const body = await req.json();
     console.log("Patching career with ID:", id, "Data:", body);
 
+    // Validate the data
+    const validatedData = careerSchema.parse(body);
+
+    // Check if career exists
+    const [existingCareer] = await db
+      .select()
+      .from(careers)
+      .where(eq(careers.id, id));
+
+    if (!existingCareer) {
+      return NextResponse.json(
+        { success: false, error: "Career not found" },
+        { status: 404 }
+      );
+    }
+
+    // Update the career
     const updated = await db
       .update(careers)
       .set({
-        title: body.title,
-        type: body.type,
-        location: body.location,
-        description: body.description,
-        requirements: body.requirements,
-        salary: body.salary || null,
-        applyUrl: body.applyUrl || null,
+        title: validatedData.title,
+        type: validatedData.type,
+        location: validatedData.location,
+        description: validatedData.description,
+        requirements: validatedData.requirements,
+        salary: validatedData.salary || null,
+        applyUrl: validatedData.applyUrl || null,
       })
       .where(eq(careers.id, id))
       .returning();
 
-    return NextResponse.json(updated[0]);
+    return NextResponse.json({ success: true, career: updated[0] });
   } catch (error) {
     console.error("Error updating career:", error);
-    return new NextResponse("Internal Server Error", { status: 500 });
+
+    if (error instanceof z.ZodError) {
+      return NextResponse.json(
+        { success: false, errors: error.errors },
+        { status: 400 }
+      );
+    }
+
+    return NextResponse.json(
+      { success: false, error: "Internal server error" },
+      { status: 500 }
+    );
   }
 }
