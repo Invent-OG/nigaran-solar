@@ -17,7 +17,8 @@ const fetchLeads = async (
   page: number = 1,
   limit: number = 10,
   search: string = "",
-  date?: string
+  date?: string,
+  type?: string
 ): Promise<{ leads: Lead[]; totalCount: number; totalPages: number }> => {
   const params = new URLSearchParams({
     page: page.toString(),
@@ -26,6 +27,7 @@ const fetchLeads = async (
   
   if (search) params.append("search", search);
   if (date) params.append("date", date);
+  if (type) params.append("type", type);
   
   const response = await fetch(`/api/leads?${params.toString()}`);
   if (!response.ok) throw new Error("Failed to fetch leads");
@@ -73,11 +75,12 @@ export function useLeads(
   page: number = 1,
   limit: number = 10,
   search: string = "",
-  date?: string
+  date?: string,
+  type?: string
 ) {
   return useQuery({
-    queryKey: ["leads", page, limit, search, date],
-    queryFn: () => fetchLeads(page, limit, search, date),
+    queryKey: ["leads", page, limit, search, date, type],
+    queryFn: () => fetchLeads(page, limit, search, date, type),
     refetchInterval: 60000, // Refetch every minute
   });
 }

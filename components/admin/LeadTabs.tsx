@@ -46,7 +46,8 @@ export default function LeadTabs() {
     currentPage,
     itemsPerPage,
     searchTerm,
-    selectedDate ? format(selectedDate, "yyyy-MM-dd") : undefined
+    selectedDate ? format(selectedDate, "yyyy-MM-dd") : undefined,
+    activeTab // Pass the active tab as the type filter
   );
 
   const deleteMutation = useDeleteLead();
@@ -101,6 +102,39 @@ export default function LeadTabs() {
 
   const handleDateReset = () => {
     setSelectedDate(null);
+  };
+
+  const handleExport = (type: string) => {
+    // Filter leads by the current tab type
+    const leadsToExport = data?.leads.filter((lead) => lead.type === type) || [];
+    
+    const headers = ["Name", "WhatsApp Number", "Electricity Bill", "City", "Date"];
+
+    const csv = [
+      headers,
+      ...leadsToExport.map((lead) => [
+        lead.name,
+        lead.whatsappNumber,
+        lead.electricityBill.toString(),
+        lead.city,
+        new Date(lead.createdAt).toLocaleDateString(),
+      ]),
+    ]
+      .map((row) => row.join(","))
+      .join("\n");
+
+    const blob = new Blob([csv], { type: "text/csv" });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `${type}-leads.csv`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+    toast.success(
+      `${type === "residential" ? "Residential" : type === "housing_society" ? "Housing Society" : "Commercial"} leads exported successfully!`
+    );
   };
 
   if (isLoading) {
@@ -164,34 +198,7 @@ export default function LeadTabs() {
 
   const leads = data?.leads ?? [];
   const totalPages = data?.totalPages ?? 1;
-
-  const filterLeadsByType = (type: string) => {
-    return leads.filter((lead) => lead.type === type);
-  };
-
-  const handleExport = (type: string) => {
-    const leadsToExport = filterLeadsByType(type);
-    const csv = [
-      ["Name", "WhatsApp Number", "Electricity Bill", "City", "Date"],
-      ...leadsToExport.map((lead) => [
-        lead.name,
-        lead.whatsappNumber,
-        lead.electricityBill.toString(),
-        lead.city,
-        new Date(lead.createdAt).toLocaleDateString(),
-      ]),
-    ]
-      .map((row) => row.join(","))
-      .join("\n");
-
-    const blob = new Blob([csv], { type: "text/csv" });
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `${type}-leads.csv`;
-    a.click();
-    window.URL.revokeObjectURL(url);
-  };
+  const totalCount = data?.totalCount ?? 0;
 
   const LeadTable = ({ type }: { type: string }) => {
     const [localSearchTerm, setLocalSearchTerm] = useState("");
@@ -200,18 +207,13 @@ export default function LeadTabs() {
     useEffect(() => {
       const timeout = setTimeout(() => {
         setDebouncedSearch(localSearchTerm);
+        setSearchTerm(localSearchTerm);
       }, 500);
       return () => clearTimeout(timeout);
     }, [localSearchTerm]);
 
     // Filter leads by type first, then by search term
-    const filteredLeads = leads
-      .filter((lead) => lead.type === type)
-      .filter((lead) =>
-        lead.name.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
-        lead.whatsappNumber.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
-        lead.city.toLowerCase().includes(debouncedSearch.toLowerCase())
-      );
+    const filteredLeads = leads.filter((lead) => lead.type === type);
 
     return (
       <div>
@@ -326,29 +328,34 @@ export default function LeadTabs() {
 
         {filteredLeads.length > 0 && totalPages > 1 && (
           <div className="mt-4 flex items-center justify-between">
-            <Pagination
-              currentPage={currentPage}
-              totalPages={totalPages}
-              onPageChange={handlePageChange}
-            />
-            <Select
-              value={itemsPerPage.toString()}
-              onValueChange={(value) => {
-                setItemsPerPage(Number(value));
-                setCurrentPage(1);
-              }}
-            >
-              <SelectTrigger className="w-[120px]">
-                {itemsPerPage} / page
-              </SelectTrigger>
-              <SelectContent>
-                {[5, 10, 20, 50].map((num) => (
-                  <SelectItem key={num} value={num.toString()}>
-                    {num}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            <div className="text-sm text-muted-foreground">
+              Showing {filteredLeads.length} of {totalCount} leads
+            </div>
+            <div className="flex items-center gap-4">
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={handlePageChange}
+              />
+              <Select
+                value={itemsPerPage.toString()}
+                onValueChange={(value) => {
+                  setItemsPerPage(Number(value));
+                  setCurrentPage(1);
+                }}
+              >
+                <SelectTrigger className="w-[120px]">
+                  {itemsPerPage} / page
+                </SelectTrigger>
+                <SelectContent>
+                  {[5, 10, 20, 50].map((num) => (
+                    <SelectItem key={num} value={num.toString()}>
+                      {num}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
           </div>
         )}
       </div>
