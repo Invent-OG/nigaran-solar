@@ -40,11 +40,12 @@ export default function LeadTabs() {
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [activeTab, setActiveTab] = useState<string>("residential");
+  const [searchTerm, setSearchTerm] = useState("");
 
   const { data, isLoading, error } = useLeads(
     currentPage,
     itemsPerPage,
-    undefined,
+    searchTerm,
     selectedDate ? format(selectedDate, "yyyy-MM-dd") : undefined
   );
 
@@ -95,6 +96,7 @@ export default function LeadTabs() {
     setActiveTab(value);
     setCurrentPage(1);
     setSelectedIds([]);
+    setSearchTerm("");
   };
 
   const handleDateReset = () => {
@@ -193,21 +195,22 @@ export default function LeadTabs() {
 
   const LeadTable = ({ type }: { type: string }) => {
     const [localSearchTerm, setLocalSearchTerm] = useState("");
-    const [searchTerm, setSearchTerm] = useState("");
-    const [localDebouncedSearch, setLocalDebouncedSearch] = useState("");
+    const [debouncedSearch, setDebouncedSearch] = useState("");
 
     useEffect(() => {
       const timeout = setTimeout(() => {
-        setSearchTerm(localSearchTerm);
-        setLocalDebouncedSearch(localSearchTerm);
+        setDebouncedSearch(localSearchTerm);
       }, 500);
       return () => clearTimeout(timeout);
     }, [localSearchTerm]);
 
+    // Filter leads by type first, then by search term
     const filteredLeads = leads
       .filter((lead) => lead.type === type)
       .filter((lead) =>
-        lead.name.toLowerCase().includes(searchTerm.toLowerCase())
+        lead.name.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
+        lead.whatsappNumber.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
+        lead.city.toLowerCase().includes(debouncedSearch.toLowerCase())
       );
 
     return (
@@ -271,8 +274,7 @@ export default function LeadTabs() {
                 <TableHead>
                   <Checkbox
                     checked={
-                      selectedIds.length === filteredLeads.length &&
-                      filteredLeads.length > 0
+                      selectedIds.length === filteredLeads.length && filteredLeads.length > 0
                     }
                     onCheckedChange={() => handleSelectAll(filteredLeads)}
                   />
