@@ -53,6 +53,8 @@ import {
   type JobApplication,
 } from "@/lib/queries/careers";
 import { DeleteConfirmation } from "@/components/admin/DeleteConfirmation";
+import { getStoragePath } from "@/lib/utils";
+import { supabase } from "@/lib/supabase/client";
 
 export default function CareersPage() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -136,6 +138,19 @@ export default function CareersPage() {
     mutationFn: async (id: string) => {
       setIsDeleting(true);
       try {
+        const resumeUrl = applicationsData?.applications.find(
+          (app) => app.id === id
+        )?.resumeUrl;
+        if (resumeUrl) {
+          const path = getStoragePath(resumeUrl);
+          if (path) {
+            console.log("Removing from Supabase:", path);
+            const { data, error } = await supabase.storage
+              .from("resumes")
+              .remove([path]);
+            if (error) console.error("Supabase delete error:", error);
+          }
+        }
         const response = await fetch(`/api/job-applications/${id}`, {
           method: "DELETE",
         });

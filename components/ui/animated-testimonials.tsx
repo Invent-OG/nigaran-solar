@@ -222,16 +222,16 @@ export function AnimatedTestimonials({
                 <div className="absolute z-10 w-24 h-24 -bottom-6 -left-6 rounded-xl bg-primary/50"></div>
                 <div className="absolute z-10 w-24 h-24 -top-6 -right-6 rounded-xl bg-primary/50"></div>
 
-                <div className="relative z-30 flex flex-col w-full p-8 bg-white border shadow-lg rounded-2xl">
+                <div className="relative z-30 flex flex-col w-full max-h-[500px] p-8 bg-white border shadow-lg rounded-2xl overflow-hidden">
                   {/* Content */}
-                  <div className="relative z-10 flex-1 w-full mb-6">
+                  <div className="overflow-y-auto pr-2 max-h-72">
                     {testimonials[activeIndex].youtubeUrl ? (
                       <div className="w-full overflow-hidden aspect-video ">
                         {testimonials[activeIndex].youtubeUrl?.includes(
                           "/shorts/"
                         ) && (
                           <svg
-                            className="absolute mb-2 -top-4 -left-4 text-primary/20"
+                            className="absolute  top-1 left-1 text-primary/20"
                             width="60"
                             height="60"
                             viewBox="0 0 98.94 122.88"
@@ -258,12 +258,12 @@ export function AnimatedTestimonials({
                         />
                       </div>
                     ) : (
-                      <>
+                      <div className="relative z-30 text-lg font-medium leading-relaxed break-words">
                         <Quote className="absolute w-8 h-8 rotate-180 -top-2 -left-2 text-primary/20" />
-                        <p className="relative z-30 text-lg font-medium leading-relaxed">
+                        <p className="whitespace-pre-wrap break-words break-all w-full overflow-wrap break-word">
                           {testimonials[activeIndex].content}
                         </p>
-                      </>
+                      </div>
                     )}
                   </div>
 

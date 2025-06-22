@@ -34,6 +34,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { format } from "date-fns";
+import { supabase } from "@/lib/supabase/client";
+import { getStoragePath } from "@/lib/utils";
 
 interface BlogTableProps {
   searchTerm: string;
@@ -76,6 +78,17 @@ export default function BlogTable({ searchTerm }: BlogTableProps) {
 
   const handleDelete = async (blogId: string) => {
     try {
+      const blog = blogs.find((b) => b.id === blogId);
+      if (blog?.imageUrl) {
+        const path = getStoragePath(blog.imageUrl);
+        if (path) {
+          console.log("Removing from Supabase:", path);
+          const { data, error } = await supabase.storage
+            .from("blog-images")
+            .remove([path]);
+          if (error) console.error("Supabase delete error:", error);
+        }
+      }
       await deleteBlogMutation.mutateAsync(blogId);
       toast.success("Blog deleted successfully");
     } catch (error) {
@@ -91,6 +104,13 @@ export default function BlogTable({ searchTerm }: BlogTableProps) {
     ) {
       try {
         for (const id of selectedBlogs) {
+          const blog = blogs.find((b) => b.id === id);
+          if (blog?.imageUrl) {
+            const path = getStoragePath(blog.imageUrl);
+            if (path) {
+              await supabase.storage.from("blog-images").remove([path]);
+            }
+          }
           await deleteBlogMutation.mutateAsync(id);
         }
         toast.success("Selected blogs deleted successfully");
@@ -125,7 +145,23 @@ export default function BlogTable({ searchTerm }: BlogTableProps) {
   }
 
   if (isLoading) {
-    return <div className="text-center py-8">Loading blogs...</div>;
+    return (
+      <div className="space-y-4">
+        {Array.from({ length: itemsPerPage }).map((_, idx) => (
+          <div
+            key={idx}
+            className="animate-pulse flex items-center space-x-4 p-4 border rounded"
+          >
+            <div className="h-16 w-24 bg-gray-300 rounded" />
+            <div className="flex-1 space-y-2">
+              <div className="h-4 bg-gray-300 rounded w-1/2" />
+              <div className="h-4 bg-gray-200 rounded w-1/3" />
+              <div className="h-4 bg-gray-100 rounded w-1/4" />
+            </div>
+          </div>
+        ))}
+      </div>
+    );
   }
 
   // Get unique categories for filter

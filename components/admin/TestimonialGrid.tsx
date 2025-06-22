@@ -13,6 +13,8 @@ import { Pagination } from "@/components/ui/pagination";
 import TestimonialForm from "./TestimonialForm";
 import { DeleteConfirmation } from "./DeleteConfirmation";
 import { toast } from "sonner";
+import { supabase } from "@/lib/supabase/client";
+import { getStoragePath } from "@/lib/utils";
 
 interface TestimonialGridProps {
   searchTerm: string;
@@ -29,8 +31,24 @@ export default function TestimonialGrid({ searchTerm }: TestimonialGridProps) {
   const { data, isLoading } = useTestimonials();
   const deleteTestimonialMutation = useDeleteTestimonial();
 
-  const handleDelete = async (id: string) => {
+  console.log(
+    "Testimonials data:",
+    data?.testimonials.map((t) => t.imageUrl)
+  );
+
+  const handleDelete = async (id: string, imageUrl: string) => {
     try {
+      if (imageUrl) {
+        const path = getStoragePath(imageUrl);
+        if (path) {
+          console.log("Removing from Supabase:", path);
+          const { data, error } = await supabase.storage
+            .from("testimonials")
+            .remove([path]);
+          if (error) console.error("Supabase delete error:", error);
+        }
+      }
+
       await deleteTestimonialMutation.mutateAsync(id);
       toast.success("Testimonial deleted successfully");
     } catch (error) {
@@ -115,7 +133,9 @@ export default function TestimonialGrid({ searchTerm }: TestimonialGridProps) {
                   <Edit2 className="h-4 w-4" />
                 </Button>
                 <DeleteConfirmation
-                  onDelete={() => handleDelete(testimonial.id)}
+                  onDelete={() =>
+                    handleDelete(testimonial.id, testimonial.imageUrl)
+                  }
                   title="Delete Testimonial"
                   description="Are you sure you want to delete this testimonial? This action cannot be undone."
                 />
