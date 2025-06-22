@@ -14,7 +14,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
   SelectContent,
@@ -24,6 +23,7 @@ import {
 } from "@/components/ui/select";
 import { useCreateCareer, useUpdateCareer } from "@/lib/queries/careers";
 import { toast } from "sonner";
+import RichTextEditor from "./RichTextEditor";
 
 const careerSchema = z.object({
   title: z.string().min(2, "Title must be at least 2 characters"),
@@ -70,7 +70,7 @@ export default function CareerForm({ initialData, onClose }: CareerFormProps) {
   const onSubmit = async (data: CareerFormData) => {
     setIsSubmitting(true);
     try {
-      if (initialData?.id) {
+      if (initialData?.id && initialData.id !== "new") {
         await updateCareerMutation.mutateAsync({ id: initialData.id, data });
         toast.success("Career updated successfully");
       } else {
@@ -90,139 +90,148 @@ export default function CareerForm({ initialData, onClose }: CareerFormProps) {
   };
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-        <FormField
-          control={form.control}
-          name="title"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Job Title</FormLabel>
-              <FormControl>
-                <Input {...field} placeholder="Enter job title" />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+    <div className="bg-card rounded-lg p-6">
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-xl font-semibold">
+          {initialData && initialData.id !== "new" ? "Edit Job Listing" : "Add New Job Listing"}
+        </h2>
+        <Button variant="ghost" onClick={onClose}>
+          Cancel
+        </Button>
+      </div>
 
-        <FormField
-          control={form.control}
-          name="type"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Job Type</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          <FormField
+            control={form.control}
+            name="title"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Job Title</FormLabel>
                 <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select job type" />
-                  </SelectTrigger>
+                  <Input {...field} placeholder="Enter job title" />
                 </FormControl>
-                <SelectContent>
-                  <SelectItem value="Full-Time">Full-Time</SelectItem>
-                  <SelectItem value="Part-Time">Part-Time</SelectItem>
-                  <SelectItem value="Internship">Internship</SelectItem>
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <FormField
-          control={form.control}
-          name="location"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Location</FormLabel>
-              <FormControl>
-                <Input {...field} placeholder="Enter job location" />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+          <FormField
+            control={form.control}
+            name="type"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Job Type</FormLabel>
+                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select job type" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="Full-Time">Full-Time</SelectItem>
+                    <SelectItem value="Part-Time">Part-Time</SelectItem>
+                    <SelectItem value="Internship">Internship</SelectItem>
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <FormField
-          control={form.control}
-          name="salary"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Salary Range (Optional)</FormLabel>
-              <FormControl>
-                <Input {...field} placeholder="e.g., ₹5-8 LPA" />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+          <FormField
+            control={form.control}
+            name="location"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Location</FormLabel>
+                <FormControl>
+                  <Input {...field} placeholder="Enter job location" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <FormField
-          control={form.control}
-          name="description"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Job Description</FormLabel>
-              <FormControl>
-                <Textarea
-                  {...field}
-                  placeholder="Enter job description"
-                  className="min-h-[150px]"
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+          <FormField
+            control={form.control}
+            name="salary"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Salary Range (Optional)</FormLabel>
+                <FormControl>
+                  <Input {...field} placeholder="e.g., ₹5-8 LPA" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <FormField
-          control={form.control}
-          name="requirements"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Requirements</FormLabel>
-              <FormControl>
-                <Textarea
-                  {...field}
-                  placeholder="Enter job requirements"
-                  className="min-h-[150px]"
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+          <FormField
+            control={form.control}
+            name="description"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Job Description</FormLabel>
+                <FormControl>
+                  <RichTextEditor
+                    content={field.value}
+                    onChange={field.onChange}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <FormField
-          control={form.control}
-          name="applyUrl"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Application URL (Optional)</FormLabel>
-              <FormControl>
-                <Input {...field} placeholder="Enter application URL" />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+          <FormField
+            control={form.control}
+            name="requirements"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Requirements</FormLabel>
+                <FormControl>
+                  <RichTextEditor
+                    content={field.value}
+                    onChange={field.onChange}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <div className="flex justify-end gap-4">
-          <Button type="button" variant="outline" onClick={onClose}>
-            Cancel
-          </Button>
-          <Button
-            type="submit"
-            disabled={
-              isSubmitting ||
-              createCareerMutation.isPending ||
-              updateCareerMutation.isPending
-            }
-          >
-            {isSubmitting ? "Saving..." : initialData ? "Update" : "Create"}
-          </Button>
-        </div>
-      </form>
-    </Form>
+          <FormField
+            control={form.control}
+            name="applyUrl"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Application URL (Optional)</FormLabel>
+                <FormControl>
+                  <Input {...field} placeholder="Enter application URL" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <div className="flex justify-end gap-4">
+            <Button type="button" variant="outline" onClick={onClose}>
+              Cancel
+            </Button>
+            <Button
+              type="submit"
+              disabled={
+                isSubmitting ||
+                createCareerMutation.isPending ||
+                updateCareerMutation.isPending
+              }
+            >
+              {isSubmitting ? "Saving..." : initialData && initialData.id !== "new" ? "Update" : "Create"}
+            </Button>
+          </div>
+        </form>
+      </Form>
+    </div>
   );
 }

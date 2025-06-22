@@ -21,12 +21,29 @@ export interface JobApplication {
   resumeUrl: string;
   coverLetter?: string;
   careerId: string;
+  careerTitle?: string;
   createdAt: string;
 }
 
 // API Functions
-const fetchCareers = async (): Promise<Career[]> => {
-  const response = await fetch("/api/careers");
+const fetchCareers = async (
+  page: number = 1,
+  limit: number = 10,
+  search: string = ""
+): Promise<{ 
+  careers: Career[]; 
+  totalCount: number; 
+  totalPages: number;
+  currentPage: number;
+}> => {
+  const params = new URLSearchParams({
+    page: page.toString(),
+    limit: limit.toString(),
+  });
+  
+  if (search) params.append("search", search);
+  
+  const response = await fetch(`/api/careers?${params.toString()}`);
   if (!response.ok) throw new Error("Failed to fetch careers");
   return response.json();
 };
@@ -72,14 +89,30 @@ const deleteCareer = async (id: string): Promise<void> => {
   if (!response.ok) throw new Error("Failed to delete career");
 };
 
-const fetchJobApplications = async (): Promise<JobApplication[]> => {
-  const response = await fetch("/api/job-applications");
+const fetchJobApplications = async (
+  page: number = 1,
+  limit: number = 10,
+  search: string = ""
+): Promise<{ 
+  applications: JobApplication[]; 
+  totalCount: number; 
+  totalPages: number;
+  currentPage: number;
+}> => {
+  const params = new URLSearchParams({
+    page: page.toString(),
+    limit: limit.toString(),
+  });
+  
+  if (search) params.append("search", search);
+  
+  const response = await fetch(`/api/job-applications?${params.toString()}`);
   if (!response.ok) throw new Error("Failed to fetch job applications");
   return response.json();
 };
 
 const createJobApplication = async (
-  data: Omit<JobApplication, "id" | "createdAt">
+  data: Omit<JobApplication, "id" | "createdAt" | "careerTitle">
 ): Promise<JobApplication> => {
   const response = await fetch("/api/job-applications", {
     method: "POST",
@@ -90,11 +123,22 @@ const createJobApplication = async (
   return response.json();
 };
 
+const deleteJobApplication = async (id: string): Promise<void> => {
+  const response = await fetch(`/api/job-applications?id=${id}`, {
+    method: "DELETE",
+  });
+  if (!response.ok) throw new Error("Failed to delete job application");
+};
+
 // Hooks
-export function useCareers() {
+export function useCareers(
+  page: number = 1,
+  limit: number = 10,
+  search: string = ""
+) {
   return useQuery({
-    queryKey: ["careers"],
-    queryFn: fetchCareers,
+    queryKey: ["careers", page, limit, search],
+    queryFn: () => fetchCareers(page, limit, search),
   });
 }
 
@@ -102,6 +146,7 @@ export function useCareer(id: string) {
   return useQuery({
     queryKey: ["career", id],
     queryFn: () => fetchCareerById(id),
+    enabled: !!id,
   });
 }
 
@@ -135,10 +180,14 @@ export function useDeleteCareer() {
   });
 }
 
-export function useJobApplications() {
+export function useJobApplications(
+  page: number = 1,
+  limit: number = 10,
+  search: string = ""
+) {
   return useQuery({
-    queryKey: ["jobApplications"],
-    queryFn: fetchJobApplications,
+    queryKey: ["jobApplications", page, limit, search],
+    queryFn: () => fetchJobApplications(page, limit, search),
   });
 }
 
@@ -146,6 +195,16 @@ export function useCreateJobApplication() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: createJobApplication,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["jobApplications"] });
+    },
+  });
+}
+
+export function useDeleteJobApplication() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: deleteJobApplication,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["jobApplications"] });
     },
