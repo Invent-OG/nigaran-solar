@@ -44,13 +44,19 @@ const fetchCareers = async (
   if (search) params.append("search", search);
   
   const response = await fetch(`/api/careers?${params.toString()}`);
-  if (!response.ok) throw new Error("Failed to fetch careers");
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.error || "Failed to fetch careers");
+  }
   return response.json();
 };
 
 const fetchCareerById = async (id: string): Promise<{ career: Career }> => {
   const response = await fetch(`/api/careers/${id}`);
-  if (!response.ok) throw new Error("Failed to fetch career");
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.error || "Failed to fetch career");
+  }
   return response.json();
 };
 
@@ -62,7 +68,10 @@ const createCareer = async (
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   });
-  if (!response.ok) throw new Error("Failed to create career");
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.error || "Failed to create career");
+  }
   return response.json();
 };
 
@@ -78,7 +87,10 @@ const updateCareer = async ({
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   });
-  if (!response.ok) throw new Error("Failed to update career");
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.error || "Failed to update career");
+  }
   return response.json();
 };
 
@@ -86,6 +98,7 @@ const deleteCareer = async (id: string): Promise<void> => {
   const response = await fetch(`/api/careers/${id}`, {
     method: "DELETE",
   });
+  
   if (!response.ok) {
     const errorData = await response.json();
     throw new Error(errorData.error || "Failed to delete career");
@@ -110,7 +123,10 @@ const fetchJobApplications = async (
   if (search) params.append("search", search);
   
   const response = await fetch(`/api/job-applications?${params.toString()}`);
-  if (!response.ok) throw new Error("Failed to fetch job applications");
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.error || "Failed to fetch job applications");
+  }
   return response.json();
 };
 
@@ -122,14 +138,18 @@ const createJobApplication = async (
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   });
-  if (!response.ok) throw new Error("Failed to submit job application");
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.error || "Failed to submit job application");
+  }
   return response.json();
 };
 
 const deleteJobApplication = async (id: string): Promise<void> => {
-  const response = await fetch(`/api/job-applications?id=${id}`, {
+  const response = await fetch(`/api/job-applications/${id}`, {
     method: "DELETE",
   });
+  
   if (!response.ok) {
     const errorData = await response.json();
     throw new Error(errorData.error || "Failed to delete job application");

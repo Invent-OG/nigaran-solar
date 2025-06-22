@@ -35,6 +35,9 @@ export async function DELETE(
   { params }: { params: { id: string } }
 ) {
   try {
+    console.log('Deleting job application with ID:', params.id);
+    
+    // Check if application exists
     const [application] = await db
       .select()
       .from(jobApplications)
@@ -47,6 +50,7 @@ export async function DELETE(
       );
     }
     
+    // Delete the application
     await db.delete(jobApplications).where(eq(jobApplications.id, params.id));
     
     return NextResponse.json({ success: true });

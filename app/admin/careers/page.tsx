@@ -68,6 +68,7 @@ export default function CareersPage() {
   const [appSearchTerm, setAppSearchTerm] = useState("");
   const [appDebouncedSearch, setAppDebouncedSearch] = useState("");
   const [selectedAppIds, setSelectedAppIds] = useState<string[]>([]);
+  const [isDeleting, setIsDeleting] = useState(false);
   
   const queryClient = useQueryClient();
 
@@ -103,26 +104,60 @@ export default function CareersPage() {
 
   // Mutations
   const deleteCareer = useMutation({
-    mutationFn: useDeleteCareer().mutationFn,
+    mutationFn: async (id: string) => {
+      setIsDeleting(true);
+      try {
+        const response = await fetch(`/api/careers/${id}`, {
+          method: "DELETE",
+        });
+        
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || "Failed to delete career");
+        }
+        
+        return { success: true };
+      } finally {
+        setIsDeleting(false);
+      }
+    },
     onSuccess: () => {
       toast.success("Career deleted");
       queryClient.invalidateQueries({ queryKey: ["careers"] });
       setSelectedIds([]);
     },
-    onError: () => {
-      toast.error("Delete failed");
+    onError: (error) => {
+      console.error("Delete career error:", error);
+      toast.error("Delete failed: " + (error instanceof Error ? error.message : "Unknown error"));
     },
   });
 
   const deleteApplication = useMutation({
-    mutationFn: useDeleteJobApplication().mutationFn,
+    mutationFn: async (id: string) => {
+      setIsDeleting(true);
+      try {
+        const response = await fetch(`/api/job-applications/${id}`, {
+          method: "DELETE",
+        });
+        
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || "Failed to delete application");
+        }
+        
+        return { success: true };
+      } finally {
+        setIsDeleting(false);
+      }
+    },
     onSuccess: () => {
       toast.success("Application deleted");
       queryClient.invalidateQueries({ queryKey: ["jobApplications"] });
       setSelectedAppIds([]);
     },
-    onError: () => {
-      toast.error("Delete failed");
+    onError: (error) => {
+      console.error("Delete application error:", error);
+      toast.error("Delete failed: " + (error instanceof Error ? error.message : "Unknown error"));
     },
   });
 
@@ -182,6 +217,7 @@ export default function CareersPage() {
   // Bulk delete handlers
   const handleBulkDeleteCareers = async () => {
     try {
+      setIsDeleting(true);
       for (const id of selectedIds) {
         await deleteCareer.mutateAsync(id);
       }
@@ -189,11 +225,14 @@ export default function CareersPage() {
       setSelectedIds([]);
     } catch (error) {
       toast.error("Failed to delete some careers");
+    } finally {
+      setIsDeleting(false);
     }
   };
 
   const handleBulkDeleteApplications = async () => {
     try {
+      setIsDeleting(true);
       for (const id of selectedAppIds) {
         await deleteApplication.mutateAsync(id);
       }
@@ -201,6 +240,8 @@ export default function CareersPage() {
       setSelectedAppIds([]);
     } catch (error) {
       toast.error("Failed to delete some applications");
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -309,14 +350,34 @@ export default function CareersPage() {
               </div>
               <div className="space-x-4 flex items-center">
                 {selectedIds.length > 0 && (
-                  <Button 
-                    variant="destructive" 
-                    onClick={handleBulkDeleteCareers}
-                    disabled={deleteCareer.isPending}
-                  >
-                    <Trash2 className="h-4 w-4 mr-2" />
-                    Delete Selected ({selectedIds.length})
-                  </Button>
+                  <AlertDialog>
+                    <AlertDialogTrigger asChild>
+                      <Button 
+                        variant="destructive" 
+                        disabled={isDeleting}
+                      >
+                        <Trash2 className="h-4 w-4 mr-2" />
+                        Delete Selected ({selectedIds.length})
+                      </Button>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent>
+                      <AlertDialogHeader>
+                        <AlertDialogTitle>Delete Careers</AlertDialogTitle>
+                        <AlertDialogDescription>
+                          Are you sure you want to delete {selectedIds.length} selected careers? This action cannot be undone.
+                        </AlertDialogDescription>
+                      </AlertDialogHeader>
+                      <AlertDialogFooter>
+                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogAction 
+                          onClick={handleBulkDeleteCareers}
+                          className="bg-red-600 hover:bg-red-700"
+                        >
+                          Delete
+                        </AlertDialogAction>
+                      </AlertDialogFooter>
+                    </AlertDialogContent>
+                  </AlertDialog>
                 )}
                 <Button
                   variant="outline"
@@ -390,11 +451,30 @@ export default function CareersPage() {
                           >
                             <Edit2 className="h-4 w-4" />
                           </Button>
-                          <DeleteConfirmation
-                            onDelete={() => deleteCareer.mutate(career.id)}
-                            title="Delete Career"
-                            description="Are you sure you want to delete this career? This action cannot be undone."
-                          />
+                          <AlertDialog>
+                            <AlertDialogTrigger asChild>
+                              <Button variant="ghost" size="icon">
+                                <Trash2 className="h-4 w-4 text-red-500" />
+                              </Button>
+                            </AlertDialogTrigger>
+                            <AlertDialogContent>
+                              <AlertDialogHeader>
+                                <AlertDialogTitle>Delete Career</AlertDialogTitle>
+                                <AlertDialogDescription>
+                                  Are you sure you want to delete this career? This action cannot be undone.
+                                </AlertDialogDescription>
+                              </AlertDialogHeader>
+                              <AlertDialogFooter>
+                                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                <AlertDialogAction 
+                                  onClick={() => deleteCareer.mutate(career.id)}
+                                  className="bg-red-600 hover:bg-red-700"
+                                >
+                                  Delete
+                                </AlertDialogAction>
+                              </AlertDialogFooter>
+                            </AlertDialogContent>
+                          </AlertDialog>
                         </TableCell>
                       </TableRow>
                     ))
@@ -452,14 +532,34 @@ export default function CareersPage() {
               </div>
               <div className="space-x-4 flex items-center">
                 {selectedAppIds.length > 0 && (
-                  <Button 
-                    variant="destructive" 
-                    onClick={handleBulkDeleteApplications}
-                    disabled={deleteApplication.isPending}
-                  >
-                    <Trash2 className="h-4 w-4 mr-2" />
-                    Delete Selected ({selectedAppIds.length})
-                  </Button>
+                  <AlertDialog>
+                    <AlertDialogTrigger asChild>
+                      <Button 
+                        variant="destructive" 
+                        disabled={isDeleting}
+                      >
+                        <Trash2 className="h-4 w-4 mr-2" />
+                        Delete Selected ({selectedAppIds.length})
+                      </Button>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent>
+                      <AlertDialogHeader>
+                        <AlertDialogTitle>Delete Applications</AlertDialogTitle>
+                        <AlertDialogDescription>
+                          Are you sure you want to delete {selectedAppIds.length} selected applications? This action cannot be undone.
+                        </AlertDialogDescription>
+                      </AlertDialogHeader>
+                      <AlertDialogFooter>
+                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogAction 
+                          onClick={handleBulkDeleteApplications}
+                          className="bg-red-600 hover:bg-red-700"
+                        >
+                          Delete
+                        </AlertDialogAction>
+                      </AlertDialogFooter>
+                    </AlertDialogContent>
+                  </AlertDialog>
                 )}
                 <Button
                   variant="outline"
@@ -527,11 +627,30 @@ export default function CareersPage() {
                           >
                             <FileText className="h-4 w-4" />
                           </Button>
-                          <DeleteConfirmation
-                            onDelete={() => deleteApplication.mutate(application.id)}
-                            title="Delete Application"
-                            description="Are you sure you want to delete this application? This action cannot be undone."
-                          />
+                          <AlertDialog>
+                            <AlertDialogTrigger asChild>
+                              <Button variant="ghost" size="icon">
+                                <Trash2 className="h-4 w-4 text-red-500" />
+                              </Button>
+                            </AlertDialogTrigger>
+                            <AlertDialogContent>
+                              <AlertDialogHeader>
+                                <AlertDialogTitle>Delete Application</AlertDialogTitle>
+                                <AlertDialogDescription>
+                                  Are you sure you want to delete this application? This action cannot be undone.
+                                </AlertDialogDescription>
+                              </AlertDialogHeader>
+                              <AlertDialogFooter>
+                                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                <AlertDialogAction 
+                                  onClick={() => deleteApplication.mutate(application.id)}
+                                  className="bg-red-600 hover:bg-red-700"
+                                >
+                                  Delete
+                                </AlertDialogAction>
+                              </AlertDialogFooter>
+                            </AlertDialogContent>
+                          </AlertDialog>
                         </TableCell>
                       </TableRow>
                     ))
