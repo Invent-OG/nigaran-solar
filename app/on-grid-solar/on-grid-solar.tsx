@@ -183,7 +183,9 @@ export default function OnGridSolarPage() {
               <SwiperSlide key={index}>
                 <Image
                   src={src}
-                  alt={`On-grid solar installation by Nigaran Solar - Slide ${index + 1}`}
+                  alt={`On-grid solar installation by Nigaran Solar - Slide ${
+                    index + 1
+                  }`}
                   height={100}
                   width={100}
                   priority
