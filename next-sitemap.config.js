@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: 'https://www.nigaran.in/', 
-  generateRobotsTxt: true,      
-  exclude: ['/admin']
-}
+  siteUrl: 'https://nigaran.in',
+  generateRobotsTxt: true,
+  exclude: ['/admin/*'], // ✅ Exclude all /admin pages
+};
