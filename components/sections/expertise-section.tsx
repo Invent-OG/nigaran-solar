@@ -176,6 +176,7 @@ const ExpertiseSection = () => {
             className="absolute bottom-0 right-0 flex justify-center"
           >
             <Image
+              title="Renewable energy concept"
               src="https://wallpapers.com/images/hd/renewable-energy-concept-earth-solar-panels-wind-turbines-02b8mz7vgrvw8ikq-02b8mz7vgrvw8ikq.jpg"
               alt="Renewable energy concept"
               width={400}

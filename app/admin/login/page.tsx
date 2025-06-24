@@ -82,6 +82,7 @@ export default function AdminLoginPage() {
           <CardHeader className="space-y-1 flex flex-col items-center">
             <div className="mb-4 flex items-center justify-center">
               <Image
+                title="Nigaran-Logo"
                 src="/nigaran-logo.png"
                 alt="Nigaran Solar Logo"
                 width={80}

@@ -75,8 +75,9 @@ export function VideoLoaderProvider({
           <div className="flex gap-2 justify-center items-center">
             {/* Logo */}
             <Image
+              title="Nigaran-Logo"
               src={"/nigaran-logo.png"}
-              alt={"logo"}
+              alt="Nigaran Solar Logo"
               className="w-24 h-24 mb-4"
               width={50}
               height={50}

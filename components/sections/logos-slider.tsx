@@ -34,7 +34,22 @@ export function LogosSlider() {
           >
             <Image
               src={image}
-              alt={`${image.split('/').pop()?.replace('.webp', '').replace('logos_', '')} logo - Trusted partner of Nigaran Solar`}
+              alt={`${image
+                .split("/")
+                .pop()
+                ?.replace(".webp", "")
+                .replace(
+                  "logos_",
+                  ""
+                )} logo - Trusted partner of Nigaran Solar`}
+              title={`${image
+                .split("/")
+                .pop()
+                ?.replace(".webp", "")
+                .replace(
+                  "logos_",
+                  ""
+                )} logo - Trusted partner of Nigaran Solar`}
               width={100}
               height={100}
               className="object-contain transition-transform duration-300 ease-in-out hover:scale-110"
@@ -49,7 +64,22 @@ export function LogosSlider() {
           >
             <Image
               src={image}
-              alt={`${image.split('/').pop()?.replace('.webp', '').replace('logos_', '')} logo - Trusted partner of Nigaran Solar`}
+              alt={`${image
+                .split("/")
+                .pop()
+                ?.replace(".webp", "")
+                .replace(
+                  "logos_",
+                  ""
+                )} logo - Trusted partner of Nigaran Solar`}
+              title={`${image
+                .split("/")
+                .pop()
+                ?.replace(".webp", "")
+                .replace(
+                  "logos_",
+                  ""
+                )} logo - Trusted partner of Nigaran Solar`}
               width={128}
               height={28}
               className="object-contain transition-transform duration-300 ease-in-out md:w-20 md:h-20 lg:w-24 lg:h-24 hover:scale-110"

@@ -188,6 +188,7 @@ const Feature108 = ({
                 <Image
                   src={selectedTab.content.imageSrc}
                   alt={selectedTab.content.imageAlt}
+                  title={selectedTab.content.imageAlt}
                   width={500}
                   height={500}
                   className="absolute inset-0 object-cover w-full h-full"

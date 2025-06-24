@@ -99,6 +99,7 @@ export default function FAQ() {
 
             <div className="absolute  -bottom-10 translate-x-1/3  lg:hidden  h-[200px] w-[200px] rounded-full  bg-primary z-0"></div>
             <Image
+              title="FAQ Illustration"
               src="/Home page/FAQ.webp"
               alt="Solar Panels"
               width={500}

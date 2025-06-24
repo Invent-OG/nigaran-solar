@@ -139,6 +139,7 @@ export default function Sidebar() {
         <div className="p-6">
           <div className="flex items-center gap-2 mb-8">
             <Image
+              title="Nigaran-Logo"
               src={"/nigaran-logo.png"}
               alt={"Nigaran Solar Logo"}
               width={50}

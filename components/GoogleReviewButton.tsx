@@ -11,6 +11,7 @@ export function GoogleReviewButton() {
   return (
     <button onClick={handleClick}>
       <Image
+        title="Google Review Button"
         src="https://turbifycdn.com/ty/cdn/finnstyle/google-button.png" // ← You'll need to download the icon and place it in /public
         alt="Google Review Button - Rate your experience with Nigaran Solar"
         height={100}

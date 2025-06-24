@@ -89,6 +89,7 @@ export default function Footer() {
         </div>
         <div className="w-full md:w-auto">
           <Image
+            title="Contact us illustration"
             src="/contact-us.png"
             alt="Contact us illustration with customer service representative"
             width={450}
@@ -110,6 +111,7 @@ export default function Footer() {
           >
             <div className="flex items-center gap-2">
               <Image
+                title="Nigaran-Logo"
                 src="/nigaran-logo.png"
                 alt="Nigaran Solar company logo"
                 width={50}

@@ -57,11 +57,11 @@ const navItems: NavItem[] = [
     label: "Services",
     href: "#",
     submenu: [
-       { label: "On-Grid Solar", href: "/on-grid-solar", icon: Zap },
+      { label: "On-Grid Solar", href: "/on-grid-solar", icon: Zap },
       { label: "Off-Grid Solar", href: "/off-grid-solar", icon: Battery },
-    ]
+    ],
   },
-  
+
   { label: "Contact", href: "/contact" },
   {
     label: "More",
@@ -133,7 +133,13 @@ export default function Header() {
           className="flex items-center gap-2"
         >
           <Link href="/" className="text-xl font-bold flex items-center">
-            <Image src="/nigaran-logo.png" alt="" width={50} height={50} />
+            <Image
+              title="Nigaran-Logo"
+              src="/nigaran-logo.png"
+              alt="Nigaran Solar Logo"
+              width={50}
+              height={50}
+            />
             <span
               className={cn(
                 "ml-2",
