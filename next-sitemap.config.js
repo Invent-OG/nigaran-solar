@@ -1,6 +1,14 @@
-/** @type {import('next-sitemap').IConfig} */
+// next-sitemap.config.js
 module.exports = {
   siteUrl: 'https://nigaran.in',
   generateRobotsTxt: true,
-  exclude: ['/admin/*'], // ✅ Exclude all /admin pages
+  exclude: ['/admin'], // 🔒 Exclude /admin from sitemap
+  robotsTxtOptions: {
+    policies: [
+      {
+        userAgent: '*',
+        disallow: '/admin', // 🔒 Disallow in robots.txt
+      },
+    ],
+  },
 };
