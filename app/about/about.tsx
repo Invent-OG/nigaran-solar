@@ -54,11 +54,11 @@ export default function AboutPage() {
       position: "Site Survey Engineer",
       image: "/about/teams/Empty.png",
     },
-    {
-      name: "Aushinraj",
-      position: "Project Manager",
-      image: "/about/teams/5.png",
-    },
+    // {
+    //   name: "Aushinraj",
+    //   position: "Project Manager",
+    //   image: "/about/teams/5.png",
+    // },
   ];
   return (
     <div className="min-h-screen pt-20">
@@ -181,12 +181,12 @@ export default function AboutPage() {
           commercial clients. Our goal is to help our customers reduce energy
           costs and contribute to environmental conservation by offering
           renewable energy solutions. With years of expertise in solar panel
-          technology and installations, we're your trusted solar partner in
+          technology and installations, we&apos;re your trusted solar partner in
           Tamilnadu, providing unmatched service and consultation. We offer a
           full range of solar services, including solar power systems for homes,
           commercial establishments, and industries. Whether you&apos;re looking
           for a residential solar installation or a large-scale solar rooftop
-          installation, we've got you covered.
+          installation, we&apos;ve got you covered.
         </p>
       </div>
 
@@ -236,7 +236,7 @@ export default function AboutPage() {
                   Our team brings extensive experience in the solar power
                   industry, combining technical expertise with deep knowledge of
                   the latest renewable energy technologies. From consultation to
-                  installation, you'll work with seasoned professionals who
+                  installation, you&apos;ll work with seasoned professionals who
                   ensure every project is completed to the highest standards.
                 </p>
               </div>
@@ -300,10 +300,11 @@ export default function AboutPage() {
                   Excellent Customer Support
                 </h4>
                 <p className="text-sm text-muted-foreground md:text-base">
-                  We believe that great service doesn't end after installation.
-                  Our friendly and responsive support team is always available
-                  to assist you — whether you have questions, need maintenance,
-                  or want to expand your solar system in the future.
+                  We believe that great service doesn&apos;t end after
+                  installation. Our friendly and responsive support team is
+                  always available to assist you — whether you have questions,
+                  need maintenance, or want to expand your solar system in the
+                  future.
                 </p>
               </div>
             </div>

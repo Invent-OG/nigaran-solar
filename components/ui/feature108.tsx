@@ -48,7 +48,7 @@ const Feature108 = ({
         description:
           "Go solar with Nigaran Solar and enjoy a steady reduction in your electricity bills. We offer affordable solar panel solutions for homes across Tamil Nadu. Whether you need a solar rooftop installation or a custom solar installation, we provide high-quality panels that ensure maximum energy efficiency.",
         buttonText: "Learn More",
-        imageSrc: "/Home page/Residential solar.webp",
+        imageSrc: "/Home page/Residential solar.jpeg",
         imageAlt: "On-grid solar system installation",
         link: "/residential",
       },
