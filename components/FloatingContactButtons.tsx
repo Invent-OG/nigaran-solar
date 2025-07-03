@@ -24,7 +24,7 @@ export default function FloatingContactButtons() {
       </a>
 
       {/* Download PDF Button */}
-      <a
+      {/* <a
         href="https://drive.google.com/uc?export=download&id=1glsHHAZvKwbCXD8OWnCLI10TdTrkhwEQ"
         target="_blank"
         rel="noopener noreferrer"
@@ -32,7 +32,7 @@ export default function FloatingContactButtons() {
         title="Download PDF"
       >
         <Download className="w-5 h-5" />
-      </a>
+      </a> */}
     </div>
   );
 }

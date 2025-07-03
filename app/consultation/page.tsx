@@ -107,7 +107,7 @@ export default function ConsultationPage() {
             </div>
 
             {/* Image with Download Button */}
-            <div className="relative z-10 mx-auto mt-10 overflow-hidden shadow-lg rounded-xl">
+            {/* <div className="relative z-10 mx-auto mt-10 overflow-hidden shadow-lg rounded-xl">
               <Image
                 src="https://images.unsplash.com/photo-1707247111552-aaf74241058b?q=80&w=3480&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 alt="Download PDF"
@@ -131,7 +131,7 @@ export default function ConsultationPage() {
                   Download PDF
                 </a>
               </div>
-            </div>
+            </div> */}
 
             <div className="flex justify-center gap-2 mt-4">
               {slides.map((_, index) => (
