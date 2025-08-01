@@ -27,7 +27,7 @@ export default function AboutPage() {
     {
       name: "Lourduraj",
       position: "Technical Head",
-      image: "/about/teams/Empty.png",
+      image: "/about/teams/9.webp",
     },
     {
       name: "Boobala Krishnan",
@@ -44,11 +44,11 @@ export default function AboutPage() {
       position: "Client Relationship Manager",
       image: "/about/teams/3.png",
     },
-    {
-      name: "Vindhiya",
-      position: "Accounts and Operations.",
-      image: "/about/teams/4.png",
-    },
+    // {
+    //   name: "Vindhiya",
+    //   position: "Accounts and Operations.",
+    //   image: "/about/teams/4.png",
+    // },
     {
       name: "Akashveer",
       position: "Site Survey Engineer",
@@ -415,20 +415,6 @@ export default function AboutPage() {
               commercial, and industrial clients.
             </p>
           </div>
-          {/* <CTASection
-            badge={{
-              text: "Get started",
-            }}
-            title="Join the Solar Revolution"
-            description="Thousands have already made the switch to solar with Nigaran Solar. Join
-the movement and discover how you can save money, increase your
-property value, and help protect the environment."
-            action={{
-              text: "Learn more about our solar solutions",
-              href: "/residential",
-              variant: "default",
-            }}
-          /> */}
         </div>
       </section>
     </div>

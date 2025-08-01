@@ -42,7 +42,9 @@ export default function CommercialPage() {
               <SwiperSlide key={index}>
                 <Image
                   src={src}
-                  alt={`Commercial solar installation by Nigaran Solar - Slide ${index + 1}`}
+                  alt={`Commercial solar installation by Nigaran Solar - Slide ${
+                    index + 1
+                  }`}
                   fill
                   sizes="100vw"
                   className="object-cover w-full h-full"
@@ -108,9 +110,9 @@ export default function CommercialPage() {
           <p>
             Energy costs are a major expense for many organizations, but Nigaran
             Solar offers scalable commercial solar panels that transform
-            sunlight into long-term savings. Whether it's a warehouse, factory,
-            or office complex, our solar for business solutions are engineered
-            for performance and durability.
+            sunlight into long-term savings. Whether it&apos;s a warehouse,
+            factory, or office complex, our solar for business solutions are
+            engineered for performance and durability.
           </p>
           <p>
             We provide end-to-end services including industrial solar
@@ -261,8 +263,8 @@ export default function CommercialPage() {
                 <strong className="text-white">
                   Sustainability & Brand Image:
                 </strong>{" "}
-                Adopt sustainable energy to boost your business's eco-friendly
-                image and appeal to green-conscious customers.
+                Adopt sustainable energy to boost your business&apos;s
+                eco-friendly image and appeal to green-conscious customers.
               </span>
             </li>
             <li className="flex items-start gap-4">
