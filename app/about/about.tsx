@@ -363,9 +363,6 @@ export default function AboutPage() {
           <div className="w-20 h-1 mx-auto mb-6 bg-primary"></div>
         </motion.div>
 
-        {
-          // Team Members
-        }
         <div className="grid grid-cols-1  md:grid-cols-3 lg:grid-cols-4 container">
           {TeamsData.map((member, index) => (
             <div
