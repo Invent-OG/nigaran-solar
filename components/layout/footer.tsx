@@ -215,11 +215,19 @@ export default function Footer() {
         </div>
 
         {/* COPYRIGHT */}
-        <motion.div className="pt-10 mt-10 text-center border-t border-white/10">
-          <p className="text-sm text-gray-400">
+        <motion.div className="pt-10 mt-10 flex justify-center w-full  text-center border-t border-white/10">
+          <p className="text-sm text-gray-400 w-full">
             &copy; {new Date().getFullYear()} Nigaran Solar. All rights
             reserved.
           </p>
+          <Image
+            title="Maven Advertising logo"
+            src="/logo png (1).png"
+            alt="Maven Advertising logo"
+            width={200}
+            height={200}
+            className=" w-40  ml-4 object-contain"
+          />
         </motion.div>
       </div>
     </footer>
