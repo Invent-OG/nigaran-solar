@@ -5,11 +5,13 @@ import { leads } from "@/lib/db/schema";
 import { eq, count, like, and, sql } from "drizzle-orm";
 import { sendLeadThankYouEmail } from "@/lib/email";
 
+const phoneRegex = /^(?:\+91)?[6-9]\d{9}$/;
+
 const leadSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   whatsappNumber: z
     .string()
-    .regex(/^[6-9]\d{9}$/, "Please enter a valid Indian mobile number"),
+    .regex(phoneRegex, "Please enter a valid Indian mobile number"),
   electricityBill: z
     .string()
     .min(1, "Please enter your electricity bill amount"),
