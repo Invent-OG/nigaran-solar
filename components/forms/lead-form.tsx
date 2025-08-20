@@ -31,7 +31,7 @@ import {
   CardTitle,
 } from "../ui/card";
 
-const phoneRegex = /^[6-9]\d{9}$/;
+const phoneRegex = /^(?:\+91)?[6-9]\d{9}$/;
 
 const leadFormSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -163,7 +163,8 @@ export default function LeadForm({
                   <FormLabel className={textColor}>WhatsApp Number</FormLabel>
                   <FormControl>
                     <Input
-                      {...field}
+                      value={field.value || "+91"}
+                      onChange={field.onChange}
                       placeholder="Enter your WhatsApp number"
                       className="border placeholder-white/60"
                     />
