@@ -106,33 +106,6 @@ export default function ConsultationPage() {
               </div>
             </div>
 
-            {/* Image with Download Button */}
-            {/* <div className="relative z-10 mx-auto mt-10 overflow-hidden shadow-lg rounded-xl">
-              <Image
-                src="https://images.unsplash.com/photo-1707247111552-aaf74241058b?q=80&w=3480&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                alt="Download PDF"
-                width={800}
-                height={500}
-                className="object-cover w-full transition-opacity duration-300 lg:h-20 hover:opacity-100 rounded-xl"
-              />
-              <div className="absolute inset-0 bg-black/40 rounded-xl" />
-              <div className="absolute flex flex-col items-center justify-center gap-5 p-5 transform translate-y-1/2 lg:gap-10 lg:justify-between lg:flex-row bottom-1/2 right-4">
-                <h2 className="text-xl font-semibold text-center text-white lg:text-left ">
-                  Download Our Solar Consultation Brochure
-                </h2>
-
-                <a
-                  href="https://drive.google.com/uc?export=download&id=1hb0g0RTYrj1sMfIeJJAkTQP8BOrldNdJ"
-                  download
-                  className="lg:w-[40%] px-4 py-2 text-center flex items-center
-                   font-semibold text-white transition bg-primary rounded-md shadow-md hover:bg-primary/90"
-                >
-                  <DownloadIcon size={16} className="inline mr-2" />
-                  Download PDF
-                </a>
-              </div>
-            </div> */}
-
             <div className="flex justify-center gap-2 mt-4">
               {slides.map((_, index) => (
                 <button

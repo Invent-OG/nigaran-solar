@@ -14,7 +14,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 const footerLinks = {
   legal: [
     { name: "Privacy Policy", href: "#" },
@@ -32,6 +32,7 @@ const footerLinks = {
 export default function Footer() {
   const [email, setEmail] = useState("");
   const router = useRouter();
+  const pathName = usePathname();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -220,14 +221,18 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} Nigaran Solar. All rights
             reserved.
           </p>
-          <Image
-            title="Maven Advertising logo"
-            src="/logo png (1).png"
-            alt="Maven Advertising logo"
-            width={200}
-            height={200}
-            className=" w-40  ml-4 object-contain"
-          />
+          {pathName == "/consultation" ? (
+            ""
+          ) : (
+            <Image
+              title="Maven Advertising logo"
+              src="/logo png (1).png"
+              alt="Maven Advertising logo"
+              width={200}
+              height={200}
+              className=" w-40  ml-4 object-contain"
+            />
+          )}
         </motion.div>
       </div>
     </footer>
