@@ -6,7 +6,7 @@ export interface Lead {
   name: string;
   whatsappNumber: string;
   electricityBill: string; // Assuming this is a string representing the bill amount
-  city: string;
+  district: string;
   companyName?: string;
   type: "residential" | "housing_society" | "commercial";
   createdAt: string;
@@ -24,11 +24,11 @@ const fetchLeads = async (
     page: page.toString(),
     limit: limit.toString(),
   });
-  
+
   if (search) params.append("search", search);
   if (date) params.append("date", date);
   if (type) params.append("type", type);
-  
+
   const response = await fetch(`/api/leads?${params.toString()}`);
   if (!response.ok) throw new Error("Failed to fetch leads");
   return response.json();

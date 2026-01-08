@@ -42,7 +42,8 @@ const leadFormSchema = z.object({
   electricityBill: z
     .string()
     .min(1, "Please select your electricity bill range"),
-  city: z.string().min(2, "Please enter your city"),
+
+  district: z.string().min(2, "Please enter your district"),
   companyName: z.string().optional(),
   type: z.enum(["residential", "housing_society", "commercial"]),
 });
@@ -72,7 +73,8 @@ export default function LeadForm({
       whatsappNumber: "",
       // electricityBill is initialized as an empty string, as required.
       electricityBill: "",
-      city: "",
+
+      district: "",
       companyName: "",
       type,
     },
@@ -218,17 +220,65 @@ export default function LeadForm({
 
             <FormField
               control={form.control}
-              name="city"
+              name="district"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className={textColor}>City</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      placeholder="Enter your city"
-                      className="border placeholder-white/60"
-                    />
-                  </FormControl>
+                  <FormLabel className={textColor}>District</FormLabel>
+                  <Select onValueChange={field.onChange} value={field.value}>
+                    <FormControl>
+                      <SelectTrigger className="border">
+                        <SelectValue placeholder="Select your district" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent className="h-56">
+                      {[
+                        "Ariyalur",
+                        "Chengalpattu",
+                        "Chennai",
+                        "Coimbatore",
+                        "Cuddalore",
+                        "Dharmapuri",
+                        "Dindigul",
+                        "Erode",
+                        "Kallakurichi",
+                        "Kanchipuram",
+                        "Kanniyakumari",
+                        "Karur",
+                        "Krishnagiri",
+                        "Madurai",
+                        "Mayiladuthurai",
+                        "Nagapattinam",
+                        "Namakkal",
+                        "Nilgiris",
+                        "Perambalur",
+                        "Pudukkottai",
+                        "Ramanathapuram",
+                        "Ranipet",
+                        "Salem",
+                        "Sivagangai",
+                        "Tenkasi",
+                        "Thanjavur",
+                        "Theni",
+                        "Thiruvarur",
+                        "Thoothukudi",
+                        "Tiruchirappalli",
+                        "Tirunelveli",
+                        "Tirupathur",
+                        "Tiruppur",
+                        "Tiruvallur",
+                        "Tiruvannamalai",
+                        "Vellore",
+                        "Villupuram",
+                        "Virudhunagar",
+                        "Pondicherry",
+                        "Others",
+                      ].map((option) => (
+                        <SelectItem key={option} value={option}>
+                          {option}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                   <FormMessage />
                 </FormItem>
               )}

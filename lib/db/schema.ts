@@ -31,7 +31,7 @@ export const leads = pgTable("leads", {
   name: text("name").notNull(),
   whatsappNumber: varchar("whatsapp_number", { length: 15 }).notNull(),
   electricityBill: text("electricity_bill").notNull(),
-  city: text("city").notNull(),
+  district: text("district").notNull(),
   companyName: text("company_name"),
   type: text("type", {
     enum: ["residential", "housing_society", "commercial"],

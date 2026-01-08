@@ -16,7 +16,7 @@ export async function POST(req: Request) {
         {
           Last_Name: body.name,
           Mobile: body.whatsappNumber,
-          City: body.city,
+          District: body.district,
           Company_Name: body.companyName || "N/A",
           Monthly_Electricity_Bill: body.electricityBill,
           Looking_For: body.type,

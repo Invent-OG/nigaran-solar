@@ -106,9 +106,16 @@ export default function LeadTabs() {
 
   const handleExport = (type: string) => {
     // Filter leads by the current tab type
-    const leadsToExport = data?.leads.filter((lead) => lead.type === type) || [];
-    
-    const headers = ["Name", "WhatsApp Number", "Electricity Bill", "City", "Date"];
+    const leadsToExport =
+      data?.leads.filter((lead) => lead.type === type) || [];
+
+    const headers = [
+      "Name",
+      "WhatsApp Number",
+      "Electricity Bill",
+      "District",
+      "Date",
+    ];
 
     const csv = [
       headers,
@@ -116,7 +123,7 @@ export default function LeadTabs() {
         lead.name,
         lead.whatsappNumber,
         lead.electricityBill.toString(),
-        lead.city,
+        lead.district,
         new Date(lead.createdAt).toLocaleDateString(),
       ]),
     ]
@@ -133,7 +140,13 @@ export default function LeadTabs() {
     document.body.removeChild(a);
     window.URL.revokeObjectURL(url);
     toast.success(
-      `${type === "residential" ? "Residential" : type === "housing_society" ? "Housing Society" : "Commercial"} leads exported successfully!`
+      `${
+        type === "residential"
+          ? "Residential"
+          : type === "housing_society"
+          ? "Housing Society"
+          : "Commercial"
+      } leads exported successfully!`
     );
   };
 
@@ -276,7 +289,8 @@ export default function LeadTabs() {
                 <TableHead>
                   <Checkbox
                     checked={
-                      selectedIds.length === filteredLeads.length && filteredLeads.length > 0
+                      selectedIds.length === filteredLeads.length &&
+                      filteredLeads.length > 0
                     }
                     onCheckedChange={() => handleSelectAll(filteredLeads)}
                   />
@@ -284,7 +298,7 @@ export default function LeadTabs() {
                 <TableHead>Name</TableHead>
                 <TableHead>WhatsApp</TableHead>
                 <TableHead>Bill Amount</TableHead>
-                <TableHead>City</TableHead>
+                <TableHead>District</TableHead>
                 <TableHead>Date</TableHead>
                 <TableHead className="text-right">Actions</TableHead>
               </TableRow>
@@ -308,7 +322,7 @@ export default function LeadTabs() {
                     <TableCell>{lead.name}</TableCell>
                     <TableCell>{lead.whatsappNumber}</TableCell>
                     <TableCell>{lead.electricityBill}</TableCell>
-                    <TableCell>{lead.city}</TableCell>
+                    <TableCell>{lead.district}</TableCell>
                     <TableCell>
                       {new Date(lead.createdAt).toLocaleDateString()}
                     </TableCell>

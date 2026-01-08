@@ -1,92 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-    xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"
-    xmlns:xhtml="http://www.w3.org/1999/xhtml"
-    xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0"
-    xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
-    xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
-    <url>
-        <loc>https://nigaran.in/about</loc>
-        <lastmod>2025-06-24T05:37:42.985Z</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>0.7</priority>
-    </url>
-    <url>
-        <loc>https://nigaran.in/consultation</loc>
-        <lastmod>2025-06-24T05:37:42.985Z</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>0.7</priority>
-    </url>
-    <url>
-        <loc>https://nigaran.in/commercial</loc>
-        <lastmod>2025-06-24T05:37:42.985Z</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>0.7</priority>
-    </url>
-    <url>
-        <loc>https://nigaran.in/careers</loc>
-        <lastmod>2025-06-24T05:37:42.985Z</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>0.7</priority>
-    </url>
-    <url>
-        <loc>https://nigaran.in/blog</loc>
-        <lastmod>2025-06-24T05:37:42.985Z</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>0.7</priority>
-    </url>
-    <url>
-        <loc>https://nigaran.in/contact</loc>
-        <lastmod>2025-06-24T05:37:42.985Z</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>0.7</priority>
-    </url>
-    <url>
-        <loc>https://nigaran.in/on-grid-solar</loc>
-        <lastmod>2025-06-24T05:37:42.985Z</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>0.7</priority>
-    </url>
-    <url>
-        <loc>https://nigaran.in</loc>
-        <lastmod>2025-06-24T05:37:42.985Z</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>0.7</priority>
-    </url>
-    <url>
-        <loc>https://nigaran.in/solar-calculator</loc>
-        <lastmod>2025-06-24T05:37:42.985Z</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>0.7</priority>
-    </url>
-    <url>
-        <loc>https://nigaran.in/off-grid-solar</loc>
-        <lastmod>2025-06-24T05:37:42.985Z</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>0.7</priority>
-    </url>
-    <url>
-        <loc>https://nigaran.in/housing-society</loc>
-        <lastmod>2025-06-24T05:37:42.985Z</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>0.7</priority>
-    </url>
-    <url>
-        <loc>https://nigaran.in/solar-pro</loc>
-        <lastmod>2025-06-24T05:37:42.985Z</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>0.7</priority>
-    </url>
-    <url>
-        <loc>https://nigaran.in/subsidy</loc>
-        <lastmod>2025-06-24T05:37:42.985Z</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>0.7</priority>
-    </url>
-    <url>
-        <loc>https://nigaran.in/residential</loc>
-        <lastmod>2025-06-24T05:37:42.985Z</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>0.7</priority>
-    </url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+<url><loc>https://nigaran.in/about</loc><lastmod>2026-01-08T08:03:30.368Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://nigaran.in/admin/login</loc><lastmod>2026-01-08T08:03:30.369Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://nigaran.in/blog</loc><lastmod>2026-01-08T08:03:30.369Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://nigaran.in/admin/leads</loc><lastmod>2026-01-08T08:03:30.369Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://nigaran.in/admin/testimonials</loc><lastmod>2026-01-08T08:03:30.369Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://nigaran.in/admin/settings</loc><lastmod>2026-01-08T08:03:30.369Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://nigaran.in/commercial</loc><lastmod>2026-01-08T08:03:30.369Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://nigaran.in/housing-society</loc><lastmod>2026-01-08T08:03:30.369Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://nigaran.in/consultation</loc><lastmod>2026-01-08T08:03:30.369Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://nigaran.in/on-grid-solar</loc><lastmod>2026-01-08T08:03:30.369Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://nigaran.in/off-grid-solar</loc><lastmod>2026-01-08T08:03:30.369Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://nigaran.in/solar-calculator</loc><lastmod>2026-01-08T08:03:30.369Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://nigaran.in/contact</loc><lastmod>2026-01-08T08:03:30.369Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://nigaran.in/careers</loc><lastmod>2026-01-08T08:03:30.369Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://nigaran.in/admin/careers</loc><lastmod>2026-01-08T08:03:30.369Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://nigaran.in/admin/blog</loc><lastmod>2026-01-08T08:03:30.369Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://nigaran.in/subsidy</loc><lastmod>2026-01-08T08:03:30.369Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://nigaran.in/residential</loc><lastmod>2026-01-08T08:03:30.369Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://nigaran.in/solar-pro</loc><lastmod>2026-01-08T08:03:30.369Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://nigaran.in</loc><lastmod>2026-01-08T08:03:30.369Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
 </urlset>

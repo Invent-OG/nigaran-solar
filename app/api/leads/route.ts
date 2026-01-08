@@ -15,7 +15,7 @@ const leadSchema = z.object({
   electricityBill: z
     .string()
     .min(1, "Please enter your electricity bill amount"),
-  city: z.string().min(2, "Please enter your city"),
+  district: z.string().min(2, "Please enter your district"),
   companyName: z.string().optional(),
   type: z.enum(["residential", "housing_society", "commercial"]),
 });
@@ -66,7 +66,7 @@ export async function GET(req: Request) {
       whereConditions.push(
         sql`(${leads.name} ILIKE ${`%${search}%`} OR 
              ${leads.whatsappNumber} ILIKE ${`%${search}%`} OR 
-             ${leads.city} ILIKE ${`%${search}%`})`
+             ${leads.district} ILIKE ${`%${search}%`})`
       );
     }
 

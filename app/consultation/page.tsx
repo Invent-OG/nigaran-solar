@@ -7,6 +7,11 @@ import { motion } from "framer-motion";
 import LeadForm from "@/components/forms/lead-form";
 import RippleBackground from "@/components/RippleBackground";
 import { Building2, DownloadIcon, HomeIcon, Users2 } from "lucide-react";
+import { ConsultationWhyChooseUs } from "@/components/sections/consultation-why-choose-us";
+import { ConsultationInstallationProcess } from "@/components/sections/consultation-installation-process";
+import { ConsultationExperience } from "@/components/sections/consultation-experience";
+import { ConsultationQuickInstallation } from "@/components/sections/consultation-quick-installation";
+import { ConsultationFinancing } from "@/components/sections/consultation-financing";
 
 export default function ConsultationPage() {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
@@ -180,6 +185,25 @@ export default function ConsultationPage() {
           </div>
         </motion.div>
       </section>
+
+      {/* Why Choose Us */}
+      <div className="relative z-10 bg-white">
+        <ConsultationWhyChooseUs />
+      </div>
+
+      {/* Installation Process */}
+      <div className="relative z-10 bg-white ">
+        <ConsultationInstallationProcess />
+      </div>
+
+      {/* Nigaran Solar Experience */}
+      <ConsultationExperience />
+
+      {/* Quick Installation */}
+      <ConsultationQuickInstallation />
+
+      {/* Financing options */}
+      <ConsultationFinancing />
     </div>
   );
 }

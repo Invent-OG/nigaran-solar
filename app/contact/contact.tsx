@@ -40,7 +40,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h2 className="mb-2 text-lg font-semibold">Email:</h2>
-                  <p>info@nigaransolar.com</p>
+                  <p>Info@nigaran.in</p>
                 </div>
                 <div>
                   <h2 className="mb-2 text-lg font-semibold">
