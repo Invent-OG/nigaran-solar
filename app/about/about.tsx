@@ -17,48 +17,73 @@ export default function AboutPage() {
     {
       name: "Felix Bernard",
       position: "Business Head",
-      image: "/about/teams/1.png",
+      image: "/about/teams/felix.webp",
     },
     {
       name: "Cathelene",
       position: "Operations Head",
-      image: "/about/teams/2.png",
-    },
-    {
-      name: "Lourduraj",
-      position: "Technical Head",
-      image: "/about/teams/9.webp",
-    },
-    {
-      name: "Boobala Krishnan",
-      position: "Business Development Manager",
-      image: "/about/teams/6.png",
-    },
-    {
-      name: "Jerome",
-      position: "Operations Manager",
-      image: "/about/teams/7.png",
+      image: "/about/teams/cathelene.webp",
     },
     {
       name: "Srimathi",
       position: "Client Relationship Manager",
-      image: "/about/teams/3.png",
+      image: "/about/teams/srimathi.webp",
     },
-    // {
-    //   name: "Vindhiya",
-    //   position: "Accounts and Operations.",
-    //   image: "/about/teams/4.png",
-    // },
     {
       name: "Akashveer",
       position: "Site Survey Engineer",
-      image: "/about/teams/Empty.png",
+      image: "/about/teams/akashveer.webp",
     },
-    // {
-    //   name: "Aushinraj",
-    //   position: "Project Manager",
-    //   image: "/about/teams/5.png",
-    // },
+    {
+      name: "Chithrakala",
+      position: "Operations Manager - Banking",
+      image: "/about/teams/chithrakala.webp",
+    },
+    {
+      name: "Iruthayaraj",
+      position: "Project Coordinator",
+      image: "/about/teams/iruthayaraj.webp",
+    },
+    {
+      name: "Karpagam",
+      position: "Process Executive",
+      image: "/about/teams/karpagam.webp",
+    },
+    {
+      name: "Kowsalya",
+      position: "Business Development Manager",
+      image: "/about/teams/kowsalya.webp",
+    },
+    {
+      name: "Navaraj",
+      position: "Accounts & Operations",
+      image: "/about/teams/navaraj.webp",
+    },
+    {
+      name: "Saran",
+      position: "Project Co-ordinator",
+      image: "/about/teams/saran.webp",
+    },
+    {
+      name: "Sibi",
+      position: "HR Manager",
+      image: "/about/teams/sibi.webp",
+    },
+    {
+      name: "Swathika",
+      position: "Process Executive",
+      image: "/about/teams/swathika.webp",
+    },
+    {
+      name: "Swetha",
+      position: "Operations Manager - DISCOM",
+      image: "/about/teams/swetha.webp",
+    },
+    {
+      name: "Yogesh Dinagar",
+      position: "Site Survey Engineer",
+      image: "/about/teams/yogesh dinagar.webp",
+    },
   ];
   return (
     <div className="min-h-screen pt-20">
