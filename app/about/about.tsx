@@ -20,6 +20,11 @@ export default function AboutPage() {
       image: "/about/teams/felix.webp",
     },
     {
+      name: "Lourdraj",
+      position: "Technical Head",
+      image: "/about/teams/lourdraj.webp",
+    },
+    {
       name: "Cathelene",
       position: "Operations Head",
       image: "/about/teams/cathelene.webp",

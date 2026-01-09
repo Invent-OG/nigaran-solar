@@ -125,12 +125,14 @@ export default function LeadForm({
                 name="companyName"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className={textColor}>Company Name</FormLabel>
+                    <FormLabel className={`${textColor} text-base md:text-lg`}>
+                      Company Name
+                    </FormLabel>
                     <FormControl>
                       <Input
                         {...field}
                         placeholder="Enter company name"
-                        className="border placeholder-white/60"
+                        className="border placeholder-white/60 h-12 text-base md:text-lg"
                       />
                     </FormControl>
                     <FormMessage />
@@ -144,12 +146,14 @@ export default function LeadForm({
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className={textColor}>Name</FormLabel>
+                  <FormLabel className={`${textColor} text-base md:text-lg`}>
+                    Name
+                  </FormLabel>
                   <FormControl>
                     <Input
                       {...field}
                       placeholder="Enter your name"
-                      className="border placeholder-white/60"
+                      className="border placeholder-white/60 h-12 text-base md:text-lg"
                     />
                   </FormControl>
                   <FormMessage />
@@ -162,14 +166,28 @@ export default function LeadForm({
               name="whatsappNumber"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className={textColor}>WhatsApp Number</FormLabel>
+                  <FormLabel className={`${textColor} text-base md:text-lg`}>
+                    WhatsApp Number
+                  </FormLabel>
                   <FormControl>
-                    <Input
-                      value={field.value || "+91"}
-                      onChange={field.onChange}
-                      placeholder="Enter your WhatsApp number"
-                      className="border placeholder-white/60"
-                    />
+                    <div className="flex items-center border rounded-md focus-within:ring-1 focus-within:ring-ring h-12">
+                      <div className="pl-3 pr-2 py-3 text-muted-foreground bg-muted/50 border-r text-base md:text-lg">
+                        +91
+                      </div>
+                      <Input
+                        value={field.value.replace("+91", "")}
+                        onChange={(e) => {
+                          const val = e.target.value.replace(/[^0-9]/g, "");
+                          if (val.length <= 10) {
+                            field.onChange(`+91${val}`);
+                          }
+                        }}
+                        placeholder="Enter your WhatsApp number"
+                        className="border-0 focus-visible:ring-0 focus-visible:ring-offset-0 px-3 min-w-0 h-full text-base md:text-lg"
+                        maxLength={10}
+                        type="tel"
+                      />
+                    </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -181,17 +199,17 @@ export default function LeadForm({
               name="electricityBill"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className={textColor}>
+                  <FormLabel className={`${textColor} text-base md:text-lg`}>
                     {type === "commercial" ? "Monthly" : "Bi-Monthly"}{" "}
                     Electricity Bill (₹)
                   </FormLabel>
                   <Select onValueChange={field.onChange} value={field.value}>
                     <FormControl>
-                      <SelectTrigger className="border ">
+                      <SelectTrigger className="border h-12 text-base md:text-lg">
                         <SelectValue placeholder="Select your electricity bill range" />
                       </SelectTrigger>
                     </FormControl>
-                    <SelectContent className="text-black">
+                    <SelectContent className="text-black text-base md:text-lg">
                       {(type === "residential"
                         ? [
                             "Less than 3,000/-",
@@ -207,7 +225,11 @@ export default function LeadForm({
                             "1,00,000/- and above",
                           ]
                       ).map((option) => (
-                        <SelectItem key={option} value={option}>
+                        <SelectItem
+                          key={option}
+                          value={option}
+                          className="text-base md:text-lg"
+                        >
                           {option}
                         </SelectItem>
                       ))}
@@ -223,14 +245,16 @@ export default function LeadForm({
               name="district"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className={textColor}>District</FormLabel>
+                  <FormLabel className={`${textColor} text-base md:text-lg`}>
+                    District
+                  </FormLabel>
                   <Select onValueChange={field.onChange} value={field.value}>
                     <FormControl>
-                      <SelectTrigger className="border">
+                      <SelectTrigger className="border h-12 text-base md:text-lg">
                         <SelectValue placeholder="Select your district" />
                       </SelectTrigger>
                     </FormControl>
-                    <SelectContent className="h-56">
+                    <SelectContent className="h-56 text-base md:text-lg">
                       {[
                         "Ariyalur",
                         "Chengalpattu",
@@ -273,7 +297,11 @@ export default function LeadForm({
                         "Pondicherry",
                         "Others",
                       ].map((option) => (
-                        <SelectItem key={option} value={option}>
+                        <SelectItem
+                          key={option}
+                          value={option}
+                          className="text-base md:text-lg"
+                        >
                           {option}
                         </SelectItem>
                       ))}
@@ -286,7 +314,7 @@ export default function LeadForm({
 
             <Button
               type="submit"
-              className="w-full"
+              className="w-full h-12 text-lg font-semibold"
               disabled={createLeadMutation.isPending}
             >
               {createLeadMutation.isPending

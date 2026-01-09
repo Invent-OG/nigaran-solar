@@ -61,10 +61,10 @@ export default function ConsultationPage() {
   }, [emblaApi]);
 
   return (
-    <div className="relative min-h-screen px-4 pb-[50%] pt-[20%] lg:py-[8%]  md:px-12 lg:px-20 overflow-hidden">
+    <div className="relative min-h-screen overflow-hidden">
       <RippleBackground />
 
-      <section className="container relative z-10 pb-20 mx-auto mt-12 sm:mt-20">
+      <section className="container relative z-10 px-4 pb-20 mx-auto mt-12 md:px-12 lg:px-20 pt-[20%] lg:pt-[8%] sm:mt-20">
         <motion.div
           initial={{ opacity: 0, y: 100 }}
           animate={{ opacity: 1, y: 0 }}
