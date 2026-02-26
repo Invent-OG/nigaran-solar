@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { ChevronDown } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -57,6 +58,146 @@ interface LeadFormProps {
   type: "residential" | "housing_society" | "commercial";
 }
 
+const DISTRICTS = [
+  "Ariyalur",
+  "Chengalpattu",
+  "Chennai",
+  "Coimbatore",
+  "Cuddalore",
+  "Dharmapuri",
+  "Dindigul",
+  "Erode",
+  "Kallakurichi",
+  "Kanchipuram",
+  "Kanniyakumari",
+  "Karur",
+  "Krishnagiri",
+  "Madurai",
+  "Mayiladuthurai",
+  "Nagapattinam",
+  "Namakkal",
+  "Nilgiris",
+  "Perambalur",
+  "Pudukkottai",
+  "Ramanathapuram",
+  "Ranipet",
+  "Salem",
+  "Sivagangai",
+  "Tenkasi",
+  "Thanjavur",
+  "Theni",
+  "Thiruvarur",
+  "Thoothukudi",
+  "Tiruchirappalli",
+  "Tirunelveli",
+  "Tirupathur",
+  "Tiruppur",
+  "Tiruvallur",
+  "Tiruvannamalai",
+  "Vellore",
+  "Villupuram",
+  "Virudhunagar",
+  "Pondicherry",
+  "Others",
+];
+
+function DistrictDropdown({
+  field,
+  textColor,
+}: {
+  field: any;
+  textColor: string;
+}) {
+  const [open, setOpen] = useState(false);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        wrapperRef.current &&
+        !wrapperRef.current.contains(event.target as Node)
+      ) {
+        setOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const filteredDistricts = DISTRICTS.filter((d) =>
+    d.toLowerCase().includes((field.value || "").toLowerCase()),
+  );
+
+  return (
+    <div ref={wrapperRef} className="relative w-full space-y-2">
+      <FormLabel className={`${textColor} text-base md:text-lg`}>
+        District
+      </FormLabel>
+      <div
+        className={`flex border rounded-md transition-all ${open ? "border-green-700 ring-1 ring-green-700" : "border-input"} bg-white cursor-text px-3 h-12`}
+        onClick={() => {
+          setOpen(true);
+          inputRef.current?.focus();
+        }}
+      >
+        <div className="flex justify-between items-center w-full h-full">
+          <input
+            {...field}
+            ref={inputRef}
+            className="w-full text-base md:text-lg border-none outline-none bg-transparent p-0 focus:ring-0 text-black placeholder-gray-500 transition-all h-full"
+            placeholder="Select or enter your district"
+            onFocus={() => setOpen(true)}
+            onBlur={() => {
+              // Delay closing so that onClick on the dropdown items can fire first
+              setTimeout(() => {
+                // Only close if focus didn't move elsewhere within the wrapper
+                if (!wrapperRef.current?.contains(document.activeElement)) {
+                  setOpen(false);
+                }
+              }, 150);
+            }}
+            autoComplete="off"
+          />
+          <ChevronDown
+            className={`h-4 w-4 text-gray-400 cursor-pointer pointer-events-none transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+          />
+        </div>
+      </div>
+
+      {open && (
+        <div
+          className="absolute z-50 w-full mt-1 bg-white border border-gray-200 rounded-md shadow-lg"
+          onWheel={(e) => e.stopPropagation()}
+        >
+          {filteredDistricts.length > 0 ? (
+            <ul className="py-1 max-h-40 overflow-y-auto overscroll-contain touch-pan-y [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-gray-300 [&::-webkit-scrollbar-thumb]:rounded-full">
+              {filteredDistricts.map((district) => (
+                <li
+                  key={district}
+                  className={`px-4 py-2 hover:bg-gray-100 cursor-pointer text-base md:text-lg ${field.value === district ? "bg-gray-50 text-black font-medium" : "text-black"}`}
+                  onMouseDown={(e) => {
+                    // Use onMouseDown so clicking fires before onBlur
+                    e.preventDefault();
+                    field.onChange(district);
+                    setOpen(false);
+                  }}
+                >
+                  {district}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <div className="px-4 py-3 text-sm text-gray-500">
+              Press enter to use "{field.value}"
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function LeadForm({
   type,
   description,
@@ -71,9 +212,7 @@ export default function LeadForm({
     defaultValues: {
       name: "",
       whatsappNumber: "",
-      // electricityBill is initialized as an empty string, as required.
       electricityBill: "",
-
       district: "",
       companyName: "",
       type,
@@ -84,7 +223,6 @@ export default function LeadForm({
     try {
       await createLeadMutation.mutateAsync(data);
       setSubmitSuccess(true);
-
       form.reset();
     } catch (error) {
       console.error("Failed to submit lead:", error);
@@ -105,7 +243,7 @@ export default function LeadForm({
   }
 
   return (
-    <Card className="relative overflow-hidden bg-white border shadow-2xl border-white/30">
+    <Card className="relative  bg-white border shadow-2xl border-white/30">
       <CardHeader className="text-center">
         <CardTitle className="text-3xl font-bold ">{title}</CardTitle>
         <CardDescription className="">{description}</CardDescription>
@@ -245,68 +383,9 @@ export default function LeadForm({
               name="district"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className={`${textColor} text-base md:text-lg`}>
-                    District
-                  </FormLabel>
-                  <Select onValueChange={field.onChange} value={field.value}>
-                    <FormControl>
-                      <SelectTrigger className="border h-12 text-base md:text-lg">
-                        <SelectValue placeholder="Select your district" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent className="h-56 text-base md:text-lg">
-                      {[
-                        "Ariyalur",
-                        "Chengalpattu",
-                        "Chennai",
-                        "Coimbatore",
-                        "Cuddalore",
-                        "Dharmapuri",
-                        "Dindigul",
-                        "Erode",
-                        "Kallakurichi",
-                        "Kanchipuram",
-                        "Kanniyakumari",
-                        "Karur",
-                        "Krishnagiri",
-                        "Madurai",
-                        "Mayiladuthurai",
-                        "Nagapattinam",
-                        "Namakkal",
-                        "Nilgiris",
-                        "Perambalur",
-                        "Pudukkottai",
-                        "Ramanathapuram",
-                        "Ranipet",
-                        "Salem",
-                        "Sivagangai",
-                        "Tenkasi",
-                        "Thanjavur",
-                        "Theni",
-                        "Thiruvarur",
-                        "Thoothukudi",
-                        "Tiruchirappalli",
-                        "Tirunelveli",
-                        "Tirupathur",
-                        "Tiruppur",
-                        "Tiruvallur",
-                        "Tiruvannamalai",
-                        "Vellore",
-                        "Villupuram",
-                        "Virudhunagar",
-                        "Pondicherry",
-                        "Others",
-                      ].map((option) => (
-                        <SelectItem
-                          key={option}
-                          value={option}
-                          className="text-base md:text-lg"
-                        >
-                          {option}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                  <FormControl>
+                    <DistrictDropdown field={field} textColor={textColor} />
+                  </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
