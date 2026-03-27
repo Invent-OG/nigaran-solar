@@ -107,7 +107,8 @@ export default function ConsultationPage() {
 
   useEffect(() => {
     if (!emblaApiMobile) return;
-    const onSelect = () => setSelectedIndexMobile(emblaApiMobile.selectedScrollSnap());
+    const onSelect = () =>
+      setSelectedIndexMobile(emblaApiMobile.selectedScrollSnap());
     emblaApiMobile.on("select", onSelect);
     onSelect();
   }, [emblaApiMobile]);
@@ -133,7 +134,7 @@ export default function ConsultationPage() {
 
         {/* Hero content */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-24 lg:pt-36 lg:pb-28">
-          <div className="flex flex-col xl:flex-row items-start gap-12 xl:gap-16">
+          <div className="flex flex-col xl:flex-row items-start gap-8 xl:gap-16">
             {/* ── LEFT COLUMN ── */}
             <motion.div
               initial={{ opacity: 0, x: -40 }}
@@ -156,7 +157,7 @@ export default function ConsultationPage() {
                   Start Saving Today.
                 </span>
               </h1>
-              <p className="text-slate-300 text-base sm:text-lg leading-relaxed mb-8 max-w-xl">
+              <p className="text-slate-300 text-base sm:text-lg leading-relaxed  max-w-xl">
                 Tell us about your energy needs and our certified solar experts
                 will design a custom plan — completely free.
               </p>
@@ -213,7 +214,6 @@ export default function ConsultationPage() {
                 </div>
               </div>
             </motion.div>
-
 
             {/* ── RIGHT COLUMN – FORM ── */}
             <motion.div
