@@ -3,46 +3,84 @@
 import { useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import LeadForm from "@/components/forms/lead-form";
-import RippleBackground from "@/components/RippleBackground";
-import { Building2, DownloadIcon, HomeIcon, Users2 } from "lucide-react";
 import { ConsultationWhyChooseUs } from "@/components/sections/consultation-why-choose-us";
 import { ConsultationInstallationProcess } from "@/components/sections/consultation-installation-process";
 import { ConsultationExperience } from "@/components/sections/consultation-experience";
 import { ConsultationQuickInstallation } from "@/components/sections/consultation-quick-installation";
 import { ConsultationFinancing } from "@/components/sections/consultation-financing";
+import {
+  Building2,
+  HomeIcon,
+  Users2,
+  CheckCircle2,
+  Star,
+  ShieldCheck,
+  Clock4,
+} from "lucide-react";
+
+const formTypes = [
+  {
+    id: "residential" as const,
+    label: "Residential",
+    icon: HomeIcon,
+    title: "Home Solar Solutions",
+    description:
+      "Customized solar plans to slash your home electricity bill and maximize savings.",
+  },
+  {
+    id: "housing_society" as const,
+    label: "Housing Society",
+    icon: Users2,
+    title: "Society Solar System",
+    description:
+      "Affordable, large-scale solar energy for entire communities and residential societies.",
+  },
+  {
+    id: "commercial" as const,
+    label: "Commercial",
+    icon: Building2,
+    title: "Commercial Solar Plans",
+    description:
+      "High-efficiency solar power designed to cut operational costs for your business.",
+  },
+];
+
+const slides = [
+  {
+    src: "https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=2072&auto=format&fit=crop",
+    badge: "Save up to 90%",
+    heading: "Slash Your Electricity Bill",
+    description:
+      "Generate clean energy from the sun and dramatically reduce your monthly costs.",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=2070&auto=format&fit=crop",
+    badge: "For Communities",
+    heading: "Power Your Entire Society",
+    description:
+      "Bring sustainable, efficient energy to your whole housing community.",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1466611653911-95081537e5b7?q=80&w=2070&auto=format&fit=crop",
+    badge: "Business Ready",
+    heading: "Solar for Your Business",
+    description:
+      "Boost profitability with commercial-grade solar installations built for scale.",
+  },
+];
 
 export default function ConsultationPage() {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [formType, setFormType] = useState<
+  const [activeForm, setActiveForm] = useState<
     "residential" | "housing_society" | "commercial"
   >("residential");
 
-  const slides = [
-    {
-      src: "https://images.unsplash.com/photo-1463173904305-ba479d2123b7?q=80&w=3658&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      heading: "Save Money with Solar",
-      description: "Reduce your monthly electricity bills with clean energy.",
-    },
-    {
-      src: "https://images.unsplash.com/photo-1463173904305-ba479d2123b7?q=80&w=3658&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      heading: "Power Your Society",
-      description:
-        "Bring efficient and sustainable power to your entire community.",
-    },
-    {
-      src: "https://images.unsplash.com/photo-1463173904305-ba479d2123b7?q=80&w=3658&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      heading: "Solar for Your Business",
-      description:
-        "Boost your bottom line with solar energy solutions for commercial spaces.",
-    },
-  ];
-
   useEffect(() => {
     if (!emblaApi) return;
-    const autoplay = setInterval(() => emblaApi.scrollNext(), 4000);
+    const autoplay = setInterval(() => emblaApi.scrollNext(), 5000);
     return () => clearInterval(autoplay);
   }, [emblaApi]);
 
@@ -50,7 +88,7 @@ export default function ConsultationPage() {
     (index: number) => {
       if (emblaApi) emblaApi.scrollTo(index);
     },
-    [emblaApi]
+    [emblaApi],
   );
 
   useEffect(() => {
@@ -60,150 +98,170 @@ export default function ConsultationPage() {
     onSelect();
   }, [emblaApi]);
 
+  const activeFormMeta = formTypes.find((f) => f.id === activeForm)!;
+
   return (
-    <div className="relative min-h-screen overflow-hidden">
-      <RippleBackground />
+    <div className="min-h-screen bg-slate-900 overflow-x-hidden">
+      {/* ─── HERO SECTION ─── */}
+      <section className="relative lg:pb-10 pb-[50%]">
+        {/* Background image */}
+        <div className="absolute inset-0">
+          <Image
+            src="/On grid solar page/benefits.webp"
+            alt="Solar Consultation Background"
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/70 to-slate-900/40" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-slate-900/30" />
+        </div>
 
-      <section className="container relative z-10 px-4 pb-20 mx-auto mt-12 md:px-12 lg:px-20 pt-[20%] lg:pt-[8%] sm:mt-20">
-        <motion.div
-          initial={{ opacity: 0, y: 100 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="flex flex-col items-start gap-10 lg:flex-row lg:gap-16"
-        >
-          {/* Carousel Section */}
-          <div className="w-full lg:max-w-xl">
-            <div className="mb-6 text-white">
-              <h1 className="mb-2 text-2xl font-bold sm:text-3xl md:text-4xl">
-                Get Your Free Solar Consultation
+        {/* Hero content */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-24 lg:pt-36 lg:pb-28">
+          <div className="flex flex-col xl:flex-row items-start gap-12 xl:gap-16">
+            {/* ── LEFT COLUMN ── */}
+            <motion.div
+              initial={{ opacity: 0, x: -40 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
+              className="flex-1 min-w-0 w-full"
+            >
+              {/* Eyebrow */}
+              <div className="inline-flex items-center gap-2 bg-primary border border-green-400/30 rounded-full px-4 py-1.5 mb-6">
+                <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
+                <span className="text-white text-sm font-medium">
+                  Free Expert Consultation
+                </span>
+              </div>
+
+              {/* Headline */}
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight tracking-tight mb-5">
+                Switch to Solar.{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/90">
+                  Start Saving Today.
+                </span>
               </h1>
-              <p className="text-sm sm:text-base text-white/70">
-                Fill out the form below and our experts will provide you with a
-                customized solar solution.
+              <p className="text-slate-300 text-base sm:text-lg leading-relaxed mb-8 max-w-xl">
+                Tell us about your energy needs and our certified solar experts
+                will design a custom plan — completely free.
               </p>
-            </div>
 
-            <div className="relative overflow-hidden rounded-xl" ref={emblaRef}>
-              <div className="flex">
-                {slides.map((slide, index) => (
-                  <div
-                    className="min-w-full relative h-48 sm:h-64 md:h-72 lg:h-[40vh]"
-                    key={index}
-                  >
-                    <Image
-                      src={slide.src}
-                      alt={`Slide ${index + 1}`}
-                      layout="fill"
-                      objectFit="cover"
-                      className="rounded-xl"
-                    />
-                    {/* Overlay Heading and Description */}
-                    <div className="absolute inset-0 flex flex-col justify-end p-4 bg-black/40 rounded-xl sm:p-6">
-                      <h3 className="text-lg font-semibold text-white sm:text-xl">
-                        {slide.heading}
-                      </h3>
-                      <p className="text-sm text-white/80 sm:text-base">
-                        {slide.description}
-                      </p>
+              {/* Carousel */}
+              <div
+                className="relative overflow-hidden rounded-2xl shadow-2xl"
+                ref={emblaRef}
+              >
+                <div className="flex">
+                  {slides.map((slide, index) => (
+                    <div
+                      key={index}
+                      className="min-w-full relative h-52 sm:h-64 lg:h-92"
+                    >
+                      <Image
+                        src={slide.src}
+                        alt={slide.heading}
+                        fill
+                        className="object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent rounded-2xl" />
+                      <div className="absolute top-4 left-4">
+                        <span className="inline-block bg-primary text-white text-xs font-bold px-3 py-1 rounded-full">
+                          {slide.badge}
+                        </span>
+                      </div>
+                      <div className="absolute bottom-0 left-0 right-0 p-5">
+                        <h3 className="text-white font-bold text-lg sm:text-xl leading-tight">
+                          {slide.heading}
+                        </h3>
+                        <p className="text-white/75 text-sm mt-1">
+                          {slide.description}
+                        </p>
+                      </div>
                     </div>
-                  </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Carousel dots */}
+              <div className="flex justify-center gap-2 mt-4">
+                {slides.map((_, index) => (
+                  <button
+                    key={index}
+                    aria-label={`Go to slide ${index + 1}`}
+                    onClick={() => scrollTo(index)}
+                    className={`rounded-full transition-all duration-300 ${
+                      selectedIndex === index
+                        ? "w-6 h-2.5 bg-green-400"
+                        : "w-2.5 h-2.5 bg-white/25 hover:bg-white/50"
+                    }`}
+                  />
                 ))}
               </div>
-            </div>
+            </motion.div>
 
-            <div className="flex justify-center gap-2 mt-4">
-              {slides.map((_, index) => (
-                <button
-                  key={index}
-                  className={`w-3 h-3 rounded-full ${
-                    selectedIndex === index ? "bg-white" : "bg-white/30"
-                  }`}
-                  onClick={() => scrollTo(index)}
-                />
-              ))}
-            </div>
+            {/* ── RIGHT COLUMN – FORM ── */}
+            <motion.div
+              initial={{ opacity: 0, x: 40 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7, ease: "easeOut", delay: 0.15 }}
+              className="w-full min-w-0 xl:w-[480px] flex-shrink-0 overflow-hidden"
+            >
+              {/* Tab switcher */}
+              <div className="bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl p-1.5 flex gap-1 mb-5">
+                {formTypes.map(({ id, label, icon: Icon }) => (
+                  <button
+                    key={id}
+                    onClick={() => setActiveForm(id)}
+                    className={`flex-1 flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-sm font-semibold transition-all duration-300 ${
+                      activeForm === id
+                        ? "bg-gradient-to-r from-primary to-primary text-white shadow-lg shadow-primary/30"
+                        : "text-white/70 hover:text-white hover:bg-white/10"
+                    }`}
+                  >
+                    <Icon size={15} className="flex-shrink-0" />
+                    <span className="hidden sm:inline">{label}</span>
+                  </button>
+                ))}
+              </div>
+
+              {/* Animated Form */}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeForm}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -12 }}
+                  transition={{ duration: 0.25 }}
+                >
+                  <LeadForm
+                    type={activeForm}
+                    title={activeFormMeta.title}
+                    description={activeFormMeta.description}
+                  />
+                </motion.div>
+              </AnimatePresence>
+
+              {/* Footer note */}
+              <p className="text-center text-slate-400 text-xs mt-4">
+                No spam. We respect your privacy.{" "}
+                <span className="text-primary font-medium">100% Free.</span>
+              </p>
+            </motion.div>
           </div>
-
-          {/* Form Section */}
-          <div className="w-full text-white lg:max-w-xl">
-            {/* Buttons */}
-            <div className="flex flex-row gap-3 mb-6 sm:gap-4">
-              <div
-                onClick={() => setFormType("residential")}
-                className={`cursor-pointer py-3 lg:px-4  w-full flex items-center justify-center gap-2 rounded-xl text-xs lg:text-sm sm:text-base transition ${
-                  formType === "residential"
-                    ? "bg-white text-black font-semibold"
-                    : "bg-white/20 text-white hover:bg-white/30"
-                }`}
-              >
-                <HomeIcon size={16} className="hidden lg:flex" /> Residential
-              </div>
-              <div
-                onClick={() => setFormType("housing_society")}
-                className={`cursor-pointer py-3 lg:px-4  w-full flex items-center justify-center gap-2 rounded-xl text-xs lg:text-sm sm:text-base transition ${
-                  formType === "housing_society"
-                    ? "bg-white text-black font-semibold"
-                    : "bg-white/20 text-white hover:bg-white/30"
-                }`}
-              >
-                <Users2 size={16} className="hidden lg:flex" /> Housing Society
-              </div>
-              <div
-                onClick={() => setFormType("commercial")}
-                className={`cursor-pointer py-3 lg:px-4  w-full flex items-center justify-center gap-2 rounded-xl text-xs lg:text-sm sm:text-base transition ${
-                  formType === "commercial"
-                    ? "bg-white text-black font-semibold"
-                    : "bg-white/20 text-white hover:bg-white/30"
-                }`}
-              >
-                <Building2 size={16} className="hidden lg:flex" /> Commercial
-              </div>
-            </div>
-
-            {/* Dynamic Form */}
-            {formType === "residential" && (
-              <LeadForm
-                type="residential"
-                title="Residential Solar Solutions"
-                description="Optimize your home's energy with our customized residential solar plans."
-              />
-            )}
-            {formType === "housing_society" && (
-              <LeadForm
-                type="housing_society"
-                title="Housing Society Solutions"
-                description="Affordable solar solutions designed for housing societies and communities."
-              />
-            )}
-            {formType === "commercial" && (
-              <LeadForm
-                type="commercial"
-                title="Commercial Solar Plans"
-                description="Efficient solar power options tailored for your commercial needs."
-              />
-            )}
-          </div>
-        </motion.div>
+        </div>
       </section>
 
-      {/* Why Choose Us */}
-      <div className="relative z-10 bg-white">
+      {/* ─── BELOW FOLD SECTIONS ─── */}
+      {/* <div className="relative z-10 bg-white">
         <ConsultationWhyChooseUs />
       </div>
-
-      {/* Installation Process */}
-      <div className="relative z-10 bg-white ">
+      <div className="relative z-10 bg-white">
         <ConsultationInstallationProcess />
       </div>
-
-      {/* Nigaran Solar Experience */}
       <ConsultationExperience />
-
-      {/* Quick Installation */}
       <ConsultationQuickInstallation />
-
-      {/* Financing options */}
-      <ConsultationFinancing />
+      <ConsultationFinancing /> */}
     </div>
   );
 }

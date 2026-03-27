@@ -101,7 +101,7 @@ export default function Footer() {
       </section>
 
       {/* FOOTER MAIN */}
-      <div className="flex flex-col lg:px-[15%] px-10 pt-4 ">
+      <div className="flex flex-col max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
         <div className="flex flex-col justify-between gap-10 lg:flex-row">
           {/* COMPANY INFO */}
           <motion.div

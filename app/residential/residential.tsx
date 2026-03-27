@@ -300,7 +300,7 @@ export default function ResidentialPage() {
           repeatDelay={1}
           className={cn(
             "[mask-image:radial-gradient(500px_circle_at_center,white,transparent)]",
-            "inset-x-0  h-full skew-y-12"
+            "inset-x-0  h-full skew-y-12",
           )}
         />
         <FeaturesSectionWithCardGradient />
@@ -362,11 +362,8 @@ export default function ResidentialPage() {
 
           <style jsx>{`
             .stars {
-              background-image: radial-gradient(
-                  2px 2px at 20px 30px,
-                  #eee,
-                  rgba(0, 0, 0, 0)
-                ),
+              background-image:
+                radial-gradient(2px 2px at 20px 30px, #eee, rgba(0, 0, 0, 0)),
                 radial-gradient(2px 2px at 40px 70px, #fff, rgba(0, 0, 0, 0)),
                 radial-gradient(2px 2px at 50px 160px, #ddd, rgba(0, 0, 0, 0)),
                 radial-gradient(2px 2px at 90px 40px, #fff, rgba(0, 0, 0, 0)),
@@ -532,26 +529,6 @@ export default function ResidentialPage() {
               </div>
             </motion.div>
           ))}
-        </div>
-      </section>
-
-      {/* Example Case Study */}
-      <section className="pt-16 pb-[90%] lg:pb-32">
-        <div className="container ">
-          <motion.div
-            className="flex flex-col items-center gap-4 text-center"
-            initial={{ opacity: 0, y: 100 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <Badge variant="outline">Testimonials</Badge>
-            <h2 className="max-w-2xl text-4xl font-extrabold md:text-5xl text-black/80">
-              Customer Success Story
-            </h2>
-            <div className="w-20 h-1 mx-auto mb-6 bg-primary"></div>
-          </motion.div>
-
-          <DemoOne />
         </div>
       </section>
     </div>
