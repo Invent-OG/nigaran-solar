@@ -65,7 +65,9 @@ const slides = [
 
 export default function ConsultationPage() {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
+  const [emblaRefMobile, emblaApiMobile] = useEmblaCarousel({ loop: true });
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [selectedIndexMobile, setSelectedIndexMobile] = useState(0);
   const [activeForm, setActiveForm] = useState<
     "residential" | "housing_society" | "commercial"
   >("residential");
@@ -76,11 +78,24 @@ export default function ConsultationPage() {
     return () => clearInterval(autoplay);
   }, [emblaApi]);
 
+  useEffect(() => {
+    if (!emblaApiMobile) return;
+    const autoplay = setInterval(() => emblaApiMobile.scrollNext(), 5000);
+    return () => clearInterval(autoplay);
+  }, [emblaApiMobile]);
+
   const scrollTo = useCallback(
     (index: number) => {
       if (emblaApi) emblaApi.scrollTo(index);
     },
     [emblaApi],
+  );
+
+  const scrollToMobile = useCallback(
+    (index: number) => {
+      if (emblaApiMobile) emblaApiMobile.scrollTo(index);
+    },
+    [emblaApiMobile],
   );
 
   useEffect(() => {
@@ -89,6 +104,13 @@ export default function ConsultationPage() {
     emblaApi.on("select", onSelect);
     onSelect();
   }, [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApiMobile) return;
+    const onSelect = () => setSelectedIndexMobile(emblaApiMobile.selectedScrollSnap());
+    emblaApiMobile.on("select", onSelect);
+    onSelect();
+  }, [emblaApiMobile]);
 
   const activeFormMeta = formTypes.find((f) => f.id === activeForm)!;
 
@@ -117,7 +139,7 @@ export default function ConsultationPage() {
               initial={{ opacity: 0, x: -40 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.7, ease: "easeOut" }}
-              className="flex-1 min-w-0 w-full order-last xl:order-first"
+              className="flex-1 min-w-0 w-full "
             >
               {/* Eyebrow */}
               <div className="inline-flex items-center gap-2 bg-primary border border-green-400/30 rounded-full px-4 py-1.5 mb-6">
@@ -139,58 +161,59 @@ export default function ConsultationPage() {
                 will design a custom plan — completely free.
               </p>
 
-              {/* Carousel */}
-              <div
-                className="relative overflow-hidden rounded-2xl shadow-2xl"
-                ref={emblaRef}
-              >
-                <div className="flex">
-                  {slides.map((slide, index) => (
-                    <div
+              {/* Carousel - desktop only */}
+              <div className="hidden xl:block">
+                <div
+                  className="relative overflow-hidden rounded-2xl shadow-2xl"
+                  ref={emblaRef}
+                >
+                  <div className="flex">
+                    {slides.map((slide, index) => (
+                      <div
+                        key={index}
+                        className="min-w-full relative h-52 sm:h-64 lg:h-92"
+                      >
+                        <Image
+                          src={slide.src}
+                          alt={slide.heading}
+                          fill
+                          className="object-cover"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent rounded-2xl" />
+                        <div className="absolute top-4 left-4">
+                          <span className="inline-block bg-primary text-white text-xs font-bold px-3 py-1 rounded-full">
+                            {slide.badge}
+                          </span>
+                        </div>
+                        <div className="absolute bottom-0 left-0 right-0 p-5">
+                          <h3 className="text-white font-bold text-lg sm:text-xl leading-tight">
+                            {slide.heading}
+                          </h3>
+                          <p className="text-white/75 text-sm mt-1">
+                            {slide.description}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className="flex justify-center gap-2 mt-4">
+                  {slides.map((_, index) => (
+                    <button
                       key={index}
-                      className="min-w-full relative h-52 sm:h-64 lg:h-92"
-                    >
-                      <Image
-                        src={slide.src}
-                        alt={slide.heading}
-                        fill
-                        className="object-cover"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent rounded-2xl" />
-                      <div className="absolute top-4 left-4">
-                        <span className="inline-block bg-primary text-white text-xs font-bold px-3 py-1 rounded-full">
-                          {slide.badge}
-                        </span>
-                      </div>
-                      <div className="absolute bottom-0 left-0 right-0 p-5">
-                        <h3 className="text-white font-bold text-lg sm:text-xl leading-tight">
-                          {slide.heading}
-                        </h3>
-                        <p className="text-white/75 text-sm mt-1">
-                          {slide.description}
-                        </p>
-                      </div>
-                    </div>
+                      aria-label={`Go to slide ${index + 1}`}
+                      onClick={() => scrollTo(index)}
+                      className={`rounded-full transition-all duration-300 ${
+                        selectedIndex === index
+                          ? "w-6 h-2.5 bg-green-400"
+                          : "w-2.5 h-2.5 bg-white/25 hover:bg-white/50"
+                      }`}
+                    />
                   ))}
                 </div>
               </div>
-
-              {/* Carousel dots */}
-              <div className="flex justify-center gap-2 mt-4">
-                {slides.map((_, index) => (
-                  <button
-                    key={index}
-                    aria-label={`Go to slide ${index + 1}`}
-                    onClick={() => scrollTo(index)}
-                    className={`rounded-full transition-all duration-300 ${
-                      selectedIndex === index
-                        ? "w-6 h-2.5 bg-green-400"
-                        : "w-2.5 h-2.5 bg-white/25 hover:bg-white/50"
-                    }`}
-                  />
-                ))}
-              </div>
             </motion.div>
+
 
             {/* ── RIGHT COLUMN – FORM ── */}
             <motion.div
@@ -240,6 +263,57 @@ export default function ConsultationPage() {
                 <span className="text-primary font-medium">100% Free.</span>
               </p>
             </motion.div>
+            {/* Carousel - mobile only, shown below the form */}
+            <div className="xl:hidden w-full">
+              <div
+                className="relative overflow-hidden rounded-2xl shadow-2xl"
+                ref={emblaRefMobile}
+              >
+                <div className="flex">
+                  {slides.map((slide, index) => (
+                    <div
+                      key={index}
+                      className="min-w-full relative h-52 sm:h-64"
+                    >
+                      <Image
+                        src={slide.src}
+                        alt={slide.heading}
+                        fill
+                        className="object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent rounded-2xl" />
+                      <div className="absolute top-4 left-4">
+                        <span className="inline-block bg-primary text-white text-xs font-bold px-3 py-1 rounded-full">
+                          {slide.badge}
+                        </span>
+                      </div>
+                      <div className="absolute bottom-0 left-0 right-0 p-5">
+                        <h3 className="text-white font-bold text-lg sm:text-xl leading-tight">
+                          {slide.heading}
+                        </h3>
+                        <p className="text-white/75 text-sm mt-1">
+                          {slide.description}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="flex justify-center gap-2 mt-4">
+                {slides.map((_, index) => (
+                  <button
+                    key={index}
+                    aria-label={`Go to slide ${index + 1}`}
+                    onClick={() => scrollToMobile(index)}
+                    className={`rounded-full transition-all duration-300 ${
+                      selectedIndexMobile === index
+                        ? "w-6 h-2.5 bg-green-400"
+                        : "w-2.5 h-2.5 bg-white/25 hover:bg-white/50"
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
