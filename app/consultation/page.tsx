@@ -10,15 +10,7 @@ import { ConsultationInstallationProcess } from "@/components/sections/consultat
 import { ConsultationExperience } from "@/components/sections/consultation-experience";
 import { ConsultationQuickInstallation } from "@/components/sections/consultation-quick-installation";
 import { ConsultationFinancing } from "@/components/sections/consultation-financing";
-import {
-  Building2,
-  HomeIcon,
-  Users2,
-  CheckCircle2,
-  Star,
-  ShieldCheck,
-  Clock4,
-} from "lucide-react";
+import { Building2, HomeIcon, Users2 } from "lucide-react";
 
 const formTypes = [
   {
@@ -49,21 +41,21 @@ const formTypes = [
 
 const slides = [
   {
-    src: "https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=2072&auto=format&fit=crop",
+    src: "/consultaion/carousel/cdq march posters-19.webp",
     badge: "Save up to 90%",
     heading: "Slash Your Electricity Bill",
     description:
       "Generate clean energy from the sun and dramatically reduce your monthly costs.",
   },
   {
-    src: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=2070&auto=format&fit=crop",
+    src: "/consultaion/carousel/cdq march posters-20.webp",
     badge: "For Communities",
     heading: "Power Your Entire Society",
     description:
       "Bring sustainable, efficient energy to your whole housing community.",
   },
   {
-    src: "https://images.unsplash.com/photo-1466611653911-95081537e5b7?q=80&w=2070&auto=format&fit=crop",
+    src: "/consultaion/carousel/cdq march posters-21.webp",
     badge: "Business Ready",
     heading: "Solar for Your Business",
     description:
@@ -103,7 +95,7 @@ export default function ConsultationPage() {
   return (
     <div className="min-h-screen bg-slate-900 overflow-x-hidden">
       {/* ─── HERO SECTION ─── */}
-      <section className="relative lg:pb-10 pb-[50%]">
+      <section className="relative lg:pb-10 ">
         {/* Background image */}
         <div className="absolute inset-0">
           <Image
@@ -125,7 +117,7 @@ export default function ConsultationPage() {
               initial={{ opacity: 0, x: -40 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.7, ease: "easeOut" }}
-              className="flex-1 min-w-0 w-full"
+              className="flex-1 min-w-0 w-full order-last xl:order-first"
             >
               {/* Eyebrow */}
               <div className="inline-flex items-center gap-2 bg-primary border border-green-400/30 rounded-full px-4 py-1.5 mb-6">
@@ -253,7 +245,7 @@ export default function ConsultationPage() {
       </section>
 
       {/* ─── BELOW FOLD SECTIONS ─── */}
-      {/* <div className="relative z-10 bg-white">
+      <div className="relative z-10 bg-white">
         <ConsultationWhyChooseUs />
       </div>
       <div className="relative z-10 bg-white">
@@ -261,7 +253,7 @@ export default function ConsultationPage() {
       </div>
       <ConsultationExperience />
       <ConsultationQuickInstallation />
-      <ConsultationFinancing /> */}
+      <ConsultationFinancing />
     </div>
   );
 }
