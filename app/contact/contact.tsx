@@ -42,14 +42,14 @@ export default function ContactPage() {
                   <h2 className="mb-2 text-lg font-semibold">Email:</h2>
                   <p>Info@nigaran.in</p>
                 </div>
-                <div>
+                {/* <div>
                   <h2 className="mb-2 text-lg font-semibold">
                     Registered Office:
                   </h2>
                   <p>No.52, Theo Saro Villa</p>
                   <p>Vasantham Nagar, P&T Nagar Extn</p>
                   <p>Madurai-625017</p>
-                </div>
+                </div> */}
                 <div>
                   <h2 className="mb-2 text-lg font-semibold">Work Office:</h2>
                   <p>No.G1a/62, Periya Subbannan Street</p>

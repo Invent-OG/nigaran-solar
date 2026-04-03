@@ -13,8 +13,7 @@ export default function FloatingContactButtons() {
     <div className="fixed z-50 flex flex-col gap-3 bottom-5 right-5">
       {/* WhatsApp Button */}
       <a
-        href="https://wa.me/919600715993" // Replace with your number
-        target="_blank"
+        href="https://wa.me/919600701249?text=Hi%2C%20I%20came%20across%20your%20website.%20Could%20you%20provide%20a%20solar%20quote%3F"
         rel="noopener noreferrer"
         className="p-4 text-white transition-transform transform bg-green-500 rounded-full shadow-lg hover:bg-green-600 hover:scale-105"
         title="Chat on WhatsApp"

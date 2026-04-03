@@ -19,11 +19,11 @@ export default function AboutPage() {
       position: "Business Head",
       image: "/about/teams/felix.webp",
     },
-    {
-      name: "Lourdraj",
-      position: "Technical Head",
-      image: "/about/teams/lourdraj.webp",
-    },
+    // {
+    //   name: "Lourdraj",
+    //   position: "Technical Head",
+    //   image: "/about/teams/lourdraj.webp",
+    // },
     {
       name: "Cathelene",
       position: "Operations Head",
@@ -54,16 +54,16 @@ export default function AboutPage() {
       position: "Process Executive",
       image: "/about/teams/karpagam.webp",
     },
-    {
-      name: "Kowsalya",
-      position: "Business Development Manager",
-      image: "/about/teams/kowsalya.webp",
-    },
-    {
-      name: "Navaraj",
-      position: "Accounts & Operations",
-      image: "/about/teams/navaraj.webp",
-    },
+    // {
+    //   name: "Kowsalya",
+    //   position: "Business Development Manager",
+    //   image: "/about/teams/kowsalya.webp",
+    // },
+    // {
+    //   name: "Navaraj",
+    //   position: "Accounts & Operations",
+    //   image: "/about/teams/navaraj.webp",
+    // },
     {
       name: "Saran",
       position: "Project Co-ordinator",

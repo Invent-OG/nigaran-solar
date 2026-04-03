@@ -157,7 +157,7 @@ export default function ConsultationPage() {
                   Start Saving Today.
                 </span>
               </h1>
-              <p className="text-slate-300 text-base sm:text-lg leading-relaxed  max-w-xl">
+              <p className="text-slate-300 text-base sm:text-lg leading-relaxed lg:pb-5 max-w-xl">
                 Tell us about your energy needs and our certified solar experts
                 will design a custom plan — completely free.
               </p>
