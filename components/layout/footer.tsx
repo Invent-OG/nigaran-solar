@@ -61,7 +61,7 @@ export default function Footer() {
               size={"lg"}
               variant={"secondary"}
               className="w-full sm:w-auto"
-              onClick={() => router.push("contact")}
+              onClick={() => router.push("/contact")}
             >
               Contact us
             </Button>
