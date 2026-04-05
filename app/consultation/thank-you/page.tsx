@@ -1,5 +1,9 @@
 "use client";
 
+import { useEffect } from "react";
+
+declare const fbq: (...args: unknown[]) => void;
+
 import { motion } from "framer-motion";
 import Link from "next/link";
 import {
@@ -13,6 +17,12 @@ import {
 } from "lucide-react";
 
 export default function ThankYouPage() {
+  useEffect(() => {
+    if (typeof fbq !== "undefined") {
+      fbq("track", "Lead");
+    }
+  }, []);
+
   const benefits = [
     {
       icon: Sun,
