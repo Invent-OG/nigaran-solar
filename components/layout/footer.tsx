@@ -225,6 +225,9 @@ export default function Footer() {
             ""
           ) : (
             <Image
+              onClick={() =>
+                window.open("https://www.mavenadvert.com/", "_blank")
+              }
               title="Maven Advertising logo"
               src="/logo png (1).png"
               alt="Maven Advertising logo"
