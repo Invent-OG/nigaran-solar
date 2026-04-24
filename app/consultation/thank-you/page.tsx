@@ -19,7 +19,7 @@ import {
 export default function ThankYouPage() {
   useEffect(() => {
     if (typeof fbq !== "undefined") {
-      fbq("track", "Lead");
+      fbq("track", "Lead", { value: 1, currency: "INR" });
     }
   }, []);
 
