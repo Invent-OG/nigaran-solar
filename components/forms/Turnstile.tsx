@@ -13,6 +13,14 @@ export default function Turnstile({ siteKey, onVerify, className }: TurnstilePro
   const containerRef = useRef<HTMLDivElement>(null);
   const widgetIdRef = useRef<string | null>(null);
 
+  // Use a ref to store the latest onVerify callback.
+  // This prevents Turnstile from re-rendering and going into an infinite loop
+  // when the parent component re-renders and passes a new function reference.
+  const onVerifyRef = useRef(onVerify);
+  useEffect(() => {
+    onVerifyRef.current = onVerify;
+  }, [onVerify]);
+
   useEffect(() => {
     let timer: NodeJS.Timeout | null = null;
 
@@ -28,7 +36,7 @@ export default function Turnstile({ siteKey, onVerify, className }: TurnstilePro
             widgetIdRef.current = (window as any).turnstile.render(containerRef.current, {
               sitekey: siteKey,
               callback: (token: string) => {
-                onVerify(token);
+                onVerifyRef.current(token);
               },
             });
           }
@@ -52,7 +60,7 @@ export default function Turnstile({ siteKey, onVerify, className }: TurnstilePro
         }
       }
     };
-  }, [siteKey, onVerify]);
+  }, [siteKey]);
 
   return (
     <div className={className}>
