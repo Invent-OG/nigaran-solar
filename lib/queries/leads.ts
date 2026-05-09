@@ -18,7 +18,7 @@ const fetchLeads = async (
   limit: number = 10,
   search: string = "",
   date?: string,
-  type?: string
+  type?: string,
 ): Promise<{ leads: Lead[]; totalCount: number; totalPages: number }> => {
   const params = new URLSearchParams({
     page: page.toString(),
@@ -38,7 +38,7 @@ const createLead = async (
   data: Omit<Lead, "id" | "createdAt"> & {
     honeypot?: string;
     turnstileToken?: string;
-  }
+  },
 ): Promise<Lead> => {
   // 1. Save to Supabase (your existing API)
   const response = await fetch("/api/leads", {
@@ -52,16 +52,16 @@ const createLead = async (
   const savedLead = await response.json();
 
   // 2. Also send to Zoho Bigin
-  // try {
-  //   await fetch("/api/zoho/lead", {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify(data),
-  //   });
-  // } catch (error) {
-  //   console.error("Zoho submission failed", error);
-  //   // Optional: log this somewhere or notify admin
-  // }
+  try {
+    await fetch("/api/zoho/lead", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+  } catch (error) {
+    console.error("Zoho submission failed", error);
+    // Optional: log this somewhere or notify admin
+  }
 
   return savedLead;
 };
@@ -79,7 +79,7 @@ export function useLeads(
   limit: number = 10,
   search: string = "",
   date?: string,
-  type?: string
+  type?: string,
 ) {
   return useQuery({
     queryKey: ["leads", page, limit, search, date, type],
