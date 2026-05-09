@@ -7,6 +7,10 @@ import { sendLeadThankYouEmail } from "@/lib/email";
 
 const phoneRegex = /^(?:\+91)?[6-9]\d{9}$/;
 
+const ipCache = new Map<string, { count: number; firstRequestTime: number }>();
+const RATE_LIMIT_WINDOW_MS = 60 * 1000;
+const MAX_REQUESTS_PER_WINDOW = 5;
+
 const leadSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   whatsappNumber: z
@@ -18,19 +22,79 @@ const leadSchema = z.object({
   district: z.string().min(2, "Please enter your district"),
   companyName: z.string().optional(),
   type: z.enum(["residential", "housing_society", "commercial"]),
+  honeypot: z.string().optional(),
+  turnstileToken: z.string().min(1, "Turnstile token is required"),
 });
 
 export async function POST(req: Request) {
   try {
-    const body = await req.json();
-    const data = leadSchema.parse(body);
+    // 1. IP-based Rate Limiting
+    const ip = req.headers.get("x-forwarded-for") || "127.0.0.1";
+    const now = Date.now();
+    const clientData = ipCache.get(ip);
+    if (!clientData) {
+      ipCache.set(ip, { count: 1, firstRequestTime: now });
+    } else {
+      if (now - clientData.firstRequestTime < RATE_LIMIT_WINDOW_MS) {
+        if (clientData.count >= MAX_REQUESTS_PER_WINDOW) {
+          return NextResponse.json(
+            { success: false, error: "Too many requests. Please try again later." },
+            { status: 429 }
+          );
+        }
+        clientData.count++;
+      } else {
+        // Reset window
+        ipCache.set(ip, { count: 1, firstRequestTime: now });
+      }
+    }
 
-    const [lead] = await db.insert(leads).values(data).returning();
+    const body = await req.json();
+    const { honeypot, turnstileToken, ...validData } = leadSchema.parse(body);
+
+    // 2. Honeypot Validation
+    if (honeypot) {
+      return NextResponse.json(
+        { success: false, error: "Bot detected" },
+        { status: 400 }
+      );
+    }
+
+    // 3. Turnstile token Verification
+    const secretKey = process.env.TURNSTILE_SECRET_KEY;
+    if (!secretKey) {
+      console.warn("Cloudflare Turnstile secret key is not set");
+    }
+
+    const verifyResponse = await fetch(
+      "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams({
+          secret: secretKey || "",
+          response: turnstileToken,
+          remoteip: ip,
+        }),
+      }
+    );
+
+    const verifyData = await verifyResponse.json();
+    if (!verifyData.success) {
+      return NextResponse.json(
+        { success: false, error: "Turnstile verification failed" },
+        { status: 400 }
+      );
+    }
+
+    const [lead] = await db.insert(leads).values(validData).returning();
 
     // Send thank you email
     // await sendLeadThankYouEmail(
-    //   data.whatsappNumber + "@whatsapp.com",
-    //   data.name
+    //   validData.whatsappNumber + "@whatsapp.com",
+    //   validData.name
     // );
 
     return NextResponse.json({ success: true, lead });
@@ -47,6 +111,7 @@ export async function POST(req: Request) {
     );
   }
 }
+
 
 export async function GET(req: Request) {
   try {

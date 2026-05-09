@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/form";
 import { useCreateLead } from "@/lib/queries/leads";
 import { useRouter } from "next/navigation";
+import Turnstile from "./Turnstile";
 import {
   User,
   Phone,
@@ -39,6 +40,8 @@ const leadFormSchema = z.object({
   district: z.string().min(2, "Please select your district"),
   companyName: z.string().optional(),
   type: z.enum(["residential", "housing_society", "commercial"]),
+  honeypot: z.string().optional(),
+  turnstileToken: z.string().min(1, "Please complete the captcha verification"),
 });
 
 type LeadFormData = z.infer<typeof leadFormSchema>;
@@ -123,10 +126,16 @@ export default function LeadForm({ type, description, title }: LeadFormProps) {
       district: "",
       companyName: "",
       type,
+      honeypot: "",
+      turnstileToken: "",
     },
   });
 
   const onSubmit = async (data: LeadFormData) => {
+    if (data.honeypot) {
+      console.warn("Honeypot field filled");
+      return;
+    }
     try {
       await createLeadMutation.mutateAsync(data);
       form.reset();
@@ -141,6 +150,7 @@ export default function LeadForm({ type, description, title }: LeadFormProps) {
 
   const selectBase =
     "w-full h-12 rounded-xl border border-slate-200 bg-slate-50 px-4 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200 appearance-none cursor-pointer";
+
 
   return (
     <div className="bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden">
@@ -317,6 +327,43 @@ export default function LeadForm({ type, description, title }: LeadFormProps) {
                   )}
                 />
               </div>
+
+              {/* Honeypot field (hidden) */}
+              <div className="hidden" aria-hidden="true">
+                <FormField
+                  control={form.control}
+                  name="honeypot"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <input
+                          {...field}
+                          tabIndex={-1}
+                          autoComplete="off"
+                        />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              {/* Turnstile Captcha widget */}
+              <FormField
+                control={form.control}
+                name="turnstileToken"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Turnstile
+                        siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ""}
+                        onVerify={(token) => field.onChange(token)}
+                        className="flex justify-center my-2"
+                      />
+                    </FormControl>
+                    <FormMessage className="text-xs text-red-500 text-center" />
+                  </FormItem>
+                )}
+              />
 
               {/* Submit */}
               <Button

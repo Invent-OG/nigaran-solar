@@ -34,7 +34,7 @@ export function ConsultationQuickInstallation() {
               </h3>
             </motion.div>
             <p className="mt-2 text-xl font-medium text-neutral-600">
-              That's all it takes.
+              That&apos;s all it takes.
             </p>
           </div>
 
