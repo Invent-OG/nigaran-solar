@@ -445,15 +445,15 @@ export default function AboutPage() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="w-full bg-primary py-16 md:py-24 px-6 md:px-12 "
+          className="w-full bg-black py-16 md:py-24 px-6 md:px-12 "
         >
           <div className="container max-w-5xl mx-auto">
             <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light tracking-tight leading-[1.3] md:leading-[1.25]">
-              <span className="font-normal text-white">
-                The people behind every promise we make
+              <span className="font-normal text-primary">
+                The people behind every promise we make{" "}
               </span>
-              <span className="text-neutral-800">
-                {" "}— engineers, solar professionals, and problem-solvers brought
+              <span className="text-neutral-500">
+                — engineers, solar professionals, and problem-solvers brought
                 together by one conviction — that every solar project should be
                 built with clarity, precision, and purpose. Our team is the
                 foundation of the trust behind every Nigaran Solar installation.
