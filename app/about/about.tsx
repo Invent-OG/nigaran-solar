@@ -243,7 +243,7 @@ export default function AboutPage() {
               {/* Top Image */}
               <div className="h-1/2 w-full">
                 <Image
-                  src="/about/expert team.webp"
+                  src="https://plus.unsplash.com/premium_photo-1682148026899-d21f17c04e80?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                   alt="Expert team of solar professionals at Nigaran Solar"
                   width={600}
                   height={400}
@@ -375,25 +375,51 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <div className="p-[5%] ">
-        <motion.div
-          className="flex flex-col items-center gap-4 text-center"
-          initial={{ opacity: 0, y: 100 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <Badge variant="outline" className="">
+      <div className="w-full">
+        {/* Mobile Heading (above photo so faces are never covered) */}
+        <div className="flex md:hidden flex-col items-center gap-3 text-center pt-8 pb-4 px-4 bg-background">
+          <Badge variant="outline" className="border-black/10">
             Our Team
           </Badge>
-          <h2 className="max-w-2xl text-4xl font-extrabold md:text-5xl ">
+          <h2 className="max-w-md text-2xl sm:text-3xl font-extrabold text-black/90">
             The Team Behind Our
             <br />
             Services
           </h2>
-          <div className="w-20 h-1 mx-auto mb-6 bg-primary"></div>
+          <div className="w-16 h-1 mx-auto bg-primary"></div>
+        </div>
+
+        {/* Team Group Photo */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="relative w-full flex justify-center items-center overflow-hidden"
+        >
+          <Image
+            src="/about/teams/team group photo.webp"
+            alt="Nigaran Solar Team"
+            width={1920}
+            height={1440}
+            className="w-full h-auto object-cover"
+            priority
+          />
+
+          {/* Desktop / Tablet Heading (inside spacious ceiling area) */}
+          <div className="hidden md:flex absolute top-8 lg:top-14 xl:top-16 inset-x-0 z-10 flex-col items-center gap-3 md:gap-4 text-center px-4">
+            <Badge variant="outline" className="bg-white/80 backdrop-blur-sm border-black/10">
+              Our Team
+            </Badge>
+            <h2 className="max-w-2xl text-3xl md:text-4xl lg:text-5xl font-extrabold text-black/90">
+              The Team Behind Our
+              <br />
+              Services
+            </h2>
+            <div className="w-20 h-1 mx-auto bg-primary"></div>
+          </div>
         </motion.div>
 
-        <div className="grid grid-cols-1  md:grid-cols-3 lg:grid-cols-4 container">
+        {/* <div className="grid grid-cols-1  md:grid-cols-3 lg:grid-cols-4 container">
           {TeamsData.map((member, index) => (
             <div
               key={index}
@@ -412,7 +438,29 @@ export default function AboutPage() {
               <p className="text-sm text-muted-foreground">{member.position}</p>
             </div>
           ))}
-        </div>
+        </div> */}
+
+        {/* Team Statement */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="w-full bg-primary py-16 md:py-24 px-6 md:px-12 "
+        >
+          <div className="container max-w-5xl mx-auto">
+            <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light tracking-tight leading-[1.3] md:leading-[1.25]">
+              <span className="font-normal text-white">
+                The people behind every promise we make
+              </span>
+              <span className="text-neutral-800">
+                {" "}— engineers, solar professionals, and problem-solvers brought
+                together by one conviction — that every solar project should be
+                built with clarity, precision, and purpose. Our team is the
+                foundation of the trust behind every Nigaran Solar installation.
+              </span>
+            </p>
+          </div>
+        </motion.div>
       </div>
 
       {/* Sustainability & Call to Action */}
