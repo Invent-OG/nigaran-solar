@@ -6,19 +6,23 @@ import Lenis from "@studio-freight/lenis";
 export const LenisProvider = () => {
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.5,
+      duration: 0.9,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      // Removed smooth: true, as it is not required anymore
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      touchMultiplier: 1.5,
     });
 
+    let rafId: number;
     function raf(time: number) {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      rafId = requestAnimationFrame(raf);
     }
 
-    requestAnimationFrame(raf);
+    rafId = requestAnimationFrame(raf);
 
     return () => {
+      cancelAnimationFrame(rafId);
       lenis.destroy();
     };
   }, []);

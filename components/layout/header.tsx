@@ -89,11 +89,18 @@ export default function Header() {
   const pathName = usePathname();
 
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setIsScrolled(window.scrollY > 20);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -116,13 +123,16 @@ export default function Header() {
     }));
   };
 
+  const isTransparentAtTop =
+    (pathName === "/" || pathName === "/consultation") && !isScrolled;
+
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        isScrolled
-          ? "bg-background/80 backdrop-blur-md py-3 shadow-lg"
-          : "bg-transparent py-5",
+        "fixed top-0 left-0 right-0 z-50 transition-colors duration-200",
+        isTransparentAtTop
+          ? "bg-transparent py-5"
+          : "bg-background/95 backdrop-blur-md py-3 shadow-sm border-b border-border/40",
       )}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex items-center justify-between">
@@ -143,10 +153,7 @@ export default function Header() {
             <span
               className={cn(
                 "ml-2",
-                (!isScrolled && pathName === "/") ||
-                  (!isScrolled && pathName === "/consultation")
-                  ? "text-white"
-                  : "",
+                isTransparentAtTop ? "text-white" : "",
               )}
             >
               Nigaran Solar
@@ -171,10 +178,7 @@ export default function Header() {
                 href={item.href}
                 className={cn(
                   "text-foreground/80 hover:text-primary transition-colors font-medium",
-                  (!isScrolled && pathName === "/") ||
-                    (!isScrolled && pathName === "/consultation")
-                    ? "text-white"
-                    : "",
+                  isTransparentAtTop ? "text-white" : "",
                 )}
               >
                 {item.label}
@@ -224,7 +228,7 @@ export default function Header() {
                 <Menu
                   className={cn(
                     "h-5 w-5",
-                    !isScrolled && pathName === "/" ? "text-white" : "",
+                    isTransparentAtTop ? "text-white" : "",
                   )}
                 />
               )}

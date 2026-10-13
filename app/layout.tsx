@@ -12,7 +12,11 @@ import { Metadata } from "next/types";
 import Script from "next/script";
 import { VideoLoaderProvider } from "@/components/VideoLoaderProvider";
 
-const inter = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
+const outfit = Outfit({
+  subsets: ["latin"],
+  variable: "--font-outfit",
+  display: "swap",
+});
 
 export default function RootLayout({
   children,
@@ -20,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={outfit.variable}>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <Script id="gtm-script" strategy="afterInteractive">
@@ -44,7 +48,7 @@ export default function RootLayout({
           `}
         </Script>
       </head>
-      <body className={`${inter.variable} font-sans`}>
+      <body className={`${outfit.variable} font-sans`}>
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-KBMQNM53"
