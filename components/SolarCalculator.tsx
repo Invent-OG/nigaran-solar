@@ -6,7 +6,7 @@ import {
     IndianRupee,
     BatteryCharging,
     Clock3,
-    ChartNoAxesColumn,
+    BarChart3,
     MapPin,
     ArrowRight,
     CheckCircle2,
@@ -440,7 +440,7 @@ export default function SolarCalculator({
 
                         {/* Roof area */}
                         <ResultCard
-                            icon={<ChartNoAxesColumn />}
+                            icon={<BarChart3 />}
                             title="Roof Area Needed"
                             value={
                                 displayedResult
