@@ -3,15 +3,14 @@
 import { useRef, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { ArrowRight, PhoneCall } from "lucide-react";
 import {
-  ArrowRight,
-  Facebook,
-  Twitter,
-  Instagram,
-  Linkedin,
-  Youtube,
-  PhoneCall,
-} from "lucide-react";
+  FaFacebookF,
+  FaTwitter,
+  FaInstagram,
+  FaLinkedinIn,
+  FaYoutube,
+} from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
@@ -88,7 +87,7 @@ export default function Footer() {
             </motion.div>
           </div>
         </div>
-        <div className="w-full md:w-auto">
+        {/* <div className="w-full md:w-auto">
           <Image
             title="Contact us illustration"
             src="/contact-us.png"
@@ -97,7 +96,7 @@ export default function Footer() {
             height={450}
             className="top-0 right-0 z-10 object-cover lg:absolute"
           />
-        </div>
+        </div> */}
       </section>
 
       {/* FOOTER MAIN */}
@@ -129,26 +128,26 @@ export default function Footer() {
                 href="https://www.facebook.com/NigaranSolar"
                 aria-label="Facebook"
               >
-                <Facebook className="w-5 h-5 text-gray-400 transition-colors hover:text-white" />
+                <FaFacebookF className="w-5 h-5 text-gray-400 transition-colors hover:text-white" />
               </Link>
 
               <Link
                 href="https://www.instagram.com/nigaransolar/"
                 aria-label="Instagram"
               >
-                <Instagram className="w-5 h-5 text-gray-400 transition-colors hover:text-white" />
+                <FaInstagram className="w-5 h-5 text-gray-400 transition-colors hover:text-white" />
               </Link>
               <Link
                 href="https://www.linkedin.com/company/nigaransolar/"
                 aria-label="LinkedIn"
               >
-                <Linkedin className="w-5 h-5 text-gray-400 transition-colors hover:text-white" />
+                <FaLinkedinIn className="w-5 h-5 text-gray-400 transition-colors hover:text-white" />
               </Link>
               <Link
                 href="https://www.youtube.com/@NigaranSolar"
                 aria-label="YouTube"
               >
-                <Youtube className="w-5 h-5 text-gray-400 transition-colors hover:text-white" />
+                <FaYoutube className="w-5 h-5 text-gray-400 transition-colors hover:text-white" />
               </Link>
             </div>
           </motion.div>

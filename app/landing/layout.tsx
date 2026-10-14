@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import "./landing.css";
+// import "./landing.css";
 
 export const metadata: Metadata = {
   title: "Go Solar at Zero Investment! | Nigaran Solar - Coimbatore & Tamil Nadu",

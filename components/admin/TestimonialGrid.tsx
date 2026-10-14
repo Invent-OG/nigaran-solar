@@ -4,7 +4,8 @@ import { useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Edit2, Trash2, Youtube } from "lucide-react";
+import { Edit2, Trash2 } from "lucide-react";
+import { FaYoutube } from "react-icons/fa";
 import {
   useTestimonials,
   useDeleteTestimonial,
@@ -120,7 +121,7 @@ export default function TestimonialGrid({ searchTerm }: TestimonialGridProps) {
                     rel="noopener noreferrer"
                     className="text-red-500 hover:text-red-600"
                   >
-                    <Youtube className="h-5 w-5" />
+                    <FaYoutube className="h-5 w-5" />
                   </a>
                 )}
               </div>
