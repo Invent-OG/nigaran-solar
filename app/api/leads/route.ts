@@ -4,6 +4,7 @@ import { db } from "@/lib/db";
 import { leads } from "@/lib/db/schema";
 import { eq, count, like, and, sql } from "drizzle-orm";
 import { sendLeadThankYouEmail } from "@/lib/email";
+import { sendLeadToBigin } from "@/lib/zoho/sendLeadToBigin";
 
 const phoneRegex = /^(?:\+91)?[6-9]\d{9}$/;
 
@@ -62,43 +63,72 @@ export async function POST(req: Request) {
 
     // 3. Turnstile token Verification
     const secretKey = process.env.TURNSTILE_SECRET_KEY;
-    if (!secretKey) {
-      console.warn("Cloudflare Turnstile secret key is not set");
+    if (secretKey) {
+      const verifyResponse = await fetch(
+        "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: new URLSearchParams({
+            secret: secretKey,
+            response: turnstileToken,
+            remoteip: ip,
+          }),
+        }
+      );
+
+      const verifyData = await verifyResponse.json();
+      if (!verifyData.success) {
+        return NextResponse.json(
+          { success: false, error: "Turnstile verification failed" },
+          { status: 400 }
+        );
+      }
+    } else {
+      console.warn("Cloudflare Turnstile secret key is not configured, skipping verification.");
     }
 
-    const verifyResponse = await fetch(
-      "https://challenges.cloudflare.com/turnstile/v0/siteverify",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: new URLSearchParams({
-          secret: secretKey || "",
-          response: turnstileToken,
-          remoteip: ip,
-        }),
-      }
-    );
+    let lead = null;
+    let dbError: string | null = null;
+    try {
+      const inserted = await db.insert(leads).values(validData).returning();
+      lead = inserted[0];
+    } catch (err: any) {
+      dbError = err?.message || "Database insert error";
+      console.error("Database lead insert error:", err);
+    }
 
-    const verifyData = await verifyResponse.json();
-    if (!verifyData.success) {
+    // 4. Send to Zoho Bigin server-side
+    let zohoResult: any = null;
+    try {
+      zohoResult = await sendLeadToBigin(validData);
+      if (!zohoResult.success) {
+        console.warn("Zoho Bigin sync warning:", zohoResult.error || zohoResult);
+      }
+    } catch (zohoError: any) {
+      console.error("Failed to sync lead to Zoho Bigin:", zohoError);
+    }
+
+    if (!lead && (!zohoResult || !zohoResult.success)) {
       return NextResponse.json(
-        { success: false, error: "Turnstile verification failed" },
-        { status: 400 }
+        {
+          success: false,
+          error: "Failed to save lead to database and Zoho CRM",
+          details: { dbError, zohoError: zohoResult?.error },
+        },
+        { status: 500 }
       );
     }
 
-    const [lead] = await db.insert(leads).values(validData).returning();
-
-    // Send thank you email
-    // await sendLeadThankYouEmail(
-    //   validData.whatsappNumber + "@whatsapp.com",
-    //   validData.name
-    // );
-
-    return NextResponse.json({ success: true, lead });
-  } catch (error) {
+    return NextResponse.json({
+      success: true,
+      lead: lead || { ...validData, id: "crm-only" },
+      zoho: zohoResult,
+    });
+  } catch (error: any) {
+    console.error("Leads Route Error:", error);
     if (error instanceof z.ZodError) {
       return NextResponse.json(
         { success: false, errors: error.errors },
@@ -106,7 +136,7 @@ export async function POST(req: Request) {
       );
     }
     return NextResponse.json(
-      { success: false, error: "Internal server error" },
+      { success: false, error: error?.message || "Internal server error" },
       { status: 500 }
     );
   }

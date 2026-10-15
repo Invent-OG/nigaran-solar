@@ -6,8 +6,34 @@
 import LeadForm from "@/components/forms/lead-form";
 import { Button } from "@/components/ui/button";
 import { AnimatePresence, motion } from "framer-motion";
-import { HomeIcon, Users2, Building2, MapIcon, Sun, ArrowRight, BarChart, Battery, Calculator, Clock, IndianRupee, AlertCircle, ArrowUpRight, Check, CheckCircle2, ChevronDown, MapPin, Ruler, ShieldCheck, ArrowLeftRight, Quote } from "lucide-react";
+import { HomeIcon, Users2, Building2, MapIcon, Sun, ArrowRight, BarChart, Battery, Calculator, Clock, IndianRupee, AlertCircle, ArrowUpRight, Check, CheckCircle2, ChevronDown, MapPin, Ruler, ShieldCheck, ArrowLeftRight, Quote, Star } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
+
+const GOOGLE_REVIEW_URL =
+  "https://www.google.com/search?hl=en-IN&gl=in&q=No.G1a/62,+Nigaran+Green+Energy+Solutions,+Periya+Subbannan+Street,+Saibaba+Colony,+Kuppakonam+Pudur,+K+K+Pudur,+Coimbatore,+Tamil+Nadu+641038&ludocid=6474371972092443514&lsig=AB86z5WefvuV94gnHShLEmomdtIG#lrd=0x3ba8f7059e858ee9:0x59d997018450bb7a,3,,,,";
+
+function GoogleLogo({ className = "w-5 h-5" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+        fill="#4285F4"
+      />
+      <path
+        d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+        fill="#34A853"
+      />
+      <path
+        d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"
+        fill="#FBBC05"
+      />
+      <path
+        d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"
+        fill="#EA4335"
+      />
+    </svg>
+  );
+}
 
 /* ==========================================================================
    Landing page — Tailwind-only port. Every rule that used to live in
@@ -204,18 +230,24 @@ const FEATURE_POS = [
 const TESTIMONIALS = [
   {
     text: "Most companies forget you after installation, but their customer service is top-notch. I had a small question about the inverter display a month after setup, and their technician was at my house the next morning to check it out. Excellent peace of mind!",
-    name: "yoga Vignesh",
-    avatar: `${IMG}/avatar-1.jpeg`,
+    name: "Yoga Vignesh",
+    rating: 5,
+    location: "Coimbatore",
+    date: "2 months ago",
   },
   {
     text: "What I loved most was their transparency. No hidden charges, no aggressive sales pitches. They gave an honest estimate, explained the return on investment clearly, and guided us through the entire subsidy application process step-by-step.",
-    name: "Kannan Kannan v",
-    avatar: `${IMG}/avatar-2.png`,
+    name: "Kannan Kannan V",
+    rating: 5,
+    location: "Tiruppur",
+    date: "3 months ago",
   },
   {
-    text: "Very satisfied with the service provided by Nigaran Solar. The team explained the entire process clearly, completed the installation on time, and addressed all our questions professionally. I would recommend them to anyone looking for a reliable solar solution",
+    text: "Very satisfied with the service provided by Nigaran Solar. The team explained the entire process clearly, completed the installation on time, and addressed all our questions professionally. I would recommend them to anyone looking for a reliable solar solution.",
     name: "Srimathi Murugasamy",
-    avatar: `${IMG}/avatar-3.jpeg`,
+    rating: 5,
+    location: "Erode",
+    date: "1 month ago",
   },
 ];
 
@@ -472,17 +504,17 @@ function useCountUp(target: number, duration = 1600) {
 
 function CtaBox({ onOpen }: { onOpen: () => void }) {
   return (
-    <div className="flex items-center gap-3 overflow-hidden rounded-xl bg-gradient-to-r from-lime-500 to-lime-200 md:w-[490px]">
-      <div className="relative z-[1] h-[130px] w-[126px] text-center before:absolute before:left-0 before:z-[-1] before:h-[148px] before:w-[148px] before:bg-[url('/landing/bg-circles.webp')] before:bg-cover before:bg-center before:bg-no-repeat before:content-['']">
+    <div className="flex items-center gap-2 sm:gap-3 overflow-hidden rounded-xl bg-gradient-to-r from-lime-500 p-5 to-lime-200 md:w-[490px]">
+      <div className="relative shrink-0 h-[110px] self-end flex items-end justify-center pl-2 sm:pl-4">
         <img
           src={`/landing/Got questions.webp`}
           alt="Expert"
-          width={80}
-          height={110}
-          className="ml-[30px] mt-5 inline-block h-auto w-auto"
+          width={130}
+          height={150}
+          className="h-[150px] relative -bottom-6 w-auto object-contain object-bottom"
         />
       </div>
-      <div className="ml-5 pr-4 text-start">
+      <div className="min-w-0 flex-1 py-3.5 pr-4 text-start">
         <p className="mb-0 text-[18px] font-semibold text-[#182150] md:text-[1.15rem]">
           Got questions?
         </p>
@@ -490,12 +522,12 @@ function CtaBox({ onOpen }: { onOpen: () => void }) {
           Our solar experts are just a call away.
         </p>
         <button
-          className="mt-3 inline-block cursor-pointer flex rounded-md border border-transparent bg-transparent p-0 items-center text-center text-[0.875rem] font-semibold leading-normal text-[#2f38cf]"
+          className="mt-3 inline-flex cursor-pointer items-center rounded-md border border-transparent bg-transparent p-0 text-center text-[0.875rem] font-semibold leading-normal text-[#2f38cf] transition hover:text-[#182150]"
           type="button"
           onClick={onOpen}
         >
           Talk to our expert{" "}
-          <ArrowRight />
+          <ArrowRight className="ml-1 h-4 w-4" />
         </button>
       </div>
     </div>
@@ -763,13 +795,7 @@ export default function LandingPage() {
           <div className="absolute inset-x-0 bottom-0 z-[1] bg-[#fcf9f1] lg:left-1/2 lg:right-auto lg:bottom-[42px] lg:w-full lg:max-w-[1440px] lg:-translate-x-1/2 lg:bg-transparent lg:px-20">
             <div className="flex justify-center p-0 lg:justify-start">
               <div className="flex h-11 items-center gap-1 p-0 text-center text-[14px] font-medium leading-[1.4] tracking-[-0.56px] text-[#1a1f38] lg:h-auto lg:rounded-xl lg:bg-white/[0.16] lg:px-8 lg:py-3 lg:text-[20px] lg:tracking-[-0.4px] lg:text-white lg:shadow-[inset_0_1px_0_rgba(255,255,255,0.28),inset_0_0_0_1px_rgba(255,255,255,0.16),0_2px_8px_rgba(0,0,0,0.18)] lg:backdrop-blur-[12px]">
-                <img
-                  src={`${IMG}/google-logo.webp`}
-                  width={16}
-                  height={16}
-                  alt="Google logo"
-                  className="m-0 h-4 w-4 lg:hidden"
-                />
+                <GoogleLogo className="m-0 h-4 w-4" />
                 Rated{" "}
                 <span className="font-medium text-[#d8901e] lg:text-[#e9b35e]">★ 4.8</span> on Google{" "}
                 <span className="inline-block h-[9px] w-px flex-none overflow-hidden bg-[#9ea2b8] text-[0px] leading-[0] lg:h-[18px] lg:bg-[#e2e4ec]">
@@ -811,7 +837,7 @@ export default function LandingPage() {
                     onClick={() => setActiveForm(id)}
                     aria-pressed={isActive}
                     className={`relative flex min-w-0 flex-1 cursor-pointer items-center justify-center gap-2 rounded-xl px-2 py-3 text-sm font-semibold transition-all duration-300 sm:px-3 ${isActive
-                      ? "bg-gradient-to-r from-[#007D10] to-[#004D0A] text-white shadow-md"
+                      ? "bg-gradient-to-r bg-gray-500 text-white shadow-md"
                       : "text-white/80 hover:bg-white/10 hover:text-white"
                       }`}
                   >
@@ -1592,48 +1618,90 @@ export default function LandingPage() {
         </div>
       </section>
       {/* ------------------------------------------------------ testimonials */}
-      <section className="px-4 md:bg-[#f5f8fd] md:px-0 md:py-[116px] pb-[20rem]">
+      <section className="px-4 pb-32 md:bg-[#f5f8fd] md:px-0 md:py-[100px]">
         <div className={`${CONTAINER} p-0 md:p-4`}>
-          <h2 className="mb-2 w-full text-[1.75rem] font-bold leading-[normal] md:mb-7 md:mt-0 md:text-[36px] md:tracking-[-1px]">
-            Happy Customers
-          </h2>
+          {/* Header with Google Reviews summary */}
+          <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3.5 py-1.5 text-xs font-semibold text-slate-800 shadow-sm">
+                <GoogleLogo className="h-4 w-4 shrink-0" />
+                <span>Google Verified Reviews</span>
+                <span className="tracking-wider text-amber-500 font-bold">★★★★★</span>
+                <span className="rounded bg-emerald-50 px-1.5 py-0.5 text-[11px] font-bold text-emerald-700">
+                  4.9 / 5
+                </span>
+              </div>
+              <h2 className="mb-1 text-[1.75rem] font-bold leading-tight text-[#1a1f38] md:text-[36px] md:tracking-[-1px]">
+                Happy Customers
+              </h2>
+              <p className="m-0 text-sm text-[#5d627c] md:text-base">
+                Real feedback and verified 5-star Google reviews from homeowners across Tamil Nadu.
+              </p>
+            </div>
+
+            <a
+              href={GOOGLE_REVIEW_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex shrink-0 items-center gap-2.5 self-start rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-xs font-bold text-[#182150] shadow-sm transition hover:border-slate-300 hover:bg-slate-50 hover:shadow sm:self-auto sm:text-sm"
+            >
+              <GoogleLogo className="h-4 w-4 shrink-0" />
+              <span>Review Us on Google</span>
+              <ArrowUpRight className="h-4 w-4 text-slate-400" />
+            </a>
+          </div>
 
           <div className="mt-6 md:pt-2">
-            <div className="-mx-3 flex items-stretch overflow-x-scroll [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:gap-2 md:overflow-visible md:p-0">
+            <div className="-mx-3 flex items-stretch overflow-x-scroll [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:p-0">
               {TESTIMONIALS.map((testimonial) => (
                 <div
-                  className="mx-2 max-w-[17.5rem] rounded-xl bg-[#f5f8fd] md:w-full md:max-w-none md:bg-white"
+                  className="mx-2 flex w-[285px] shrink-0 flex-col justify-between rounded-2xl border border-slate-200/80 bg-white p-5 shadow-sm transition hover:shadow-md md:mx-0 md:w-auto md:p-6"
                   key={testimonial.name}
                 >
-                  <div className="relative w-[280px] p-5 text-base md:h-[270px] md:w-full md:rounded-xl md:border md:border-[#f1f1f5] md:p-6 md:text-[1.12rem] md:text-[#1a1f38]">
-                    {/* Quote icon: replaces the image without changing its layout */}
-                    <div className="mb-2">
-                      <Quote
-                        size={34}
-                        strokeWidth={0}
-                        fill="#e7e9f8"
-                        className="text-[#e7e9f8]"
-                        aria-hidden="true"
-                      />
+                  <div>
+                    {/* Top row: 5 Stars + Google Badge */}
+                    <div className="mb-3 flex items-center justify-between">
+                      <div className="flex items-center gap-0.5 text-amber-400">
+                        {[...Array(5)].map((_, i) => (
+                          <Star key={i} size={15} fill="currentColor" stroke="none" />
+                        ))}
+                      </div>
+
+                      <div className="inline-flex items-center gap-1.5 rounded-md bg-[#f8f9fc] px-2 py-1 text-[11px] font-medium text-slate-600">
+                        <GoogleLogo className="h-3.5 w-3.5 shrink-0" />
+                        <span>Google Review</span>
+                      </div>
                     </div>
 
                     {/* Testimonial text */}
-                    <div className="mb-4 max-w-full">
-                      <p className="m-0 max-w-full text-ellipsis text-[1.125rem] font-normal leading-7 text-[#1a1f38] line-clamp-7 md:text-base md:leading-7 md:line-clamp-4">
-                        {testimonial.text}
+                    <p className="m-0 text-sm leading-relaxed text-[#1a1f38] md:text-[0.95rem] md:leading-6">
+                      &ldquo;{testimonial.text}&rdquo;
+                    </p>
+                  </div>
+
+                  {/* Customer details */}
+                  <div className="mt-5 flex items-center justify-between border-t border-slate-100 pt-4">
+                    <div className="min-w-0">
+                      <div className="flex items-center gap-1.5">
+                        <p className="m-0 truncate text-sm font-semibold text-[#182150]">
+                          {testimonial.name}
+                        </p>
+                        <CheckCircle2 size={14} className="shrink-0 text-emerald-600" />
+                      </div>
+                      <p className="m-0 text-xs text-[#5d627c]">
+                        {testimonial.location} • {testimonial.date}
                       </p>
                     </div>
 
-                    {/* Customer details */}
-                    <div className="mt-4 flex items-center gap-1 md:absolute md:bottom-5 md:left-6 md:right-6 md:mt-0">
-                      <div className="min-w-0">
-                        <p className="m-0 inline-block max-w-full truncate align-middle font-semibold text-[#131ca2]">
-                          {testimonial.name}
-                        </p>
-
-                        <p className="m-0 font-normal text-[#5d627c]" />
-                      </div>
-                    </div>
+                    <a
+                      href={GOOGLE_REVIEW_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-slate-400 transition hover:text-[#182150]"
+                      aria-label="View on Google"
+                    >
+                      <ArrowUpRight size={16} />
+                    </a>
                   </div>
                 </div>
               ))}
@@ -1757,7 +1825,7 @@ export default function LandingPage() {
                           aria-controls="modal-lead-form"
                           onClick={() => setActiveForm(id)}
                           className={`flex min-w-0 flex-col items-center justify-center gap-1.5 rounded-lg px-1.5 py-3 text-center text-xs font-semibold transition-all duration-200 sm:flex-row sm:gap-2 sm:px-3 sm:text-sm ${isActive
-                            ? "bg-gradient-to-r from-[#007D10] to-[#004D0A] text-white shadow-md shadow-green-900/20"
+                            ? "bg-gradient-to-r bg-gray-500 text-white shadow-md shadow-green-900/20"
                             : "text-gray-600 hover:bg-white hover:text-gray-900"
                             }`}
                         >

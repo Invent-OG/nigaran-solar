@@ -47,20 +47,26 @@ const createLead = async (
     body: JSON.stringify(data),
   });
 
-  if (!response.ok) throw new Error("Failed to create lead in Supabase");
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(errorData.error || "Failed to create lead");
+  }
 
   const savedLead = await response.json();
 
-  // 2. Also send to Zoho Bigin
+  // 2. Also send to Zoho Bigin (fallback client call)
   try {
-    await fetch("/api/zoho/lead", {
+    const zohoRes = await fetch("/api/zoho/lead", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     });
+    if (!zohoRes.ok) {
+      const err = await zohoRes.json().catch(() => ({}));
+      console.warn("Zoho submission returned non-OK status:", err);
+    }
   } catch (error) {
     console.error("Zoho submission failed", error);
-    // Optional: log this somewhere or notify admin
   }
 
   return savedLead;

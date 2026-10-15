@@ -1,37 +1,29 @@
-import { getZohoAccessToken } from "@/lib/zoho/getAccessToken";
+import { NextRequest, NextResponse } from "next/server";
+import { sendLeadToBigin } from "@/lib/zoho/sendLeadToBigin";
 
 export async function POST(req: Request) {
-  const body = await req.json();
+  try {
+    const body = await req.json();
 
-  const accessToken = await getZohoAccessToken();
+    const result = await sendLeadToBigin({
+      name: body.name,
+      whatsappNumber: body.whatsappNumber,
+      district: body.district,
+      companyName: body.companyName,
+      electricityBill: body.electricityBill,
+      type: body.type,
+    });
 
-  const zohoRes = await fetch("https://www.zohoapis.in/bigin/v1/Contacts", {
-    method: "POST",
-    headers: {
-      Authorization: `Zoho-oauthtoken ${accessToken}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      data: [
-        {
-          Last_Name: body.name,
-          Mobile: body.whatsappNumber,
-          District: body.district,
-          Company_Name: body.companyName || "N/A",
-          Monthly_Electricity_Bill: body.electricityBill,
-          Looking_For: body.type,
-        },
-      ],
-      trigger: ["workflow"],
-    }),
-  });
+    if (!result.success) {
+      return NextResponse.json(result, { status: 500 });
+    }
 
-  const zohoData = await zohoRes.json();
-
-  if (!zohoRes.ok || zohoData.data?.[0]?.code !== "SUCCESS") {
-    console.error("Zoho Error:", zohoData);
-    return new Response("Zoho API Error", { status: 500 });
+    return NextResponse.json(result);
+  } catch (error: any) {
+    console.error("Zoho Route Exception:", error);
+    return NextResponse.json(
+      { success: false, error: error?.message || "Internal server error" },
+      { status: 500 }
+    );
   }
-
-  return Response.json({ message: "Contact created in Zoho Bigin" });
 }
