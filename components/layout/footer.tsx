@@ -33,6 +33,10 @@ export default function Footer() {
   const router = useRouter();
   const pathName = usePathname();
 
+  if (pathName === "/landing" || pathName?.startsWith("/landing/")) {
+    return null;
+  }
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setEmail("");
