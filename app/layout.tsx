@@ -11,6 +11,7 @@ import Image from "next/image";
 import { Metadata } from "next/types";
 import Script from "next/script";
 import { VideoLoaderProvider } from "@/components/VideoLoaderProvider";
+import { usePathname } from "next/navigation";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -23,6 +24,9 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const pathname = usePathname();
+  const isLandingPage =
+    pathname === "/landing" || pathname?.startsWith("/landing/");
   return (
     <html lang="en" className={outfit.variable}>
       <head>
@@ -62,11 +66,11 @@ export default function RootLayout({
           <VideoLoaderProvider>
             <Providers>
               <LenisProvider />
-              <Header />
+              {!isLandingPage && <Header />}
               <main>{children}</main>
-              <Footer />
+              {!isLandingPage && <Footer />}
             </Providers>
-            <FloatingContactButtons />
+            {!isLandingPage && <FloatingContactButtons />}
           </VideoLoaderProvider>
         </>
       </body>

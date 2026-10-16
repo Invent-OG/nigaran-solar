@@ -32,6 +32,7 @@ export default function Footer() {
   const [email, setEmail] = useState("");
   const router = useRouter();
   const pathName = usePathname();
+  const formRef = useRef<HTMLFormElement>(null);
 
   if (pathName === "/landing" || pathName?.startsWith("/landing/")) {
     return null;
@@ -41,8 +42,6 @@ export default function Footer() {
     e.preventDefault();
     setEmail("");
   };
-
-  const formRef = useRef<HTMLFormElement>(null);
 
   return (
     <footer className="relative md:pt-40 pt-[60%] pb-8  text-white bg-black">

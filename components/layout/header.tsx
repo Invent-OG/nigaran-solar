@@ -176,6 +176,10 @@ export default function Header() {
     }));
   };
 
+  if (pathName === "/landing" || pathName?.startsWith("/landing/")) {
+    return null;
+  }
+
   return (
     <header
       className={cn(
