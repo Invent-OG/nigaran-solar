@@ -792,27 +792,56 @@ export default function LandingPage() {
                 Cut electricity expenses by up to 99% and get up to ₹1 lakh in government solar subsidy.
               </p>
             </div>
-            <div className="absolute inset-x-0 bottom-[60px] z-[1] overflow-hidden lg:relative lg:bottom-auto lg:my-6 lg:w-[55%] lg:overflow-visible lg:p-0">
-              <div className="flex w-max gap-3 px-[calc(50%_-_147.5px)] will-change-transform lg:w-auto lg:flex-wrap lg:items-start lg:px-0 lg:will-change-auto">
-                {HERO_TAGS.map((tag) => {
-                  const Icon = tag.icon;
+            <div className="absolute inset-x-0 bottom-[60px] z-[1] overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_24px,black_calc(100%-24px),transparent)] lg:relative lg:bottom-auto lg:my-6 lg:w-full lg:max-w-[min(679px,calc(100%_-_538px))] lg:overflow-visible lg:p-0 lg:[mask-image:none]">
+              <div className="flex w-max hover:[&>*]:[animation-play-state:paused] active:[&>*]:[animation-play-state:paused] lg:block lg:w-full">
+                {/* Primary track */}
+                <div className="animate-hero-marquee flex shrink-0 items-center gap-3 pr-3 will-change-transform lg:flex lg:w-full lg:shrink lg:flex-wrap lg:items-start lg:gap-2 lg:pr-0 lg:animate-none lg:will-change-auto">
+                  {HERO_TAGS.map((tag) => {
+                    const Icon = tag.icon;
 
-                  return (
-                    <div
-                      className="flex h-[35px] flex-[0_0_295px] items-center justify-center gap-3 whitespace-nowrap rounded-lg bg-black/20 px-4 py-2 text-[14px] font-medium leading-none tracking-[-0.28px] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.28),inset_0_0_0_1px_rgba(255,255,255,0.16),0_2px_8px_rgba(0,0,0,0.18)] backdrop-blur-[12px] lg:h-auto lg:w-auto lg:flex-none lg:gap-2"
-                      key={tag.label}
-                    >
-                      <Icon
-                        size={19}
-                        strokeWidth={1.8}
-                        aria-hidden="true"
-                        className="h-[19px] w-[19px] flex-none text-white"
-                      />
+                    return (
+                      <div
+                        className="flex h-[35px] flex-[0_0_295px] items-center justify-center gap-3 whitespace-nowrap rounded-lg bg-black/20 px-4 py-2 text-[14px] font-medium leading-none tracking-[-0.28px] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.28),inset_0_0_0_1px_rgba(255,255,255,0.16),0_2px_8px_rgba(0,0,0,0.18)] backdrop-blur-[12px] lg:h-auto lg:w-auto lg:flex-none lg:gap-2"
+                        key={tag.label}
+                      >
+                        <Icon
+                          size={19}
+                          strokeWidth={1.8}
+                          aria-hidden="true"
+                          className="h-[19px] w-[19px] flex-none text-white"
+                        />
 
-                      <span>{tag.label}</span>
-                    </div>
-                  );
-                })}
+                        <span>{tag.label}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* Duplicate track for seamless infinite looping on mobile (hidden on desktop) */}
+                <div
+                  aria-hidden="true"
+                  className="animate-hero-marquee flex shrink-0 items-center gap-3 pr-3 will-change-transform lg:hidden"
+                >
+                  {HERO_TAGS.map((tag, idx) => {
+                    const Icon = tag.icon;
+
+                    return (
+                      <div
+                        className="flex h-[35px] flex-[0_0_295px] items-center justify-center gap-3 whitespace-nowrap rounded-lg bg-black/20 px-4 py-2 text-[14px] font-medium leading-none tracking-[-0.28px] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.28),inset_0_0_0_1px_rgba(255,255,255,0.16),0_2px_8px_rgba(0,0,0,0.18)] backdrop-blur-[12px]"
+                        key={`duplicate-${tag.label}-${idx}`}
+                      >
+                        <Icon
+                          size={19}
+                          strokeWidth={1.8}
+                          aria-hidden="true"
+                          className="h-[19px] w-[19px] flex-none text-white"
+                        />
+
+                        <span>{tag.label}</span>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             </div>
           </div>
@@ -1312,15 +1341,7 @@ export default function LandingPage() {
                       </button>
                     </form>
 
-                    <div className="mt-5 flex items-center justify-center gap-2 border-t border-white/[0.07] pt-4">
-                      <ShieldCheck
-                        size={15}
-                        className="shrink-0 text-[#76d34d]"
-                      />
-                      <p className="m-0 text-center text-xs leading-5 text-white/40">
-                        Free estimate. No obligation. No hidden charges.
-                      </p>
-                    </div>
+
                   </div>
                 </motion.div>
               </div>
@@ -1352,9 +1373,6 @@ export default function LandingPage() {
                     <div className="mb-7">
                       <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
                         <div className="flex items-center gap-3">
-                          <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-[#56a733]/25 bg-[#56a733]/10 text-[#83dc5b]">
-                            <Sun size={25} />
-                          </div>
 
                           <div>
                             <h3 className="m-0 text-xl font-bold text-white sm:text-2xl md:text-[28px]">
@@ -1377,10 +1395,7 @@ export default function LandingPage() {
                         </div>
                       </div>
 
-                      <p className="m-0 text-sm leading-6 text-white/50 sm:text-base">
-                        Based on your inputs, here's what your solar system could
-                        look like.
-                      </p>
+
                     </div>
 
                     {/* RESULT CARDS */}

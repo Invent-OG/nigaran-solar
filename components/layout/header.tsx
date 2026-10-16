@@ -200,8 +200,13 @@ export default function Header() {
         >
           <Link
             href="/"
-            aria-label="Nigaran Solar Home"
-            className="text-xl font-bold flex items-center"
+            aria-label="Go to Home Page"
+            onClick={(event) => {
+              if (isLandingPage) {
+                event.preventDefault();
+              }
+            }}
+            className="flex items-center cursor-pointer"
           >
             <Image
               title="Nigaran-Logo"
@@ -215,7 +220,11 @@ export default function Header() {
             <span
               className={cn(
                 "ml-2 text-xl font-bold tracking-tight transition-colors duration-200",
-                isTransparentAtTop ? "text-white" : "text-foreground"
+                isLandingPage
+                  ? "text-black"
+                  : isTransparentAtTop
+                    ? "text-white"
+                    : "text-foreground"
               )}
             >
               Nigaran Solar

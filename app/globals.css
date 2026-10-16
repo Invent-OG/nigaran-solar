@@ -381,3 +381,30 @@ html.lenis body {
     transform: rotate(360deg);
   }
 }
+
+/* Continuous smooth marquee for hero tags on mobile */
+@keyframes heroMarquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-hero-marquee {
+  animation: heroMarquee 24s linear infinite;
+}
+
+@media (min-width: 1024px) {
+  .animate-hero-marquee {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-hero-marquee {
+    animation: none !important;
+  }
+}
