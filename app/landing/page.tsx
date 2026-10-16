@@ -671,6 +671,30 @@ export default function LandingPage() {
     useState<SolarCalculatorResult | null>(null);
 
   const [showSolarResults, setShowSolarResults] = useState(false);
+  const solarResultsRef = useRef<HTMLDivElement>(null);
+
+  const scrollToSolarResults = () => {
+    setTimeout(() => {
+      if (solarResultsRef.current) {
+        solarResultsRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+    }, 150);
+  };
+
+  useEffect(() => {
+    if (showSolarResults && solarResultsRef.current) {
+      const timer = setTimeout(() => {
+        solarResultsRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }, 150);
+      return () => clearTimeout(timer);
+    }
+  }, [showSolarResults]);
 
   const calculateSolarRequirements = (
     event: React.FormEvent<HTMLFormElement>
@@ -729,12 +753,13 @@ export default function LandingPage() {
 
     setSolarResults(results);
     setShowSolarResults(true);
+    scrollToSolarResults();
   };
 
 
   return (
     <div
-      className="bg-white pt-20 text-base font-normal leading-normal tracking-[-0.5px] text-[#212529] max-[768px]:pt-[72px]"
+      className="bg-white text-base font-normal leading-normal tracking-[-0.5px] text-[#212529]"
       data-city="coimbatore"
     >
       {/* ------------------------------------------------------------ hero */}
@@ -759,7 +784,7 @@ export default function LandingPage() {
           </div>
 
           <div className={`${CONTAINER} px-3`}>
-            <div className="relative z-[1] px-4 pt-14 text-center lg:mx-auto lg:w-full lg:max-w-[1440px] lg:px-0 lg:pt-[72px] lg:text-left">
+            <div className="relative z-[1] px-4 pt-20 text-center lg:mx-auto lg:w-full lg:max-w-[1440px] lg:px-0 lg:pt-28 lg:text-left">
               <h2 className="m-0 text-[28px] font-bold leading-[1.2] tracking-[-1.12px] text-white lg:max-w-[min(679px,calc(100%_-_538px))] lg:text-left lg:text-[56px] lg:leading-[64px] lg:tracking-[-2.24px]">
                 Make Your Rooftop a Brighter purpose to save
               </h2>
@@ -813,7 +838,7 @@ export default function LandingPage() {
 
         <div
           id="review-section"
-          className="relative z-20 w-full min-w-0 px-4 py-8 md:px-6 lg:z-10 lg:mx-auto lg:flex lg:max-w-[1440px] lg:justify-end lg:self-start lg:pb-[72px] lg:pl-0 lg:pr-20 lg:pt-[72px] lg:[grid-area:1/1]"
+          className="relative z-20 w-full min-w-0 px-4 py-8 md:px-6 md:pt-14 lg:z-10 lg:mx-auto lg:flex lg:max-w-[1440px] lg:justify-end lg:self-start lg:pb-[72px] lg:pl-0 lg:pr-20 lg:pt-28 lg:[grid-area:1/1]"
         >
           <motion.div
             initial={{ opacity: 0, x: 40 }}
@@ -993,7 +1018,7 @@ export default function LandingPage() {
       </section>
 
       {/* -------------------------------------------------------- estimator */}
-      <section className="relative overflow-hidden bg-[linear-gradient(110deg,#0c0e1b_0%,#111729_50%,#15192c_100%)] py-10 text-[14px] text-white md:py-[72px]">
+      <section className="relative overflow-hidden bg-black py-10 text-[14px] text-white md:py-[72px]">
         {/* Background accents */}
         <div className="pointer-events-none absolute -left-32 top-20 h-80 w-80 rounded-full bg-[#56a733]/10 blur-[120px]" />
         <div className="pointer-events-none absolute -right-32 bottom-20 h-96 w-96 rounded-full bg-[#0e78b9]/10 blur-[140px]" />
@@ -1234,7 +1259,7 @@ export default function LandingPage() {
                             onChange={(event) =>
                               setSolarLocation(event.target.value)
                             }
-                            className="h-[54px] w-full cursor-pointer appearance-none rounded-xl border border-white/10 bg-[#15192c] pl-11 pr-10 text-base text-white outline-none transition-all hover:border-white/20 focus:border-[#56a733]/70 focus:ring-2 focus:ring-[#56a733]/15"
+                            className="h-[54px] w-full cursor-pointer appearance-none rounded-xl border border-white/10 bg-transparent pl-11 pr-10 text-base text-white outline-none transition-all hover:border-white/20 focus:border-[#56a733]/70 focus:ring-2 focus:ring-[#56a733]/15"
                           >
                             <option
                               value="tamil-nadu"
@@ -1303,226 +1328,320 @@ export default function LandingPage() {
           </div>
 
           {/* EXPANDABLE SOLAR RESULTS */}
-          {showSolarResults && solarResults && (
-            <motion.div
-              initial={{ opacity: 0, height: 0, y: 20 }}
-              animate={{ opacity: 1, height: "auto", y: 0 }}
-              transition={{ duration: 0.45, ease: "easeOut" }}
-              className="mt-10 overflow-hidden md:mt-14"
-              aria-live="polite"
-            >
-              <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.035] p-5 shadow-2xl shadow-black/20 backdrop-blur-2xl sm:p-7 md:p-9">
-                {/* Results background accent */}
-                <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[#56a733]/10 blur-[100px]" />
+          <AnimatePresence>
+            {showSolarResults && solarResults && (
+              <motion.div
+                ref={solarResultsRef}
+                key="solar-results-container"
+                initial={{ opacity: 0, height: 0, y: 35, scale: 0.98 }}
+                animate={{ opacity: 1, height: "auto", y: 0, scale: 1 }}
+                exit={{ opacity: 0, height: 0, y: 20, scale: 0.98 }}
+                transition={{
+                  duration: 0.55,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+                className="scroll-mt-24 mt-10 overflow-hidden md:mt-14"
+                aria-live="polite"
+              >
+                <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.035] p-5 shadow-2xl shadow-black/20 backdrop-blur-2xl sm:p-7 md:p-9">
+                  {/* Results background accent */}
+                  <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[#56a733]/10 blur-[100px]" />
 
-                <div className="relative z-[1]">
-                  {/* RESULTS HEADER */}
-                  <div className="mb-7">
-                    <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
-                      <div className="flex items-center gap-3">
-                        <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-[#56a733]/25 bg-[#56a733]/10 text-[#83dc5b]">
-                          <Sun size={25} />
+                  <div className="relative z-[1]">
+                    {/* RESULTS HEADER */}
+                    <div className="mb-7">
+                      <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
+                        <div className="flex items-center gap-3">
+                          <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-[#56a733]/25 bg-[#56a733]/10 text-[#83dc5b]">
+                            <Sun size={25} />
+                          </div>
+
+                          <div>
+                            <h3 className="m-0 text-xl font-bold text-white sm:text-2xl md:text-[28px]">
+                              Your Solar System Estimate
+                            </h3>
+                            <p className="mt-1 text-xs font-medium tracking-wide text-white/40">
+                              YOUR PERSONALIZED RESULTS
+                            </p>
+                          </div>
                         </div>
 
-                        <div>
-                          <h3 className="m-0 text-xl font-bold text-white sm:text-2xl md:text-[28px]">
-                            Your Solar System Estimate
-                          </h3>
-                          <p className="mt-1 text-xs font-medium tracking-wide text-white/40">
-                            YOUR PERSONALIZED RESULTS
-                          </p>
+                        <div className="inline-flex items-center gap-2 rounded-full border border-[#56a733]/20 bg-[#56a733]/10 px-3 py-1.5">
+                          <CheckCircle2
+                            size={15}
+                            className="text-[#76d34d]"
+                          />
+                          <span className="text-xs font-semibold text-[#a7e68d]">
+                            Calculation complete
+                          </span>
                         </div>
                       </div>
 
-                      <div className="inline-flex items-center gap-2 rounded-full border border-[#56a733]/20 bg-[#56a733]/10 px-3 py-1.5">
-                        <CheckCircle2
-                          size={15}
-                          className="text-[#76d34d]"
-                        />
-                        <span className="text-xs font-semibold text-[#a7e68d]">
-                          Calculation complete
-                        </span>
-                      </div>
+                      <p className="m-0 text-sm leading-6 text-white/50 sm:text-base">
+                        Based on your inputs, here's what your solar system could
+                        look like.
+                      </p>
                     </div>
 
-                    <p className="m-0 text-sm leading-6 text-white/50 sm:text-base">
-                      Based on your inputs, here's what your solar system could
-                      look like.
-                    </p>
-                  </div>
+                    {/* RESULT CARDS */}
+                    <motion.div
+                      variants={{
+                        hidden: { opacity: 0 },
+                        show: {
+                          opacity: 1,
+                          transition: {
+                            staggerChildren: 0.07,
+                            delayChildren: 0.1,
+                          },
+                        },
+                      }}
+                      initial="hidden"
+                      animate="show"
+                      className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5"
+                    >
+                      {/* SYSTEM SIZE */}
+                      <motion.div
+                        variants={{
+                          hidden: { opacity: 0, y: 15 },
+                          show: {
+                            opacity: 1,
+                            y: 0,
+                            transition: { duration: 0.35, ease: "easeOut" },
+                          },
+                        }}
+                        className="group rounded-xl border border-white/[0.09] bg-white/[0.025] p-5 transition-all duration-300 hover:border-[#56a733]/40 hover:bg-white/[0.045] sm:p-6"
+                      >
+                        <div className="mb-4 flex items-center justify-between">
+                          <div className="flex items-center gap-2.5">
+                            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#56a733]/10 text-[#76d34d]">
+                              <Sun size={20} />
+                            </div>
+                            <h4 className="m-0 text-base font-semibold text-white/85 sm:text-lg">
+                              System Size
+                            </h4>
+                          </div>
+                          <ArrowUpRight
+                            size={17}
+                            className="text-white/20 transition-colors group-hover:text-[#76d34d]"
+                          />
+                        </div>
 
-                  {/* RESULT CARDS */}
-                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5">
-                    {/* SYSTEM SIZE */}
-                    <div className="group rounded-xl border border-white/[0.09] bg-white/[0.025] p-5 transition-all duration-300 hover:border-[#56a733]/40 hover:bg-white/[0.045] sm:p-6">
-                      <div className="mb-4 flex items-center justify-between">
-                        <div className="flex items-center gap-2.5">
-                          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#56a733]/10 text-[#76d34d]">
-                            <Sun size={20} />
+                        <p className="mb-1 text-3xl font-bold tracking-tight text-[#76d34d]">
+                          {solarResults.systemSize} kW
+                        </p>
+                        <p className="m-0 text-sm leading-6 text-white/45">
+                          Recommended capacity for your consumption
+                        </p>
+                      </motion.div>
+
+                      {/* ESTIMATED COST */}
+                      <motion.div
+                        variants={{
+                          hidden: { opacity: 0, y: 15 },
+                          show: {
+                            opacity: 1,
+                            y: 0,
+                            transition: { duration: 0.35, ease: "easeOut" },
+                          },
+                        }}
+                        className="group rounded-xl border border-white/[0.09] bg-white/[0.025] p-5 transition-all duration-300 hover:border-[#56a733]/40 hover:bg-white/[0.045] sm:p-6"
+                      >
+                        <div className="mb-4 flex items-center gap-2.5">
+                          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/[0.06] text-white/70">
+                            <IndianRupee size={20} />
                           </div>
                           <h4 className="m-0 text-base font-semibold text-white/85 sm:text-lg">
-                            System Size
+                            Estimated Cost
                           </h4>
                         </div>
-                        <ArrowUpRight
-                          size={17}
-                          className="text-white/20 transition-colors group-hover:text-[#76d34d]"
-                        />
-                      </div>
 
-                      <p className="mb-1 text-3xl font-bold tracking-tight text-[#76d34d]">
-                        {solarResults.systemSize} kW
-                      </p>
-                      <p className="m-0 text-sm leading-6 text-white/45">
-                        Recommended capacity for your consumption
-                      </p>
-                    </div>
+                        <p className="mb-1 text-2xl font-bold tracking-tight text-white sm:text-3xl">
+                          ₹{solarResults.systemCost.toLocaleString("en-IN")}
+                        </p>
+                        <p className="m-0 text-sm leading-6 text-white/45">
+                          Estimated cost before subsidy
+                        </p>
+                      </motion.div>
 
-                    {/* ESTIMATED COST */}
-                    <div className="group rounded-xl border border-white/[0.09] bg-white/[0.025] p-5 transition-all duration-300 hover:border-[#56a733]/40 hover:bg-white/[0.045] sm:p-6">
-                      <div className="mb-4 flex items-center gap-2.5">
-                        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/[0.06] text-white/70">
-                          <IndianRupee size={20} />
-                        </div>
-                        <h4 className="m-0 text-base font-semibold text-white/85 sm:text-lg">
-                          Estimated Cost
-                        </h4>
-                      </div>
-
-                      <p className="mb-1 text-2xl font-bold tracking-tight text-white sm:text-3xl">
-                        ₹{solarResults.systemCost.toLocaleString("en-IN")}
-                      </p>
-                      <p className="m-0 text-sm leading-6 text-white/45">
-                        Estimated cost before subsidy
-                      </p>
-                    </div>
-
-                    {/* COST AFTER SUBSIDY */}
-                    <div className="group rounded-xl border border-[#56a733]/20 bg-gradient-to-br from-[#56a733]/[0.08] to-transparent p-5 transition-all duration-300 hover:border-[#56a733]/40 sm:p-6">
-                      <div className="mb-4 flex items-center gap-2.5">
-                        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#56a733]/15 text-[#76d34d]">
-                          <IndianRupee size={20} />
-                        </div>
-                        <h4 className="m-0 text-base font-semibold text-white/85 sm:text-lg">
-                          Cost After Subsidy
-                        </h4>
-                      </div>
-
-                      <p className="mb-1 text-2xl font-bold tracking-tight text-[#76d34d] sm:text-3xl">
-                        ₹{solarResults.subsidizedCost.toLocaleString("en-IN")}
-                      </p>
-                      <p className="m-0 text-sm leading-6 text-white/45">
-                        Estimated cost after subsidy
-                      </p>
-                    </div>
-
-                    {/* ANNUAL SAVINGS */}
-                    <div className="group rounded-xl border border-white/[0.09] bg-white/[0.025] p-5 transition-all duration-300 hover:border-[#56a733]/40 hover:bg-white/[0.045] sm:p-6">
-                      <div className="mb-4 flex items-center gap-2.5">
-                        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#56a733]/10 text-[#76d34d]">
-                          <Battery size={20} />
-                        </div>
-                        <h4 className="m-0 text-base font-semibold text-white/85 sm:text-lg">
-                          Annual Savings
-                        </h4>
-                      </div>
-
-                      <p className="mb-1 text-2xl font-bold tracking-tight text-[#76d34d] sm:text-3xl">
-                        ₹{solarResults.annualSavings.toLocaleString("en-IN")}
-                      </p>
-                      <p className="m-0 text-sm leading-6 text-white/45">
-                        Estimated yearly electricity savings
-                      </p>
-                    </div>
-
-                    {/* PAYBACK PERIOD */}
-                    <div className="group rounded-xl border border-white/[0.09] bg-white/[0.025] p-5 transition-all duration-300 hover:border-[#56a733]/40 hover:bg-white/[0.045] sm:p-6">
-                      <div className="mb-4 flex items-center gap-2.5">
-                        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/[0.06] text-white/70">
-                          <Clock size={20} />
-                        </div>
-                        <h4 className="m-0 text-base font-semibold text-white/85 sm:text-lg">
-                          Payback Period
-                        </h4>
-                      </div>
-
-                      <p className="mb-1 text-2xl font-bold tracking-tight text-white sm:text-3xl">
-                        {solarResults.paybackPeriod} years
-                      </p>
-                      <p className="m-0 text-sm leading-6 text-white/45">
-                        Estimated time to recover your investment
-                      </p>
-                    </div>
-
-                    {/* ROOF AREA */}
-                    <div className="group rounded-xl border border-white/[0.09] bg-white/[0.025] p-5 transition-all duration-300 hover:border-[#56a733]/40 hover:bg-white/[0.045] sm:p-6">
-                      <div className="mb-4 flex items-center gap-2.5">
-                        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/[0.06] text-white/70">
-                          <BarChart size={20} />
-                        </div>
-                        <h4 className="m-0 text-base font-semibold text-white/85 sm:text-lg">
-                          Roof Area Needed
-                        </h4>
-                      </div>
-
-                      <p className="mb-1 text-2xl font-bold tracking-tight text-white sm:text-3xl">
-                        {solarResults.areaNeeded} sq ft
-                      </p>
-
-                      <p
-                        className={`m-0 flex items-center gap-1.5 text-sm leading-6 ${solarResults.roofAreaSufficient
-                          ? "text-[#83dc5b]"
-                          : "text-amber-400"
-                          }`}
+                      {/* COST AFTER SUBSIDY */}
+                      <motion.div
+                        variants={{
+                          hidden: { opacity: 0, y: 15 },
+                          show: {
+                            opacity: 1,
+                            y: 0,
+                            transition: { duration: 0.35, ease: "easeOut" },
+                          },
+                        }}
+                        className="group rounded-xl border border-[#56a733]/20 bg-gradient-to-br from-[#56a733]/[0.08] to-transparent p-5 transition-all duration-300 hover:border-[#56a733]/40 sm:p-6"
                       >
-                        {solarResults.roofAreaSufficient ? (
-                          <CheckCircle2 size={15} className="shrink-0" />
-                        ) : (
-                          <AlertCircle size={15} className="shrink-0" />
-                        )}
+                        <div className="mb-4 flex items-center gap-2.5">
+                          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#56a733]/15 text-[#76d34d]">
+                            <IndianRupee size={20} />
+                          </div>
+                          <h4 className="m-0 text-base font-semibold text-white/85 sm:text-lg">
+                            Cost After Subsidy
+                          </h4>
+                        </div>
 
-                        {solarResults.roofAreaSufficient
-                          ? "Your roof area is sufficient"
-                          : "Your roof area may be insufficient"}
-                      </p>
-                    </div>
-                  </div>
+                        <p className="mb-1 text-2xl font-bold tracking-tight text-[#76d34d] sm:text-3xl">
+                          ₹{solarResults.subsidizedCost.toLocaleString("en-IN")}
+                        </p>
+                        <p className="m-0 text-sm leading-6 text-white/45">
+                          Estimated cost after subsidy
+                        </p>
+                      </motion.div>
 
-                  {/* RESULTS CTA */}
-                  <div className="relative mt-6 overflow-hidden rounded-xl border border-[#56a733]/20 bg-gradient-to-br from-[#56a733]/10 via-[#56a733]/[0.04] to-transparent p-5 text-center sm:p-8">
-                    <div className="pointer-events-none absolute -right-10 -top-20 h-40 w-40 rounded-full bg-[#56a733]/10 blur-[60px]" />
-
-                    <div className="relative z-[1]">
-                      <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl border border-[#56a733]/25 bg-[#56a733]/10 text-[#83dc5b]">
-                        <ShieldCheck size={25} />
-                      </div>
-
-                      <h4 className="mb-2 text-lg font-bold text-white sm:text-xl">
-                        Ready to start saving?
-                      </h4>
-
-                      <p className="mx-auto mb-5 max-w-2xl text-sm leading-6 text-white/55 sm:text-base">
-                        Get a detailed consultation from our experts and discover
-                        the right solar solution for your property.
-                      </p>
-
-                      <button
-                        type="button"
-                        onClick={() => openModal("Talk to our Experts")}
-                        className="group inline-flex min-h-12 items-center justify-center gap-3 rounded-xl bg-gradient-to-r from-[#56a733] to-[#398b28] px-6 py-3 text-sm font-bold text-white shadow-lg shadow-[#56a733]/15 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-[#56a733]/20 sm:text-base"
+                      {/* ANNUAL SAVINGS */}
+                      <motion.div
+                        variants={{
+                          hidden: { opacity: 0, y: 15 },
+                          show: {
+                            opacity: 1,
+                            y: 0,
+                            transition: { duration: 0.35, ease: "easeOut" },
+                          },
+                        }}
+                        className="group rounded-xl border border-white/[0.09] bg-white/[0.025] p-5 transition-all duration-300 hover:border-[#56a733]/40 hover:bg-white/[0.045] sm:p-6"
                       >
-                        Get Free Consultation
-                        <ArrowRight
-                          size={19}
-                          className="transition-transform duration-300 group-hover:translate-x-1"
-                        />
-                      </button>
-                    </div>
+                        <div className="mb-4 flex items-center gap-2.5">
+                          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#56a733]/10 text-[#76d34d]">
+                            <Battery size={20} />
+                          </div>
+                          <h4 className="m-0 text-base font-semibold text-white/85 sm:text-lg">
+                            Annual Savings
+                          </h4>
+                        </div>
+
+                        <p className="mb-1 text-2xl font-bold tracking-tight text-[#76d34d] sm:text-3xl">
+                          ₹{solarResults.annualSavings.toLocaleString("en-IN")}
+                        </p>
+                        <p className="m-0 text-sm leading-6 text-white/45">
+                          Estimated yearly electricity savings
+                        </p>
+                      </motion.div>
+
+                      {/* PAYBACK PERIOD */}
+                      <motion.div
+                        variants={{
+                          hidden: { opacity: 0, y: 15 },
+                          show: {
+                            opacity: 1,
+                            y: 0,
+                            transition: { duration: 0.35, ease: "easeOut" },
+                          },
+                        }}
+                        className="group rounded-xl border border-white/[0.09] bg-white/[0.025] p-5 transition-all duration-300 hover:border-[#56a733]/40 hover:bg-white/[0.045] sm:p-6"
+                      >
+                        <div className="mb-4 flex items-center gap-2.5">
+                          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/[0.06] text-white/70">
+                            <Clock size={20} />
+                          </div>
+                          <h4 className="m-0 text-base font-semibold text-white/85 sm:text-lg">
+                            Payback Period
+                          </h4>
+                        </div>
+
+                        <p className="mb-1 text-2xl font-bold tracking-tight text-white sm:text-3xl">
+                          {solarResults.paybackPeriod} years
+                        </p>
+                        <p className="m-0 text-sm leading-6 text-white/45">
+                          Estimated time to recover your investment
+                        </p>
+                      </motion.div>
+
+                      {/* ROOF AREA */}
+                      <motion.div
+                        variants={{
+                          hidden: { opacity: 0, y: 15 },
+                          show: {
+                            opacity: 1,
+                            y: 0,
+                            transition: { duration: 0.35, ease: "easeOut" },
+                          },
+                        }}
+                        className="group rounded-xl border border-white/[0.09] bg-white/[0.025] p-5 transition-all duration-300 hover:border-[#56a733]/40 hover:bg-white/[0.045] sm:p-6"
+                      >
+                        <div className="mb-4 flex items-center gap-2.5">
+                          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/[0.06] text-white/70">
+                            <BarChart size={20} />
+                          </div>
+                          <h4 className="m-0 text-base font-semibold text-white/85 sm:text-lg">
+                            Roof Area Needed
+                          </h4>
+                        </div>
+
+                        <p className="mb-1 text-2xl font-bold tracking-tight text-white sm:text-3xl">
+                          {solarResults.areaNeeded} sq ft
+                        </p>
+
+                        <p
+                          className={`m-0 flex items-center gap-1.5 text-sm leading-6 ${solarResults.roofAreaSufficient
+                            ? "text-[#83dc5b]"
+                            : "text-amber-400"
+                            }`}
+                        >
+                          {solarResults.roofAreaSufficient ? (
+                            <CheckCircle2 size={15} className="shrink-0" />
+                          ) : (
+                            <AlertCircle size={15} className="shrink-0" />
+                          )}
+
+                          {solarResults.roofAreaSufficient
+                            ? "Your roof area is sufficient"
+                            : "Your roof area may be insufficient"}
+                        </p>
+                      </motion.div>
+                    </motion.div>
+
+                    {/* RESULTS CTA */}
+                    <motion.div
+                      variants={{
+                        hidden: { opacity: 0, y: 15 },
+                        show: {
+                          opacity: 1,
+                          y: 0,
+                          transition: { duration: 0.4, ease: "easeOut", delay: 0.3 },
+                        },
+                      }}
+                      initial="hidden"
+                      animate="show"
+                      className="relative mt-6 overflow-hidden rounded-xl border border-[#56a733]/20 bg-gradient-to-br from-[#56a733]/10 via-[#56a733]/[0.04] to-transparent p-5 text-center sm:p-8"
+                    >
+                      <div className="pointer-events-none absolute -right-10 -top-20 h-40 w-40 rounded-full bg-[#56a733]/10 blur-[60px]" />
+
+                      <div className="relative z-[1]">
+                        <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl border border-[#56a733]/25 bg-[#56a733]/10 text-[#83dc5b]">
+                          <ShieldCheck size={25} />
+                        </div>
+
+                        <h4 className="mb-2 text-lg font-bold text-white sm:text-xl">
+                          Ready to start saving?
+                        </h4>
+
+                        <p className="mx-auto mb-5 max-w-2xl text-sm leading-6 text-white/55 sm:text-base">
+                          Get a detailed consultation from our experts and discover
+                          the right solar solution for your property.
+                        </p>
+
+                        <button
+                          type="button"
+                          onClick={() => openModal("Talk to our Experts")}
+                          className="group inline-flex min-h-12 items-center justify-center gap-3 rounded-xl bg-gradient-to-r from-[#56a733] to-[#398b28] px-6 py-3 text-sm font-bold text-white shadow-lg shadow-[#56a733]/15 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-[#56a733]/20 sm:text-base"
+                        >
+                          Get Free Consultation
+                          <ArrowRight
+                            size={19}
+                            className="transition-transform duration-300 group-hover:translate-x-1"
+                          />
+                        </button>
+                      </div>
+                    </motion.div>
                   </div>
                 </div>
-              </div>
-            </motion.div>
-          )}
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
 
         {/* MOBILE CTA */}

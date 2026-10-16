@@ -90,7 +90,7 @@ export default function HeroSection({ onVideoLoad }: HeroSectionProps) {
           >
             <Button
               size="lg"
-              onClick={() => router.push("/consultation")}
+              onClick={() => router.push("/landing")}
               className="group"
             >
               Get Free Solar Consultation
