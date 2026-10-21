@@ -1679,8 +1679,7 @@ export default function LandingPage() {
           </div>
           <div className="text-center md:mx-auto md:mt-7 md:flex md:w-[90%] md:items-center md:justify-between md:rounded-xl md:border md:border-[#e3f8ff] md:bg-[linear-gradient(45deg,#f5f9fa,#f1fbff)]">
             <div className="mb-3 flex items-center justify-center gap-3 rounded-xl border border-[#e3f8ff] bg-[linear-gradient(45deg,#f1fbff,#fff)] p-4 md:m-0 md:border-0 md:bg-none md:py-6 md:pl-6 md:pr-0">
-              {/* <img src={`${IMG}/map.png`} width={50} height={50} alt="Map" className="inline-block" /> */}
-              <MapIcon width={20} height={20} />
+              <img src={`/landing/tamil_nadu.png`} width={50} height={50} alt="Map" className="inline-block" />
               <div>
                 <p className="mb-0 text-left text-[0.875rem] font-medium tracking-[-0.5px] md:text-[1.25rem]">
                   From your hometown to homes across Tamil Nadu.                 </p>
