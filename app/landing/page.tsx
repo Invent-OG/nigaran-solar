@@ -9,8 +9,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { HomeIcon, Users2, Building2, MapIcon, Sun, ArrowRight, BarChart, Battery, Calculator, Clock, IndianRupee, AlertCircle, ArrowUpRight, Check, CheckCircle2, ChevronDown, MapPin, Ruler, ShieldCheck, ArrowLeftRight, Quote, Star } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 
-const GOOGLE_REVIEW_URL =
-  "https://www.google.com/search?hl=en-IN&gl=in&q=No.G1a/62,+Nigaran+Green+Energy+Solutions,+Periya+Subbannan+Street,+Saibaba+Colony,+Kuppakonam+Pudur,+K+K+Pudur,+Coimbatore,+Tamil+Nadu+641038&ludocid=6474371972092443514&lsig=AB86z5WefvuV94gnHShLEmomdtIG#lrd=0x3ba8f7059e858ee9:0x59d997018450bb7a,3,,,,";
+
 
 function GoogleLogo({ className = "w-5 h-5" }: { className?: string }) {
   return (
@@ -788,9 +787,15 @@ export default function LandingPage() {
               <h2 className="m-0 text-[28px] font-bold leading-[1.2] tracking-[-1.12px] text-white lg:max-w-[min(679px,calc(100%_-_538px))] lg:text-left lg:text-[56px] lg:leading-[64px] lg:tracking-[-2.24px]">
                 Make Your Rooftop a Brighter purpose to save
               </h2>
-              <p className="mb-0 mt-2 text-[14px] font-medium leading-[1.4] tracking-[-0.56px] text-white lg:mt-4 lg:max-w-[min(679px,calc(100%_-_538px))] lg:text-left lg:text-[20px] lg:tracking-[-0.8px]">
-                Cut electricity expenses by up to 99% and get up to ₹1 lakh in government solar subsidy.
-              </p>
+              <div className="mb-0 mt-3 inline-block rounded-xl bg-black/40 px-3.5 py-2.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.25),0_4px_16px_rgba(0,0,0,0.3)] backdrop-blur-[12px] border border-white/10 text-left lg:mt-5 lg:max-w-[min(679px,calc(100%_-_538px))]">
+                <p className="m-0 text-[14px] font-medium leading-[1.5] tracking-[-0.3px] text-white lg:text-[18px]">
+                  Cut electricity expenses by{" "}
+                  <span className="font-bold text-[#4ade80]">up to 99%</span>{" "}
+                  and get{" "}
+                  <span className="font-bold text-[#fde047]">up to ₹1 lakh</span>{" "}
+                  in government solar subsidy.
+                </p>
+              </div>
             </div>
             <div className="absolute inset-x-0 bottom-[60px] z-[1] overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_24px,black_calc(100%-24px),transparent)] lg:relative lg:bottom-auto lg:my-6 lg:w-full lg:max-w-[min(679px,calc(100%_-_538px))] lg:overflow-visible lg:p-0 lg:[mask-image:none]">
               <div className="flex w-max hover:[&>*]:[animation-play-state:paused] active:[&>*]:[animation-play-state:paused] lg:block lg:w-full">
@@ -1772,16 +1777,6 @@ export default function LandingPage() {
               </p>
             </div>
 
-            <a
-              href={GOOGLE_REVIEW_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex shrink-0 items-center gap-2.5 self-start rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-xs font-bold text-[#182150] shadow-sm transition hover:border-slate-300 hover:bg-slate-50 hover:shadow sm:self-auto sm:text-sm"
-            >
-              <GoogleLogo className="h-4 w-4 shrink-0" />
-              <span>Review Us on Google</span>
-              <ArrowUpRight className="h-4 w-4 text-slate-400" />
-            </a>
           </div>
 
           <div className="mt-6 md:pt-2">
@@ -1826,15 +1821,6 @@ export default function LandingPage() {
                       </p>
                     </div>
 
-                    <a
-                      href={GOOGLE_REVIEW_URL}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-slate-400 transition hover:text-[#182150]"
-                      aria-label="View on Google"
-                    >
-                      <ArrowUpRight size={16} />
-                    </a>
                   </div>
                 </div>
               ))}
