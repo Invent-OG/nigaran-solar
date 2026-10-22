@@ -790,9 +790,9 @@ export default function LandingPage() {
               <div className="mb-0 mt-3 inline-block rounded-xl bg-black/40 px-3.5 py-2.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.25),0_4px_16px_rgba(0,0,0,0.3)] backdrop-blur-[12px] border border-white/10 text-left lg:mt-5 lg:max-w-[min(679px,calc(100%_-_538px))]">
                 <p className="m-0 text-[14px] font-medium leading-[1.5] tracking-[-0.3px] text-white lg:text-[18px]">
                   Cut electricity expenses by{" "}
-                  <span className="font-bold text-[#4ade80]">up to 99%</span>{" "}
+                  <span className="font-bold ">up to 99%</span>{" "}
                   and get{" "}
-                  <span className="font-bold text-[#fde047]">up to ₹1 lakh</span>{" "}
+                  <span className="font-bold ">up to ₹1 lakh</span>{" "}
                   in government solar subsidy.
                 </p>
               </div>
