@@ -2,6 +2,7 @@ import { getZohoAccessToken } from "./getAccessToken";
 
 export interface ZohoLeadPayload {
   name: string;
+  email?: string;
   whatsappNumber: string;
   district: string;
   companyName?: string;
@@ -35,11 +36,12 @@ export async function sendLeadToBigin(lead: ZohoLeadPayload) {
       {
         Last_Name: lead.name,
         Mobile: lead.whatsappNumber,
+        Email: lead.email || undefined,
         District: lead.district,
         Company_Name: lead.companyName || "N/A",
         Monthly_Electricity_Bill: lead.electricityBill,
         Looking_For: lead.type,
-        Description: `Electricity Bill: ${lead.electricityBill} | District: ${lead.district} | Type: ${lead.type}${lead.companyName ? ` | Company: ${lead.companyName}` : ""}`,
+        Description: `Electricity Bill: ${lead.electricityBill} | District: ${lead.district} | Type: ${lead.type}${lead.email ? ` | Email: ${lead.email}` : ""}${lead.companyName ? ` | Company: ${lead.companyName}` : ""}`,
       },
     ],
     trigger: ["workflow"],
@@ -71,8 +73,9 @@ export async function sendLeadToBigin(lead: ZohoLeadPayload) {
         {
           Last_Name: lead.name,
           Mobile: lead.whatsappNumber,
+          Email: lead.email || undefined,
           Mailing_City: lead.district,
-          Description: `Electricity Bill: ${lead.electricityBill} | District: ${lead.district} | Type: ${lead.type}${lead.companyName ? ` | Company: ${lead.companyName}` : ""}`,
+          Description: `Electricity Bill: ${lead.electricityBill} | District: ${lead.district} | Type: ${lead.type}${lead.email ? ` | Email: ${lead.email}` : ""}${lead.companyName ? ` | Company: ${lead.companyName}` : ""}`,
           Lead_Source: "Website - Landing Page",
         },
       ],

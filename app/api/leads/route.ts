@@ -14,6 +14,11 @@ const MAX_REQUESTS_PER_WINDOW = 5;
 
 const leadSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
+  email: z
+    .string()
+    .email("Please enter a valid email address")
+    .optional()
+    .or(z.literal("")),
   whatsappNumber: z
     .string()
     .regex(phoneRegex, "Please enter a valid Indian mobile number"),
@@ -51,7 +56,7 @@ export async function POST(req: Request) {
     }
 
     const body = await req.json();
-    const { honeypot, turnstileToken, ...validData } = leadSchema.parse(body);
+    const { honeypot, turnstileToken, email, ...validData } = leadSchema.parse(body);
 
     // 2. Honeypot Validation
     if (honeypot) {
@@ -103,12 +108,18 @@ export async function POST(req: Request) {
     // 4. Send to Zoho Bigin server-side
     let zohoResult: any = null;
     try {
-      zohoResult = await sendLeadToBigin(validData);
+      zohoResult = await sendLeadToBigin({ ...validData, email });
       if (!zohoResult.success) {
         console.warn("Zoho Bigin sync warning:", zohoResult.error || zohoResult);
       }
     } catch (zohoError: any) {
       console.error("Failed to sync lead to Zoho Bigin:", zohoError);
+    }
+
+    if (email) {
+      sendLeadThankYouEmail(email, validData.name).catch((emailErr) => {
+        console.warn("Failed to send thank you email:", emailErr);
+      });
     }
 
     if (!lead && (!zohoResult || !zohoResult.success)) {

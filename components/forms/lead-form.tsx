@@ -19,6 +19,7 @@ import { useRouter } from "next/navigation";
 import Turnstile from "./Turnstile";
 import {
   User,
+  Mail,
   Phone,
   Zap,
   MapPin,
@@ -31,6 +32,10 @@ const phoneRegex = /^(?:\+91)?[6-9]\d{9}$/;
 
 const leadFormSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
+  email: z
+    .string()
+    .min(1, "Please enter your email address")
+    .email("Please enter a valid email address"),
   whatsappNumber: z
     .string()
     .regex(phoneRegex, "Please enter a valid Indian mobile number"),
@@ -121,6 +126,7 @@ export default function LeadForm({ type, description, title }: LeadFormProps) {
     resolver: zodResolver(leadFormSchema),
     defaultValues: {
       name: "",
+      email: "",
       whatsappNumber: "",
       electricityBill: "",
       district: "",
@@ -139,7 +145,13 @@ export default function LeadForm({ type, description, title }: LeadFormProps) {
     try {
       await createLeadMutation.mutateAsync(data);
       form.reset();
-      router.push("/consultation/thank-you");
+
+      const params = new URLSearchParams();
+      if (data.name) params.set("name", data.name.trim());
+      if (data.email) params.set("email", data.email.trim());
+      if (data.whatsappNumber) params.set("phone", data.whatsappNumber.trim());
+
+      router.push(`/consultation/thank-you?${params.toString()}`);
     } catch (error) {
       console.error("Failed to submit lead:", error);
     }
@@ -210,6 +222,29 @@ export default function LeadForm({ type, description, title }: LeadFormProps) {
                       <Input
                         {...field}
                         placeholder="Enter your full name"
+                        className={inputBase}
+                      />
+                    </FormControl>
+                    <FormMessage className="text-xs" />
+                  </FormItem>
+                )}
+              />
+
+              {/* Email */}
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-xs font-semibold text-slate-500 uppercase tracking-wide flex items-center gap-1.5">
+                      <Mail className="w-3.5 h-3.5 text-green-600" />
+                      Email Address
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        type="email"
+                        placeholder="Enter your email address"
                         className={inputBase}
                       />
                     </FormControl>

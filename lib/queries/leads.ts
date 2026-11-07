@@ -4,6 +4,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 export interface Lead {
   id: string;
   name: string;
+  email?: string;
   whatsappNumber: string;
   electricityBill: string; // Assuming this is a string representing the bill amount
   district: string;

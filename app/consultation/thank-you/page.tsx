@@ -1,48 +1,28 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
+import { motion } from "framer-motion";
+import { CheckCircle2 } from "lucide-react";
 
 declare const fbq: (...args: unknown[]) => void;
 
-import { motion } from "framer-motion";
-import Link from "next/link";
-import {
-  CheckCircle2,
-  Home,
-  Phone,
-  ArrowRight,
-  Sun,
-  Zap,
-  Shield,
-} from "lucide-react";
+function ThankYouContent() {
+  const searchParams = useSearchParams();
+  const name = searchParams.get("name");
 
-export default function ThankYouPage() {
   useEffect(() => {
     if (typeof fbq !== "undefined") {
-      fbq("track", "Lead", { value: 1, currency: "INR" });
+      fbq("track", "Lead", {
+        value: 1,
+        currency: "INR",
+        content_name: name || undefined,
+      });
     }
-  }, []);
-
-  const benefits = [
-    {
-      icon: Sun,
-      title: "Expert Consultation",
-      description: "Our solar expert will call you within 24 hours",
-    },
-    {
-      icon: Zap,
-      title: "Custom Solar Plan",
-      description: "Receive a plan tailored to your energy needs",
-    },
-    {
-      icon: Shield,
-      title: "Free Site Survey",
-      description: "Get a complimentary on-site evaluation",
-    },
-  ];
+  }, [name]);
 
   return (
-    <div className="min-h-screen  flex items-center justify-center px-4 py-16 relative overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center px-4 py-16 relative overflow-hidden">
       <div className="relative z-10 max-w-2xl w-full mx-auto text-center">
         {/* Success Icon */}
         <motion.div
@@ -78,7 +58,7 @@ export default function ThankYouPage() {
             You&apos;re All Set!
           </h1>
           <p className="text-lg text-slate-500 mb-2">
-            Thank you for reaching out to{" "}
+            Thank you{name ? `, ${name},` : ""} for reaching out to{" "}
             <span className="text-primary font-semibold">Nigaran Solar</span>.
           </p>
           <p className="text-slate-400 text-base mb-10">
@@ -88,5 +68,19 @@ export default function ThankYouPage() {
         </motion.div>
       </div>
     </div>
+  );
+}
+
+export default function ThankYouPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center px-4 py-16">
+          <div className="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin" />
+        </div>
+      }
+    >
+      <ThankYouContent />
+    </Suspense>
   );
 }
