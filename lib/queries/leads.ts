@@ -55,19 +55,21 @@ const createLead = async (
 
   const savedLead = await response.json();
 
-  // 2. Also send to Zoho Bigin (fallback client call)
-  try {
-    const zohoRes = await fetch("/api/zoho/lead", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
-    if (!zohoRes.ok) {
-      const err = await zohoRes.json().catch(() => ({}));
-      console.warn("Zoho submission returned non-OK status:", err);
+  // 2. Also send to Zoho Bigin as fallback only if server sync did not succeed
+  if (!savedLead?.zoho?.success) {
+    try {
+      const zohoRes = await fetch("/api/zoho/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (!zohoRes.ok) {
+        const err = await zohoRes.json().catch(() => ({}));
+        console.warn("Zoho fallback submission returned non-OK status:", err);
+      }
+    } catch (error) {
+      console.error("Zoho fallback submission failed", error);
     }
-  } catch (error) {
-    console.error("Zoho submission failed", error);
   }
 
   return savedLead;

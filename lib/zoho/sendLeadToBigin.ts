@@ -10,6 +10,102 @@ export interface ZohoLeadPayload {
   type: string;
 }
 
+interface ZohoRecordResult {
+  code?: string;
+  status?: string;
+  message?: string;
+  action?: string;
+  details?: {
+    id?: string;
+    api_name?: string;
+    [key: string]: any;
+  };
+}
+
+async function handleZohoResponse(
+  zohoRes: Response,
+  accessToken: string,
+  lead: ZohoLeadPayload
+) {
+  let zohoData: any = null;
+  try {
+    zohoData = await zohoRes.json();
+  } catch {
+    return null;
+  }
+
+  const record: ZohoRecordResult | undefined = zohoData?.data?.[0];
+
+  // 1. Successful creation or update
+  if (
+    zohoRes.ok &&
+    (record?.code === "SUCCESS" || record?.status === "success")
+  ) {
+    return {
+      success: true,
+      message:
+        record?.action === "update"
+          ? "Contact updated in Zoho Bigin"
+          : "Contact created in Zoho Bigin",
+      data: zohoData,
+    };
+  }
+
+  // 2. Duplicate contact detected
+  if (record?.code === "DUPLICATE_DATA") {
+    const existingId = record.details?.id;
+
+    if (existingId) {
+      try {
+        const updatePayload = {
+          data: [
+            {
+              Description: `[Latest Inquiry: ${new Date().toLocaleDateString("en-IN")}] Bill: ${lead.electricityBill} | District: ${lead.district} | Type: ${lead.type}${lead.email ? ` | Email: ${lead.email}` : ""}${lead.companyName ? ` | Company: ${lead.companyName}` : ""}`,
+              ...(lead.email ? { Email: lead.email } : {}),
+            },
+          ],
+          trigger: ["workflow"],
+        };
+
+        const updateRes = await fetch(
+          `https://www.zohoapis.in/bigin/v1/Contacts/${existingId}`,
+          {
+            method: "PUT",
+            headers: {
+              Authorization: `Zoho-oauthtoken ${accessToken}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(updatePayload),
+          }
+        );
+
+        const updateData = await updateRes.json().catch(() => ({}));
+        return {
+          success: true,
+          message:
+            "Contact already exists in Zoho Bigin; record updated with latest inquiry",
+          isDuplicate: true,
+          existingId,
+          data: updateData,
+        };
+      } catch (updateErr) {
+        console.warn("Failed to update existing Zoho Bigin contact:", updateErr);
+      }
+    }
+
+    // Return success even if PUT fails since contact is already present in Zoho Bigin
+    return {
+      success: true,
+      message: "Contact already exists in Zoho Bigin",
+      isDuplicate: true,
+      existingId,
+      data: zohoData,
+    };
+  }
+
+  return null;
+}
+
 export async function sendLeadToBigin(lead: ZohoLeadPayload) {
   const envStatus = {
     hasRefreshToken: Boolean(process.env.ZB_REFRESH_TOKEN),
@@ -30,7 +126,7 @@ export async function sendLeadToBigin(lead: ZohoLeadPayload) {
 
   const accessToken = await getZohoAccessToken();
 
-  // Try first with custom fields
+  // Try first with custom fields and duplicate check
   const customPayload = {
     data: [
       {
@@ -44,10 +140,11 @@ export async function sendLeadToBigin(lead: ZohoLeadPayload) {
         Description: `Electricity Bill: ${lead.electricityBill} | District: ${lead.district} | Type: ${lead.type}${lead.email ? ` | Email: ${lead.email}` : ""}${lead.companyName ? ` | Company: ${lead.companyName}` : ""}`,
       },
     ],
+    duplicate_check_fields: ["Mobile"],
     trigger: ["workflow"],
   };
 
-  let zohoRes = await fetch("https://www.zohoapis.in/bigin/v1/Contacts", {
+  const zohoRes = await fetch("https://www.zohoapis.in/bigin/v1/Contacts", {
     method: "POST",
     headers: {
       Authorization: `Zoho-oauthtoken ${accessToken}`,
@@ -56,62 +153,46 @@ export async function sendLeadToBigin(lead: ZohoLeadPayload) {
     body: JSON.stringify(customPayload),
   });
 
-  let zohoData = await zohoRes.json();
-
-  // If Bigin rejected due to custom fields not existing, retry with standard Bigin fields
-  if (
-    !zohoRes.ok ||
-    zohoData.data?.[0]?.code !== "SUCCESS"
-  ) {
-    console.warn(
-      "Zoho custom fields submission failed, retrying with standard Bigin fields:",
-      zohoData
-    );
-
-    const standardPayload = {
-      data: [
-        {
-          Last_Name: lead.name,
-          Mobile: lead.whatsappNumber,
-          Email: lead.email || undefined,
-          Mailing_City: lead.district,
-          Description: `Electricity Bill: ${lead.electricityBill} | District: ${lead.district} | Type: ${lead.type}${lead.email ? ` | Email: ${lead.email}` : ""}${lead.companyName ? ` | Company: ${lead.companyName}` : ""}`,
-          Lead_Source: "Website - Landing Page",
-        },
-      ],
-      trigger: ["workflow"],
-    };
-
-    const retryRes = await fetch("https://www.zohoapis.in/bigin/v1/Contacts", {
-      method: "POST",
-      headers: {
-        Authorization: `Zoho-oauthtoken ${accessToken}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(standardPayload),
-    });
-
-    const retryData = await retryRes.json();
-
-    if (retryRes.ok && retryData.data?.[0]?.code === "SUCCESS") {
-      return {
-        success: true,
-        message: "Contact created in Zoho Bigin using standard fields",
-        data: retryData,
-      };
-    }
-
-    console.error("Zoho Bigin retry failed:", retryData);
-    return {
-      success: false,
-      error: "Zoho API Error",
-      details: retryData,
-    };
+  const customResult = await handleZohoResponse(zohoRes, accessToken, lead);
+  if (customResult) {
+    return customResult;
   }
 
+  // If custom fields submission failed (e.g. invalid custom field name), retry with standard Bigin fields
+  const standardPayload = {
+    data: [
+      {
+        Last_Name: lead.name,
+        Mobile: lead.whatsappNumber,
+        Email: lead.email || undefined,
+        Mailing_City: lead.district,
+        Description: `Electricity Bill: ${lead.electricityBill} | District: ${lead.district} | Type: ${lead.type}${lead.email ? ` | Email: ${lead.email}` : ""}${lead.companyName ? ` | Company: ${lead.companyName}` : ""}`,
+        Lead_Source: "Website - Landing Page",
+      },
+    ],
+    duplicate_check_fields: ["Mobile"],
+    trigger: ["workflow"],
+  };
+
+  const retryRes = await fetch("https://www.zohoapis.in/bigin/v1/Contacts", {
+    method: "POST",
+    headers: {
+      Authorization: `Zoho-oauthtoken ${accessToken}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(standardPayload),
+  });
+
+  const retryResult = await handleZohoResponse(retryRes, accessToken, lead);
+  if (retryResult) {
+    return retryResult;
+  }
+
+  const retryData = await retryRes.json().catch(() => ({}));
+  console.error("Zoho Bigin submission failed:", retryData);
   return {
-    success: true,
-    message: "Contact created in Zoho Bigin",
-    data: zohoData,
+    success: false,
+    error: "Zoho API Error",
+    details: retryData,
   };
 }
