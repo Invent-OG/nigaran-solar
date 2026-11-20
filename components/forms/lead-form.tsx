@@ -208,12 +208,14 @@ export default function LeadForm({ type, description, title }: LeadFormProps) {
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-xs font-semibold text-slate-500 uppercase tracking-wide flex items-center gap-1.5">
+                    <FormLabel htmlFor="name" className="text-xs font-semibold text-slate-700 uppercase tracking-wide flex items-center gap-1.5">
                       <User className="w-3.5 h-3.5 text-green-600" />
                       Full Name
                     </FormLabel>
                     <FormControl>
                       <Input
+                        id="name"
+                        aria-label="Full Name"
                         {...field}
                         placeholder="Enter your full name"
                         className={inputBase}
@@ -230,7 +232,7 @@ export default function LeadForm({ type, description, title }: LeadFormProps) {
                 name="whatsappNumber"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-xs font-semibold text-slate-500 uppercase tracking-wide flex items-center gap-1.5">
+                    <FormLabel htmlFor="whatsappNumber" className="text-xs font-semibold text-slate-700 uppercase tracking-wide flex items-center gap-1.5">
                       <Phone className="w-3.5 h-3.5 text-green-600" />
                       WhatsApp Number
                     </FormLabel>
@@ -245,6 +247,9 @@ export default function LeadForm({ type, description, title }: LeadFormProps) {
                           </span>
                         </div>
                         <input
+                          id="whatsappNumber"
+                          name="whatsappNumber"
+                          aria-label="WhatsApp Number"
                           type="tel"
                           value={field.value.replace("+91", "")}
                           onChange={(e) => {
@@ -254,7 +259,7 @@ export default function LeadForm({ type, description, title }: LeadFormProps) {
                             }
                           }}
                           placeholder="Enter 10-digit number"
-                          className="flex-1 bg-transparent border-0 px-3 text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none h-full"
+                          className="flex-1 bg-transparent border-0 px-3 text-sm text-slate-800 placeholder:text-slate-500 focus:outline-none h-full"
                           maxLength={10}
                         />
                       </div>
@@ -272,13 +277,16 @@ export default function LeadForm({ type, description, title }: LeadFormProps) {
                   name="electricityBill"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-xs font-semibold text-slate-500 uppercase tracking-wide flex items-center gap-1.5">
+                      <FormLabel htmlFor="electricityBill" className="text-xs font-semibold text-slate-700 uppercase tracking-wide flex items-center gap-1.5">
                         <Zap className="w-3.5 h-3.5 text-green-600" />
                         {type === "commercial" ? "Monthly" : "Bi-Monthly"} Bill
                       </FormLabel>
                       <FormControl>
                         <div className="relative">
                           <select
+                            id="electricityBill"
+                            name="electricityBill"
+                            aria-label="Electricity Bill"
                             value={field.value}
                             onChange={field.onChange}
                             className={selectBase}
@@ -307,13 +315,16 @@ export default function LeadForm({ type, description, title }: LeadFormProps) {
                   name="district"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-xs font-semibold text-slate-500 uppercase tracking-wide flex items-center gap-1.5">
+                      <FormLabel htmlFor="district" className="text-xs font-semibold text-slate-700 uppercase tracking-wide flex items-center gap-1.5">
                         <MapPin className="w-3.5 h-3.5 text-green-600" />
                         District
                       </FormLabel>
                       <FormControl>
                         <div className="relative">
                           <select
+                            id="district"
+                            name="district"
+                            aria-label="District"
                             value={field.value}
                             onChange={field.onChange}
                             className={selectBase}
@@ -389,7 +400,7 @@ export default function LeadForm({ type, description, title }: LeadFormProps) {
                 )}
               </Button>
 
-              <p className="text-center text-xs text-slate-400">
+              <p className="text-center text-xs text-slate-600 font-medium">
                 🔒 Your information is 100% secure and never shared.
               </p>
             </form>

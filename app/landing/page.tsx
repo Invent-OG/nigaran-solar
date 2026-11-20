@@ -560,13 +560,13 @@ function StatCard({ stat }: { stat: (typeof STATS)[number] }) {
         </div>
 
         {/* Statistic */}
-        <h4 className="mb-1 mt-3 text-[1.25rem] font-semibold leading-[normal] text-[#182150] md:mt-4 md:whitespace-nowrap md:leading-7">
+        <div className="mb-1 mt-3 text-[1.25rem] font-semibold leading-[normal] text-[#182150] md:mt-4 md:whitespace-nowrap md:leading-7">
           <span className="font-bold" ref={ref}>
             {stat.prefix}
             {formattedValue}
           </span>
           <span>{stat.suffix}</span>
-        </h4>
+        </div>
 
         {/* Label */}
         <p className="m-0 text-[0.875rem] text-[#5d627c] md:text-base">
@@ -788,9 +788,9 @@ export default function LandingPage() {
 
           <div className={`${CONTAINER} px-3`}>
             <div className="relative z-[1] px-4 pt-20 text-center lg:mx-auto lg:w-full lg:max-w-[1440px] lg:px-0 lg:pt-28 lg:text-left">
-              <h2 className="m-0 text-[28px] font-bold leading-[1.2] tracking-[-1.12px] text-white lg:max-w-[min(679px,calc(100%_-_538px))] lg:text-left lg:text-[56px] lg:leading-[64px] lg:tracking-[-2.24px]">
+              <h1 className="m-0 text-[28px] font-bold leading-[1.2] tracking-[-1.12px] text-white lg:max-w-[min(679px,calc(100%_-_538px))] lg:text-left lg:text-[56px] lg:leading-[64px] lg:tracking-[-2.24px]">
                 Make Your Rooftop a Brighter purpose to save
-              </h2>
+              </h1>
               <div className="mb-0 mt-3 inline-block rounded-xl bg-black/40 px-3.5 py-2.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.25),0_4px_16px_rgba(0,0,0,0.3)] backdrop-blur-[12px] border border-white/10 text-left lg:mt-5 lg:max-w-[min(679px,calc(100%_-_538px))]">
                 <p className="m-0 text-[14px] font-medium leading-[1.5] tracking-[-0.3px] text-white lg:text-[18px]">
                   Cut electricity expenses by{" "}
@@ -860,7 +860,7 @@ export default function LandingPage() {
               <div className="flex h-11 items-center gap-1 p-0 text-center text-[14px] font-medium leading-[1.4] tracking-[-0.56px] text-[#1a1f38] lg:h-auto lg:rounded-xl lg:bg-white/[0.16] lg:px-8 lg:py-3 lg:text-[20px] lg:tracking-[-0.4px] lg:text-white lg:shadow-[inset_0_1px_0_rgba(255,255,255,0.28),inset_0_0_0_1px_rgba(255,255,255,0.16),0_2px_8px_rgba(0,0,0,0.18)] lg:backdrop-blur-[12px]">
                 <GoogleLogo className="m-0 h-4 w-4" />
                 Rated{" "}
-                <span className="font-medium text-[#d8901e] lg:text-[#e9b35e]">★ 4.8</span> on Google{" "}
+                <span className="font-semibold text-[#b45309] lg:text-[#fbbf24]">★ 4.8</span> on Google{" "}
                 <span className="inline-block h-[9px] w-px flex-none overflow-hidden bg-[#9ea2b8] text-[0px] leading-[0] lg:h-[18px] lg:bg-[#e2e4ec]">
                   |
                 </span>{" "}
@@ -932,9 +932,9 @@ export default function LandingPage() {
             </AnimatePresence>
 
             {/* Footer note */}
-            <p className="mt-4 text-center text-xs text-slate-400">
+            <p className="mt-4 text-center text-xs text-slate-600 font-medium">
               No spam. We respect your privacy.{" "}
-              <span className="font-medium text-primary">100% Free.</span>
+              <span className="font-semibold text-emerald-800">100% Free.</span>
             </p>
           </motion.div>
         </div>
@@ -983,9 +983,9 @@ export default function LandingPage() {
             <div className="overflow-hidden pb-10 pl-4 min-[1200px]:p-0">
               <div className="flex items-center justify-between">
                 <div>
-                  <h6 className="mb-1 text-base font-semibold leading-[normal] md:text-[1.875rem]">
+                  <p className="mb-1 text-base font-semibold leading-[normal] md:text-[1.875rem]">
                     Introducing
-                  </h6>
+                  </p>
                   <h2 className="m-0 inline-block bg-gradient-to-b from-[#02060E] via-[#004D0A] to-[#007D10] bg-clip-text text-transparent bg-clip-text text-[2rem] font-bold leading-[normal] tracking-[0] text-transparent md:mb-6 md:text-[56px]">
                     {" "}
                     SunSure Promise{" "}
@@ -1072,14 +1072,14 @@ export default function LandingPage() {
               <div className="min-w-0 min-[992px]:w-[41.66666667%] min-[992px]:flex-none">
                 <div>
 
-                  <h6 className="mb-4 text-[32px] font-bold leading-[1.15] tracking-[-1px] md:mb-5 md:text-[3.5rem] md:leading-[1.15]">
+                  <h2 className="mb-4 text-[32px] font-bold leading-[1.15] tracking-[-1px] md:mb-5 md:text-[3.5rem] md:leading-[1.15]">
                     Go Solar with{" "}
                     <span className="mt-2 block bg-gradient-to-r from-[#b5e69c] via-[#76d34d] to-[#c5f5b3] bg-clip-text pb-1 text-transparent">
                       {zeroInvestment
                         ? "Zero Investment"
                         : "Zero Downpayment"}
                     </span>
-                  </h6>
+                  </h2>
 
                   <p className="mb-6 max-w-xl text-base font-medium leading-7 text-white/65 md:mb-10 md:text-[1.25rem] md:leading-8">
                     Government subsidy covers your downpayment, and monthly solar

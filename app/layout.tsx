@@ -31,17 +31,22 @@ export default function RootLayout({
     <html lang="en" className={outfit.variable}>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        {/* Google Tag Manager */}
-        {/* eslint-disable-next-line @next/next/next-script-for-ga */}
+        {/* Initialize dataLayer immediately so all early events are safely queued */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-NKV43Q3J');`,
+            __html: `window.dataLayer = window.dataLayer || [];`,
           }}
         />
+        {/* Google Tag Manager loaded with lazyOnload to keep initial CPU free for LCP/TBT */}
+        <Script id="gtm-loader" strategy="lazyOnload">
+          {`
+            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-NKV43Q3J');
+          `}
+        </Script>
         {/* End Google Tag Manager */}
         {/* Google Ads Tag */}
         <Script
@@ -50,7 +55,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         />
         <Script id="google-ads-tag" strategy="lazyOnload">
           {`
-            window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', 'AW-18065170684');
@@ -69,17 +73,21 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </noscript>
         {/* End Google Tag Manager (noscript) */}
 
-        <>
+        {isLandingPage ? (
+          <Providers>
+            <main>{children}</main>
+          </Providers>
+        ) : (
           <VideoLoaderProvider>
             <Providers>
               <LenisProvider />
-              {!isLandingPage && <Header />}
+              <Header />
               <main>{children}</main>
-              {!isLandingPage && <Footer />}
+              <Footer />
             </Providers>
-            {!isLandingPage && <FloatingContactButtons />}
+            <FloatingContactButtons />
           </VideoLoaderProvider>
-        </>
+        )}
       </body>
     </html>
   );
