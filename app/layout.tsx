@@ -31,12 +31,22 @@ export default function RootLayout({
     <html lang="en" className={outfit.variable}>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link
-          rel="preload"
-          as="image"
-          href="/videos/hero-poster.webp"
-          type="image/webp"
-        />
+        {isLandingPage ? (
+          <link
+            rel="preload"
+            as="image"
+            href="/landing/banner-mobile.webp"
+            media="(max-width: 767.98px)"
+            type="image/webp"
+          />
+        ) : (
+          <link
+            rel="preload"
+            as="image"
+            href="/videos/hero-poster.webp"
+            type="image/webp"
+          />
+        )}
         {/* Initialize dataLayer immediately so all early events are safely queued */}
         <script
           dangerouslySetInnerHTML={{
@@ -54,16 +64,12 @@ export default function RootLayout({
           `}
         </Script>
         {/* End Google Tag Manager */}
-        {/* Google Ads Tag */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=AW-18065170684"
-          strategy="lazyOnload"
-        />
+        {/* Google Ads helper */}
         <Script id="google-ads-tag" strategy="lazyOnload">
           {`
+            window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'AW-18065170684');
           `}
         </Script>
       </head>
