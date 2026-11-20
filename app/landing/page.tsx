@@ -103,22 +103,22 @@ const BILL_OPTIONS = [
 
 const PROMISES = [
   {
-    img: `/landing/All-Weather Reliability.webp`,
+    img: `/landing/all-weather-reliability.webp`,
     heading: "All-Weather Reliability",
     desc: "Engineered to perform in heavy rain, strong winds, and extreme heat.",
   },
   {
-    img: `/landing/Seamless Solar Experience.webp`,
+    img: `/landing/seamless-solar-experience.webp`,
     heading: "Seamless Solar Experience",
     desc: "Expert guidance, hassle-free installation, and quick subsidy support.",
   },
   {
-    img: `/landing/Care Beyond Installation.webp`,
+    img: `/landing/care-beyond-installation.webp`,
     heading: "Care Beyond Installation",
     desc: "Dedicated assistance for years after you switch to solar.",
   },
   {
-    img: `/landing/Generation Commitment.webp`,
+    img: `/landing/generation-commitment.webp`,
     heading: "Generation Commitment",
     desc: "Support throughout your solar journey.",
   },
@@ -506,7 +506,7 @@ function CtaBox({ onOpen }: { onOpen: () => void }) {
     <div className="flex items-center gap-2 sm:gap-3 overflow-hidden rounded-xl bg-gradient-to-r from-lime-500 p-5 to-lime-200 md:w-[490px]">
       <div className="relative shrink-0 h-[110px] self-end flex items-end justify-center pl-2 sm:pl-4">
         <img
-          src={`/landing/Got questions.webp`}
+          src={`/landing/got-questions.webp`}
           alt="Expert"
           width={130}
           height={150}
@@ -770,7 +770,7 @@ export default function LandingPage() {
             <picture>
               <source
                 media="(max-width: 767.98px)"
-                srcSet="/landing/banner mobile.webp"
+                srcSet="/landing/banner-mobile.webp"
                 sizes="100vw"
               />
               <img

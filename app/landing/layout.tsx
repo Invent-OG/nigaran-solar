@@ -17,8 +17,8 @@ export default function LandingLayout({
       <link
         rel="preload"
         as="image"
-        href="/landing/banner mobile.webp"
-        imageSrcSet="/landing/banner mobile.webp"
+        href="/landing/banner-mobile.webp"
+        imageSrcSet="/landing/banner-mobile.webp"
         media="(max-width: 767.98px)"
       />
       <link
