@@ -53,22 +53,40 @@ export default function RootLayout({
             __html: `window.dataLayer = window.dataLayer || [];`,
           }}
         />
-        {/* Google Tag Manager loaded with lazyOnload to keep initial CPU free for LCP/TBT */}
-        <Script id="gtm-loader" strategy="lazyOnload">
+        {/* Google Tag Manager deferred to keep initial paint and main thread free */}
+        <Script id="gtm-loader" strategy="afterInteractive">
           {`
-            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer','GTM-NKV43Q3J');
+            function initGTM() {
+              if (window.__gtmLoaded) return;
+              window.__gtmLoaded = true;
+              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+              })(window,document,'script','dataLayer','GTM-NKV43Q3J');
+            }
+            if (typeof window !== 'undefined') {
+              var events = ['scroll', 'mousemove', 'touchstart', 'click', 'keydown'];
+              var trigger = function() {
+                initGTM();
+                events.forEach(function(e) { window.removeEventListener(e, trigger); });
+              };
+              events.forEach(function(e) { window.addEventListener(e, trigger, { passive: true, once: true }); });
+              if ('requestIdleCallback' in window) {
+                requestIdleCallback(function() { setTimeout(initGTM, 3000); });
+              } else {
+                setTimeout(initGTM, 3500);
+              }
+            }
           `}
         </Script>
         {/* End Google Tag Manager */}
         {/* Google Ads helper */}
-        <Script id="google-ads-tag" strategy="lazyOnload">
+        <Script id="google-ads-tag" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
+            window.gtag = gtag;
             gtag('js', new Date());
           `}
         </Script>
