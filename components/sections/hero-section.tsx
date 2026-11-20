@@ -39,7 +39,7 @@ export default function HeroSection({ onVideoLoad }: HeroSectionProps) {
           playsInline
           poster="/videos/hero-poster.webp"
           onCanPlayThrough={handleVideoLoad}
-          className="object-cover w-full h-full"
+          className="hidden md:block object-cover w-full h-full"
           preload="none"
           aria-label="Background video showing solar panels and renewable energy installations"
         >
@@ -67,7 +67,7 @@ export default function HeroSection({ onVideoLoad }: HeroSectionProps) {
               <span className="text-6xl font-bold text-white">Powering</span>
               <RotatingText
                 texts={["Tamil Nadu's", "Future", "with", "Clean", "Energy"]}
-                mainClassName="px-2 sm:px-2 md:px-3 bg-primary text-white text-5xl overflow-hidden py-0.5 shadow-xl sm:py-1 md:py-2 justify-center rounded-lg"
+                mainClassName="px-2 sm:px-2 md:px-3 bg-primary text-white text-5xl overflow-hidden py-0.5 shadow-xl sm:py-1 md:py-2 justify-center rounded-lg min-w-[220px] sm:min-w-[260px] text-center"
                 staggerFrom={"last"}
                 initial={false}
                 animate={{ y: 0 }}
@@ -75,7 +75,7 @@ export default function HeroSection({ onVideoLoad }: HeroSectionProps) {
                 staggerDuration={0.04}
                 splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
                 transition={{ type: "spring", damping: 40, stiffness: 800 }}
-                rotationInterval={4500}
+                rotationInterval={6000}
               />
             </div>
           </h1>
