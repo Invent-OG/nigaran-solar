@@ -73,9 +73,9 @@ export default function RootLayout({
               };
               events.forEach(function(e) { window.addEventListener(e, trigger, { passive: true, once: true }); });
               if ('requestIdleCallback' in window) {
-                requestIdleCallback(function() { setTimeout(initGTM, 3000); });
+                requestIdleCallback(function() { setTimeout(initGTM, 5000); });
               } else {
-                setTimeout(initGTM, 3500);
+                setTimeout(initGTM, 5500);
               }
             }
           `}
