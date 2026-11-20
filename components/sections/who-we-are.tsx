@@ -123,6 +123,7 @@ const WhoWeAre = () => {
             <Button
               className="bg-green-700 hover:bg-green-800 text-white font-medium shadow-md shadow-green-900/20"
               onClick={() => router.push("/about")}
+              aria-label="Read more about Nigaran Solar and our mission"
             >
               Read more
             </Button>

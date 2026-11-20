@@ -41,7 +41,7 @@ const BlogCard = ({ id, title, excerpt, imageUrl, index }: BlogCardProps) => {
           {title}
         </h3>
         <p className="mb-4 text-muted-foreground line-clamp-3">{excerpt}</p>
-        <Link href={`/blog/${id}`}>
+        <Link href={`/blog/${id}`} aria-label={`Read more about ${title}`}>
           <Button
             variant="link"
             className="h-auto p-0 font-medium text-primary"

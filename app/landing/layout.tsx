@@ -2,9 +2,13 @@ import { Metadata } from "next";
 // import "./landing.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.nigaran.in"),
   title: "Go Solar at Zero Investment! | Nigaran Solar - Coimbatore & Tamil Nadu",
   description:
     "Pay your EB bill as solar EMI and start saving money easily with zero upfront cost. 25-year warranty, subsidy support up to ₹78,000, and free lifetime maintenance.",
+  alternates: {
+    canonical: "/landing",
+  },
 };
 
 export default function LandingLayout({

@@ -204,7 +204,7 @@ export default function Header() {
         >
           <Link
             href="/"
-            aria-label="Go to Home Page"
+            aria-label="Nigaran Solar - Go to Home Page"
             onClick={(event) => {
               if (isLandingPage) {
                 event.preventDefault();
@@ -301,7 +301,7 @@ export default function Header() {
               >
                 <Button
                   onClick={() => router.push("/landing")}
-                  className="hidden md:inline-flex"
+                  className="hidden md:inline-flex bg-[#15803d] hover:bg-[#166534] text-white font-semibold"
                 >
                   Get Free Quote
                 </Button>

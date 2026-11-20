@@ -145,7 +145,7 @@ const Feature108 = ({
               <div className="flex flex-col gap-5">
                 <Badge
                   variant="outline"
-                  className="text-white w-fit bg-primary"
+                  className="text-white w-fit bg-[#15803d] border-[#15803d] font-semibold"
                 >
                   {selectedTab.content.badge}
                 </Badge>
@@ -158,7 +158,7 @@ const Feature108 = ({
                   {selectedTab.content.title}
                 </motion.h3>
                 <motion.p
-                  className="text-muted-foreground lg:text-lg"
+                  className="text-neutral-700 lg:text-lg"
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.2 }}
@@ -170,7 +170,11 @@ const Feature108 = ({
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.3 }}
                 >
-                  <Link href={selectedTab.content.link} passHref>
+                  <Link
+                    href={selectedTab.content.link}
+                    passHref
+                    aria-label={`Learn more about ${selectedTab.content.title}`}
+                  >
                     <Button className="mt-2.5 w-fit gap-2 bg-green-700 hover:bg-green-800 text-white font-medium shadow-md shadow-green-900/20" size="lg">
                       {selectedTab.content.buttonText}
                     </Button>

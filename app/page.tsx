@@ -32,11 +32,15 @@ const FAQ = dynamic(() => import("@/components/sections/faq-section2"), {
 });
 
 export const metadata = {
+  metadataBase: new URL("https://www.nigaran.in"),
   title: "Nigaran Solar – Trusted Solar Partner in Tamil Nadu",
   description:
     "Nigaran Solar offers top solar panel solutions in Coimbatore & Tamil Nadu for homes, businesses & housing societies. Book your free consultation today!",
   keywords:
     "solar energy, solar panel solutions in coimbatore, solar panels, solar power systems, residential solar, commercial solar, solar solutions Tamil Nadu, solar companies in TamilNadu",
+  alternates: {
+    canonical: "/",
+  },
 };
 
 export default function Home() {
