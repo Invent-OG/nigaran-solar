@@ -23,6 +23,7 @@ export default function FloatingContactButtons() {
         rel="noopener noreferrer"
         className="p-4 text-white transition-transform transform bg-green-500 rounded-full shadow-lg hover:bg-green-600 hover:scale-105"
         title="Chat on WhatsApp"
+        aria-label="Chat with Nigaran Solar on WhatsApp"
       >
         {/* <MessageSquare className="w-5 h-5" /> */}
         <FaWhatsapp className="w-5 h-5" />

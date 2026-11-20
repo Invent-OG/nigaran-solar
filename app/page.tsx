@@ -1,12 +1,35 @@
 import HeroSection from "@/components/sections/hero-section";
-import StatsSection from "@/components/sections/stats-section";
-import { Feature108 } from "@/components/ui/feature108";
-import ExpertiseSection from "@/components/sections/expertise-section";
-import TestimonialsSection from "@/components/sections/testimonials-section";
-import BlogSection from "@/components/sections/blog-section";
-import { LogosSlider } from "@/components/sections/logos-slider";
-import WhoWeAre from "@/components/sections/who-we-are";
-import FAQ from "@/components/sections/faq-section2";
+import dynamic from "next/dynamic";
+
+const LogosSlider = dynamic(
+  () => import("@/components/sections/logos-slider").then((m) => m.LogosSlider),
+  { ssr: true }
+);
+const StatsSection = dynamic(
+  () => import("@/components/sections/stats-section"),
+  { ssr: true }
+);
+const WhoWeAre = dynamic(() => import("@/components/sections/who-we-are"), {
+  ssr: true,
+});
+const Feature108 = dynamic(
+  () => import("@/components/ui/feature108").then((m) => m.Feature108),
+  { ssr: true }
+);
+const ExpertiseSection = dynamic(
+  () => import("@/components/sections/expertise-section"),
+  { ssr: true }
+);
+const TestimonialsSection = dynamic(
+  () => import("@/components/sections/testimonials-section"),
+  { ssr: true }
+);
+const BlogSection = dynamic(() => import("@/components/sections/blog-section"), {
+  ssr: true,
+});
+const FAQ = dynamic(() => import("@/components/sections/faq-section2"), {
+  ssr: true,
+});
 
 export const metadata = {
   title: "Nigaran Solar – Trusted Solar Partner in Tamil Nadu",
@@ -16,7 +39,6 @@ export const metadata = {
     "solar energy, solar panel solutions in coimbatore, solar panels, solar power systems, residential solar, commercial solar, solar solutions Tamil Nadu, solar companies in TamilNadu",
 };
 
-console.log("test");
 export default function Home() {
   return (
     <>

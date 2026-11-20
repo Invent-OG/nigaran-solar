@@ -171,7 +171,7 @@ const Feature108 = ({
                   transition={{ delay: 0.3 }}
                 >
                   <Link href={selectedTab.content.link} passHref>
-                    <Button className="mt-2.5 w-fit gap-2" size="lg">
+                    <Button className="mt-2.5 w-fit gap-2 bg-green-700 hover:bg-green-800 text-white font-medium shadow-md shadow-green-900/20" size="lg">
                       {selectedTab.content.buttonText}
                     </Button>
                   </Link>

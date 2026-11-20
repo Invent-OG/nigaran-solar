@@ -55,7 +55,7 @@ const WhoWeAre = () => {
             {/* Overlapping Image */}
             <Image
               title="Solar Panels"
-              src="https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=3132&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              src="https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=400&auto=format&fit=crop"
               alt="Close-up of solar panels capturing sunlight"
               width={250}
               loading="lazy"
@@ -120,7 +120,12 @@ const WhoWeAre = () => {
           </div>
 
           <div className="z-20 mt-6">
-            <Button onClick={() => router.push("/about")}>Read more</Button>
+            <Button
+              className="bg-green-700 hover:bg-green-800 text-white font-medium shadow-md shadow-green-900/20"
+              onClick={() => router.push("/about")}
+            >
+              Read more
+            </Button>
           </div>
         </div>
       </div>

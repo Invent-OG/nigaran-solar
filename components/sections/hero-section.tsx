@@ -36,7 +36,7 @@ export default function HeroSection({ onVideoLoad }: HeroSectionProps) {
           playsInline
           onCanPlayThrough={handleVideoLoad}
           className="object-cover w-full h-full"
-          preload="auto" // or "metadata" for lighter load
+          preload="none"
           aria-label="Background video showing solar panels and renewable energy installations"
         >
           <source src="/videos/hero-video.mp4" type="video/mp4" />
@@ -60,7 +60,7 @@ export default function HeroSection({ onVideoLoad }: HeroSectionProps) {
             className="max-w-4xl mb-6 text-4xl font-bold leading-tight text-white md:text-5xl lg:text-6xl"
           >
             <div className="flex lg:flex-row flex-col items-center space-y-4 lg:space-x-4">
-              <h1 className="text-6xl font-bold text-white">Powering</h1>
+              <span className="text-6xl font-bold text-white">Powering</span>
               <RotatingText
                 texts={["Tamil Nadu's", "Future", "with", "Clean", "Energy"]}
                 mainClassName="px-2 sm:px-2 md:px-3 bg-primary text-white text-5xl overflow-hidden py-0.5 shadow-xl sm:py-1 md:py-2 justify-center rounded-lg"
@@ -91,7 +91,7 @@ export default function HeroSection({ onVideoLoad }: HeroSectionProps) {
             <Button
               size="lg"
               onClick={() => router.push("/landing")}
-              className="group"
+              className="group bg-[#15803d] hover:bg-[#166534] text-white font-semibold text-base px-6 py-6 shadow-lg shadow-green-900/40"
             >
               Get Free Solar Consultation
               <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
