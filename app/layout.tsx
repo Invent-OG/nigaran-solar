@@ -31,6 +31,12 @@ export default function RootLayout({
     <html lang="en" className={outfit.variable}>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+          rel="preload"
+          as="image"
+          href="/videos/hero-poster.webp"
+          type="image/webp"
+        />
         {/* Initialize dataLayer immediately so all early events are safely queued */}
         <script
           dangerouslySetInnerHTML={{

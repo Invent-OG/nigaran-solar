@@ -102,29 +102,38 @@ export function AnimatedTestimonials({
         `youtube-player-${activeIndex}`
       ) as HTMLIFrameElement;
 
-      if (iframe && (window as any).YT && !playerRef.current) {
-        playerRef.current = new (window as any).YT.Player(
-          `youtube-player-${activeIndex}`,
-          {
-            events: {
-              onStateChange: (event: any) => {
-                const YT = (window as any).YT;
-                switch (event.data) {
-                  case YT.PlayerState.PLAYING:
-                    setAutoScrollPaused(true);
-                    break;
-                  case YT.PlayerState.PAUSED:
-                  case YT.PlayerState.ENDED:
-                    setAutoScrollPaused(false);
-                    break;
-                  default:
-                    break;
-                }
+      if (
+        iframe &&
+        typeof (window as any).YT?.Player === "function" &&
+        !playerRef.current
+      ) {
+        try {
+          playerRef.current = new (window as any).YT.Player(
+            `youtube-player-${activeIndex}`,
+            {
+              events: {
+                onStateChange: (event: any) => {
+                  const YT = (window as any).YT;
+                  if (!YT?.PlayerState) return;
+                  switch (event.data) {
+                    case YT.PlayerState.PLAYING:
+                      setAutoScrollPaused(true);
+                      break;
+                    case YT.PlayerState.PAUSED:
+                    case YT.PlayerState.ENDED:
+                      setAutoScrollPaused(false);
+                      break;
+                    default:
+                      break;
+                  }
+                },
               },
-            },
-          }
-        );
-        clearInterval(interval);
+            }
+          );
+          clearInterval(interval);
+        } catch {
+          // Ignore transient YouTube player creation errors
+        }
       }
     }, 500);
 

@@ -26,14 +26,18 @@ export default function HeroSection({ onVideoLoad }: HeroSectionProps) {
   return (
     <section
       ref={sectionRef}
-      className="relative flex items-center justify-center min-h-screen overflow-hidden"
+      className="relative flex items-center justify-center min-h-screen overflow-hidden bg-slate-900"
     >
-      <div className="absolute inset-0 z-0 hero-background">
+      <div
+        className="absolute inset-0 z-0 hero-background bg-cover bg-center"
+        style={{ backgroundImage: "url('/videos/hero-poster.webp')" }}
+      >
         <video
           autoPlay
           loop
           muted
           playsInline
+          poster="/videos/hero-poster.webp"
           onCanPlayThrough={handleVideoLoad}
           className="object-cover w-full h-full"
           preload="none"
@@ -43,7 +47,7 @@ export default function HeroSection({ onVideoLoad }: HeroSectionProps) {
           Your browser does not support the video tag.
         </video>
 
-        <div className="absolute inset-0 bg-gradient-to-r from-black/10 to-black/10 mix-blend-multiply" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/40 to-black/50" />
         {/* <AshParticles /> */}
       </div>
 
@@ -65,13 +69,13 @@ export default function HeroSection({ onVideoLoad }: HeroSectionProps) {
                 texts={["Tamil Nadu's", "Future", "with", "Clean", "Energy"]}
                 mainClassName="px-2 sm:px-2 md:px-3 bg-primary text-white text-5xl overflow-hidden py-0.5 shadow-xl sm:py-1 md:py-2 justify-center rounded-lg"
                 staggerFrom={"last"}
-                initial={{ y: "100%" }}
+                initial={false}
                 animate={{ y: 0 }}
                 exit={{ y: "-120%" }}
                 staggerDuration={0.04}
                 splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
                 transition={{ type: "spring", damping: 40, stiffness: 800 }}
-                rotationInterval={2000}
+                rotationInterval={4500}
               />
             </div>
           </h1>
