@@ -14,6 +14,20 @@ export default function LandingLayout({
 }) {
   return (
     <div className="landing-root">
+      <link
+        rel="preload"
+        as="image"
+        href="/landing/banner mobile.webp"
+        imageSrcSet="/landing/banner mobile.webp"
+        media="(max-width: 767.98px)"
+      />
+      <link
+        rel="preload"
+        as="image"
+        href="/landing/banner.webp"
+        imageSrcSet="/landing/banner.webp"
+        media="(min-width: 768px)"
+      />
       <style
         dangerouslySetInnerHTML={{
           __html: `

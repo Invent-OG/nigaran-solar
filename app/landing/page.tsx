@@ -510,6 +510,8 @@ function CtaBox({ onOpen }: { onOpen: () => void }) {
           alt="Expert"
           width={130}
           height={150}
+          loading="lazy"
+          decoding="async"
           className="h-[150px] relative -bottom-6 w-auto object-contain object-bottom"
         />
       </div>
@@ -772,11 +774,13 @@ export default function LandingPage() {
                 sizes="100vw"
               />
               <img
-                width={2560}
-                height={1333}
-                src={`landing/banner.webp`}
+                width={1920}
+                height={1000}
+                src="/landing/banner.webp"
+                fetchPriority="high"
+                decoding="async"
                 className="block h-full w-full object-cover object-[center_top]"
-                alt="Coimbatore"
+                alt="Nigaran Solar Rooftop"
                 sizes="(max-width: 767px) 100vw, 1440px"
               />
             </picture>
@@ -953,7 +957,9 @@ export default function LandingPage() {
                       width={250}
                       height={250}
                       src={promise.img}
-                      alt=""
+                      alt={promise.heading}
+                      loading="lazy"
+                      decoding="async"
                       className="block h-full w-full rounded-xl object-cover"
                     />
                   </div>
@@ -971,7 +977,7 @@ export default function LandingPage() {
       </section>
 
       {/* --------------------------------------------------------- goodzero */}
-      <section className="relative overflow-hidden bg-[url('/landing/bg.png')] bg-cover bg-bottom bg-no-repeat md:before:pointer-events-none md:before:absolute md:before:-right-[25px] md:before:top-[10px] md:before:h-[370px] md:before:w-[370px] md:before:bg-[url('/landing/shield.webp')] md:before:bg-contain md:before:bg-center md:before:bg-no-repeat md:before:content-[''] min-[1200px]:py-24">
+      <section className="relative overflow-hidden bg-[url('/landing/bg.webp')] bg-cover bg-bottom bg-no-repeat md:before:pointer-events-none md:before:absolute md:before:-right-[25px] md:before:top-[10px] md:before:h-[370px] md:before:w-[370px] md:before:bg-[url('/landing/shield.webp')] md:before:bg-contain md:before:bg-center md:before:bg-no-repeat md:before:content-[''] min-[1200px]:py-24">
         <div className={`${CONTAINER} px-0 md:px-4`}>
           <div className="block items-center md:gap-[55px] min-[992px]:flex">
             <div className="overflow-hidden pb-10 pl-4 min-[1200px]:p-0">
@@ -990,7 +996,9 @@ export default function LandingPage() {
                     src={`/landing/shield.webp`}
                     width={150}
                     height={168}
-                    alt=""
+                    alt="SunSure Promise Shield"
+                    loading="lazy"
+                    decoding="async"
                     className="inline-block h-full w-[150px] align-middle"
                   />
                 </div>
@@ -1684,7 +1692,15 @@ export default function LandingPage() {
           </div>
           <div className="text-center md:mx-auto md:mt-7 md:flex md:w-[90%] md:items-center md:justify-between md:rounded-xl md:border md:border-[#e3f8ff] md:bg-[linear-gradient(45deg,#f5f9fa,#f1fbff)]">
             <div className="mb-3 flex items-center justify-center gap-3 rounded-xl border border-[#e3f8ff] bg-[linear-gradient(45deg,#f1fbff,#fff)] p-4 md:m-0 md:border-0 md:bg-none md:py-6 md:pl-6 md:pr-0">
-              <img src={`/landing/tamil_nadu.png`} width={50} height={50} alt="Map" className="inline-block" />
+              <img
+                src={`/landing/tamil_nadu.png`}
+                width={50}
+                height={50}
+                alt="Map"
+                loading="lazy"
+                decoding="async"
+                className="inline-block"
+              />
               <div>
                 <p className="mb-0 text-left text-[0.875rem] font-medium tracking-[-0.5px] md:text-[1.25rem]">
                   From your hometown to homes across Tamil Nadu.                 </p>
@@ -1710,10 +1726,12 @@ export default function LandingPage() {
 
               {/* Phone Image */}
               <img
-                src="landing/app.webp"
+                src="/landing/app.webp"
                 alt="Solar monitoring app preview"
                 height={580}
                 width={500}
+                loading="lazy"
+                decoding="async"
                 className="relative z-[1] block h-auto w-full max-w-[420px] object-contain md:max-w-[500px]"
               />
 
